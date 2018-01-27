@@ -1,0 +1,2 @@
+-app/org.fdroid.fdroid_1001000.apk;PRESIGNED
+-priv-app/org.fdroid.fdroid.privileged_2070.apk;PRESIGNED
