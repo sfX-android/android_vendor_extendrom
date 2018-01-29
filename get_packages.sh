@@ -109,7 +109,7 @@ function get_packages() {
     return 0
 }
 
-get_packages "$FDROID_REPO_URL" "fdroid.txt"
+get_packages "$FDROID_REPO_URL" "$MY_DIR/repo/fdroid.txt"
 
 INITIAL_COPYRIGHT_YEAR=2017
 VENDOR="fdroid"
@@ -119,7 +119,7 @@ PRODUCTMK="$MY_DIR/$VENDOR-vendor.mk"
 DEVICE="true"
 write_headers "" WITH_FDROID
 DEVICE=
-write_makefiles "$MY_DIR/fdroid.txt"
+write_makefiles "$MY_DIR/repo/fdroid.txt"
 write_footers
 
 exit 0
