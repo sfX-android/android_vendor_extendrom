@@ -1,2 +1,3 @@
+# FDroid
 -app/org.fdroid.fdroid_1001000.apk:app/FDroid.apk;PRESIGNED
 -priv-app/org.fdroid.fdroid.privileged_2070.apk:priv-app/FDroidPrivilegedExtension.apk;PRESIGNED

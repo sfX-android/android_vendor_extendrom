@@ -91,8 +91,12 @@ function get_packages() {
         mkdir "proprietary"
     fi
 
-    for file in $(< $package_file_list); do
-        local split=(${file//:/ })
+    for line in $(grep -v '^#' $package_file_list); do
+        if [ -z "$line" ]; then
+            continue;
+        fi
+
+        local split=(${line//:/ })
         local package_name="${split[0]#-}"
         local package="proprietary/$package_name"
 
