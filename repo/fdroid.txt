@@ -1,3 +1,8 @@
 # FDroid
 -app/org.fdroid.fdroid_1001000.apk:app/FDroid.apk;PRESIGNED
 -priv-app/org.fdroid.fdroid.privileged_2070.apk:priv-app/FDroidPrivilegedExtension.apk;PRESIGNED
+
+# UnifiedNlp Backends
+-app/org.microg.nlp_20187.apk:app/UnifiedNlp.apk
+-app/org.microg.nlp.backend.ichnaea_20026.apk:app/IchnaeaNlpBackend.apk;PRESIGNED
+-app/org.microg.nlp.backend.nominatim_20042.apk:app/NominatimNlpBackend.apk;PRESIGNED
