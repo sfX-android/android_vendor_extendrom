@@ -11,8 +11,11 @@ Getting the packages
 
       <?xml version="1.0" encoding="UTF-8"?>
       <manifest>
-          <!-- MicroG -->
-          <project name="cryptomilk/android_vendor_fdroid" path="vendor/fdroid" remote="github" />
+          <!-- FDroid -->
+          <project name="cryptomilk/android_vendor_fdroid"
+                   path="vendor/fdroid"
+                   remote="github"
+                   revision="master" />
       </manifest>
 
 * After downloading to to the vendor dir and get the packages:
