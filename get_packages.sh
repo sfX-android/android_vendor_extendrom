@@ -16,7 +16,7 @@
 # limitations under the License.
 
 
-FDROID_REPO_URL="https://f-droid.org/repo"
+FDROID_REPO_URL="https://fdroid.tetaneutral.net/fdroid/repo/"
 
 ###########################################################
 
