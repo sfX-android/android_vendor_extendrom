@@ -25,7 +25,7 @@
         <!-- version -->
         <item>1</item>
         <!-- enabled -->
-        <item>1</item>
+        <item>0</item>
         <!-- push requests -->
         <item>ignore</item>
         <!-- pubkey -->
@@ -40,7 +40,7 @@
         <!-- version -->
         <item>1</item>
         <!-- enabled -->
-        <item>1</item>
+        <item>0</item>
         <!-- push requests -->
         <item>ignore</item>
         <!-- pubkey -->
