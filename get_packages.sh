@@ -124,6 +124,9 @@ DEVICE="true"
 write_headers "" WITH_FDROID
 DEVICE=
 write_makefiles "$MY_DIR/repo/fdroid.txt"
+cat >> $ANDROIDMK <<EOMK
+include $MY_DIR/extra/Android.mk
+EOMK
 write_footers
 
 exit 0
