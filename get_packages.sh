@@ -20,10 +20,20 @@ FDROID_REPO_URL="https://mirror.cyberbits.eu/fdroid/repo/"
 
 ###########################################################
 
-MY_DIR=$(pwd)
+MY_DIR="$1"
+[ -z "$MY_DIR" ] && MY_DIR=$(pwd)
+
+unset CURLDNS
+CUSTDNS="$2"
+[ ! -z "$CUSTDNS" ] && CURLDNS="--dns-servers $CUSTDNS"
+
 PROPRIETARY_DIR="$MY_DIR/proprietary"
 
-source tools/extract_utils.sh
+CURLARGS=" -L $CURLDNS"
+CURL="$MY_DIR/tools/curl_x64_static $CURLARGS"
+source $MY_DIR/tools/extract_utils.sh
+
+echo "$CURL"
 
 rm -rf "$PROPRIETARY_DIR"
 
@@ -42,22 +52,21 @@ function download_package() {
     fi
 
     echo "- Downloading package: $pkg"
-    cmd="wget --quiet -O $pkg_path $repo/$pkg 2>&1"
-    out=$(eval $cmd)
+    cmd=$($CURL -o $pkg_path $repo/$pkg 2>&1)
     ret=$?
     if [ $ret -ne 0 ]; then
-        echo "ERROR: Failed to download $pkg"
+        echo "ERROR: Failed to download $pkg (returned: $ret)"
         echo
-        echo "$out"
+        echo "$cmd"
         exit 1
     fi
 
     echo "- Downloading signature: $pkg_sig"
-    cmd="wget --quiet -O $pkg_dir/$pkg_sig $repo/$pkg_sig 2>&1"
+    cmd="$CURL -o $pkg_dir/$pkg_sig $repo/$pkg_sig 2>&1"
     out=$(eval $cmd)
     ret=$?
     if [ $ret -ne 0 ]; then
-        echo "ERROR: Failed to download $pkg_sig"
+        echo "ERROR: Failed to download $pkg_sig (returned: $ret)"
         echo
         echo "$out"
         exit 1
@@ -87,8 +96,8 @@ function get_packages() {
     local repo="$1"
     local package_file_list="$2"
 
-    if [ ! -d "proprietary" ]; then
-        mkdir "proprietary"
+    if [ ! -d "$MY_DIR/proprietary" ]; then
+        mkdir "$MY_DIR/proprietary"
     fi
 
     for line in $(grep -v '^#' $package_file_list); do
@@ -98,13 +107,13 @@ function get_packages() {
 
         local split=(${line//:/ })
         local package_name="${split[0]#-}"
-        local package="proprietary/$package_name"
+        local package="$MY_DIR/proprietary/$package_name"
 
         download_package "$repo" "$package"
         verify_package "$package"
 
         local target_split="${split[1]#-}"
-        target_pkg="proprietary/$(target_file $target_split | sed 's/\;.*//')"
+        target_pkg="$MY_DIR/proprietary/$(target_file $target_split | sed 's/\;.*//')"
         echo "- Target package: $target_pkg"
         cp $package $target_pkg
         echo
