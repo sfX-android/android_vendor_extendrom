@@ -1,6 +1,6 @@
-ifeq ($(FDROID_EXTRA_REPOS),true)
-
 LOCAL_PATH := $(call my-dir)
+
+ifeq ($(FDROID_EXTRA_REPOS),true)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := additional_repos.xml
