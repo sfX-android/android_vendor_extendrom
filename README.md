@@ -22,3 +22,12 @@ Getting the packages
 
       cd vendor/fdroid
       ./get_packages.sh
+
+## Adding the F-Droid key to your system
+
+* either by searching: `gpg --keyserver pgp.mit.edu --search-keys f-droid.org`
+* or by specifying the key directly: `gpg --keyserver pgp.mit.edu --recv-key 7A029E54DD5DCE7A`
+
+you can of course use [another keyserver](https://en.wikipedia.org/wiki/Key_server_(cryptographic)#Keyserver_examples) if pgp.mit.edu fails for you
+
+More information and the current F-Droid fingerprint can be verified [here](https://f-droid.org/docs/Release_Channels_and_Signing_Keys/?title=Release_Channels_and_Signing_Keys)
