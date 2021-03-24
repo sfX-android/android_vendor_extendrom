@@ -17,6 +17,9 @@ com.aurora.store_29.apk|FDROIDREPO|app|AuroraStore.apk;PRESIGNED|true
 # AdAway
 org.adaway_50400.apk|FDROIDREPO|priv-app|AdAway.apk;user-keys/shared|false
 
+# DNS66
+org.jak_linux.dns66_28.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
+
 # Omega Launcher
 Omega.v0.7.1.Build.118.apk|https://github.com/otakuhqz/Omega/releases/download/v0.7.1|app|Omega.apk;user-keys/shared|false
 
