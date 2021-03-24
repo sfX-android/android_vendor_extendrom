@@ -1,7 +1,8 @@
 #!/bin/bash
-
+############################################################################
 #
 # Copyright (C) 2017-2018 Andreas Schneider <asn@crytpomilk.org>
+# Copyright (C) 2020-2021 steadfasterX <steadfasterX@binbash.rocks>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,21 +22,22 @@ FDROID_REPO_URL="https://mirror.cyberbits.eu/fdroid/repo/"
 ###########################################################
 
 MY_DIR="$1"
-[ -z "$MY_DIR" ] && MY_DIR=$(pwd)
+[ -z "$MY_DIR" ] && MY_DIR=${0%/*}
 
 unset CURLDNS
 CUSTDNS="$2"
 [ ! -z "$CUSTDNS" ] && CURLDNS="--dns-servers $CUSTDNS"
 
-PROPRIETARY_DIR="$MY_DIR/proprietary"
+PREBUILT_DIR="$MY_DIR/prebuilt"
 
 CURLARGS=" -L $CURLDNS"
 CURL="$MY_DIR/tools/curl_x64_static $CURLARGS"
 source $MY_DIR/tools/extract_utils.sh
 
-echo "$CURL"
-
-rm -rf "$PROPRIETARY_DIR"
+if [ -d "$PREBUILT_DIR" ]; then
+    rm -rf "$PREBUILT_DIR"
+fi
+mkdir $PREBUILT_DIR $PREBUILT_DIR/app $PREBUILT_DIR/priv-app
 
 function download_package() {
     local repo="$1"
@@ -52,24 +54,24 @@ function download_package() {
     fi
 
     echo "- Downloading package: $pkg"
-    cmd=$($CURL -o $pkg_path $repo/$pkg 2>&1)
+    cmd=$($CURL -o $pkg_path $repo 2>&1)
     ret=$?
     if [ $ret -ne 0 ]; then
         echo "ERROR: Failed to download $pkg (returned: $ret)"
         echo
         echo "$cmd"
-        exit 1
+        return $ret
     fi
 
-    echo "- Downloading signature: $pkg_sig"
-    cmd="$CURL -o $pkg_dir/$pkg_sig $repo/$pkg_sig 2>&1"
+    echo "- Downloading signature: ${repo}.asc"
+    cmd="$CURL -o $pkg_dir/$pkg_sig ${repo}.asc 2>&1"
     out=$(eval $cmd)
     ret=$?
     if [ $ret -ne 0 ]; then
-        echo "ERROR: Failed to download $pkg_sig (returned: $ret)"
+        echo "ERROR: Failed to download $repo/$pkg_sig (returned: $ret)"
         echo
         echo "$out"
-        exit 1
+        return $ret
     fi
 }
 
@@ -93,48 +95,58 @@ function verify_package() {
 }
 
 function get_packages() {
-    local repo="$1"
-    local package_file_list="$2"
-
-    if [ ! -d "$MY_DIR/proprietary" ]; then
-        mkdir "$MY_DIR/proprietary"
-    fi
+    local package_file_list="$1"
 
     for line in $(grep -v '^#' $package_file_list); do
         if [ -z "$line" ]; then
             continue;
         fi
+	unset repo
 
-        local split=(${line//:/ })
-        local package_name="${split[0]#-}"
-        local package="$MY_DIR/proprietary/$package_name"
+	local package_name=$(echo ${line} |cut -d "|" -f1 |cut -d "-" -f 2)
+	local package_baseuri=$(echo ${line} |cut -d "|" -f2)
+        local package="$PREBUILT_DIR/$package_name"
+
+	if [ "$package_baseuri" == "FDROIDREPO" ];then
+	    local repo="${FDROID_REPO_URL}/${package_name}"
+	else
+	    local repo="$package_baseuri/${package_name}"
+	fi
 
         download_package "$repo" "$package"
-        verify_package "$package"
+	[ $? -ne 0 ] && echo "ERROR occured while downloading, aborted"  && return 3
+        
+	local should_verify=$(echo ${line} |cut -d "|" -f5)
+	if [ "$should_verify" == "true" ];then
+	    verify_package "$package"
+	fi
 
-        local target_split="${split[1]#-}"
-        target_pkg="$MY_DIR/proprietary/$(target_file $target_split | sed 's/\;.*//')"
+	local target_split=$(echo ${line} |cut -d "|" -f4)
+        target_pkg="$PREBUILT_DIR/$(target_file $target_split | sed 's/\;.*//')"
         echo "- Target package: $target_pkg"
         cp $package $target_pkg
+	[ $? -ne 0 ] && echo "ERROR occured during copying, aborted"  && return 3
         echo
     done
-
-    return 0
 }
 
-get_packages "$FDROID_REPO_URL" "$MY_DIR/repo/fdroid.txt"
+get_packages "$MY_DIR/repo/packages.txt"
 
-INITIAL_COPYRIGHT_YEAR=2017
-VENDOR="fdroid"
+INITIAL_COPYRIGHT_YEAR=2021
+VENDOR="extendrom"
 ANDROIDMK="$MY_DIR/Android.mk"
-PRODUCTMK="$MY_DIR/$VENDOR-vendor.mk"
 
 DEVICE="true"
-write_headers "" WITH_FDROID
+write_headers "" ENABLE_EXTENDROM
 DEVICE=
-write_makefiles "$MY_DIR/repo/fdroid.txt"
+
+echo "- writing makefile"
+F_WRITE_MAKEFILE "$MY_DIR/repo/packages.txt"
 cat >> $ANDROIDMK <<EOMK
+
+# include additional repos for F-droid 
 include $MY_DIR/extra/Android.mk
+
 EOMK
 write_footers
 

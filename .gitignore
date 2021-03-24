@@ -1,3 +1,2 @@
 Android.mk
-fdroid-vendor.mk
-proprietary/
+prebuilt/
