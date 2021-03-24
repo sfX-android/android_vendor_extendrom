@@ -77,3 +77,18 @@ if you want to remove something else: open `vendor/extendrom/extra/Android.mk` a
 
 Keep in mind that removing ROM apps like that it might can lead to a non-bootable system if there are dependencies you forgot to take care of.
 
+## building / changes in behavior
+
+whenever you change something in `device/<vendor>/<model>/vendorsetup.sh` you HAVE TO use: `source build/envsetup.sh && <lunch or brunch>` to apply these changes.
+
+best practice is to use that before building always.
+
+I always build like this:
+
+~~~
+source build/envsetup.sh
+lunch lineage_j5y17lte-userdebug
+mka otapackage (or mka eos when buildin /e/)
+~~~
+
+instead of lunch `brunch <device>` will do as well ofc.
