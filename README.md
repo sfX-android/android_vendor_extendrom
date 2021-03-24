@@ -15,6 +15,13 @@ create `.repo/local_manifest/extendrom.xml` and add:
 
 sync this repo with `repo sync -j4 vendor/extendrom`
 
+add the following in your `device/<vendor>/<model>/device.mk` (or any other device mk file):
+
+~~~
+# Enable extendrom
+$(call inherit-product-if-exists, vendor/extendrom/config/common.mk)
+~~~
+
 add the following section to your `device/<vendor>/<model>/vendorsetup.sh` :
 
 ~~~
