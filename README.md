@@ -9,6 +9,7 @@ this project is a merge of vendor/e-mod and vendor/fdroid which are both superse
 create `.repo/local_manifest/extendrom.xml` and add:
 
 ~~~
+<!-- extendrom -->
 <remote name="sfX" fetch="https://github.com/sfX-Android/" />
 <project path="vendor/extendrom" name="android_vendor_extendrom" remote="sfX" revision="main" />
 ~~~
@@ -39,6 +40,7 @@ you can use: `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension_pb"` which will use
 for the recommended way add this to your `.repo/local_manifest/extendrom.xml`:
 
 ~~~
+<!-- F-Droid -->
 <remote name="fdroid" fetch="https://gitlab.com/fdroid/" />
 <project path="packages/apps/F-DroidPrivilegedExtension" name="privileged-extension.git" remote="fdroid" revision="master" />
 ~~~
