@@ -66,7 +66,7 @@ its very easy to add more prebuilt packages to the list:
 
 open: `vendor/extendrom/repo/packages.txt` and add any additional prebuilt you like here. The format is described in the header of that file.
 
-## removing packages (built-in the regular ROM)
+## removing packages (which are built-in)
 
 even removing a package is possible, e.g. if you do not like the `Apps` package within /e/ OS you can specify `EXTENDROM_PACKAGES="noEOSappstore"` in your `device/<vendor>/<model>/vendorsetup.sh` and it will be removed.
 
