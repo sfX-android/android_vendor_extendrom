@@ -30,3 +30,21 @@ Lawnchair_stable.apk|https://leech.binbash.rocks:8008/misc|app|Lawnchair.apk;use
 
 # Magisk
 Magisk-v21.4.zip|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app|MagiskManager.apk;user-keys/shared|false
+
+## More alternatives to /e/ OS system apps
+
+# K9-Mail
+# latest version has no IMAP-idle / push
+com.fsck.k9_27034.apk|FDROIDREPO|app|K9-Mail-latest.apk;PRESIGNED|true
+
+# stable version has IMAP-isle, but old UI
+com.fsck.k9_26000.apk|FDROIDREPO|app|K9-Mail-stable.apk;PRESIGNED|true
+
+# Fennec Browser
+org.mozilla.fennec_fdroid_870020.apk|FDROIDREPO|app|Fennec.apk;PRESIGNED|true
+
+# QKSMS Messaging
+com.moez.QKSMS_2218.apk|FDROIDREPO|app|QKSMS.apk;PRESIGNED|true
+
+# Etar Calendar
+ws.xsoh.etar_27.apk|FDROIDREPO|app|Etar.apk;PRESIGNED|true
