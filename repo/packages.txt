@@ -24,9 +24,9 @@ org.jak_linux.dns66_29.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 Omega.v0.7.1.Build.118.apk|https://github.com/otakuhqz/Omega/releases/download/v0.7.1|app|Omega.apk;user-keys/shared|false
 
 # Lawnchair Launcher
-# taken from here (does not support direct download though):
-# https://www.apkmirror.com/apk/deletescape/lawnchair/lawnchair-2-1-2627-ci-q-merge-release/lawnchair-2-2-1-2627-ci-q-merge-android-apk-download/
-Lawnchair_stable.apk|https://leech.binbash.rocks:8008/misc|app|Lawnchair.apk;user-keys/shared|false
+# taken from PlayStore via AuroraStore and my Dropbox account:
+Lawnchair_202589.apk|https://www.dropbox.com/s/qi551e1y2ubd1zd|app|Lawnchair-stable.apk;PRESIGNED|false
+
 
 # Magisk
 Magisk-v21.4.zip|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app|MagiskManager.apk;user-keys/shared|false
