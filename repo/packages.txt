@@ -39,7 +39,8 @@ Magisk-v21.4.zip|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app
 com.fsck.k9_27034.apk|FDROIDREPO|app|K9-Mail-latest.apk;PRESIGNED|true
 
 # Fennec Browser
-org.mozilla.fennec_fdroid_881120.apk|FDROIDREPO|app|Fennec.apk;PRESIGNED|true
+org.mozilla.fennec_fdroid_891100.apk|FDROIDREPO|app|Fennec.apk;PRESIGNED|true
+https://f-droid.org/repo/org.mozilla.fennec_fdroid_891100.apk
 
 # QKSMS Messaging
 com.moez.QKSMS_2218.apk|FDROIDREPO|app|QKSMS.apk;PRESIGNED|true
