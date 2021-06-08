@@ -103,8 +103,8 @@ function get_packages() {
         fi
 	unset repo
 
-	local package_name=$(echo ${line} |cut -d "|" -f1 |cut -d "-" -f 2)
-	local package_baseuri=$(echo ${line} |cut -d "|" -f2)
+        local package_name=$(echo ${line} |cut -d "|" -f1)
+        local package_baseuri=$(echo ${line} |cut -d "|" -f2)
         local package="$PREBUILT_DIR/$package_name"
 
 	if [ "$package_baseuri" == "FDROIDREPO" ];then
