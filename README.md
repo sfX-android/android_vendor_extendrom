@@ -49,16 +49,16 @@ sync this repo with `repo sync -j4 packages/apps/F-DroidPrivilegedExtension`
 
 and add `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension"` (so without `_pb`) to your `device/<vendor>/<model>/vendorsetup.sh`.
 
-## Adding public GPG keys to your system for verifying signatures
+## Adding public GPG keys for verifying signatures
 
-extendrom will verify signatures (mainly used for F-Droid packages) fully automatically but it needs the GPG public key added to your system first.<br/>
-extendrom comes with a list of gpg keys which get auto-imported when using it but sometimes you might need to extend that list.
+extendrom will verify signatures (if available) fully automatically but it needs the GPG public key added to your system first.<br/>
+extendrom comes already with a list of gpg keys which get auto-imported when using it but sometimes you might need to extend that list.
 
 For this you need to know the key id first which you can usually find beneath the package you want to add.<br/>
 Another option is to find it by searching: `gpg --keyserver pgp.mit.edu --search-keys f-droid.org` <br/>
 Of course there are [other keyservers](https://en.wikipedia.org/wiki/Key_server_(cryptographic)#Keyserver_examples) if pgp.mit.edu fails for you.
 
-Once you got the id just add it to the variable `GPG_KEYS` in `vendor/extendrom/get_prebuilds.sh` (separate by a space from the others).
+Once you got the id just add it to the variable `GPG_KEYS` in `vendor/extendrom/get_prebuilts.sh` (separate by a space from the others).
 
 More information and the current F-Droid fingerprint can be verified [here](https://f-droid.org/docs/Release_Channels_and_Signing_Keys/?title=Release_Channels_and_Signing_Keys)
 
