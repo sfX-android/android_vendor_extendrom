@@ -68,7 +68,7 @@ function download_package() {
     fi
 
     echo "- Downloading package: $pkg"
-    cmd=$($CURL -o $pkg_path $repo 2>&1)
+    cmd=$($CURL --fail -o $pkg_path $repo 2>&1)
     ret=$?
     if [ $ret -ne 0 ]; then
         echo "ERROR: Failed to download $pkg (returned: $ret)"
@@ -77,15 +77,17 @@ function download_package() {
         return $ret
     fi
 
-    echo "- Downloading signature: ${repo}.asc"
-    cmd="$CURL -o $pkg_dir/$pkg_sig ${repo}.asc 2>&1"
-    out=$(eval $cmd)
-    ret=$?
-    if [ $ret -ne 0 ]; then
-        echo "ERROR: Failed to download $repo/$pkg_sig (returned: $ret)"
-        echo
-        echo "$out"
-        return $ret
+    if [ "$should_verify" == "true" ];then
+       echo "- Downloading signature: ${repo}.asc"
+       cmd="$CURL -o $pkg_dir/$pkg_sig ${repo}.asc 2>&1"
+       out=$(eval $cmd)
+       ret=$?
+       if [ $ret -ne 0 ]; then
+           echo "ERROR: Failed to download $repo/$pkg_sig (returned: $ret)"
+           echo
+           echo "$out"
+           return $ret
+       fi
     fi
 }
 
@@ -127,10 +129,10 @@ function get_packages() {
 	    local repo="$package_baseuri/${package_name}"
 	fi
 
+       should_verify=$(echo ${line} |cut -d "|" -f5)
         download_package "$repo" "$package"
-	[ $? -ne 0 ] && echo "ERROR occured while downloading, aborted"  && return 3
+       [ $? -ne 0 ] && echo "ERROR occured while downloading, aborted"  && exit 3
         
-	local should_verify=$(echo ${line} |cut -d "|" -f5)
 	if [ "$should_verify" == "true" ];then
 	    verify_package "$package"
 	fi
@@ -139,7 +141,7 @@ function get_packages() {
         target_pkg="$PREBUILT_DIR/$(target_file $target_split | sed 's/\;.*//')"
         echo "- Target package: $target_pkg"
         cp $package $target_pkg
-	[ $? -ne 0 ] && echo "ERROR occured during copying, aborted"  && return 3
+       [ $? -ne 0 ] && echo "ERROR occured during copying, aborted"  && exit 3
         echo
     done
 }
