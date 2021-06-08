@@ -16,8 +16,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 FDROID_REPO_URL="https://mirror.cyberbits.eu/fdroid/repo/"
+
+# list of keyservers for importing gpg pub keys
+# space separated
+GPG_KEYSERVER="keyserver.ubuntu.com pgp.mit.edu keys.openpgp.org keyring.debian.org"
+
+# gpg keys to import
+# space separated
+# f-droid:     7A029E54DD5DCE7A
+# microg:      22F796D6E62E6625A0BCEFEA7F979A66F3E08422
+GPG_KEYS="7A029E54DD5DCE7A 22F796D6E62E6625A0BCEFEA7F979A66F3E08422"
+
+# force a gpg pub key refresh
+# 0: will only download pub key when not installed
+# 1: will always download pub key even when installed already
+GPG_FORCE_DL=1
 
 ###########################################################
 
@@ -130,6 +144,22 @@ function get_packages() {
     done
 }
 
+F_GET_GPG_KEYS(){
+    # import all required gpg pub keys
+    for k in $GPG_KEYS;do
+       if [ $GPG_FORCE_DL -eq 0 ];then
+           gpg -k $k 2>&1 >> /dev/null && echo "- skipping already imported gpg pub key ($k)" && continue
+       fi
+       for s in $GPG_KEYSERVER;do
+           echo "- trying $k from $s"
+           gpg --keyserver $s --recv-key $k >> /dev/null 2>&1 && echo "- imported gpg key $k from $s" && continue 2
+       done
+       echo "- ERROR: Cannot download a required gpg pub key: $k"
+       exit 3
+    done
+}
+
+F_GET_GPG_KEYS
 get_packages "$MY_DIR/repo/packages.txt"
 
 INITIAL_COPYRIGHT_YEAR=2021
