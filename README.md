@@ -20,6 +20,8 @@ add the following in your `device/<vendor>/<model>/device.mk` (or any other devi
 
 ~~~
 # Enable extendrom
+ENABLE_EXTENDROM=true
+EXTENDROM_PACKAGES="noEOSappstore F-Droid F-DroidPrivilegedExtension additional_repos.xml AuroraStore"
 $(call inherit-product-if-exists, vendor/extendrom/config/common.mk)
 ~~~
 
@@ -28,16 +30,13 @@ add the following section to your `device/<vendor>/<model>/vendorsetup.sh` :
 ~~~
 ########### extendrom section ###########
 $PWD/vendor/extendrom/get_prebuilts.sh
-
-export ENABLE_EXTENDROM=true
-export EXTENDROM_PACKAGES="AdAway noEOSappstore Omega F-Droid additional_repos.xml AuroraStore"
 ~~~
 
 one note about the F-Droid privileged extension which allows to just use F-Droid without allowing "unknown sources":
 
-you can use: `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension_pb"` which will use the prebuilt apk from F-Droid or you can use the recommended way and build it:
+you can use: `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension_pb"` which will use the prebuilt apk from F-Droid or you can use the recommended way and build it instead:
 
-for the recommended way add this to your `.repo/local_manifest/extendrom.xml`:
+for the recommended way (build with the ROM) add this to your `.repo/local_manifest/extendrom.xml`:
 
 ~~~
 <!-- F-Droid -->
@@ -47,7 +46,7 @@ for the recommended way add this to your `.repo/local_manifest/extendrom.xml`:
 
 sync this repo with `repo sync -j4 packages/apps/F-DroidPrivilegedExtension`
 
-and add `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension"` (so without `_pb`) to your `device/<vendor>/<model>/vendorsetup.sh`.
+and add `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension"` (so without `_pb`) to your `device/<vendor>/<model>/device.mk`.
 
 ## Adding public GPG keys for verifying signatures
 
