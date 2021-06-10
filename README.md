@@ -16,6 +16,12 @@ create `.repo/local_manifest/extendrom.xml` and add:
 
 sync this repo with `repo sync -j4 vendor/extendrom`
 
+## activate and configure
+
+You have 2 options to do that, choose the one you like more ;)
+
+### option 1: use an Android makefile
+
 add the following in your `device/<vendor>/<model>/device.mk` (or any other device mk file):
 
 ~~~
@@ -25,14 +31,34 @@ EXTENDROM_PACKAGES := "noEOSappstore F-Droid F-DroidPrivilegedExtension addition
 $(call inherit-product-if-exists, vendor/extendrom/config/common.mk)
 ~~~
 
-add the following section to your `device/<vendor>/<model>/vendorsetup.sh` :
+add the following section to your `device/<vendor>/<model>/vendorsetup.sh`:
 
 ~~~
 ########### extendrom section ###########
 $PWD/vendor/extendrom/get_prebuilts.sh
 ~~~
 
-one note about the F-Droid privileged extension which allows to just use F-Droid without allowing "unknown sources":
+### option 2: use the vendorsetup.sh
+
+add the following in your `device/<vendor>/<model>/device.mk` (or any other device mk file):
+
+~~~
+# Enable extendrom
+$(call inherit-product-if-exists, vendor/extendrom/config/common.mk)
+~~~
+
+add the following section to your `device/<vendor>/<model>/vendorsetup.sh`:
+
+~~~
+########### extendrom section ###########
+$PWD/vendor/extendrom/get_prebuilts.sh
+export ENABLE_EXTENDROM=true
+export EXTENDROM_PACKAGES="noEOSappstore F-Droid F-DroidPrivilegedExtension additional_repos.xml AuroraStore"
+~~~
+
+### F-Droid notes
+
+one note about the *F-Droid privileged extension* which allows to use F-Droid without enabling allowing "unknown sources":
 
 you can use: `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension_pb"` which will use the prebuilt apk from F-Droid or you can use the recommended way and build it instead:
 
@@ -46,7 +72,7 @@ for the recommended way (build with the ROM) add this to your `.repo/local_manif
 
 sync this repo with `repo sync -j4 packages/apps/F-DroidPrivilegedExtension`
 
-and add `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension"` (so without `_pb`) to your `device/<vendor>/<model>/device.mk`.
+and add `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension"` (so without `_pb`) to your `device/<vendor>/<model>/device.mk` or `device/<vendor>/<model>/vendorsetup.sh`.
 
 ## Adding public GPG keys for verifying signatures
 
