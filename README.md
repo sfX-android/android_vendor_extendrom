@@ -20,8 +20,8 @@ add the following in your `device/<vendor>/<model>/device.mk` (or any other devi
 
 ~~~
 # Enable extendrom
-ENABLE_EXTENDROM=true
-EXTENDROM_PACKAGES="noEOSappstore F-Droid F-DroidPrivilegedExtension additional_repos.xml AuroraStore"
+ENABLE_EXTENDROM := true
+EXTENDROM_PACKAGES := "noEOSappstore F-Droid F-DroidPrivilegedExtension additional_repos.xml AuroraStore"
 $(call inherit-product-if-exists, vendor/extendrom/config/common.mk)
 ~~~
 
