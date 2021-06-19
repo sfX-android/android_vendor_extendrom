@@ -28,7 +28,7 @@ org.jak_linux.dns66_29.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 Magisk-v21.4.zip|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app|MagiskManager.apk;user-keys/shared|false
 
 # GmsCore
-com.google.android.gms-211515038.apk|https://microg.org/fdroid/repo/|priv-app|GsmCore.apk;PRESIGNED|false
+com.google.android.gms-211515038.apk|https://microg.org/fdroid/repo/|priv-app|GmsCore.apk;PRESIGNED|false
 
 ##########################################################################################################
 # LAUNCHERS
