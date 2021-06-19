@@ -74,6 +74,14 @@ sync this repo with `repo sync -j4 packages/apps/F-DroidPrivilegedExtension`
 
 and add `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension"` (so without `_pb`) to your `device/<vendor>/<model>/device.mk` or `device/<vendor>/<model>/vendorsetup.sh`.
 
+### microG GmsCore notes
+
+[microG GmsCore](https://github.com/microg/GmsCore/wiki) is a free software reimplementation of Google's Play Services. /e/ OS builds, both official and unofficial, include a version of GmsCore which does not include the Exposure Notifications framework. This framework is used by Covid tracing apps in many countries and without it these apps will either not work at all, or will not implement the exposure tracking functionailty. Users of these /e/ OS builds need to install an update - only avaialable in /e/'s Apps appstore - to enable the EN framework and allow the apps which use it to function correctly.
+
+Including the  `microgGmsCore` EXTENDROM package replaces /e/'s version of GmsCore (which does not include the EN framework) with the most recent (as of 19th June 2021) stable  version from the MicroG download page <https://microg.org/download.html> (which **does** include the EN Framework).
+
+Including the `additional_repos.xml` package as well will enable the microG F-Droid repo, allowing F-Droid to detect and manage future updates to GmsCore and the other components of microG.
+
 ## Adding public GPG keys for verifying signatures
 
 extendrom will verify signatures (if available) fully automatically but it needs the GPG public key added to your system first.<br/>
@@ -97,11 +105,11 @@ open: `vendor/extendrom/repo/packages.txt` and add any additional prebuilt you l
 
 even removing a package is possible, e.g. if you do not like the `Apps` package within /e/ OS you can specify `EXTENDROM_PACKAGES="noEOSappstore"` in your `device/<vendor>/<model>/vendorsetup.sh` and it will be removed.
 
-if you want to remove something else: open `vendor/extendrom/extra/Android.mk` and 
+if you want to remove something else: open `vendor/extendrom/extra/Android.mk` and
 
 * copy/paste the `noEOSappstore` block
 * change the `LOCAL_MODULE` name to whatever you like (e.g. `noWHATEVER`)
-* `LOCAL_OVERRIDES_PACKAGES` must match the LOCAL_MODULE name of what you want to remove 
+* `LOCAL_OVERRIDES_PACKAGES` must match the LOCAL_MODULE name of what you want to remove
 * add the `LOCAL_MODULE` name you specified in you `device/<vendor>/<model>/vendorsetup.sh` (e.g. `EXTENDROM_PACKAGES="noWHATEVER"`)
 
 Keep in mind that removing ROM apps like that it might can lead to a non-bootable system if there are dependencies you forgot to take care of.
