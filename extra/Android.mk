@@ -108,7 +108,7 @@ include $(BUILD_PREBUILT)
 # Use official MicroG GmsCore
 include $(CLEAR_VARS)
 LOCAL_MODULE := MicrogGmsCore
-LOCAL_SRC_FILES := prebuilt/GmsCore.apk
+LOCAL_SRC_FILES := ../prebuilt/GmsCore.apk
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := APPS
