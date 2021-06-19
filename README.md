@@ -76,11 +76,11 @@ and add `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension"` (so without `_pb`) to 
 
 ### microG GmsCore notes
 
-[microG GmsCore](https://github.com/microg/GmsCore/wiki) is a free software reimplementation of Google's Play Services. /e/ OS builds, both official and unofficial, include a version of GmsCore which does not include the Exposure Notifications framework. This framework is used by Covid tracing apps in many countries and without it these apps will either not work at all, or will not implement the exposure tracking functionailty. Users of these /e/ OS builds need to install an update - only avaialable in /e/'s Apps appstore - to enable the EN framework and allow the apps which use it to function correctly.
+[microG GmsCore](https://github.com/microg/GmsCore/wiki) is a free software reimplementation of Google's Play Services. /e/ OS ROMs, both official and unofficial, include a version of GmsCore which does not include the Exposure Notifications framework. This framework is used by Covid tracing apps in many countries and without it these apps will either not work at all, or will not implement the exposure tracking functionailty. Users of these /e/ OS ROMs need to install an update - only available in /e/'s Apps appstore - to enable the EN framework and allow the apps which use it to function correctly.
 
-Including the  `microgGmsCore` EXTENDROM package replaces /e/'s version of GmsCore (which does not include the EN framework) with the most recent (as of 19th June 2021) stable  version from the MicroG download page <https://microg.org/download.html> (which **does** include the EN Framework).
+Including the  `microgGmsCore` EXTENDROM package replaces /e/'s version of GmsCore (which does not include the EN framework) with the most recent (as of 19th June 2021) stable  version from the MicroG download page <https://microg.org/download.html> (which **does** include the EN Framework). Custom ROMs built with ths package, will therefore have a version of GmsCore which allows Covid tracking apps to work 'out of the box'.
 
-Including the `additional_repos.xml` package as well will enable the microG F-Droid repo, allowing F-Droid to detect and manage future updates to GmsCore and the other components of microG.
+Including the `additional_repos.xml` package as well as the `microgGmsCore` package will enable the microG F-Droid repo, allowing F-Droid to detect and manage future updates to GmsCore and the other components of microG.
 
 ## Adding public GPG keys for verifying signatures
 
