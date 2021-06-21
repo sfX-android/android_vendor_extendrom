@@ -106,13 +106,13 @@ LOCAL_OVERRIDES_PACKAGES := Camera
 include $(BUILD_PREBUILT)
 
 # Use official MicroG GmsCore
-include $(CLEAR_VARS)
+#include $(CLEAR_VARS)
 LOCAL_MODULE := MicrogGmsCore
-#LOCAL_SRC_FILES := ../prebuilt/microgGmsCore.apk
-LOCAL_CERTIFICATE := PRESIGNED
-LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := ../prebuilt/microgGmsCore.apk
+#LOCAL_CERTIFICATE := PRESIGNED
+#LOCAL_MODULE_TAGS := optional
 #LOCAL_MODULE_CLASS := APPS
-LOCAL_PRIVILEGED_MODULE := true
+#LOCAL_PRIVILEGED_MODULE := true
 #LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := GmsCore
 LOCAL_REQUIRED_MODULES := privapp-permissions-com.google.android.gms.xml
