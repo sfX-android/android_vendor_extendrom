@@ -156,16 +156,32 @@ F_WRITE_MAKEFILE(){
     while read -r line; do
         if [ -z "$line" ]; then continue; fi
 
+	unset EXTRA
         appsrcname=$(echo $line |cut -d "|" -f1)
         appdir=$(echo $line |cut -d "|" -f3)
 	appnamefull=$(echo $line |cut -d "|" -f4 | cut -d ";" -f1)
 	appsign=$(echo $line |cut -d "|" -f4 | cut -d ";" -f2)
 	appname="${appnamefull/\.apk/}"
+	overrides=$(echo $line |cut -d "|" -f6 )
+	requiredmods=$(echo $line |cut -d "|" -f7)
 	if [[ "$appdir" =~ .*priv-app ]];then
-	    EXTRA="LOCAL_PRIVILEGED_MODULE := true
-include \$(BUILD_PREBUILT)"
-	else
+	    EXTRA="LOCAL_PRIVILEGED_MODULE := true"
+	fi
+	if [ ! -z "$overrides" ];then
+	   p_overrides=$(echo "$overrides" | tr ";" " ")
+	   EXTRA="$EXTRA
+LOCAL_OVERRIDES_PACKAGES := $p_overrides"
+	fi
+	if [ ! -z "$requiredmods" ];then
+	   p_requiredmods=$(echo "$requiredmods" | tr ";" " ")
+	   EXTRA="$EXTRA
+LOCAL_REQUIRED_MODULES := $p_requiredmods"
+	fi
+	if [ -z "$EXTRA" ];then
 	    EXTRA="include \$(BUILD_PREBUILT)"
+	else
+	    EXTRA="$EXTRA
+include \$(BUILD_PREBUILT)"
 	fi
 	cat >> $ANDROIDMK << _EOAPP
 
