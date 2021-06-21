@@ -115,8 +115,8 @@ LOCAL_SRC_FILES := ../prebuilt/microgGmsCore.apk
 #LOCAL_PRIVILEGED_MODULE := true
 #LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := GmsCore
-LOCAL_REQUIRED_MODULES := privapp-permissions-com.google.android.gms.xml
-LOCAL_REQUIRED_MODULES += microg.xml
-include $(BUILD_PREBUILT)
+#LOCAL_REQUIRED_MODULES := privapp-permissions-com.google.android.gms.xml
+#LOCAL_REQUIRED_MODULES += microg.xml
+#include $(BUILD_PREBUILT)
 
 
