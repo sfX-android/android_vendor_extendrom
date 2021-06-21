@@ -1,9 +1,9 @@
 # FORMAT (all pipes are important for parsing):
-# <filename-for-download-uri>|<download-uri-without-filename>|<install-path>|<target-filename>;<PRESIGNED or path to certs>|<true|false> to verify GPG signature or not
+# <filename-for-download-uri>|<download-uri-without-filename>|<install-path>|<target-filename>;<PRESIGNED or path to certs>|<true|false> to verify GPG signature or not|LOCAL_OVERRIDES_PACKAGES delimited by ";"|LOCAL_REQUIRED_MODULES delimited by ";"
 # the special keyword FDROIDREPO will use the f-droid repo (or mirror) specified in get_prebuilts.sh
 # verifying GPG signatures are usually supported on F-droid repos only but as long as there is the same filename with .asc extension it will work for any
 # Example:
-# itsme.apk|http://dlurl.local|app|itsme.apk;PRESIGNED|true
+# itsme.apk|http://dlurl.local|app|itsme.apk;PRESIGNED|true|Launcher912;Home|libfoo;libmaa|
 
 ##########################################################################################################
 # SYSTEM
@@ -26,6 +26,9 @@ org.jak_linux.dns66_29.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 
 # Magisk
 Magisk-v21.4.zip|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app|MagiskManager.apk;user-keys/shared|false
+
+# Google in-app purchase support by nanolx (https://gitlab.com/Nanolx/microg-phonesky-iap-support)
+Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;user-keys/shared|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 ##########################################################################################################
 # LAUNCHERS

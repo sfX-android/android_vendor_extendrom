@@ -182,4 +182,14 @@ include $MY_DIR/extra/Android.mk
 EOMK
 write_footers
 
-exit 0
+# special handling for /e/ OS gestures support
+if [ "$EOS_GESTURES" == "true" ];then
+    TBMK="packages/apps/Trebuchet/Android.mk"
+    if [ -f $TBMK ];then
+       sed -i 's/LOCAL_PACKAGE_NAME := TrebuchetQuickStep/LOCAL_PACKAGE_NAME := eOSTrebuchetQuickStep/g' $TBMK
+    else
+       echo -e "\n*** ERROR ***\n/e/ OS gesture support is enabled (EOS_GESTURES=true) but a required file is missing:\n\n\t>${TBMK}<\n\nCheck if your local manifest contains the source for 'TrebuchetQuickStep'!"
+       echo -e "For testing purposes you can clone it manually like this \n\ngit clone https://github.com/LineageOS/android_packages_apps_Trebuchet.git packages/apps/Trebuchet -b lineage-<version>\n"
+       exit 3
+    fi
+fi
