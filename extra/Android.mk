@@ -104,3 +104,21 @@ LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Camera
 include $(BUILD_PREBUILT)
+
+# com.android.vending.xml permissions required by phonesky
+include $(CLEAR_VARS)
+LOCAL_MODULE := com.android.vending.xml
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+# phonesky-permissions.xml permissions required by phonesky
+include $(CLEAR_VARS)
+LOCAL_MODULE := phonesky-permissions.xml
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/default-permissions
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
