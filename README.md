@@ -74,6 +74,14 @@ sync this repo with `repo sync -j4 packages/apps/F-DroidPrivilegedExtension`
 
 and add `EXTENDROM_PACKAGES="F-DroidPrivilegedExtension"` (so without `_pb`) to your `device/<vendor>/<model>/device.mk` or `device/<vendor>/<model>/vendorsetup.sh`.
 
+### microG GmsCore notes
+
+[MicroG GmsCore](https://github.com/microg/GmsCore/wiki) is a free software reimplementation of Google's Play Services. /e/ OS ROMs, both official and unofficial, include a version of GmsCore which does not include the Exposure Notifications framework. This framework is used by Covid tracing apps in many countries and without it these apps will either not work at all, or will not implement the exposure tracking functionailty. Users of these /e/ OS ROMs need to install an update - only available in /e/'s Apps appstore - to enable the EN framework and allow the apps which use it to function correctly.
+
+Including the  `MicrogGmsCore` EXTENDROM package replaces /e/'s version of GmsCore (which does not include the EN framework) with the most recent (as of 19th June 2021) stable  version from the MicroG download page <https://microg.org/download.html> (which **does** include the EN Framework). Custom ROMs built with ths package, will therefore have a version of GmsCore which allows Covid tracking apps to work 'out of the box'.
+
+Including the `additional_repos.xml` package as well as the `MicrogGmsCore` package will enable the microG F-Droid repo, allowing F-Droid to detect and manage future updates to GmsCore and the other components of MicroG.
+
 ## Adding public GPG keys for verifying signatures
 
 extendrom will verify signatures (if available) fully automatically but it needs the GPG public key added to your system first.<br/>

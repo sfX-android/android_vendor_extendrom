@@ -30,6 +30,10 @@ Magisk-v21.4.zip|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app
 # Google in-app purchase support by nanolx (https://gitlab.com/Nanolx/microg-phonesky-iap-support)
 Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;user-keys/shared|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
+# MicrogGmsCore
+com.google.android.gms-211515038.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;PRESIGNED|false|GmsCore|microg.xml;privapp-permissions-com.google.android.gms.xml
+
+
 ##########################################################################################################
 # LAUNCHERS
 ##########################################################################################################
@@ -40,7 +44,7 @@ Omega.v0.7.1.Build.118.apk|https://github.com/otakuhqz/Omega/releases/download/v
 # Lawnchair - stable
 # taken from PlayStore via AuroraStore:
 Lawnchair_202589.apk|https://www.dropbox.com/s/qi551e1y2ubd1zd|app|Lawnchair-stable.apk;PRESIGNED|false
- 
+
 # Lawnchair - latest
 # taken directly from the official Lawnchair TG group (https://t.me/lawnchairci)
 Lawnchair_latest.apk|https://leech.binbash.rocks:8008/misc|app|Lawnchair-latest.apk;PRESIGNED|false
@@ -66,4 +70,3 @@ com.moez.QKSMS_2218.apk|FDROIDREPO|app|QKSMS.apk;PRESIGNED|true
 
 # Etar Calendar
 ws.xsoh.etar_27.apk|FDROIDREPO|app|Etar.apk;PRESIGNED|true
-
