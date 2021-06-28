@@ -185,6 +185,7 @@ write_footers
 # special handling for /e/ OS gestures support
 if [ "$EOS_GESTURES" == "true" ];then
     TBMK="packages/apps/Trebuchet/Android.mk"
+    TBTESTMK="packages/apps/Trebuchet/tests/Android.mk"
     if [ -f $TBMK ];then
        sed -i 's/LOCAL_PACKAGE_NAME := TrebuchetQuickStep/LOCAL_PACKAGE_NAME := eOSTrebuchetQuickStep/g' $TBMK
     else
@@ -192,4 +193,5 @@ if [ "$EOS_GESTURES" == "true" ];then
        echo -e "For testing purposes you can clone it manually like this \n\ngit clone https://github.com/LineageOS/android_packages_apps_Trebuchet.git packages/apps/Trebuchet -b lineage-<version>\n"
        exit 3
     fi
+    [ -f "$TBTESTMK" ] && rm $TBTESTMK
 fi
