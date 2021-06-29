@@ -186,6 +186,7 @@ write_footers
 if [ "$EOS_GESTURES" == "true" ];then
     TBMK="packages/apps/Trebuchet/Android.mk"
     TBTESTMK="packages/apps/Trebuchet/tests/Android.mk"
+    ICOLIB="packages/apps/iconloaderlib"
     if [ -f $TBMK ];then
        sed -i 's/LOCAL_PACKAGE_NAME := TrebuchetQuickStep/LOCAL_PACKAGE_NAME := eOSTrebuchetQuickStep/g' $TBMK
     else
@@ -194,4 +195,5 @@ if [ "$EOS_GESTURES" == "true" ];then
        exit 3
     fi
     [ -f "$TBTESTMK" ] && rm $TBTESTMK
+    [ -d "$ICOLIB" ] && rm -rf $ICOLIB
 fi
