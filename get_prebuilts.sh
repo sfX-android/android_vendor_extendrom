@@ -122,6 +122,15 @@ function get_packages() {
         local package_name=$(echo ${line} |cut -d "|" -f1)
         local package_baseuri=$(echo ${line} |cut -d "|" -f2)
         local package="$PREBUILT_DIR/$package_name"
+       local target_split=$(echo ${line} |cut -d "|" -f4)
+        target_pkg="$PREBUILT_DIR/$(target_file $target_split | sed 's/\;.*//')"
+       local package_human=$(echo $(target_file $target_split | sed 's/\;.*//;s/\.apk//g'))
+
+       # do not download what we do not want to build
+       if [[ ! "$EXTENDROM_PACKAGES" =~ "$package_human" ]];then
+           echo "..skipping $package_human as not requested by EXTENDROM_PACKAGES"
+           continue
+       fi
 
 	if [ "$package_baseuri" == "FDROIDREPO" ];then
 	    local repo="${FDROID_REPO_URL}/${package_name}"
@@ -130,7 +139,7 @@ function get_packages() {
 	fi
 
        should_verify=$(echo ${line} |cut -d "|" -f5)
-        download_package "$repo" "$package"
+       download_package "$repo" "$package"
        [ $? -ne 0 ] && echo "ERROR occured while downloading, aborted"  && exit 3
         
 	if [ "$should_verify" == "true" ];then
