@@ -128,7 +128,7 @@ function get_packages() {
 
        # do not download what we do not want to build
        if [[ ! "$EXTENDROM_PACKAGES" =~ "$package_human" ]];then
-           echo "..skipping $package_human as not requested by EXTENDROM_PACKAGES"
+           echo "[$FUNCNAME] ... skipping $package_human as not requested by EXTENDROM_PACKAGES"
            continue
        fi
 

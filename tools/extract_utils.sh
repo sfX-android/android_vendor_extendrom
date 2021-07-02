@@ -164,6 +164,14 @@ F_WRITE_MAKEFILE(){
 	appname="${appnamefull/\.apk/}"
 	overrides=$(echo $line |cut -d "|" -f6 )
 	requiredmods=$(echo $line |cut -d "|" -f7)
+        package_human="${appnamefull/\.apk}"
+
+        # do not process what we do not want to build
+        if [[ ! "$EXTENDROM_PACKAGES" =~ "$package_human" ]];then
+            echo "[$FUNCNAME] ... skipping $package_human as not requested by EXTENDROM_PACKAGES"
+            continue
+        fi
+
 	if [[ "$appdir" =~ .*priv-app ]];then
 	    EXTRA="LOCAL_PRIVILEGED_MODULE := true"
 	fi
