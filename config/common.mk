@@ -7,7 +7,7 @@ endif
 ifeq ($(EOS_GESTURES),true)
 # set specific overlay
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-gestures
+    vendor/extendrom/overlay-gestures
 # build TrebuchetQuickStep (get_prebuilts.sh must be executed once at least)
 PRODUCT_PACKAGES += eOSTrebuchetQuickStep
 endif

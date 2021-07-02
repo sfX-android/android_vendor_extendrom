@@ -196,13 +196,18 @@ if [ "$EOS_GESTURES" == "true" ];then
     TBMK="packages/apps/Trebuchet/Android.mk"
     TBTESTMK="packages/apps/Trebuchet/tests/Android.mk"
     ICOLIB="packages/apps/iconloaderlib"
+    LOSMK="vendor/lineage/config/common.mk"
     if [ -f $TBMK ];then
-       sed -i 's/LOCAL_PACKAGE_NAME := TrebuchetQuickStep/LOCAL_PACKAGE_NAME := eOSTrebuchetQuickStep/g' $TBMK
+       sed -i 's/LOCAL_PACKAGE_NAME := TrebuchetQuickStep$/LOCAL_PACKAGE_NAME := eOSTrebuchetQuickStep/g' $TBMK
     else
        echo -e "\n*** ERROR ***\n/e/ OS gesture support is enabled (EOS_GESTURES=true) but a required file is missing:\n\n\t>${TBMK}<\n\nCheck if your local manifest contains the source for 'TrebuchetQuickStep'!"
        echo -e "For testing purposes you can clone it manually like this \n\ngit clone https://github.com/LineageOS/android_packages_apps_Trebuchet.git packages/apps/Trebuchet -b lineage-<version>\n"
        exit 3
     fi
+    # remove duplicated tests causing build errors
     [ -f "$TBTESTMK" ] && rm $TBTESTMK
+    # remove duplicated iconloaderlib causing build errors
     [ -d "$ICOLIB" ] && rm -rf $ICOLIB
+    # remove legacy recents activated in /e/
+    [ -f "$LOSMK" ] && sed -E -i '/SystemUIWithLegacyRecents\s+\\/d' $LOSMK
 fi
