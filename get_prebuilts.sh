@@ -142,7 +142,6 @@ function get_packages() {
 		PERR=$?
 		if [ $PERR -eq 0 ];then
 		    echo "[$FUNCNAME] ... parsing result: $old_package_name -> $package_name"
-		    local package="$PREBUILT_DIR/$package_name"
 		else
 		    echo "[$FUNCNAME] ... ERROR $PERR occured while identifying the latest apk name from ${FDROID_REPO_URL}"
 		    exit 3
