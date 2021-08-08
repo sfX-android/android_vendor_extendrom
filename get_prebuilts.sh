@@ -43,6 +43,7 @@ CUSTDNS="$2"
 [ ! -z "$CUSTDNS" ] && CURLDNS="--dns-servers $CUSTDNS"
 
 PREBUILT_DIR="$MY_DIR/prebuilt"
+PARSEAPK="$MY_DIR/tools/get_latest_apkname.py"
 
 CURLARGS=" -L $CURLDNS"
 CURL="$MY_DIR/tools/curl_x64_static $CURLARGS"
@@ -137,7 +138,7 @@ function get_packages() {
 	    if [ $? -eq 0 ];then
 		echo "[$FUNCNAME] ... parsing repo to find latest apk file name"
 		old_package_name="$package_name"
-		package_name=$(python3 tools/get_latest_apkname.py -repourl "${FDROID_REPO_URL}" -apkname "$package_name")
+		package_name=$(python3 $PARSEAPK -repourl "${FDROID_REPO_URL}" -apkname "$package_name")
 		PERR=$?
 		if [ $PERR -eq 0 ];then
 		    echo "[$FUNCNAME] ... parsing result: $old_package_name -> $package_name"
