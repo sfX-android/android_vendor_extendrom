@@ -1,28 +1,43 @@
-# FORMAT (all pipes are important for parsing):
-# <filename-for-download-uri>|<download-uri-without-filename>|<install-path>|<target-filename>;<PRESIGNED or path to certs>|<true|false> to verify GPG signature or not|LOCAL_OVERRIDES_PACKAGES delimited by ";"|LOCAL_REQUIRED_MODULES delimited by ";"
-# the special keyword FDROIDREPO will use the f-droid repo (or mirror) specified in get_prebuilts.sh
-# verifying GPG signatures are usually supported on F-droid repos only but as long as there is the same filename with .asc extension it will work for any
-# Example:
-# itsme.apk|http://dlurl.local|app|itsme.apk;PRESIGNED|true|Launcher912;Home|libfoo;libmaa|
+# FORMAT (this is 1-line but splitted here for better readability):
+#
+#   <filename-for-download-uri>|
+#   <download-uri-without-filename>|
+#   <install-path>|
+#   <target-filename>;<PRESIGNED or path to certs>|
+#   <true|false> to verify GPG signature or not|   --> note: verifying GPG signatures requires that a filename with .asc extension is on the specified repo available
+#   LOCAL_OVERRIDES_PACKAGES delimited by ";"|
+#   LOCAL_REQUIRED_MODULES delimited by ";"
+#
+# set the above in 1 line like this:
+#<filename-for-download-uri>|<download-uri-without-filename>|<install-path>|<target-filename>;<PRESIGNED or path to certs>|<true|false>|LOCAL_OVERRIDES_PACKAGES|LOCAL_REQUIRED_MODULES
+#
+# special keywords
+#    - FDROIDREPO (download-uri): will use the f-droid repo (or mirror) specified in get_prebuilts.sh
+#    - LATEST (filename. replacing a version number of an APK): instead of a specific version fetch the latest version (works for FDROID only)
+#      e.g. org.fdroid.fdroid_1012003.apk becomes org.fdroid.fdroid_LATEST.apk
+#
+# Examples:
+#    itsme_LATEST.apk|FDROIDREPO|app|itsme.apk;user-keys/shared|true|Launcher;Home|libfoo;libmaa|
+#    itsme.apk|http://dlurl.local|app|itsme.apk;PRESIGNED|false|Launcher912;Home|libfoo;libmaa|
 
 ##########################################################################################################
 # SYSTEM
 ##########################################################################################################
 
 # F-Droid
-org.fdroid.fdroid_1012003.apk|FDROIDREPO|app|F-Droid.apk;PRESIGNED|true
+org.fdroid.fdroid_LATEST.apk|FDROIDREPO|app|F-Droid.apk;PRESIGNED|true
 
 # F-Droid privileged extension should be build with AOSP but if you REALLY wanna use a prebuilt:
-org.fdroid.fdroid.privileged_2120.apk|FDROIDREPO|priv-app|F-DroidPrivilegedExtension_pb.apk;PRESIGNED|true
+org.fdroid.fdroid.privileged_LATEST.apk|FDROIDREPO|priv-app|F-DroidPrivilegedExtension_pb.apk;PRESIGNED|true
 
 # AuroraStore
-com.aurora.store_35.apk|FDROIDREPO|app|AuroraStore.apk;PRESIGNED|true
+com.aurora.store_LATEST.apk|FDROIDREPO|app|AuroraStore.apk;PRESIGNED|true
 
 # AdAway
-org.adaway_50500.apk|FDROIDREPO|priv-app|AdAway.apk;user-keys/shared|false
+org.adaway_LATEST.apk|FDROIDREPO|priv-app|AdAway.apk;user-keys/shared|false
 
 # DNS66
-org.jak_linux.dns66_29.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
+org.jak_linux.dns66_LATEST.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 
 # Magisk
 Magisk-v21.4.zip|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app|MagiskManager.apk;user-keys/shared|false
@@ -59,14 +74,14 @@ Lawnchair_latest.apk|https://leech.binbash.rocks:8008/misc|app|Lawnchair-latest.
 com.fsck.k9_27034.apk|FDROIDREPO|app|K9-Mail-latest.apk;PRESIGNED|true
 
 # Fennec Browser
-org.mozilla.fennec_fdroid_891100.apk|FDROIDREPO|app|Fennec.apk;PRESIGNED|true
+org.mozilla.fennec_fdroid_LATEST.apk|FDROIDREPO|app|Fennec.apk;PRESIGNED|true
 
 # QKSMS Messaging
-com.moez.QKSMS_2218.apk|FDROIDREPO|app|QKSMS.apk;PRESIGNED|true
+com.moez.QKSMS_LATEST.apk|FDROIDREPO|app|QKSMS.apk;PRESIGNED|true
 
 ##########################################################################################################
 # OFFICE
 ##########################################################################################################
 
 # Etar Calendar
-ws.xsoh.etar_27.apk|FDROIDREPO|app|Etar.apk;PRESIGNED|true
+ws.xsoh.etar_LATEST.apk|FDROIDREPO|app|Etar.apk;PRESIGNED|true

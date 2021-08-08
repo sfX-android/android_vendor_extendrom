@@ -67,23 +67,23 @@ function download_package() {
         mkdir -p "$pkg_dir"
     fi
 
-    echo "- Downloading package: $pkg"
+    echo "[$FUNCNAME] ... downloading package: $pkg"
     cmd=$($CURL --fail -o $pkg_path $repo 2>&1)
     ret=$?
     if [ $ret -ne 0 ]; then
-        echo "ERROR: Failed to download $pkg (returned: $ret)"
+        echo "[$FUNCNAME] ERROR: Failed to download $pkg (returned: $ret)"
         echo
         echo "$cmd"
         return $ret
     fi
 
     if [ "$should_verify" == "true" ];then
-       echo "- Downloading signature: ${repo}.asc"
+       echo "[$FUNCNAME] ... downloading signature: ${repo}.asc"
        cmd="$CURL -o $pkg_dir/$pkg_sig ${repo}.asc 2>&1"
        out=$(eval $cmd)
        ret=$?
        if [ $ret -ne 0 ]; then
-           echo "ERROR: Failed to download $repo/$pkg_sig (returned: $ret)"
+           echo "[$FUNCNAME] ERROR: Failed to download $repo/$pkg_sig (returned: $ret)"
            echo
            echo "$out"
            return $ret
@@ -97,7 +97,7 @@ function verify_package() {
     local out=""
     local ret=0
 
-    echo -n "- Verifing package signature for $pkg_path: "
+    echo -n "[$FUNCNAME] ... verifing package signature for $pkg_path: "
     cmd="gpg --verify $pkg_path.asc 2>&1"
     out=$(eval $cmd)
     ret=$?
@@ -133,6 +133,20 @@ function get_packages() {
        fi
 
 	if [ "$package_baseuri" == "FDROIDREPO" ];then
+	    echo "$package_name" | grep -q "LATEST"
+	    if [ $? -eq 0 ];then
+		echo "[$FUNCNAME] ... parsing repo to find latest apk file name"
+		old_package_name="$package_name"
+		package_name=$(python3 tools/get_latest_apkname.py -repourl "${FDROID_REPO_URL}" -apkname "$package_name")
+		PERR=$?
+		if [ $PERR -eq 0 ];then
+		    echo "[$FUNCNAME] ... parsing result: $old_package_name -> $package_name"
+		    local package="$PREBUILT_DIR/$package_name"
+		else
+		    echo "[$FUNCNAME] ... ERROR $PERR occured while identifying the latest apk name from ${FDROID_REPO_URL}"
+		    exit 3
+		fi
+	    fi
 	    local repo="${FDROID_REPO_URL}/${package_name}"
 	else
 	    local repo="$package_baseuri/${package_name}"
@@ -140,7 +154,7 @@ function get_packages() {
 
        should_verify=$(echo ${line} |cut -d "|" -f5)
        download_package "$repo" "$package"
-       [ $? -ne 0 ] && echo "ERROR occured while downloading, aborted"  && exit 3
+       [ $? -ne 0 ] && echo "[$FUNCNAME] ERROR occured while downloading, aborted"  && exit 3
         
 	if [ "$should_verify" == "true" ];then
 	    verify_package "$package"
@@ -148,9 +162,9 @@ function get_packages() {
 
 	local target_split=$(echo ${line} |cut -d "|" -f4)
         target_pkg="$PREBUILT_DIR/$(target_file $target_split | sed 's/\;.*//')"
-        echo "- Target package: $target_pkg"
+        echo "[$FUNCNAME] ... target package: $target_pkg"
         cp $package $target_pkg
-       [ $? -ne 0 ] && echo "ERROR occured during copying, aborted"  && exit 3
+       [ $? -ne 0 ] && echo "[$FUNCNAME] ERROR occured during copying, aborted"  && exit 3
         echo
     done
 }
@@ -159,13 +173,13 @@ F_GET_GPG_KEYS(){
     # import all required gpg pub keys
     for k in $GPG_KEYS;do
        if [ $GPG_FORCE_DL -eq 0 ];then
-           gpg -k $k 2>&1 >> /dev/null && echo "- skipping already imported gpg pub key ($k)" && continue
+           gpg -k $k 2>&1 >> /dev/null && echo "[$FUNCNAME] ... skipping already imported gpg pub key ($k)" && continue
        fi
        for s in $GPG_KEYSERVER;do
            echo "- trying $k from $s"
-           gpg --keyserver $s --recv-key $k >> /dev/null 2>&1 && echo "- imported gpg key $k from $s" && continue 2
+           gpg --keyserver $s --recv-key $k >> /dev/null 2>&1 && echo "[$FUNCNAME] ... imported gpg key $k from $s" && continue 2
        done
-       echo "- ERROR: Cannot download a required gpg pub key: $k"
+       echo "[$FUNCNAME] ERROR: Cannot download a required gpg pub key: $k"
        exit 3
     done
 }
