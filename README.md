@@ -4,6 +4,15 @@ modifying / extending without touching the regular Android sources
 
 this project is a merge of vendor/e-mod and vendor/fdroid which are both superseeded by this one.
 
+## requirements
+
+The following packages needed to be installed on your build system where extendrom will run:
+
+- git
+- curl
+- python v3
+- python v3 [requests module](https://docs.python-requests.org/en/latest/user/install/#install) (mainly: `sudo python3 -m pip install requests`)
+
 ## setup
 
 create `.repo/local_manifest/extendrom.xml` and add:
