@@ -54,7 +54,7 @@ com.google.android.gms-211515038.apk|https://microg.org/fdroid/repo/|priv-app|Mi
 ##########################################################################################################
 
 # Omega Launcher
-Omega.v0.7.1.Build.118.apk|https://github.com/otakuhqz/Omega/releases/download/v0.7.1|app|Omega.apk;user-keys/shared|false
+Omega.v0.8.0.Build.168.apk|https://github.com/otakuhqz/Omega/releases/download/v0.8.0|app|Omega.apk;user-keys/shared|false
 
 # Lawnchair - stable
 # taken from PlayStore via AuroraStore:
