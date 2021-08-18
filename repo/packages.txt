@@ -43,7 +43,7 @@ org.jak_linux.dns66_LATEST.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 Magisk-v21.4.zip|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app|MagiskManager.apk;user-keys/shared|false
 
 # Google in-app purchase support by nanolx (https://gitlab.com/Nanolx/microg-phonesky-iap-support)
-Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;user-keys/shared|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 # MicrogGmsCore
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;PRESIGNED|false|GmsCore|microg.xml;privapp-permissions-com.google.android.gms.xml
@@ -54,7 +54,7 @@ com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|Micro
 ##########################################################################################################
 
 # Omega Launcher
-Omega.v0.8.0.Build.168.apk|https://github.com/otakuhqz/Omega/releases/download/v0.8.0|app|Omega.apk;user-keys/shared|false
+Omega.v0.8.0.Build.168.apk|https://github.com/otakuhqz/Omega/releases/download/v0.8.0|app|Omega.apk;PRESIGNED|false
 
 # Lawnchair - stable
 # taken from PlayStore via AuroraStore:
