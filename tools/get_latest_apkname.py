@@ -18,13 +18,13 @@ xml_file = '/tmp/repoinfo.xml'
 
 parser = argparse.ArgumentParser(description='Parsing a F-Droid repo xml to get the latest version of an APK')
 parser.add_argument('--repourl', "-repourl", required=True,
-                    help='The F-Droid full URI (index.xml must be in that path)')
+                    help='The F-Droid full URI (index.xml must be found within that path)')
 parser.add_argument('--apkname', "-apkname", required=True,
                     help='The filename of the APK')
 args = parser.parse_args()
 
 def getXML(xmluri):
-    xmlget = requests.get(xmluri)
+    xmlget = requests.get(xmluri, headers={'User-Agent': 'Mozilla/5.0'})
     with open(xml_file, 'wb') as f:
         f.write(xmlget.content)
 
@@ -49,7 +49,7 @@ def parseXML(xmlfile, apkname):
     return latest_apk
 
 def main():
-    getXML(args.repourl + "index.xml")
+    getXML(args.repourl + "/index.xml")
     parsed_apk = parseXML(xml_file, args.apkname)
     print(parsed_apk)
   
