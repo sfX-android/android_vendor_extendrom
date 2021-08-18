@@ -46,7 +46,7 @@ Magisk-v21.4.zip|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app
 Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;user-keys/shared|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 # MicrogGmsCore
-com.google.android.gms-211515038.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;PRESIGNED|false|GmsCore|microg.xml;privapp-permissions-com.google.android.gms.xml
+com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;PRESIGNED|false|GmsCore|microg.xml;privapp-permissions-com.google.android.gms.xml
 
 
 ##########################################################################################################
