@@ -74,6 +74,7 @@ function download_package() {
     if [ $ret -ne 0 ]; then
         echo "[$FUNCNAME] ERROR: Failed to download $pkg (returned: $ret)"
         echo
+	echo "$CURL --fail -o $pkg_path $repo"
         echo "$cmd"
         return $ret
     fi
@@ -121,7 +122,14 @@ function get_packages() {
 	unset repo
 
         local package_name=$(echo ${line} |cut -d "|" -f1)
+
         local package_baseuri=$(echo ${line} |cut -d "|" -f2)
+	if [ "$package_baseuri" == "FDROIDREPO" ];then
+	    local repouri="${FDROID_REPO_URL}"
+	else
+	    local repouri="${package_baseuri}"
+	fi
+
         local package="$PREBUILT_DIR/$package_name"
        local target_split=$(echo ${line} |cut -d "|" -f4)
         target_pkg="$PREBUILT_DIR/$(target_file $target_split | sed 's/\;.*//')"
@@ -133,21 +141,20 @@ function get_packages() {
            continue
        fi
 
-	if [ "$package_baseuri" == "FDROIDREPO" ];then
-	    echo "$package_name" | grep -q "LATEST"
-	    if [ $? -eq 0 ];then
-		echo "[$FUNCNAME] ... parsing repo to find latest apk file name"
-		old_package_name="$package_name"
-		package_name=$(python3 $PARSEAPK -repourl "${FDROID_REPO_URL}" -apkname "$package_name")
-		PERR=$?
-		if [ $PERR -eq 0 ];then
-		    echo "[$FUNCNAME] ... parsing result: $old_package_name -> $package_name"
-		else
-		    echo "[$FUNCNAME] ... ERROR $PERR occured while identifying the latest apk name from ${FDROID_REPO_URL}"
-		    exit 3
-		fi
+	echo "$package_name" | grep -q "LATEST"
+	if [ $? -eq 0 ];then
+	    echo "[$FUNCNAME] ... parsing repo to find latest apk file name"
+	    old_package_name="$package_name"
+	    echo "PARSEAPK -repourl ${repouri} -apkname $package_name"
+	    package_name=$(python3 $PARSEAPK -repourl "${repouri}" -apkname "$package_name")
+	    PERR=$?
+	    if [ $PERR -eq 0 ];then
+	        echo "[$FUNCNAME] ... parsing result: $old_package_name -> $package_name"
+	    else
+	        echo "[$FUNCNAME] ... ERROR $PERR occured while identifying the latest apk name from ${FDROID_REPO_URL}"
+	        exit 3
 	    fi
-	    local repo="${FDROID_REPO_URL}/${package_name}"
+	    local repo="${repouri}/${package_name}"
 	else
 	    local repo="$package_baseuri/${package_name}"
 	fi
