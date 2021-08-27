@@ -202,6 +202,11 @@ DEVICE="true"
 write_headers "" ENABLE_EXTENDROM
 DEVICE=
 
+# special handling for locked bootloaders
+if [ "$EXTENDROM_SIGN_ALL_APKS" == "true" ];then
+    sed -i 's#PRESIGNED#user-keys/shared#g' $MY_DIR/repo/packages.txt
+fi
+
 echo "- writing makefile"
 F_WRITE_MAKEFILE "$MY_DIR/repo/packages.txt"
 cat >> $ANDROIDMK <<EOMK
