@@ -133,12 +133,25 @@ function get_packages() {
         local package="$PREBUILT_DIR/$package_name"
        local target_split=$(echo ${line} |cut -d "|" -f4)
         target_pkg="$PREBUILT_DIR/$(target_file $target_split | sed 's/\;.*//')"
-       local package_human=$(echo $(target_file $target_split | sed 's/\;.*//;s/\.apk//g'))
+       local package_human=$(echo $(target_file $target_split | sed 's/\;.*//;s/\.apk//g;s/\.zip//g'))
 
        # do not download what we do not want to build
        if [[ ! "$EXTENDROM_PACKAGES" =~ "$package_human" ]];then
            echo "[$FUNCNAME] ... skipping $package_human as not requested by EXTENDROM_PACKAGES"
            continue
+	else
+	    for i in $EXTENDROM_PACKAGES; do
+		if [ "$i" != "$package_human" ];then
+		    EXACTM=0
+		else
+		    EXACTM=1
+		    break
+		fi
+	    done
+	    if [ "$EXACTM" -ne 1 ];then
+		echo "[$FUNCNAME] ... skipping $package_human as not requested by EXTENDROM_PACKAGES"
+		continue
+	    fi
        fi
 
 	echo "$package_name" | grep -q "LATEST"
