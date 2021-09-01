@@ -220,6 +220,29 @@ if [ "$EXTENDROM_SIGN_ALL_APKS" == "true" ];then
     sed -i 's#PRESIGNED#user-keys/shared#g' $MY_DIR/repo/packages.txt
 fi
 
+# MAGISK rooting preparation
+if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
+    MAGISKOUT="$MY_DIR/../../out/.magisk"
+    [ -d "$MAGISKOUT" ] && rm -rf $MAGISKOUT
+    mkdir -p $MAGISKOUT
+    if [ ! -f $MY_DIR/prebuilt/Magisk.zip ];then
+	if [ ! -f $MY_DIR/prebuilt/SignMagisk.zip ];then
+	    echo "MAGISK zip cannot be found! Do you have set 'Magisk' or 'SignMagisk' in your vendorsetup.sh??" && exit 4
+	else
+	    MAGZIP=$MY_DIR/prebuilt/SignMagisk.zip
+	fi
+    else
+	MAGZIP=$MY_DIR/prebuilt/Magisk.zip
+    fi
+    unzip -q $MAGZIP -d $MAGISKOUT/src
+    cp $MAGISKOUT/src/lib/x86/libmagiskboot.so $MAGISKOUT/magiskboot
+    chmod 755 $MAGISKOUT/magiskboot
+    cp $MAGISKOUT/src/lib/armeabi-v7a/libmagiskinit.so $MAGISKOUT/magiskinit
+    cp $MAGISKOUT/src/lib/armeabi-v7a/libmagisk32.so $MAGISKOUT/magisk32
+    cp $MAGISKOUT/src/lib/armeabi-v7a/libmagisk64.so $MAGISKOUT/magisk64
+    cp $MY_DIR/root/* $MAGISKOUT/
+fi
+
 echo "- writing makefile"
 F_WRITE_MAKEFILE "$MY_DIR/repo/packages.txt"
 cat >> $ANDROIDMK <<EOMK
