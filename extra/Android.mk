@@ -71,14 +71,14 @@ include $(BUILD_PREBUILT)
 
 # override /e/ PdfViewer
 include $(CLEAR_VARS)
-LOCAL_MODULE := noEOSBlissLauncher
+LOCAL_MODULE := noEOSPdfViewer
 LOCAL_SRC_FILES := empty.apk
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
-LOCAL_OVERRIDES_PACKAGES := BlissLauncher
+LOCAL_OVERRIDES_PACKAGES := PdfViewer
 include $(BUILD_PREBUILT)
 
 # override /e/ LibreOfficeViewer
