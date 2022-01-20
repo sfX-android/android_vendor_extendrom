@@ -105,6 +105,247 @@ LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Camera
 include $(BUILD_PREBUILT)
 
+# override /e/ eSpeakTTS
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSeSpeakTTS
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := eSpeakTTS
+include $(BUILD_PREBUILT)
+
+# override /e/ GmsCore
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSGmsCore
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := GmsCore
+include $(BUILD_PREBUILT)
+
+# override /e/ GsfProxy
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSGsfProxy
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := GsfProxy
+include $(BUILD_PREBUILT)
+
+# override /e/ FakeStore
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSFakeStore
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := FakeStore
+include $(BUILD_PREBUILT)
+
+# override /e/ com.google.android.maps.jar
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOScom.google.android.maps.jar
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := com.google.android.maps.jar
+include $(BUILD_PREBUILT)
+
+# override /e/ BlissIconPack
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSBlissIconPack
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := BlissIconPack
+include $(BUILD_PREBUILT)
+
+# override /e/ MozillaNlpBackend
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSMozillaNlpBackend
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := MozillaNlpBackend
+include $(BUILD_PREBUILT)
+
+# override /e/ OpenWeatherMapWeatherProvider
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSOpenWeatherMapWeatherProvider
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := OpenWeatherMapWeatherProvider
+include $(BUILD_PREBUILT)
+
+# override /e/ AccountManager
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSAccountManager
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := AccountManager
+include $(BUILD_PREBUILT)
+
+# override /e/ eDrive
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSeDrive
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := eDrive
+include $(BUILD_PREBUILT)
+
+# override /e/ Notes
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSNotes
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Notes
+include $(BUILD_PREBUILT)
+
+# override /e/ Tasks
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSTasks
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Tasks
+include $(BUILD_PREBUILT)
+
+# override /e/ ESmsSync
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSESmsSync
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := ESmsSync
+include $(BUILD_PREBUILT)
+
+# override /e/ NominatimNlpBackend
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSNominatimNlpBackend
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := NominatimNlpBackend
+include $(BUILD_PREBUILT)
+
+# override /e/ DroidGuard
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSDroidGuard
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := DroidGuard
+include $(BUILD_PREBUILT)
+
+# override /e/ OpenKeychain
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSOpenKeychain
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := OpenKeychain
+include $(BUILD_PREBUILT)
+
+# override /e/ Browser
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSBrowser
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Browser
+include $(BUILD_PREBUILT)
+
+# override /e/ BrowserWebView
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSBrowserWebView
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := BrowserWebView
+include $(BUILD_PREBUILT)
+
+# override /e/ PwaPlayer
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSPwaPlayer
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := PwaPlayer
+include $(BUILD_PREBUILT)
+
+# override /e/ MagicEarth
+include $(CLEAR_VARS)
+LOCAL_MODULE := noEOSMagicEarth
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := MagicEarth
+include $(BUILD_PREBUILT)
+
+
 # com.android.vending.xml permissions required by phonesky
 include $(CLEAR_VARS)
 LOCAL_MODULE := com.android.vending.xml
