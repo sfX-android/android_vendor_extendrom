@@ -16,6 +16,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+####################
+# Debuggin Editions
+echo "ENABLE_EXTENDROM: $ENABLE_EXTENDROM"
+echo "EXTENDROM_PACKAGES: $EXTENDROM_PACKAGES"
+echo "EOS_EDITION: $EOS_EDITION"
+
 FDROID_REPO_URL="https://mirror.cyberbits.eu/fdroid/repo/"
 
 # list of keyservers for importing gpg pub keys
