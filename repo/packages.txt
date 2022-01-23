@@ -49,6 +49,8 @@ Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|
 # MicrogGmsCore
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;PRESIGNED|false|GmsCore|microg.xml;privapp-permissions-com.google.android.gms.xml
 
+# OpenCamera
+net.sourceforge.opencamera_LATEST.apk|FDROIDREPO|app|OpenCamera.apk;PRESIGNED|true
 
 ##########################################################################################################
 # LAUNCHERS
@@ -88,6 +90,14 @@ com.moez.QKSMS_LATEST.apk|FDROIDREPO|app|QKSMS.apk;PRESIGNED|true
 # Allow usesr to pick a Firefox-based browser
 de.marmaro.krt.ffupdater_LATEST.apk|FDROIDREPO|app|FFUpdater.apk;PRESIGNED|true
 
+# ICSx5 
+at.bitfire.icsdroid_LATEST.apk|FDROIDREPO|app|ICSx5.apk;PRESIGNED|true
+
+# DAVx5
+at.bitfire.davdroid_LATEST.apk|FDROIDREPO|app|DAVx5.apk;PRESIGNED|true
+
+# NextCloud Sync client
+com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
 
 ##########################################################################################################
 # OFFICE
@@ -95,3 +105,10 @@ de.marmaro.krt.ffupdater_LATEST.apk|FDROIDREPO|app|FFUpdater.apk;PRESIGNED|true
 
 # Etar Calendar
 ws.xsoh.etar_LATEST.apk|FDROIDREPO|app|Etar.apk;PRESIGNED|true
+
+# OpenTasks
+org.dmfs.tasks_LATEST.apk|FDROIDREPO|app|OpenTasks.apk;PRESIGNED|true
+
+# NextCloudNotes
+it.niedermann.owncloud.notes_LATEST.apk|FDROIDREPO|app|NextCloudNotes.apk;PRESIGNED|true
+
