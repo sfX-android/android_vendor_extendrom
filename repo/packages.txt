@@ -65,6 +65,9 @@ Lawnchair_202589.apk|https://www.dropbox.com/s/qi551e1y2ubd1zd|app|Lawnchair-sta
 # taken directly from the official Lawnchair TG group (https://t.me/lawnchairci)
 Lawnchair_latest.apk|https://leech.binbash.rocks:8008/misc|app|Lawnchair-latest.apk;PRESIGNED|false
 
+# OpenLauncher
+com.benny.openlauncher_LATEST.apk|FDROIDREPO|app|OpenLauncher.apk;PRESIGNED|true
+
 ##########################################################################################################
 # INTERNET
 ##########################################################################################################
@@ -78,9 +81,13 @@ com.fsck.k9_LATEST.apk|FDROIDREPO|app|K9-Mail-latest.apk;PRESIGNED|true
 # Fennec Browser
 org.mozilla.fennec_fdroid_951020.apk|https://f-droid.org/repo|app|Fennec.apk;PRESIGNED|true
 
-
 # QKSMS Messaging
 com.moez.QKSMS_LATEST.apk|FDROIDREPO|app|QKSMS.apk;PRESIGNED|true
+
+# FFUpdater
+# Allow usesr to pick a Firefox-based browser
+de.marmaro.krt.ffupdater_LATEST.apk|FDROIDREPO|app|FFUpdater.apk;PRESIGNED|true
+
 
 ##########################################################################################################
 # OFFICE
