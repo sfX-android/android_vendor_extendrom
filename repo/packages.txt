@@ -33,6 +33,11 @@ org.fdroid.fdroid.privileged_LATEST.apk|FDROIDREPO|priv-app|F-DroidPrivilegedExt
 # AuroraStore
 com.aurora.store_LATEST.apk|FDROIDREPO|app|AuroraStore.apk;PRESIGNED|true
 
+# Aurora Services
+# Allow Aurora Store to install updates automatically
+AuroraServices_v1.1.1.apk|https://gitlab.com/AuroraOSS/AuroraServices/uploads/c22e95975571e9db143567690777a56e/|priv-app|AuroraServices.apk;PRESIGNED|false||permissions_com.aurora.services.xml
+
+
 # AdAway
 org.adaway_LATEST.apk|FDROIDREPO|priv-app|AdAway.apk;PRESIGNED|false
 
@@ -85,7 +90,10 @@ eu.faircode.email_LATEST.apk|FDROIDREPO|app|FairEmail.apk;PRESIGNED|true
 
 # Fennec Browser
 org.mozilla.fennec_fdroid_951020.apk|https://f-droid.org/repo|app|Fennec.apk;PRESIGNED|true
+# org.mozilla.fennec_fdroid_LATEST.apk|FDROIDREPO|app|Fennec.apk;PRESIGNED|true
+# org.mozilla.fennec_fdroid_952020.apk|https://f-droid.org/repo|app|Fennec.apk;PRESIGNED|true
 
+https://f-droid.org/repo/org.mozilla.fennec_fdroid_952000.apk
 # QKSMS Messaging
 com.moez.QKSMS_LATEST.apk|FDROIDREPO|app|QKSMS.apk;PRESIGNED|true
 
