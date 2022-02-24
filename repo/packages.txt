@@ -80,6 +80,9 @@ com.benny.openlauncher_LATEST.apk|FDROIDREPO|app|OpenLauncher.apk;PRESIGNED|true
 # (if the F-Droid Archive repo is enabled)
 com.fsck.k9_LATEST.apk|FDROIDREPO|app|K9-Mail-latest.apk;PRESIGNED|true
 
+# FairEmail
+eu.faircode.email_LATEST.apk|FDROIDREPO|app|FairEmail.apk;PRESIGNED|true
+
 # Fennec Browser
 org.mozilla.fennec_fdroid_951020.apk|https://f-droid.org/repo|app|Fennec.apk;PRESIGNED|true
 
