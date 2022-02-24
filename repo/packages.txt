@@ -75,6 +75,9 @@ Lawnchair_latest.apk|https://leech.binbash.rocks:8008/misc|app|Lawnchair-latest.
 # (if the F-Droid Archive repo is enabled)
 com.fsck.k9_LATEST.apk|FDROIDREPO|app|K9-Mail-latest.apk;PRESIGNED|true
 
+# FairEmail
+eu.faircode.email_LATEST.apk|FDROIDREPO|app|FairEmail.apk;PRESIGNED|true
+
 # Fennec Browser
 org.mozilla.fennec_fdroid_LATEST.apk|FDROIDREPO|app|Fennec.apk;PRESIGNED|true
 
