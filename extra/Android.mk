@@ -5,7 +5,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := additional_repos.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/org.fdroid.fdroid
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/org.fdroid.fdroid
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
@@ -346,12 +346,144 @@ LOCAL_OVERRIDES_PACKAGES := MagicEarth
 include $(BUILD_PREBUILT)
 
 
+# override graphene Vanadium
+include $(CLEAR_VARS)
+LOCAL_MODULE := noGOSvanadium
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := TrichromeChrome
+# TrichromeWebView \
+# TrichromeLibrary
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
+# override graphene Auditor
+include $(CLEAR_VARS)
+LOCAL_MODULE := noGOSauditor
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Auditor
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
+# override graphene Messaging
+include $(CLEAR_VARS)
+LOCAL_MODULE := noGOSmessaging
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := messaging
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
+# override graphene Dialer
+include $(CLEAR_VARS)
+LOCAL_MODULE := noGOSdialer
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Dialer
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
+# override graphene Dialer
+include $(CLEAR_VARS)
+LOCAL_MODULE := noGOScontacts
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Contacts
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
+# override graphene Updater
+include $(CLEAR_VARS)
+LOCAL_MODULE := noGOSupdater
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Updater
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
+# override graphene PdfViewer
+include $(CLEAR_VARS)
+LOCAL_MODULE := noGOSpdfviewer
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := PdfViewer
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
+# override graphene Files
+include $(CLEAR_VARS)
+LOCAL_MODULE := noGOSfiles
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := DocumentsUI
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
+# override graphene SeedVault
+include $(CLEAR_VARS)
+LOCAL_MODULE := noSeedvault
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Seedvault
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
+# no first boot setup wizard
+include $(CLEAR_VARS)
+LOCAL_MODULE := noWizard
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := SetupWizard
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
 # com.android.vending.xml permissions required by phonesky
 include $(CLEAR_VARS)
 LOCAL_MODULE := com.android.vending.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/permissions
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
@@ -362,4 +494,26 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/default-permissions
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+# F-Droid permissions only (only needed if not building privileged module)
+include $(CLEAR_VARS)
+LOCAL_MODULE := permissions_org.fdroid.fdroid.privileged.xml_OR
+LOCAL_OVERRIDES_PACKAGES := permissions_org.fdroid.fdroid.privileged.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/permissions
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+# F-Droid self-built/prebuilt
+include $(CLEAR_VARS)
+LOCAL_MODULE := F-Droid-SB
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_SRC_FILES := fdroidclient.apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
 include $(BUILD_PREBUILT)
