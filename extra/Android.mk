@@ -496,7 +496,6 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/default-permissions
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
-
 # F-Droid permissions only (only needed if not building privileged module)
 include $(CLEAR_VARS)
 LOCAL_MODULE := permissions_org.fdroid.fdroid.privileged.xml_OR
