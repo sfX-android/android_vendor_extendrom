@@ -517,3 +517,12 @@ LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
 include $(BUILD_PREBUILT)
+
+# permissions_com.aurora.services.xml permissions required by AuroraServices
+include $(CLEAR_VARS)
+LOCAL_MODULE := permissions_com.aurora.services.xml
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
