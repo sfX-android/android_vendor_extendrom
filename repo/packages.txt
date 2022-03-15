@@ -89,11 +89,8 @@ com.fsck.k9_LATEST.apk|FDROIDREPO|app|K9-Mail-latest.apk;PRESIGNED|true
 eu.faircode.email_LATEST.apk|FDROIDREPO|app|FairEmail.apk;PRESIGNED|true
 
 # Fennec Browser
-org.mozilla.fennec_fdroid_951020.apk|https://f-droid.org/repo|app|Fennec.apk;PRESIGNED|true
-# org.mozilla.fennec_fdroid_LATEST.apk|FDROIDREPO|app|Fennec.apk;PRESIGNED|true
-# org.mozilla.fennec_fdroid_952020.apk|https://f-droid.org/repo|app|Fennec.apk;PRESIGNED|true
+org.mozilla.fennec_fdroid_LATEST.apk|FDROIDREPO|app|Fennec.apk;PRESIGNED|true
 
-https://f-droid.org/repo/org.mozilla.fennec_fdroid_952000.apk
 # QKSMS Messaging
 com.moez.QKSMS_LATEST.apk|FDROIDREPO|app|QKSMS.apk;PRESIGNED|true
 
