@@ -2,7 +2,7 @@
 ############################################################################
 #
 # Copyright (C) 2017-2018 Andreas Schneider <asn@crytpomilk.org>
-# Copyright (C) 2020-2021 steadfasterX <steadfasterX@binbash.rocks>
+# Copyright (C) 2020-2022 steadfasterX <steadfasterX@binbash.rocks>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ GPG_KEYS="7A029E54DD5DCE7A 22F796D6E62E6625A0BCEFEA7F979A66F3E08422"
 # force a gpg pub key refresh
 # 0: will only download pub key when not installed
 # 1: will always download pub key even when installed already
-GPG_FORCE_DL=1
+GPG_FORCE_DL=0
 
 ###########################################################
 
@@ -228,12 +228,15 @@ fi
 
 # MAGISK rooting preparation
 if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
-    MAGISKOUT="$MY_DIR/../../out/.magisk"
+    echo
+    MAGISKOUT=$(realpath $MY_DIR/../../out/.magisk)
+    [ -z $MAGISK_TARGET_ARCH ] && MAGISK_TARGET_ARCH=arm64
+
     [ -d "$MAGISKOUT" ] && rm -rf $MAGISKOUT
     mkdir -p $MAGISKOUT
     if [ ! -f $MY_DIR/prebuilt/Magisk.zip ];then
 	if [ ! -f $MY_DIR/prebuilt/SignMagisk.zip ];then
-	    echo "MAGISK zip cannot be found! Do you have set 'Magisk' or 'SignMagisk' in your vendorsetup.sh??" && exit 4
+	    echo "[main] MAGISK zip cannot be found! Do you have set 'Magisk' or 'SignMagisk' in your vendorsetup.sh??" && exit 4
 	else
 	    MAGZIP=$MY_DIR/prebuilt/SignMagisk.zip
 	fi
@@ -241,19 +244,32 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
 	MAGZIP=$MY_DIR/prebuilt/Magisk.zip
     fi
     unzip -q $MAGZIP -d $MAGISKOUT/src
+
     cp $MAGISKOUT/src/lib/x86/libmagiskboot.so $MAGISKOUT/magiskboot
     chmod 755 $MAGISKOUT/magiskboot
-    cp $MAGISKOUT/src/lib/armeabi-v7a/libmagiskinit.so $MAGISKOUT/magiskinit
+    echo "[main] MAGISK_TARGET_ARCH specified as $MAGISK_TARGET_ARCH"
+
     cp $MAGISKOUT/src/lib/armeabi-v7a/libmagisk32.so $MAGISKOUT/magisk32
-    cp $MAGISKOUT/src/lib/arm64-v8a/libmagisk64.so $MAGISKOUT/magisk64
+    if [ $MAGISK_TARGET_ARCH == "arm64" ];then
+	cp $MAGISKOUT/src/lib/arm64-v8a/libmagisk64.so $MAGISKOUT/magisk64
+	cp $MAGISKOUT/src/lib/arm64-v8a/libmagiskinit.so $MAGISKOUT/magiskinit
+    else
+	cp $MAGISKOUT/src/lib/armeabi-v7a/libmagiskinit.so $MAGISKOUT/magiskinit
+    fi
     cp $MY_DIR/root/* $MAGISKOUT/
+    chmod 755 $MAGISKOUT/src/assets/boot_patch.sh
+    cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/
+    # keep backwards compability
+    cp $MAGISKOUT/src/assets/root_boot.sh $MAGISKOUT/
 fi
 
-echo "- writing makefile"
+echo
+echo "[main] Writing makefiles (if needed)"
+echo
 F_WRITE_MAKEFILE "$MY_DIR/repo/packages.txt"
 cat >> $ANDROIDMK <<EOMK
 
-# include additional repos for F-droid 
+# include additional static configs
 include $MY_DIR/extra/Android.mk
 
 EOMK
