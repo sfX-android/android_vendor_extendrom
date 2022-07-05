@@ -45,8 +45,8 @@ org.adaway_LATEST.apk|FDROIDREPO|priv-app|AdAway.apk;PRESIGNED|false
 org.jak_linux.dns66_LATEST.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 
 # Magisk
-Magisk-v25.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v25.1|app|Magisk.zip;PRESIGNED|false
-Magisk-v25.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v25.1|app|SignMagisk.zip;user-keys/shared|false
+Magisk-v21.4.apk|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app|Magisk.zip;PRESIGNED|false
+Magisk-v21.4.apk|https://github.com/topjohnwu/Magisk/releases/download/v21.4|app|SignMagisk.zip;user-keys/shared|false
 
 # Google in-app purchase support by nanolx (https://gitlab.com/Nanolx/microg-phonesky-iap-support)
 Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
