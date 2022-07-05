@@ -260,7 +260,7 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     chmod 755 $MAGISKOUT/src/assets/boot_patch.sh
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/
     # keep backwards compability
-    cp $MAGISKOUT/src/assets/root_boot.sh $MAGISKOUT/
+    cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/root_boot.sh
 fi
 
 echo
