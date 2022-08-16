@@ -6,7 +6,11 @@ git clone https://github.com/curl/curl.git
 cd curl
 git checkout <tag-version>
 autoreconf -fi
-LDFLAGS="-static" PKG_CONFIG="pkg-config --static" ./configure --disable-shared --enable-static --disable-ldap --enable-ipv6 --enable-unix-sockets --with-ssl
+
+# gcc is apparantly incapable of building a static binary, even gcc -static helloworld.c ends up linked to libc, instead of solving, use clang
+export CC=clang
+
+LDFLAGS="-static" PKG_CONFIG="pkg-config --static" ./configure --disable-shared --enable-static --disable-ldap --enable-ipv6 --enable-unix-sockets --with-openssl --enable-ares
 make -j14 V=1 LDFLAGS="-static -all-static"
 strip src/curl
 ~~~
