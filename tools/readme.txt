@@ -1,3 +1,3 @@
 curl_x64_static:
-./configure --with-ssl --enable-ares --disable-shared
+./configure --with-openssl --enable-ares --disable-shared
 make
