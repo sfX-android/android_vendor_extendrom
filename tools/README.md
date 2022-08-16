@@ -1,4 +1,14 @@
-## curl_x64_static
+# curl_x64_static
+
+as compiling a fully static curl does not work for me the current curl release is a prebuilt one (see next)
+
+## prebuilt binaries
+
+https://github.com/moparisthebest/static-curl/releases
+
+## build instructions
+
+warning: the following does not work on Ubuntu 18.04
 
 ~~~
 cd /tmp/
