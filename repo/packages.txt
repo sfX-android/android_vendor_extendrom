@@ -37,7 +37,6 @@ com.aurora.store_LATEST.apk|FDROIDREPO|app|AuroraStore.apk;PRESIGNED|true
 # Allow Aurora Store to install updates automatically
 AuroraServices_v1.1.1.apk|https://gitlab.com/AuroraOSS/AuroraServices/uploads/c22e95975571e9db143567690777a56e/|priv-app|AuroraServices.apk;PRESIGNED|false||permissions_com.aurora.services.xml
 
-
 # AdAway
 org.adaway_LATEST.apk|FDROIDREPO|priv-app|AdAway.apk;PRESIGNED|false
 
@@ -56,6 +55,9 @@ com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|Micro
 
 # OpenCamera
 net.sourceforge.opencamera_LATEST.apk|FDROIDREPO|app|OpenCamera.apk;PRESIGNED|true
+
+# J5 OpenCamera (preview fix)
+opencamera_sfX_j5_fixPreview.apk|https://leech.binbash.rocks:8008/misc|app|opencamera_j5_latest.apk;PRESIGNED|false
 
 ##########################################################################################################
 # LAUNCHERS
