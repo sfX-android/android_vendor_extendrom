@@ -1,12 +1,24 @@
 LOCAL_PATH := $(call my-dir)
 
-# additional F-Droid repos
+
+# Bromite F-Droid repos
 include $(CLEAR_VARS)
-LOCAL_MODULE := additional_repos.xml
+LOCAL_MODULE := bromite_repos.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/org.fdroid.fdroid
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
+LOCAL_OVERRIDES_PACKAGES := additional_repos.xml
+LOCAL_SRC_FILES := bromite_repos.xml
+include $(BUILD_PREBUILT)
+
+# additional F-Droid repos
+include $(CLEAR_VARS)
+LOCAL_MODULE := extendrom_additional_repos.xml
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/org.fdroid.fdroid
+LOCAL_OVERRIDES_PACKAGES := additional_repos.xml
+LOCAL_SRC_FILES := additional_repos.xml
 include $(BUILD_PREBUILT)
 
 # override /e/ apps store

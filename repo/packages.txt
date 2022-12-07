@@ -77,6 +77,9 @@ Lawnchair_latest.apk|https://leech.binbash.rocks:8008/misc|app|Lawnchair-latest.
 # OpenLauncher
 com.benny.openlauncher_LATEST.apk|FDROIDREPO|app|OpenLauncher.apk;PRESIGNED|true
 
+# Bliss Launcher
+foundation.e.blisslauncher_LATEST.apk|FDROIDREPO|app|BlissLauncher.apk;PRESIGNED|true
+
 ##########################################################################################################
 # INTERNET
 ##########################################################################################################
@@ -108,6 +111,9 @@ at.bitfire.davdroid_LATEST.apk|FDROIDREPO|app|DAVx5.apk;PRESIGNED|true
 
 # NextCloud Sync client
 com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
+
+# Bromite Browser
+arm64_ChromePublic.apk|https://github.com/bromite/bromite/releases/download/102.0.5005.67|app|Bromite.apk;PRESIGNED|false||bromite_repos.xml
 
 ##########################################################################################################
 # OFFICE
