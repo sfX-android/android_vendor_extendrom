@@ -1,5 +1,14 @@
 LOCAL_PATH := $(call my-dir)
 
+# Microg F-Droid repos
+include $(CLEAR_VARS)
+LOCAL_MODULE := microg_repos.xml
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/org.fdroid.fdroid
+LOCAL_OVERRIDES_PACKAGES := additional_repos.xml
+LOCAL_SRC_FILES := microg_repos.xml
+include $(BUILD_PREBUILT)
 
 # Bromite F-Droid repos
 include $(CLEAR_VARS)
@@ -597,4 +606,19 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Jelly
+include $(BUILD_PREBUILT)
+
+# Permissions for microG FakeStore
+include $(CLEAR_VARS)
+LOCAL_MODULE := extendrom_privapp-permissions-com.android.vending.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT_ETC)/permissions
+LOCAL_SRC_FILES := permissions-com.android.vending.xml
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := extendrom_default-permissions-com.android.vending.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT_ETC)/default-permissions
+LOCAL_SRC_FILES := default-permissions-com.android.vending.xml
 include $(BUILD_PREBUILT)
