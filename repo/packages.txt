@@ -1,24 +1,7 @@
-# FORMAT (this is 1-line but splitted here for better readability):
-#
-#   <filename-for-download-uri>|
-#   <download-uri-without-filename>|
-#   <install-path>|
-#   <target-filename>;<PRESIGNED or path to certs>|
-#   <true|false> to verify GPG signature or not|   --> note: verifying GPG signatures requires that a filename with .asc extension is on the specified repo available
-#   LOCAL_OVERRIDES_PACKAGES delimited by ";"|
-#   LOCAL_REQUIRED_MODULES delimited by ";"
-#
-# set the above in 1 line like this:
-#<filename-for-download-uri>|<download-uri-without-filename>|<install-path>|<target-filename>;<PRESIGNED or path to certs>|<true|false>|LOCAL_OVERRIDES_PACKAGES|LOCAL_REQUIRED_MODULES
-#
-# special keywords
-#    - FDROIDREPO (download-uri): will use the f-droid repo (or mirror) specified in get_prebuilts.sh
-#    - LATEST (filename. replacing a version number of an APK): instead of a specific version fetch the latest version (works for FDROID only)
-#      e.g. org.fdroid.fdroid_1012003.apk becomes org.fdroid.fdroid_LATEST.apk
-#
-# Examples:
-#    itsme_LATEST.apk|FDROIDREPO|app|itsme.apk;user-keys/shared|true|Launcher;Home|libfoo;libmaa|
-#    itsme.apk|http://dlurl.local|app|itsme.apk;PRESIGNED|false|Launcher912;Home|libfoo;libmaa|
+##########################################################################################################
+# HOW TO / FORMAT:
+# https://github.com/sfX-android/android_vendor_extendrom/wiki/packages.txt
+##########################################################################################################
 
 ##########################################################################################################
 # SYSTEM
