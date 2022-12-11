@@ -157,13 +157,13 @@ F_WRITE_MAKEFILE(){
         if [ -z "$line" ]; then continue; fi
 
 	unset EXTRA
-        appsrcname=$(echo $line |cut -d "|" -f1)
-        appdir=$(echo $line |cut -d "|" -f3)
-	appnamefull=$(echo $line |cut -d "|" -f4 | cut -d ";" -f1)
-	_appsign=$(echo $line |cut -d "|" -f4 | cut -d ";" -f2)
+        appsrcname=$(echo "$line" |cut -d "|" -f1)
+        appdir=$(echo "$line" |cut -d "|" -f3)
+	appnamefull=$(echo "$line" |cut -d "|" -f4 | cut -d ";" -f1)
+	_appsign=$(echo "$line" |cut -d "|" -f4 | cut -d ";" -f2)
 	appname="${appnamefull/\.apk/}"
-	overrides=$(echo $line |cut -d "|" -f6 )
-	requiredmods=$(echo $line |cut -d "|" -f7)
+	overrides=$(echo "$line" |cut -d "|" -f6 )
+	requiredmods=$(echo "$line" |cut -d "|" -f7)
         package_human="${appnamefull/\.apk}"
 
 	# allow empty LOCAL_CERTIFICATE
