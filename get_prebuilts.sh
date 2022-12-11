@@ -43,6 +43,9 @@ GPG_FORCE_DL=0
 
 MY_DIR="$1"
 [ -z "$MY_DIR" ] && MY_DIR=${0%/*}
+_OUTDIR="$MY_DIR/out"
+[ ! -d "$_OUTDIR" ] && mkdir $_OUTDIR
+FDROID_REPO_DIR="$MY_DIR/fdroid_repos"
 
 unset CURLDNS
 CUSTDNS="$2"
@@ -263,10 +266,36 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/root_boot.sh
 fi
 
+# write specific F-Droid module
+F_WRITE_MAKEFILE_FDROID(){
+    echo "[$FUNCNAME] writing additional_repos.xml makefile"
+    cat >> $ANDROIDMK << _EOFFD
+# additional F-Droid repos
+include \$(CLEAR_VARS)
+LOCAL_MODULE := additional_repos.xml
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := \$(TARGET_OUT_VENDOR_ETC)/org.fdroid.fdroid
+LOCAL_SRC_FILES := out/_additional_repos.xml
+include \$(BUILD_PREBUILT)
+_EOFFD
+
+    echo "[$FUNCNAME] copying additional_repos.xml"
+    cp $FDROID_REPO_DIR/additional_repos.xml $_OUTDIR/_additional_repos.xml
+
+    if [ ! -z "$EXTENDROM_FDROID_REPOS" ];then
+	for repo in $EXTENDROM_FDROID_REPOS;do
+	    [ ! -f "$FDROID_REPO_DIR/$repo" ] && echo "[$FUNCNAME] ERROR: missing $FDROID_REPO_DIR/$repo" && exit 4
+	    grep -v 'xml version=' $FDROID_REPO_DIR/$repo >> $_OUTDIR/_additional_repos.xml && echo "[$FUNCNAME] ... added $repo to additional_repos.xml"
+	done
+    fi
+}
+
 echo
 echo "[main] Writing makefiles (if needed)"
 echo
 F_WRITE_MAKEFILE "$MY_DIR/repo/packages.txt"
+[[ "$EXTENDROM_PACKAGES" =~ "additional_repos.xml" ]] && F_WRITE_MAKEFILE_FDROID
 cat >> $ANDROIDMK <<EOMK
 
 # include additional static configs
