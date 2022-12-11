@@ -1,6 +1,6 @@
 #!/bin/bash
 #################################################################################
-# Copyright (C) 2021 steadfasterX <steadfasterX@gmail.com>
+# Copyright (C) 2021-2022 steadfasterX <steadfasterX -AT- gmail #DOT# com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -160,11 +160,16 @@ F_WRITE_MAKEFILE(){
         appsrcname=$(echo $line |cut -d "|" -f1)
         appdir=$(echo $line |cut -d "|" -f3)
 	appnamefull=$(echo $line |cut -d "|" -f4 | cut -d ";" -f1)
-	appsign=$(echo $line |cut -d "|" -f4 | cut -d ";" -f2)
+	_appsign=$(echo $line |cut -d "|" -f4 | cut -d ";" -f2)
 	appname="${appnamefull/\.apk/}"
 	overrides=$(echo $line |cut -d "|" -f6 )
 	requiredmods=$(echo $line |cut -d "|" -f7)
         package_human="${appnamefull/\.apk}"
+
+	# allow empty LOCAL_CERTIFICATE
+	# that means DEFAULT_SYSTEM_DEV_CERTIFICATE will be used
+	# https://github.com/aosp-mirror/platform_build/blob/master/core/package_internal.mk#L446-L452
+	[ ! -z "$_appsign" ] && appsign="\nLOCAL_CERTIFICATE := $_appsign"
 
         # do not process what we do not want to build
         if [[ ! "$EXTENDROM_PACKAGES" =~ "$package_human" ]];then
@@ -196,8 +201,7 @@ include \$(BUILD_PREBUILT)"
 include \$(CLEAR_VARS)
 LOCAL_MODULE := $appname
 LOCAL_MODULE_OWNER := extendrom
-LOCAL_SRC_FILES := prebuilt/$appsrcname
-LOCAL_CERTIFICATE := $appsign
+LOCAL_SRC_FILES := prebuilt/$appsrcname$(echo -e "$appsign")
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
