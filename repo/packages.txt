@@ -36,6 +36,21 @@ Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|
 # MicrogGmsCore
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;PRESIGNED|false|GmsCore|microg.xml;privapp-permissions-com.google.android.gms.xml
 
+# DroidGuard
+org.microg.gms.droidguard-LATEST.apk|https://microg.org/fdroid/repo/|app|DroidGuard.apk;PRESIGNED|false
+
+# FakeStore
+com.android.vending-16.apk|https://microg.org/fdroid/repo/|priv-app|FakeStore.apk;PRESIGNED|false||extendrom_privapp-permissions-com.android.vending.xml;extendrom_default-permissions-com.android.vending.xml
+
+# NominatimBackend
+org.microg.nlp.backend.nominatim_LATEST.apk|FDROIDREPO|app|NominatimBackend.apk;PRESIGNED|false
+
+# MozillaNlpBackend
+org.microg.nlp.backend.ichnaea_LATEST.apk|FDROIDREPO|app|MozillaNlpBackend.apk;PRESIGNED|false
+
+# GsfProxy  <https://microg.org/fdroid/repo/com.google.android.gsf-8.apk>
+com.google.android.gsf-LATEST.apk|https://microg.org/fdroid/repo/|app|GsfProxy.apk;PRESIGNED|false
+
 # OpenCamera
 net.sourceforge.opencamera_LATEST.apk|FDROIDREPO|app|OpenCamera.apk;PRESIGNED|true
 
