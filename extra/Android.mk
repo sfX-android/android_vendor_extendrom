@@ -586,7 +586,7 @@ include $(BUILD_PREBUILT)
 
 # override lineageOS Camera2
 include $(CLEAR_VARS)
-LOCAL_MODULE := noLOSSnap
+LOCAL_MODULE := noLOSCamera2
 LOCAL_SRC_FILES := empty.apk
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_MODULE_TAGS := optional
