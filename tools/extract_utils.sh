@@ -172,9 +172,12 @@ F_WRITE_MAKEFILE(){
 	[ ! -z "$_appsign" ] && appsign="\nLOCAL_CERTIFICATE := $_appsign"
 
         # do not process what we do not want to build
-        if [[ ! "$EXTENDROM_PACKAGES" =~ "$package_human" ]];then
+	echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -E "${package_human}\$"
+	if [ $? -ne 0 ];then
             echo "[$FUNCNAME] ... skipping $package_human as not requested by EXTENDROM_PACKAGES"
             continue
+	else
+	    echo "[$FUNCNAME] ... WRITING $package_human as requested by EXTENDROM_PACKAGES"
         fi
 
 	if [[ "$appdir" =~ .*priv-app ]];then
@@ -208,6 +211,6 @@ LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 ${EXTRA}
 _EOAPP
-    done < <(egrep -v '(^#|^[[:space:]]*$)' "$LIST" | LC_ALL=C sort | uniq)
+    done < <(grep -E -v '(^#|^[[:space:]]*$)' "$LIST" | LC_ALL=C sort | uniq)
 }
 
