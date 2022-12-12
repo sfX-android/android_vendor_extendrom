@@ -68,10 +68,6 @@ Omega.v0.8.0.Build.168.apk|https://github.com/otakuhqz/Omega/releases/download/v
 # taken from PlayStore via AuroraStore:
 Lawnchair_202589.apk|https://www.dropbox.com/s/qi551e1y2ubd1zd|app|Lawnchair-stable.apk;PRESIGNED|false
 
-# Lawnchair - latest
-# taken directly from the official Lawnchair TG group (https://t.me/lawnchairci)
-Lawnchair_latest.apk|https://leech.binbash.rocks:8008/misc|app|Lawnchair-latest.apk;PRESIGNED|false
-
 # OpenLauncher
 com.benny.openlauncher_LATEST.apk|FDROIDREPO|app|OpenLauncher.apk;PRESIGNED|true
 
