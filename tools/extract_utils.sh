@@ -1,6 +1,6 @@
 #!/bin/bash
 #################################################################################
-# Copyright (C) 2021 steadfasterX <steadfasterX@gmail.com>
+# Copyright (C) 2021-2022 steadfasterX <steadfasterX -AT- gmail #DOT# com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -157,19 +157,27 @@ F_WRITE_MAKEFILE(){
         if [ -z "$line" ]; then continue; fi
 
 	unset EXTRA
-        appsrcname=$(echo $line |cut -d "|" -f1)
-        appdir=$(echo $line |cut -d "|" -f3)
-	appnamefull=$(echo $line |cut -d "|" -f4 | cut -d ";" -f1)
-	appsign=$(echo $line |cut -d "|" -f4 | cut -d ";" -f2)
+        appsrcname=$(echo "$line" |cut -d "|" -f1)
+        appdir=$(echo "$line" |cut -d "|" -f3)
+	appnamefull=$(echo "$line" |cut -d "|" -f4 | cut -d ";" -f1)
+	_appsign=$(echo "$line" |cut -d "|" -f4 | cut -d ";" -f2)
 	appname="${appnamefull/\.apk/}"
-	overrides=$(echo $line |cut -d "|" -f6 )
-	requiredmods=$(echo $line |cut -d "|" -f7)
+	overrides=$(echo "$line" |cut -d "|" -f6 )
+	requiredmods=$(echo "$line" |cut -d "|" -f7)
         package_human="${appnamefull/\.apk}"
 
+	# allow empty LOCAL_CERTIFICATE
+	# that means DEFAULT_SYSTEM_DEV_CERTIFICATE will be used
+	# https://github.com/aosp-mirror/platform_build/blob/master/core/package_internal.mk#L446-L452
+	[ ! -z "$_appsign" ] && appsign="\nLOCAL_CERTIFICATE := $_appsign"
+
         # do not process what we do not want to build
-        if [[ ! "$EXTENDROM_PACKAGES" =~ "$package_human" ]];then
+	echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -E "${package_human}\$"
+	if [ $? -ne 0 ];then
             echo "[$FUNCNAME] ... skipping $package_human as not requested by EXTENDROM_PACKAGES"
             continue
+	else
+	    echo "[$FUNCNAME] ... WRITING $package_human as requested by EXTENDROM_PACKAGES"
         fi
 
 	if [[ "$appdir" =~ .*priv-app ]];then
@@ -196,14 +204,13 @@ include \$(BUILD_PREBUILT)"
 include \$(CLEAR_VARS)
 LOCAL_MODULE := $appname
 LOCAL_MODULE_OWNER := extendrom
-LOCAL_SRC_FILES := prebuilt/$appsrcname
-LOCAL_CERTIFICATE := $appsign
+LOCAL_SRC_FILES := prebuilt/$appsrcname$(echo -e "$appsign")
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 ${EXTRA}
 _EOAPP
-    done < <(egrep -v '(^#|^[[:space:]]*$)' "$LIST" | LC_ALL=C sort | uniq)
+    done < <(grep -E -v '(^#|^[[:space:]]*$)' "$LIST" | LC_ALL=C sort | uniq)
 }
 

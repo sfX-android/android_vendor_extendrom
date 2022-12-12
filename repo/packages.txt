@@ -1,24 +1,7 @@
-# FORMAT (this is 1-line but splitted here for better readability):
-#
-#   <filename-for-download-uri>|
-#   <download-uri-without-filename>|
-#   <install-path>|
-#   <target-filename>;<PRESIGNED or path to certs>|
-#   <true|false> to verify GPG signature or not|   --> note: verifying GPG signatures requires that a filename with .asc extension is on the specified repo available
-#   LOCAL_OVERRIDES_PACKAGES delimited by ";"|
-#   LOCAL_REQUIRED_MODULES delimited by ";"
-#
-# set the above in 1 line like this:
-#<filename-for-download-uri>|<download-uri-without-filename>|<install-path>|<target-filename>;<PRESIGNED or path to certs>|<true|false>|LOCAL_OVERRIDES_PACKAGES|LOCAL_REQUIRED_MODULES
-#
-# special keywords
-#    - FDROIDREPO (download-uri): will use the f-droid repo (or mirror) specified in get_prebuilts.sh
-#    - LATEST (filename. replacing a version number of an APK): instead of a specific version fetch the latest version (works for FDROID only)
-#      e.g. org.fdroid.fdroid_1012003.apk becomes org.fdroid.fdroid_LATEST.apk
-#
-# Examples:
-#    itsme_LATEST.apk|FDROIDREPO|app|itsme.apk;user-keys/shared|true|Launcher;Home|libfoo;libmaa|
-#    itsme.apk|http://dlurl.local|app|itsme.apk;PRESIGNED|false|Launcher912;Home|libfoo;libmaa|
+##########################################################################################################
+# HOW TO / FORMAT:
+# https://github.com/sfX-android/android_vendor_extendrom/wiki/packages.txt
+##########################################################################################################
 
 ##########################################################################################################
 # SYSTEM
@@ -53,6 +36,21 @@ Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|
 # MicrogGmsCore
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;PRESIGNED|false|GmsCore|microg.xml;privapp-permissions-com.google.android.gms.xml
 
+# DroidGuard
+org.microg.gms.droidguard-LATEST.apk|https://microg.org/fdroid/repo/|app|DroidGuard.apk;PRESIGNED|false
+
+# FakeStore
+com.android.vending-16.apk|https://microg.org/fdroid/repo/|priv-app|FakeStore.apk;PRESIGNED|false||extendrom_privapp-permissions-com.android.vending.xml;extendrom_default-permissions-com.android.vending.xml
+
+# NominatimBackend
+org.microg.nlp.backend.nominatim_LATEST.apk|FDROIDREPO|app|NominatimBackend.apk;PRESIGNED|false
+
+# MozillaNlpBackend
+org.microg.nlp.backend.ichnaea_LATEST.apk|FDROIDREPO|app|MozillaNlpBackend.apk;PRESIGNED|false
+
+# GsfProxy  <https://microg.org/fdroid/repo/com.google.android.gsf-8.apk>
+com.google.android.gsf-LATEST.apk|https://microg.org/fdroid/repo/|app|GsfProxy.apk;PRESIGNED|false
+
 # OpenCamera
 net.sourceforge.opencamera_LATEST.apk|FDROIDREPO|app|OpenCamera.apk;PRESIGNED|true
 
@@ -76,6 +74,9 @@ Lawnchair_latest.apk|https://leech.binbash.rocks:8008/misc|app|Lawnchair-latest.
 
 # OpenLauncher
 com.benny.openlauncher_LATEST.apk|FDROIDREPO|app|OpenLauncher.apk;PRESIGNED|true
+
+# Bliss Launcher
+foundation.e.blisslauncher_LATEST.apk|FDROIDREPO|app|BlissLauncher.apk;PRESIGNED|true
 
 ##########################################################################################################
 # INTERNET
@@ -108,6 +109,9 @@ at.bitfire.davdroid_LATEST.apk|FDROIDREPO|app|DAVx5.apk;PRESIGNED|true
 
 # NextCloud Sync client
 com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
+
+# Bromite Browser
+arm64_ChromePublic.apk|https://github.com/bromite/bromite/releases/download/102.0.5005.67|app|Bromite.apk;PRESIGNED|false||bromite_repos.xml
 
 ##########################################################################################################
 # OFFICE

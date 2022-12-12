@@ -1,14 +1,5 @@
 LOCAL_PATH := $(call my-dir)
 
-# additional F-Droid repos
-include $(CLEAR_VARS)
-LOCAL_MODULE := additional_repos.xml
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/org.fdroid.fdroid
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-include $(BUILD_PREBUILT)
-
 # override /e/ apps store
 include $(CLEAR_VARS)
 LOCAL_MODULE := noEOSappstore
@@ -525,4 +516,68 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+
+# override lineageOSnoLOSEmail
+include $(CLEAR_VARS)
+LOCAL_MODULE := noLOSEmail
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Email 
+include $(BUILD_PREBUILT)
+
+# override lineageOS Messaging
+include $(CLEAR_VARS)
+LOCAL_MODULE := noLOSMessaging
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := messaging
+include $(BUILD_PREBUILT)
+
+# override lineageOS Snap
+include $(CLEAR_VARS)
+LOCAL_MODULE := noLOSSnap
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Snap
+include $(BUILD_PREBUILT)
+
+# override lineageOS Jelly
+include $(CLEAR_VARS)
+LOCAL_MODULE := noLOSJelly
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Jelly
+include $(BUILD_PREBUILT)
+ 
+# Permissions for microG FakeStore
+include $(CLEAR_VARS)
+LOCAL_MODULE := extendrom_privapp-permissions-com.android.vending.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT_ETC)/permissions
+LOCAL_SRC_FILES := permissions-com.android.vending.xml
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := extendrom_default-permissions-com.android.vending.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT_ETC)/default-permissions
+LOCAL_SRC_FILES := default-permissions-com.android.vending.xml
 include $(BUILD_PREBUILT)
