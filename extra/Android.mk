@@ -1,14 +1,5 @@
 LOCAL_PATH := $(call my-dir)
 
-# additional F-Droid repos
-include $(CLEAR_VARS)
-LOCAL_MODULE := additional_repos.xml
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/org.fdroid.fdroid
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-include $(BUILD_PREBUILT)
-
 # override /e/ apps store
 include $(CLEAR_VARS)
 LOCAL_MODULE := noEOSappstore
