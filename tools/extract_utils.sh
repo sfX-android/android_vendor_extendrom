@@ -209,7 +209,6 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
-LOCAL_ENFORCE_USES_LIBRARIES := false
 ${EXTRA}
 _EOAPP
     done < <(grep -E -v '(^#|^[[:space:]]*$)' "$LIST" | LC_ALL=C sort | uniq)
