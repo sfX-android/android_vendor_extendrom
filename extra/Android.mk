@@ -456,6 +456,19 @@ LOCAL_OVERRIDES_PACKAGES := Seedvault
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
 include $(BUILD_PREBUILT)
 
+# override Stk (com.android.stk)
+include $(CLEAR_VARS)
+LOCAL_MODULE := noStk
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := Stk
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
+
 # no first boot setup wizard
 include $(CLEAR_VARS)
 LOCAL_MODULE := noWizard
@@ -517,7 +530,6 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
-
 
 # override lineageOSnoLOSEmail
 include $(CLEAR_VARS)
