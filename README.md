@@ -44,7 +44,7 @@ add the following section to your `device/<vendor>/<model>/vendorsetup.sh`:
 
 ~~~
 ########### extendrom section ###########
-$PWD/vendor/extendrom/get_prebuilts.sh
+$PWD/vendor/extendrom/er.sh
 ~~~
 
 ### option 2: use the vendorsetup.sh
@@ -60,7 +60,7 @@ add the following section to your `device/<vendor>/<model>/vendorsetup.sh`:
 
 ~~~
 ########### extendrom section ###########
-$PWD/vendor/extendrom/get_prebuilts.sh
+$PWD/vendor/extendrom/er.sh
 export ENABLE_EXTENDROM=true
 export EXTENDROM_PACKAGES="noEOSappstore F-Droid F-DroidPrivilegedExtension additional_repos.xml AuroraStore"
 ~~~
@@ -100,7 +100,7 @@ For this you need to know the key id first which you can usually find beneath th
 Another option is to find it by searching: `gpg --keyserver pgp.mit.edu --search-keys f-droid.org` <br/>
 Of course there are [other keyservers](https://en.wikipedia.org/wiki/Key_server_(cryptographic)#Keyserver_examples) if pgp.mit.edu fails for you.
 
-Once you got the id just add it to the variable `GPG_KEYS` in `vendor/extendrom/get_prebuilts.sh` (separate by a space from the others).
+Once you got the id just add it to the variable `GPG_KEYS` in `vendor/extendrom/er.sh` (separate by a space from the others).
 
 More information and the current F-Droid fingerprint can be verified [here](https://f-droid.org/docs/Release_Channels_and_Signing_Keys/?title=Release_Channels_and_Signing_Keys)
 
