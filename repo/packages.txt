@@ -69,8 +69,8 @@ Omega.v0.8.0.Build.168.apk|https://github.com/otakuhqz/Omega/releases/download/v
 Lawnchair_202589.apk|https://www.dropbox.com/s/qi551e1y2ubd1zd|app|Lawnchair-stable.apk;PRESIGNED|false
 
 # Lawnchair - latest
-# taken directly from the official Lawnchair TG group (https://t.me/lawnchairci)
-Lawnchair_latest.apk|https://leech.binbash.rocks:8008/misc|app|Lawnchair-latest.apk;PRESIGNED|false
+# taken directly from the official Lawnchair github
+Lawnchair.12.1.0.Alpha.4.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v12.1.0-alpha.4|app|Lawnchair-latest.apk;PRESIGNED|false
 
 # OpenLauncher
 com.benny.openlauncher_LATEST.apk|FDROIDREPO|app|OpenLauncher.apk;PRESIGNED|true
