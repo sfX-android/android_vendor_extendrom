@@ -111,7 +111,7 @@ at.bitfire.davdroid_LATEST.apk|FDROIDREPO|app|DAVx5.apk;PRESIGNED|true
 com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
 
 # Bromite Browser
-arm64_ChromePublic.apk|https://github.com/bromite/bromite/releases/download/102.0.5005.67|app|Bromite.apk;PRESIGNED|false||bromite_repos.xml
+arm64_ChromePublic.apk|https://github.com/bromite/bromite/releases/download/102.0.5005.67|app|Bromite.apk;PRESIGNED|false||
 
 ##########################################################################################################
 # OFFICE
