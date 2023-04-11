@@ -1,0 +1,63 @@
+##########################################################################################
+#
+# This code is part of extendrom (https://github.com/sfX-android/android_vendor_extendrom)
+# Copyright (C) 2023 steadfasterX <steadfasterX@binbash.rocks>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+##########################################################################################
+
+# stop logging after boot
+on property:sys.boot_completed=1
+    stop boot_lc
+    stop boot_lc_crash
+    stop boot_lc_kernel
+
+# stop fallback for some devices
+on property:dev.bootcomplete=1
+    stop boot_lc
+    stop boot_lc_crash
+    stop boot_lc_kernel
+
+# start debug logger as soon as possible
+# i.e. when logd actually has started
+on property:init.svc.logd=running
+    mkdir -p %%DEBUGLOG_PATH%% 0770 system system encryption=None
+    rm %%DEBUGLOG_PATH%%/boot_lc_full.txt
+    rm %%DEBUGLOG_PATH%%/boot_lc_crash.txt
+    rm %%DEBUGLOG_PATH%%/boot_lc_kernel.txt
+    start boot_lc
+    start boot_lc_kernel
+    start boot_lc_crash
+
+service boot_lc /system/bin/logcat -b all -D -f %%DEBUGLOG_PATH%%/boot_lc_full.txt
+    user system
+    group system
+    seclabel u:r:boot_debug:s0
+    disabled
+    oneshot
+
+service boot_lc_crash /system/bin/logcat -b crash -D -f %%DEBUGLOG_PATH%%/boot_lc_crash.txt
+    user system
+    group system
+    seclabel u:r:boot_debug:s0
+    disabled
+    oneshot
+
+service boot_lc_kernel /system/bin/logcat -b kernel -D -f %%DEBUGLOG_PATH%%/boot_lc_kernel.txt
+    user system
+    group system
+    seclabel u:r:boot_debug:s0
+    disabled
+    oneshot
+

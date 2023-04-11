@@ -1,0 +1,3 @@
+# boot_debug
+#allow init boot_debug:process { noatsecure rlimitinh siginh transition };
+allow init boot_debug:process { rlimitinh siginh transition };

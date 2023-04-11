@@ -1,0 +1,7 @@
+type boot_debug, domain, coredomain;
+
+allow boot_debug boot_log_file:dir { add_name open read search write };
+allow boot_debug boot_log_file:file { append create getattr open read };
+allow boot_debug logcat_exec:file { entrypoint execute getattr read };
+allow boot_debug logd:unix_stream_socket connectto;
+allow boot_debug logdr_socket:sock_file write;

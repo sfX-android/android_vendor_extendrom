@@ -1,0 +1,2 @@
+# boot_debug
+%%DEBUGLOG_PATH%%(/.*)? 					u:object_r:boot_log_file:s0

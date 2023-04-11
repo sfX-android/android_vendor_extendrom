@@ -1,3 +1,5 @@
 Android.mk
 prebuilt/
 out/
+config/init.er.rc
+sepolicy

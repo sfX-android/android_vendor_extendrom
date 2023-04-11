@@ -2,7 +2,7 @@
 ############################################################################
 #
 # Copyright (C) 2017-2018 Andreas Schneider <asn@crytpomilk.org>
-# Copyright (C) 2020-2022 steadfasterX <steadfasterX@binbash.rocks>
+# Copyright (C) 2020-2023 steadfasterX <steadfasterX@binbash.rocks>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -213,8 +213,56 @@ F_GET_GPG_KEYS(){
     done
 }
 
+# the ultimate boot debugger
+F_BOOT_DEBUG(){
+    rm -rf $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... cleaned sepolicy dir"
+    mkdir -p $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... created sepolicy dir"
+    for p in $(find $MY_DIR/config/boot_debug/ -type f -name '*.sepolicy');do
+	pf=$(basename $p)
+	cp $p $MY_DIR/sepolicy/boot_debug/${pf/\.sepolicy/} && echo "[$FUNCNAME] ... copied sepolicy file: $pf"
+    done
+    sed "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g" $MY_DIR/config/init.er.rc.in > $MY_DIR/config/init.er.rc && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (init.er.rc) to $EXTENDROM_DEBUG_PATH"
+    sed -i "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g" $MY_DIR/sepolicy/boot_debug/* && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (sepolicies) to $EXTENDROM_DEBUG_PATH"
+    echo "[$FUNCNAME] ... enabled and configured EXTENDROM_BOOT_DEBUG"
+}
+
 F_GET_GPG_KEYS
 get_packages "$MY_DIR/repo/packages.txt"
+
+if [ ! -z "$EXTENDROM_BOOT_DEBUG" -a  "$EXTENDROM_BOOT_DEBUG" == "true" ];then
+    if [ -z "$EXTENDROM_DEBUG_PATH" ];then
+	cat << _EOH
+
+ERROR: You have specified EXTENDROM_BOOT_DEBUG=$EXTENDROM_BOOT_DEBUG but >EXTENDROM_DEBUG_PATH< is empty!
+
+    If you are NOT using encryption (FBE or FDE) you can basically choose any path you wish for EXTENDROM_DEBUG_PATH.
+    When you are trying to debug encrypted devices though you might have to choose a proper path so you can access
+    it later when boot fails.
+
+    Depending on which Android version you build on there are several options to set EXTENDROM_DEBUG_PATH on encrypted devices:
+
+    Android 9 and lower hard coded encryption exceptions here:
+     -> https://cs.android.com/android/platform/superproject/+/android-9.0.0_r34:system/extras/ext4_utils/ext4_crypt_init_extensions.cpp;l=85-94
+	e.g. /data/data, /data/user etc
+
+    Android 10 hard coded encryption exceptions here:
+     -> https://cs.android.com/android/platform/superproject/+/android-10.0.0_r18:system/extras/libfscrypt/fscrypt_init_extensions.cpp;l=83-95
+	e.g. /data/data, /data/user etc
+
+    since Android 11 this can be handled directly within init and the mkdir command (encryption=None)
+    that means you can basically use any path which is writable at boot time.
+    While you are free to choose any it is recommended setting EXTENDROM_DEBUG_PATH=/data/debug for A11 and later.
+    extendrom will ensure that EXTENDROM_DEBUG_PATH will NOT get encrypted so you can access it via recovery.
+
+
+    Hint: using /cache/xxx MIGHT be an alternative as well - while this does not work on all devices.
+    Even if this works in general /cache might be limited in disk space and also can cause other issues.
+
+_EOH
+	exit 4
+    fi
+    F_BOOT_DEBUG
+fi
 
 INITIAL_COPYRIGHT_YEAR=2021
 VENDOR="extendrom"
