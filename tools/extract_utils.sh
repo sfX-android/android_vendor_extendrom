@@ -156,7 +156,7 @@ F_WRITE_MAKEFILE(){
     while read -r line; do
         if [ -z "$line" ]; then continue; fi
 
-	unset EXTRA
+	unset EXTRA appsrcname appdir appnamefull _appsign appname overrides requiredmods uses_required_libs uses_optional_libs package_human
         appsrcname=$(echo "$line" |cut -d "|" -f1)
         appdir=$(echo "$line" |cut -d "|" -f3)
 	appnamefull=$(echo "$line" |cut -d "|" -f4 | cut -d ";" -f1)
@@ -165,7 +165,7 @@ F_WRITE_MAKEFILE(){
 	overrides=$(echo "$line" |cut -d "|" -f6 )
 	requiredmods=$(echo "$line" |cut -d "|" -f7)
 	uses_required_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull | grep "uses-library:" | sed -n "s/uses-library:'\(.*\)'/\1/p" | tr "\n" " ")
-	uses_optional_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull | grep "uses-library-not-required" | sed -n "s/uses-library-not-required:'\(.*\)'/\1/p" | tr "\n" " ")
+	uses_optional_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull | grep "uses-library-not-required:" | sed -n "s/uses-library-not-required:'\(.*\)'/\1/p" | tr "\n" " ")
         package_human="${appnamefull/\.apk}"
 
 	# allow empty LOCAL_CERTIFICATE
@@ -187,21 +187,25 @@ F_WRITE_MAKEFILE(){
 	fi
 	if [ ! -z "$overrides" ];then
 	   p_overrides=$(echo "$overrides" | tr ";" " ")
-	   EXTRA="$EXTRA
-LOCAL_OVERRIDES_PACKAGES := $p_overrides"
+	    [ ! -z "$EXTRA" ] && EXTRA="$EXTRA
+"
+	   EXTRA="${EXTRA}LOCAL_OVERRIDES_PACKAGES := $p_overrides"
 	fi
-	if [ ! -z "$requiredmods" ];then
+	if [ "${#requiredmods}" -gt 4 ];then
 	   p_requiredmods=$(echo "$requiredmods" | tr ";" " ")
-	   EXTRA="$EXTRA
-LOCAL_REQUIRED_MODULES := $p_requiredmods"
+	    [ ! -z "$EXTRA" ] && EXTRA="$EXTRA
+"
+	   EXTRA="${EXTRA}LOCAL_REQUIRED_MODULES := $p_requiredmods"
 	fi
-	if [ ! -z "$uses_required_libs" ];then
-           EXTRA="$EXTRA
-LOCAL_USES_LIBRARIES := $uses_required_libs"
+	if [ "${#uses_required_libs}" -gt 4 ];then
+	    [ ! -z "$EXTRA" ] && EXTRA="$EXTRA
+"
+           EXTRA="${EXTRA}LOCAL_USES_LIBRARIES := $uses_required_libs"
 	fi
-	if [ ! -z "$uses_optional_libs" ];then
-           EXTRA="$EXTRA
-LOCAL_OPTIONAL_USES_LIBRARIES := $uses_optional_libs"
+	if [ "${#uses_optional_libs}" -gt 4 ];then
+	    [ ! -z "$EXTRA" ] && EXTRA="$EXTRA
+"
+           EXTRA="${EXTRA}LOCAL_OPTIONAL_USES_LIBRARIES := $uses_optional_libs"
         fi
 	if [ -z "$EXTRA" ];then
 	    EXTRA="include \$(BUILD_PREBUILT)"
