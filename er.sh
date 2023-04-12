@@ -17,10 +17,12 @@
 # limitations under the License.
 
 ####################
-# Debuggin Editions
+# base info
 echo "ENABLE_EXTENDROM: $ENABLE_EXTENDROM"
 echo "EXTENDROM_PACKAGES: $EXTENDROM_PACKAGES"
 echo "EOS_EDITION: $EOS_EDITION"
+export EXTENDROM_TARGET_VERSION=$(build/soong/soong_ui.bash --dumpvar-mode PLATFORM_VERSION)
+echo "EXTENDROM_TARGET_VERSION: $EXTENDROM_TARGET_VERSION"
 
 FDROID_REPO_URL="https://mirror.cyberbits.eu/fdroid/repo/"
 
@@ -221,7 +223,12 @@ F_BOOT_DEBUG(){
 	pf=$(basename $p)
 	cp $p $MY_DIR/sepolicy/boot_debug/${pf/\.sepolicy/} && echo "[$FUNCNAME] ... copied sepolicy file: $pf"
     done
-    sed "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g" $MY_DIR/config/init.er.rc.in > $MY_DIR/config/init.er.rc && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (init.er.rc) to $EXTENDROM_DEBUG_PATH"
+    if [ $EXTENDROM_TARGET_VERSION -ge 11 ];then
+	MKDARG="encryption=None"
+    else
+	MKDARG=""
+    fi
+    sed "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g;s#%%DEBUGLOG_MKDARG%%#$MKDARG#g" $MY_DIR/config/init.er.rc.in > $MY_DIR/config/init.er.rc && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (init.er.rc) to $EXTENDROM_DEBUG_PATH"
     sed -i "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g" $MY_DIR/sepolicy/boot_debug/* && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (sepolicies) to $EXTENDROM_DEBUG_PATH"
     echo "[$FUNCNAME] ... enabled and configured EXTENDROM_BOOT_DEBUG"
 }

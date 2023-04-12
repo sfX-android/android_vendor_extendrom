@@ -1,0 +1,6 @@
+# boot_debug
+allow vendor_init boot_log_file:dir { setattr remove_name search write create };
+allow vendor_init boot_log_file:file unlink;
+
+# boot_debug: allow creating directory
+allow vendor_init system_data_file:dir { add_name write };

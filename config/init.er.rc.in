@@ -31,8 +31,11 @@ on property:dev.bootcomplete=1
 
 # start debug logger as soon as possible
 # i.e. when logd actually has started
-on property:init.svc.logd=running
-    mkdir -p %%DEBUGLOG_PATH%% 0770 system system encryption=None
+on post-fs-data && property:init.svc.logd=running
+    mkdir %%DEBUGLOG_PATH%% 0770 system system %%DEBUGLOG_MKDARG%%
+    stop boot_lc
+    stop boot_lc_crash
+    stop boot_lc_kernel
     rm %%DEBUGLOG_PATH%%/boot_lc_full.txt
     rm %%DEBUGLOG_PATH%%/boot_lc_crash.txt
     rm %%DEBUGLOG_PATH%%/boot_lc_kernel.txt
