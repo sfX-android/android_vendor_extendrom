@@ -56,33 +56,41 @@ define er_preroot_avb
     @echo "++++  PRE-ROOTing BOOT image - DONE  ++++"
 endef
 
-#build_boot_board_avb_enabled := $(call er_preroot_avb,Â$@)
-#$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILES) $(BOARD_AVB_BOOT_KEY_PATH) $(INTERNAL_GKI_CERTIFICATE_DEPS) $(BOOTIMAGE_EXTRA_DEPS)
-#	$(call build_boot_board_avb_enabled,$@)
-#$(INSTALLED_BOOTIMAGE_TARGET): $(call build_boot_board_avb_enabled,$@)
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILES) $(BOARD_AVB_BOOT_KEY_PATH) $(INTERNAL_GKI_CERTIFICATE_DEPS) $(BOOTIMAGE_EXTRA_DEPS)
 	$(call er_preroot_avb,$@)
 
 else ifeq (true,$(PRODUCT_SUPPORTS_VBOOT)) # PRODUCT_SUPPORTS_BOOT_SIGNER != true
 
-build_boot_supports_vboot_orig := $(build_boot_supports_vboot)
 define er_preroot_vboot
     @echo "++++  Exec regular boot.img handling before rooting  ++++"
-    $(call build_boot_supports_vboot_orig,$@)
+    $(MKBOOTIMG) --kernel $(call bootimage-to-kernel,$(1)) $(INTERNAL_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1).unsigned
+    $(VBOOT_SIGNER) $(FUTILITY) $(1).unsigned $(PRODUCT_VBOOT_SIGNING_KEY).vbpubk $(PRODUCT_VBOOT_SIGNING_KEY).vbprivk $(PRODUCT_VBOOT_SIGNING_SUBKEY).vbprivk $(1).keyblock $(1)
     @echo "++++  PRE-ROOTing BOOT image (vboot)  ++++"
     @/bin/bash $(ROOT_BOOT_BIN) $$PWD/$@
     @cp -v $(ROOT_BOOT_DIR)/new-boot.img $(PRODUCT_OUT)/boot.img
+    $(call assert-max-image-size,$(1),$(call get-bootimage-partition-size,$(1),boot))
+    @echo "++++  PRE-ROOTing BOOT image - DONE  ++++"
 endef
+
+$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(VBOOT_SIGNER) $(FUTILITY) $(BOOTIMAGE_EXTRA_DEPS)
+    $(call pretty,"Target boot image: $@")
+    $(call er_preroot_vboot,$@)
 
 else # PRODUCT_SUPPORTS_VBOOT != true
 
-build_boot_novboot_orig := build_boot_novboot
 define er_preroot_novboot
     @echo "++++  Exec regular boot.img handling before rooting  ++++"
-    $(call build_boot_novboot_orig,$@)
+    $(MKBOOTIMG) --kernel $(call bootimage-to-kernel,$(1)) $(INTERNAL_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1)
+    $(call assert-max-image-size,$1,$(call get-bootimage-partition-size,$(1),boot))
     @echo "++++  PRE-ROOTing BOOT image (novboot)  ++++"
     @/bin/bash $(ROOT_BOOT_BIN) $$PWD/$@
     @cp -v $(ROOT_BOOT_DIR)/new-boot.img $(PRODUCT_OUT)/boot.img
+    @echo "++++  PRE-ROOTing BOOT image - DONE  ++++"
 endef
 
-endif
+$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(BOOTIMAGE_EXTRA_DEPS)
+    $(call pretty,"Target boot image: $@")
+    $(call er_preroot_novboot,$@)
+
+endif # BOARD_AVB_ENABLE
+
