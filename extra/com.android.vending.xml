@@ -41,5 +41,7 @@
 		<permission name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
 		<permission name="android.permission.MANAGE_ROLLBACKS" />
                 <permission name="android.permission.LOADER_USAGE_STATS" />
+                <permission name="android.permission.USE_INSTALLER_V2" />
+                <permission name="com.android.permission.USE_INSTALLER_V2" />
 	</privapp-permissions>
 </permissions>

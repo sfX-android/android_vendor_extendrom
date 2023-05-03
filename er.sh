@@ -23,6 +23,8 @@ echo "EXTENDROM_PACKAGES: $EXTENDROM_PACKAGES"
 echo "EOS_EDITION: $EOS_EDITION"
 export EXTENDROM_TARGET_VERSION=$(build/soong/soong_ui.bash --dumpvar-mode PLATFORM_VERSION)
 echo "EXTENDROM_TARGET_VERSION: $EXTENDROM_TARGET_VERSION"
+export SRC_TOP=$(build/soong/soong_ui.bash --dumpvar-mode TOP)
+echo "SRC_TOP: ${SRC_TOP}/"
 
 FDROID_REPO_URL="https://mirror.cyberbits.eu/fdroid/repo/"
 
@@ -42,6 +44,13 @@ GPG_KEYS="7A029E54DD5DCE7A 22F796D6E62E6625A0BCEFEA7F979A66F3E08422"
 GPG_FORCE_DL=0
 
 ###########################################################
+
+REQ_BINARIES="aapt"
+
+for bin in $REQ_BINARIES;do
+    which $bin
+    [ $? -ne 0 ] && echo "ERROR: missing required binary: $bin" && exit 3
+done
 
 MY_DIR="$1"
 [ -z "$MY_DIR" ] && MY_DIR=${0%/*}
@@ -217,20 +226,26 @@ F_GET_GPG_KEYS(){
 
 # the ultimate boot debugger
 F_BOOT_DEBUG(){
-    rm -rf $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... cleaned sepolicy dir"
-    mkdir -p $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... created sepolicy dir"
-    for p in $(find $MY_DIR/config/boot_debug/ -type f -name '*.sepolicy');do
-	pf=$(basename $p)
-	cp $p $MY_DIR/sepolicy/boot_debug/${pf/\.sepolicy/} && echo "[$FUNCNAME] ... copied sepolicy file: $pf"
-    done
-    if [ $EXTENDROM_TARGET_VERSION -ge 11 ];then
-	MKDARG="encryption=None"
+    # check conflicts first
+    grep -qr "type boot_debug" ${SRC_TOP}device/
+    if [ $? -ne 0 ];then
+	rm -rf $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... cleaned sepolicy dir"
+	mkdir -p $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... created sepolicy dir"
+	for p in $(find $MY_DIR/config/boot_debug/ -type f -name '*.sepolicy');do
+	    pf=$(basename $p)
+	    cp $p $MY_DIR/sepolicy/boot_debug/${pf/\.sepolicy/} && echo "[$FUNCNAME] ... copied sepolicy file: $pf"
+	done
+	if [ $EXTENDROM_TARGET_VERSION -ge 11 ];then
+	    MKDARG="encryption=None"
+	else
+	    MKDARG=""
+	fi
+	sed "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g;s#%%DEBUGLOG_MKDARG%%#$MKDARG#g" $MY_DIR/config/init.er.rc.in > $MY_DIR/config/init.er.rc && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (init.er.rc) to $EXTENDROM_DEBUG_PATH"
+	sed -i "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g" $MY_DIR/sepolicy/boot_debug/* && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (sepolicies) to $EXTENDROM_DEBUG_PATH"
+	echo "[$FUNCNAME] ... enabled and configured EXTENDROM_BOOT_DEBUG"
     else
-	MKDARG=""
+	echo -e "[$FUNCNAME] ... ERROR: it seems you have legacy code in your device/ path!\nFix this first before enabling EXTENDROM_BOOT_DEBUG"
     fi
-    sed "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g;s#%%DEBUGLOG_MKDARG%%#$MKDARG#g" $MY_DIR/config/init.er.rc.in > $MY_DIR/config/init.er.rc && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (init.er.rc) to $EXTENDROM_DEBUG_PATH"
-    sed -i "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g" $MY_DIR/sepolicy/boot_debug/* && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (sepolicies) to $EXTENDROM_DEBUG_PATH"
-    echo "[$FUNCNAME] ... enabled and configured EXTENDROM_BOOT_DEBUG"
 }
 
 F_GET_GPG_KEYS
@@ -238,35 +253,11 @@ get_packages "$MY_DIR/repo/packages.txt"
 
 if [ ! -z "$EXTENDROM_BOOT_DEBUG" -a  "$EXTENDROM_BOOT_DEBUG" == "true" ];then
     if [ -z "$EXTENDROM_DEBUG_PATH" ];then
-	cat << _EOH
-
-ERROR: You have specified EXTENDROM_BOOT_DEBUG=$EXTENDROM_BOOT_DEBUG but >EXTENDROM_DEBUG_PATH< is empty!
-
-    If you are NOT using encryption (FBE or FDE) you can basically choose any path you wish for EXTENDROM_DEBUG_PATH.
-    When you are trying to debug encrypted devices though you might have to choose a proper path so you can access
-    it later when boot fails.
-
-    Depending on which Android version you build on there are several options to set EXTENDROM_DEBUG_PATH on encrypted devices:
-
-    Android 9 and lower hard coded encryption exceptions here:
-     -> https://cs.android.com/android/platform/superproject/+/android-9.0.0_r34:system/extras/ext4_utils/ext4_crypt_init_extensions.cpp;l=85-94
-	e.g. /data/data, /data/user etc
-
-    Android 10 hard coded encryption exceptions here:
-     -> https://cs.android.com/android/platform/superproject/+/android-10.0.0_r18:system/extras/libfscrypt/fscrypt_init_extensions.cpp;l=83-95
-	e.g. /data/data, /data/user etc
-
-    since Android 11 this can be handled directly within init and the mkdir command (encryption=None)
-    that means you can basically use any path which is writable at boot time.
-    While you are free to choose any it is recommended setting EXTENDROM_DEBUG_PATH=/data/debug for A11 and later.
-    extendrom will ensure that EXTENDROM_DEBUG_PATH will NOT get encrypted so you can access it via recovery.
-
-
-    Hint: using /cache/xxx MIGHT be an alternative as well - while this does not work on all devices.
-    Even if this works in general /cache might be limited in disk space and also can cause other issues.
-
-_EOH
-	exit 4
+	# set path according to android version
+	case $EXTENDROM_TARGET_VERSION in
+	    7|8|9|10)	export EXTENDROM_DEBUG_PATH=/data/vendor_de/debug ;;
+	      1[1-9])	export EXTENDROM_DEBUG_PATH=/data/vendor_de/debug ;;
+	esac
     fi
     F_BOOT_DEBUG
 fi
@@ -319,6 +310,8 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/
     # keep backwards compability
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/root_boot.sh
+    cp $MAGISKOUT/src/assets/util_functions.sh $MAGISKOUT/
+    ln -s $(which sleep) $MAGISKOUT/zygote_faker
 fi
 
 # write specific F-Droid module

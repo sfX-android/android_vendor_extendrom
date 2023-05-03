@@ -33,12 +33,12 @@ on property:dev.bootcomplete=1
 # i.e. when logd actually has started
 on post-fs-data && property:init.svc.logd=running
     mkdir %%DEBUGLOG_PATH%% 0770 system system %%DEBUGLOG_MKDARG%%
-    stop boot_lc
-    stop boot_lc_crash
-    stop boot_lc_kernel
-    rm %%DEBUGLOG_PATH%%/boot_lc_full.txt
-    rm %%DEBUGLOG_PATH%%/boot_lc_crash.txt
-    rm %%DEBUGLOG_PATH%%/boot_lc_kernel.txt
+    #stop boot_lc
+    #stop boot_lc_crash
+    #stop boot_lc_kernel
+    #rm %%DEBUGLOG_PATH%%/boot_lc_full.txt
+    #rm %%DEBUGLOG_PATH%%/boot_lc_crash.txt
+    #rm %%DEBUGLOG_PATH%%/boot_lc_kernel.txt
     start boot_lc
     start boot_lc_kernel
     start boot_lc_crash
