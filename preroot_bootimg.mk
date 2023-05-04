@@ -18,8 +18,10 @@
 
 ifeq ($(OUT_DIR), $(PWD)/out)
 UNI_OUT_DIR := $(OUT_DIR)
+UNI_PRODUCT_OUT := $(PRODUCT_OUT)
 else
 UNI_OUT_DIR := $(PWD)/out
+UNI_PRODUCT_OUT := $(PWD)/$(PRODUCT_OUT)
 endif
 ROOT_BOOT_DIR := $(UNI_OUT_DIR)/.magisk
 ROOT_BOOT_BIN := $(ROOT_BOOT_DIR)/boot_patch.sh
@@ -49,8 +51,8 @@ define er_preroot_avb
     $(MKBOOTIMG) --kernel $(kernel) $(INTERNAL_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1)
     @echo "++++  PRE-ROOTing BOOT image (avb)  ++++"
     @$(ROOT_BOOT_DIR)/zygote_faker 45 &
-    @/bin/bash $(ROOT_BOOT_BIN) $(PRODUCT_OUT)/boot.img
-    @cp -v $(ROOT_BOOT_DIR)/new-boot.img $(PRODUCT_OUT)/boot.img
+    @/bin/bash $(ROOT_BOOT_BIN) $(UNI_PRODUCT_OUT)/boot.img
+    @cp -v $(ROOT_BOOT_DIR)/new-boot.img $(UNI_PRODUCT_OUT)/boot.img
     @echo "++++  Exec regular AVB handling after rooting  ++++"
     $(call assert-max-image-size,$(1),$(call get-hash-image-max-size,$(call get-bootimage-partition-size,$(1),boot)))
     $(AVBTOOL) add_hash_footer \
@@ -71,8 +73,8 @@ define er_preroot_vboot
     $(MKBOOTIMG) --kernel $(call bootimage-to-kernel,$(1)) $(INTERNAL_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1).unsigned
     $(VBOOT_SIGNER) $(FUTILITY) $(1).unsigned $(PRODUCT_VBOOT_SIGNING_KEY).vbpubk $(PRODUCT_VBOOT_SIGNING_KEY).vbprivk $(PRODUCT_VBOOT_SIGNING_SUBKEY).vbprivk $(1).keyblock $(1)
     @echo "++++  PRE-ROOTing BOOT image (vboot)  ++++"
-    @/bin/bash $(ROOT_BOOT_BIN) $(PRODUCT_OUT)/boot.img
-    @cp -v $(ROOT_BOOT_DIR)/new-boot.img $(PRODUCT_OUT)/boot.img
+    @/bin/bash $(ROOT_BOOT_BIN) $(UNI_PRODUCT_OUT)/boot.img
+    @cp -v $(ROOT_BOOT_DIR)/new-boot.img $(UNI_PRODUCT_OUT)/boot.img
     $(call assert-max-image-size,$(1),$(call get-bootimage-partition-size,$(1),boot))
     @echo "++++  PRE-ROOTing BOOT image - DONE  ++++"
 endef
@@ -88,8 +90,8 @@ define er_preroot_novboot
     $(MKBOOTIMG) --kernel $(call bootimage-to-kernel,$(1)) $(INTERNAL_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1)
     $(call assert-max-image-size,$1,$(call get-bootimage-partition-size,$(1),boot))
     @echo "++++  PRE-ROOTing BOOT image (novboot)  ++++"
-    @/bin/bash $(ROOT_BOOT_BIN) $(PRODUCT_OUT)/boot.img
-    @cp -v $(ROOT_BOOT_DIR)/new-boot.img $(PRODUCT_OUT)/boot.img
+    @/bin/bash $(ROOT_BOOT_BIN) $(UNI_PRODUCT_OUT)/boot.img
+    @cp -v $(ROOT_BOOT_DIR)/new-boot.img $(UNI_PRODUCT_OUT)/boot.img
     @echo "++++  PRE-ROOTing BOOT image - DONE  ++++"
 endef
 
