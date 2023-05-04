@@ -308,10 +308,9 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
 	cp $MAGISKOUT/src/lib/armeabi-v7a/libmagiskinit.so $MAGISKOUT/magiskinit
     fi
     chmod 755 $MAGISKOUT/src/assets/boot_patch.sh
-    cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/
+    cp $MAGISKOUT/src/assets/* $MAGISKOUT/
     # keep backwards compability
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/root_boot.sh
-    cp $MAGISKOUT/src/assets/util_functions.sh $MAGISKOUT/
     ln -s $(which sleep) $MAGISKOUT/zygote_faker
     echo "[MAGISK] preparing root finished"
 fi
