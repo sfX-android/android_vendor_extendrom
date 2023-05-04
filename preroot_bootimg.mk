@@ -73,8 +73,8 @@ define er_preroot_vboot
 endef
 
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(VBOOT_SIGNER) $(FUTILITY) $(BOOTIMAGE_EXTRA_DEPS)
-    $(call pretty,"Target boot image: $@")
-    $(call er_preroot_vboot,$@)
+	$(call pretty,"Target boot image: $@")
+	$(call er_preroot_vboot,$@)
 
 else # PRODUCT_SUPPORTS_VBOOT != true
 
@@ -89,8 +89,8 @@ define er_preroot_novboot
 endef
 
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(BOOTIMAGE_EXTRA_DEPS)
-    $(call pretty,"Target boot image: $@")
-    $(call er_preroot_novboot,$@)
+	$(call pretty,"Target boot image: $@")
+	$(call er_preroot_novboot,$@)
 
 endif # BOARD_AVB_ENABLE
 
