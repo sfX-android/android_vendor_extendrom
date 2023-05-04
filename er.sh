@@ -283,14 +283,14 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
 
     [ -d "$MAGISKOUT" ] && rm -rf $MAGISKOUT
     mkdir -p $MAGISKOUT
-    if [ ! -f $MY_DIR/prebuilt/Magisk.zip ];then
-	if [ ! -f $MY_DIR/prebuilt/SignMagisk.zip ];then
-	    echo "[main] MAGISK zip cannot be found! Do you have set 'Magisk' or 'SignMagisk' in your vendorsetup.sh??" && exit 4
+    if [ ! -f $MY_DIR/prebuilt/Magisk.apk ];then
+	if [ ! -f $MY_DIR/prebuilt/SignMagisk.apk ];then
+	    echo "[main] MAGISK apk cannot be found! Do you have set 'Magisk' or 'SignMagisk' in your vendorsetup.sh??" && exit 4
 	else
-	    MAGZIP=$MY_DIR/prebuilt/SignMagisk.zip
+	    MAGZIP=$MY_DIR/prebuilt/SignMagisk.apk
 	fi
     else
-	MAGZIP=$MY_DIR/prebuilt/Magisk.zip
+	MAGZIP=$MY_DIR/prebuilt/Magisk.apk
     fi
     unzip -q $MAGZIP -d $MAGISKOUT/src
 
