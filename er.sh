@@ -278,25 +278,27 @@ fi
 # MAGISK rooting preparation
 if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     echo
+    echo "[MAGISK] preparing the root process as requested"
     MAGISKOUT=$(realpath $MY_DIR/../../out/.magisk)
-    [ -z $MAGISK_TARGET_ARCH ] && MAGISK_TARGET_ARCH=arm64
-
     [ -d "$MAGISKOUT" ] && rm -rf $MAGISKOUT
     mkdir -p $MAGISKOUT
-    if [ ! -f $MY_DIR/prebuilt/Magisk.apk ];then
-	if [ ! -f $MY_DIR/prebuilt/SignMagisk.apk ];then
-	    echo "[main] MAGISK apk cannot be found! Do you have set 'Magisk' or 'SignMagisk' in your vendorsetup.sh??" && exit 4
-	else
-	    MAGZIP=$MY_DIR/prebuilt/SignMagisk.apk
-	fi
+    [ -z $MAGISK_TARGET_ARCH ] && MAGISK_TARGET_ARCH=arm64
+
+    MAGNAME=$(echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -E '^Magisk$|Magisk_v[0-9]+\.[0-9]+$|SignMagisk$')
+
+    if [ ! -f $MY_DIR/prebuilt/${MAGNAME}.apk ];then
+	echo "[MAGISK] ERROR: apk cannot be found! Keep in mind that extendrom supports v22 and later only!"
+	echo "[MAGISK] ERROR: Do you have set 'Magisk' or 'SignMagisk' in your vendorsetup.sh??"
+	exit 4
     else
-	MAGZIP=$MY_DIR/prebuilt/Magisk.apk
+	MAGZIP=$MY_DIR/prebuilt/${MAGNAME}.apk
     fi
+    echo "[MAGISK] ... Magisk found!"
     unzip -q $MAGZIP -d $MAGISKOUT/src
 
     cp $MAGISKOUT/src/lib/x86/libmagiskboot.so $MAGISKOUT/magiskboot
     chmod 755 $MAGISKOUT/magiskboot
-    echo "[main] MAGISK_TARGET_ARCH specified as $MAGISK_TARGET_ARCH"
+    echo "[MAGISK] ... MAGISK_TARGET_ARCH specified as $MAGISK_TARGET_ARCH"
 
     cp $MAGISKOUT/src/lib/armeabi-v7a/libmagisk32.so $MAGISKOUT/magisk32
     if [ $MAGISK_TARGET_ARCH == "arm64" ];then
@@ -305,13 +307,13 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     else
 	cp $MAGISKOUT/src/lib/armeabi-v7a/libmagiskinit.so $MAGISKOUT/magiskinit
     fi
-    cp $MY_DIR/root/* $MAGISKOUT/
     chmod 755 $MAGISKOUT/src/assets/boot_patch.sh
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/
     # keep backwards compability
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/root_boot.sh
     cp $MAGISKOUT/src/assets/util_functions.sh $MAGISKOUT/
     ln -s $(which sleep) $MAGISKOUT/zygote_faker
+    echo "[MAGISK] preparing root finished"
 fi
 
 # write specific F-Droid module
