@@ -4,4 +4,7 @@
 ##################################################################
 
 # boot_debug
-%%DEBUGLOG_PATH%%(/.*)? 					u:object_r:boot_log_file:s0
+%%DEBUGLOG_PATH%%(/.*)?				u:object_r:boot_log_file:s0
+
+# extendrom binaries
+/vendor/bin/er-logcat	                        u:object_r:boot_debug_exec:s0

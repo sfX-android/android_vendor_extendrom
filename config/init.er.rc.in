@@ -19,48 +19,64 @@
 
 # stop logging after boot
 on property:sys.boot_completed=1
-    stop boot_lc
-    stop boot_lc_crash
-    stop boot_lc_kernel
+    stop boot_debug_full
+    stop boot_debug_crash
+    stop boot_debug_kernel
+    stop boot_debug_selinux
 
 # stop fallback for some devices
 on property:dev.bootcomplete=1
-    stop boot_lc
-    stop boot_lc_crash
-    stop boot_lc_kernel
+    stop boot_debug_full
+    stop boot_debug_crash
+    stop boot_debug_kernel
+    stop boot_debug_selinux
+
+on property:extendrom.bootdebug=start
+    start boot_debug_full
+    start boot_debug_kernel
+    start boot_debug_crash
+    start boot_debug_selinux
+
+on property:extendrom.bootdebug=stop
+    stop boot_debug_full
+    stop boot_debug_crash
+    stop boot_debug_kernel
+    stop boot_debug_selinux
 
 # start debug logger as soon as possible
 # i.e. when logd actually has started
 on post-fs-data && property:init.svc.logd=running
     mkdir %%DEBUGLOG_PATH%% 0770 system system %%DEBUGLOG_MKDARG%%
-    #stop boot_lc
-    #stop boot_lc_crash
-    #stop boot_lc_kernel
-    #rm %%DEBUGLOG_PATH%%/boot_lc_full.txt
-    #rm %%DEBUGLOG_PATH%%/boot_lc_crash.txt
-    #rm %%DEBUGLOG_PATH%%/boot_lc_kernel.txt
-    start boot_lc
-    start boot_lc_kernel
-    start boot_lc_crash
+    start boot_debug_full
+    start boot_debug_kernel
+    start boot_debug_crash
+    start boot_debug_selinux
 
-service boot_lc /system/bin/logcat -b all -D -f %%DEBUGLOG_PATH%%/boot_lc_full.txt
+service boot_debug_full /vendor/bin/er-logcat -b all -D -f %%DEBUGLOG_PATH%%/full.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_FULL%% --rotate-count=1
     user system
     group system
     seclabel u:r:boot_debug:s0
     disabled
     oneshot
 
-service boot_lc_crash /system/bin/logcat -b crash -D -f %%DEBUGLOG_PATH%%/boot_lc_crash.txt
+service boot_debug_crash /vendor/bin/er-logcat -b crash -D -f %%DEBUGLOG_PATH%%/crash.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_CRASH%% --rotate-count=1
     user system
     group system
     seclabel u:r:boot_debug:s0
     disabled
     oneshot
 
-service boot_lc_kernel /system/bin/logcat -b kernel -D -f %%DEBUGLOG_PATH%%/boot_lc_kernel.txt
+# note: kernel logs will appear on userdebug and/or eng builds only!
+service boot_debug_kernel /vendor/bin/er-logcat -b kernel -D -f %%DEBUGLOG_PATH%%/kernel.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_KERNEL%% --rotate-count=1
     user system
     group system
     seclabel u:r:boot_debug:s0
     disabled
     oneshot
 
+service boot_debug_selinux /vendor/bin/er-logcat -b events --regex=avc: -D -f %%DEBUGLOG_PATH%%/selinux.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_SELINUX%% --rotate-count=1
+    user system
+    group system
+    seclabel u:r:boot_debug:s0
+    disabled
+    oneshot

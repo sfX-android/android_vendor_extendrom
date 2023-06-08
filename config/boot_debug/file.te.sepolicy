@@ -4,4 +4,4 @@
 ##################################################################
 
 # boot_debug
-type boot_log_file, file_type, data_file_type, core_data_file_type;
+type boot_log_file, boot_log_type, file_type;

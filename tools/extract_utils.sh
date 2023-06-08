@@ -56,7 +56,7 @@ function write_header() {
         if [ $INITIAL_COPYRIGHT_YEAR -eq $YEAR ]; then
             echo -e "# Copyright (C) $YEAR steadfasterX <steadfasterX@gmail.com>\n" >> $1
         else
-            printf "# Copyright (C) $INITIAL_COPYRIGHT_YEAR-$YEAR steadfasterX \<steadfasterX@gmail.com\>\n" >> $1
+            printf "# Copyright (C) $INITIAL_COPYRIGHT_YEAR-$YEAR steadfasterX <steadfasterX@gmail.com>\n" >> $1
         fi
     else
         printf "# Copyright (C) $YEAR steadfasterX \<steadfasterX@gmail.com\>\n" > $1
@@ -87,7 +87,7 @@ function write_headers() {
     fi
 
     cat << EOF >> "$ANDROIDMK"
-LOCAL_PATH := \$(call my-dir)
+VENDOR_DIR := \$(call my-dir)
 
 EOF
     if [ "$COMMON" -ne 1 ]; then
@@ -105,7 +105,31 @@ ifneq (\$(filter $1,\$($GUARD)),)
 
 EOF
     fi
+    if [ "$EXTENDROM_BOOT_DEBUG" == true ];then
+	cat << EOF >> "$ANDROIDMK"
+LOCAL_PATH := \$(PRODUCT_OUT)
+include \$(CLEAR_VARS)
+LOCAL_MODULE            := er-logcat
+LOCAL_REQUIRED_MODULES  := logcat
+LOCAL_MODULE_TAGS       := optional
+LOCAL_MODULE_CLASS      := EXECUTABLES
+LOCAL_SRC_FILES         := \$(TARGET_COPY_OUT_SYSTEM)/bin/logcat
+LOCAL_MODULE_PATH       := \$(TARGET_OUT_VENDOR_EXECUTABLES)
+ifeq (\$(call math_gt_or_eq,\$(PLATFORM_SDK_VERSION),29), true)
+LOCAL_CHECK_ELF_FILES   := false
+else
+LOCAL_SHARED_LIBRARIES  := libbase libc++ libprocessgroup
+endif
+#LOCAL_VENDOR_MODULE    := true
+include \$(BUILD_PREBUILT)
+LOCAL_PATH := \$(VENDOR_DIR)
+EOF
+    else
 
+	 cat << EOF >> "$ANDROIDMK"
+LOCAL_PATH := \$(VENDOR_DIR)
+EOF
+    fi
 }
 
 #
@@ -167,6 +191,11 @@ F_WRITE_MAKEFILE(){
 	uses_required_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull | grep "uses-library:" | sed -n "s/uses-library:'\(.*\)'/\1/p" | tr "\n" " ")
 	uses_optional_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull | grep "uses-library-not-required:" | sed -n "s/uses-library-not-required:'\(.*\)'/\1/p" | tr "\n" " ")
         package_human="${appnamefull/\.apk}"
+
+	if [[ "$appname" =~ .*Magisk.* ]];then
+	    echo "[$FUNCNAME] ... skipping $package_human (Magisk is not allowed to be a system app)"
+	    continue
+	fi
 
 	# allow empty LOCAL_CERTIFICATE
 	# that means DEFAULT_SYSTEM_DEV_CERTIFICATE will be used

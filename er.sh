@@ -26,6 +26,20 @@ echo "EXTENDROM_TARGET_VERSION: $EXTENDROM_TARGET_VERSION"
 export SRC_TOP=$(build/soong/soong_ui.bash --dumpvar-mode TOP)
 echo "SRC_TOP: ${SRC_TOP}/"
 
+# boot debug log
+echo "EXTENDROM_BOOT_DEBUG=$EXTENDROM_BOOT_DEBUG"
+echo "EXTENDROM_DEBUG_PATH=$EXTENDROM_DEBUG_PATH (will be suffixed with /boot_debug)"
+# set default file sizes for debug logs
+[ -z "$EXTENDROM_DEBUG_PATH_SIZE_FULL" ] && export EXTENDROM_DEBUG_PATH_SIZE_FULL=5000
+[ -z "$EXTENDROM_DEBUG_PATH_SIZE_CRASH" ] && export EXTENDROM_DEBUG_PATH_SIZE_CRASH=500
+[ -z "$EXTENDROM_DEBUG_PATH_SIZE_KERNEL" ] && export EXTENDROM_DEBUG_PATH_SIZE_KERNEL=500
+[ -z "$EXTENDROM_DEBUG_PATH_SIZE_SELINUX" ] && export EXTENDROM_DEBUG_PATH_SIZE_SELINUX=500
+echo "EXTENDROM_DEBUG_PATH_SIZE_FULL=$EXTENDROM_DEBUG_PATH_SIZE_FULL KB"
+echo "EXTENDROM_DEBUG_PATH_SIZE_CRASH=$EXTENDROM_DEBUG_PATH_SIZE_CRASH KB"
+echo "EXTENDROM_DEBUG_PATH_SIZE_KERNEL=$EXTENDROM_DEBUG_PATH_SIZE_KERNEL KB"
+echo "EXTENDROM_DEBUG_PATH_SIZE_SELINUX=$EXTENDROM_DEBUG_PATH_SIZE_SELINUX KB"
+
+# main repo used for downloading F-Droid apk's
 FDROID_REPO_URL="https://mirror.cyberbits.eu/fdroid/repo/"
 
 # list of keyservers for importing gpg pub keys
@@ -226,8 +240,9 @@ F_GET_GPG_KEYS(){
 
 # the ultimate boot debugger
 F_BOOT_DEBUG(){
+    export EXTENDROM_DEBUG_PATH="${EXTENDROM_DEBUG_PATH}/boot_debug"
     # check conflicts first
-    grep -qr "type boot_debug" ${SRC_TOP}device/
+    grep -qr "type boot_debug" ${SRC_TOP}device/ 2>&1
     if [ $? -ne 0 ];then
 	rm -rf $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... cleaned sepolicy dir"
 	mkdir -p $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... created sepolicy dir"
@@ -240,7 +255,21 @@ F_BOOT_DEBUG(){
 	else
 	    MKDARG=""
 	fi
-	sed "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g;s#%%DEBUGLOG_MKDARG%%#$MKDARG#g" $MY_DIR/config/init.er.rc.in > $MY_DIR/config/init.er.rc && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (init.er.rc) to $EXTENDROM_DEBUG_PATH"
+	#sed "s#%%DEBUGLOG_DEVICE%%#$EXTENDROM_DEBUG_DEVICE#g;s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g;s#%%DEBUGLOG_MKDARG%%#$MKDARG#g" $MY_DIR/config/init.er.rc.in > $MY_DIR/config/init.er.rc && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (init.er.rc) to $EXTENDROM_DEBUG_PATH"
+	#sed "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g;s#%%DEBUGLOG_MKDARG%%#$MKDARG#g" $MY_DIR/config/init.er.rc.in > $MY_DIR/config/init.er.rc && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (init.er.rc) to $EXTENDROM_DEBUG_PATH"
+	sed "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g;s#%%DEBUGLOG_MKDARG%%#$MKDARG#g;\
+	     s#%%DEBUGLOG_PATH_SIZE_FULL%%#$EXTENDROM_DEBUG_PATH_SIZE_FULL#g;\
+	     s#%%DEBUGLOG_PATH_SIZE_CRASH%%#$EXTENDROM_DEBUG_PATH_SIZE_CRASH#g;\
+	     s#%%DEBUGLOG_PATH_SIZE_KERNEL%%#$EXTENDROM_DEBUG_PATH_SIZE_KERNEL#g;\
+	     s#%%DEBUGLOG_PATH_SIZE_SELINUX%%#$EXTENDROM_DEBUG_PATH_SIZE_SELINUX#g" \
+	     $MY_DIR/config/init.er.rc.in > $MY_DIR/config/init.er.rc
+	echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (init.er.rc) to $EXTENDROM_DEBUG_PATH"
+	echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH_SIZE's (init.er.rc):"
+	echo "[$FUNCNAME] ... EXTENDROM_DEBUG_PATH_SIZE_FULL=$EXTENDROM_DEBUG_PATH_SIZE_FULL KB"
+	echo "[$FUNCNAME] ... EXTENDROM_DEBUG_PATH_SIZE_CRASH=$EXTENDROM_DEBUG_PATH_SIZE_CRASH KB"
+	echo "[$FUNCNAME] ... EXTENDROM_DEBUG_PATH_SIZE_KERNEL=$EXTENDROM_DEBUG_PATH_SIZE_KERNEL KB"
+	echo "[$FUNCNAME] ... EXTENDROM_DEBUG_PATH_SIZE_SELINUX=$EXTENDROM_DEBUG_PATH_SIZE_SELINUX KB"
+
 	sed -i "s#%%DEBUGLOG_PATH%%#$EXTENDROM_DEBUG_PATH#g" $MY_DIR/sepolicy/boot_debug/* && echo "[$FUNCNAME] ... configured EXTENDROM_DEBUG_PATH (sepolicies) to $EXTENDROM_DEBUG_PATH"
 	echo "[$FUNCNAME] ... enabled and configured EXTENDROM_BOOT_DEBUG"
     else
@@ -255,9 +284,12 @@ if [ ! -z "$EXTENDROM_BOOT_DEBUG" -a  "$EXTENDROM_BOOT_DEBUG" == "true" ];then
     if [ -z "$EXTENDROM_DEBUG_PATH" ];then
 	# set path according to android version
 	case $EXTENDROM_TARGET_VERSION in
-	    7|8|9|10)	export EXTENDROM_DEBUG_PATH=/data/vendor_de/debug ;;
-	      1[1-9])	export EXTENDROM_DEBUG_PATH=/data/vendor_de/debug ;;
+	    7|8|9|10)	export EXTENDROM_DEBUG_PATH=/data/vendor_de ;;
+	      1[1-9])	export EXTENDROM_DEBUG_PATH=/data/vendor_de ;;
+	
 	esac
+	# add our suffix to the given debug path always
+	export EXTENDROM_DEBUG_PATH=${EXTENDROM_DEBUG_PATH}/boot_debug
     fi
     F_BOOT_DEBUG
 fi
@@ -319,6 +351,7 @@ fi
 F_WRITE_MAKEFILE_FDROID(){
     echo "[$FUNCNAME] writing additional_repos.xml makefile"
     cat >> $ANDROIDMK << _EOFFD
+
 # additional F-Droid repos
 include \$(CLEAR_VARS)
 LOCAL_MODULE := additional_repos.xml
