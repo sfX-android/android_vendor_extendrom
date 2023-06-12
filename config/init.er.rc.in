@@ -45,7 +45,7 @@ on property:extendrom.bootdebug=stop
 
 # start debug logger as soon as possible
 # i.e. when logd actually has started
-on post-fs-data && property:init.svc.logd=running
+on post-fs
     mkdir %%DEBUGLOG_PATH%% 0770 system system %%DEBUGLOG_MKDARG%%
     start boot_debug_full
     start boot_debug_kernel
