@@ -5,4 +5,4 @@
 
 # boot_debug
 allow init boot_debug:process { rlimitinh siginh transition };
-
+allow init boot_log_file:dir mounton;

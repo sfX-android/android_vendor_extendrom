@@ -18,6 +18,10 @@
 
 VENDOR_DIR := vendor/extendrom
 
+ifeq ($(EXTENDROM_BOOT_DEBUG),)
+EXTENDROM_BOOT_DEBUG := $(shell echo $$EXTENDROM_BOOT_DEBUG)
+endif
+
 ifeq ($(EXTENDROM_BOOT_DEBUG),true)
 BOARD_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/boot_debug
 
