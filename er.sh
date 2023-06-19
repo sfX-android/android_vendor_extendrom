@@ -28,6 +28,8 @@ echo "SRC_TOP: ${SRC_TOP}/"
 
 # boot debug log
 echo "EXTENDROM_BOOT_DEBUG=$EXTENDROM_BOOT_DEBUG"
+# set default debug path if unset
+[ -z "$EXTENDROM_DEBUG_PATH" ] && export EXTENDROM_DEBUG_PATH=/data/vendor_de
 echo "EXTENDROM_DEBUG_PATH=$EXTENDROM_DEBUG_PATH (will be suffixed with /boot_debug)"
 # set default file sizes for debug logs
 [ -z "$EXTENDROM_DEBUG_PATH_SIZE_FULL" ] && export EXTENDROM_DEBUG_PATH_SIZE_FULL=5000
@@ -281,16 +283,6 @@ F_GET_GPG_KEYS
 get_packages "$MY_DIR/repo/packages.txt"
 
 if [ ! -z "$EXTENDROM_BOOT_DEBUG" -a  "$EXTENDROM_BOOT_DEBUG" == "true" ];then
-    if [ -z "$EXTENDROM_DEBUG_PATH" ];then
-	# set path according to android version
-	case $EXTENDROM_TARGET_VERSION in
-	    7|8|9|10)	export EXTENDROM_DEBUG_PATH=/data/vendor_de ;;
-	      1[1-9])	export EXTENDROM_DEBUG_PATH=/data/vendor_de ;;
-	
-	esac
-	# add our suffix to the given debug path always
-	export EXTENDROM_DEBUG_PATH=${EXTENDROM_DEBUG_PATH}/boot_debug
-    fi
     F_BOOT_DEBUG
 fi
 

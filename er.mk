@@ -18,12 +18,18 @@
 
 VENDOR_DIR := vendor/extendrom
 
+# backwards compat for at least A9 where the environment vars
+# do not be parsed and become build flags automatically
 ifeq ($(EXTENDROM_BOOT_DEBUG),)
 EXTENDROM_BOOT_DEBUG := $(shell echo $$EXTENDROM_BOOT_DEBUG)
 endif
+ifeq ($(EXTENDROM_PREROOT_BOOT),)
+EXTENDROM_PREROOT_BOOT := $(shell echo $$EXTENDROM_PREROOT_BOOT)
+endif
 
 ifeq ($(EXTENDROM_BOOT_DEBUG),true)
-BOARD_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/boot_debug
+#BOARD_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/boot_debug
+BOARD_VENDOR_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/boot_debug
 
 PRODUCT_PACKAGES += \
 	er-logcat
