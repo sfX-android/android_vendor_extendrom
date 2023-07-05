@@ -1,0 +1,4 @@
+# when using /persist some devices require that one
+# otherwise e.g. the camera on the LG G4 does not start anymore
+# when enforcing
+allow sensors boot_log_file:dir { getattr search };
