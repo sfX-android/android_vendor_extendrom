@@ -203,10 +203,8 @@ function get_packages() {
 	        echo "[$FUNCNAME] ... ERROR $PERR occured while identifying the latest apk name from ${FDROID_REPO_URL}"
 	        exit 3
 	    fi
-	    local repo="${repouri}/${package_name}"
-	else
-	    local repo="$package_baseuri/${package_name}"
 	fi
+	local repo="${repouri}/${package_name}"
 
        should_verify=$(echo ${line} |cut -d "|" -f5)
        download_package "$repo" "$package"
