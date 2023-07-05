@@ -9,6 +9,8 @@
 
 # F-Droid
 org.fdroid.fdroid_LATEST.apk|FDROIDREPO|app|F-Droid.apk;PRESIGNED|true
+# F-Droid v1.16.3
+org.fdroid.fdroid_1016053.apk|FDROIDREPO|app|F-Droid_v1.16.3.apk;PRESIGNED|true
 
 # F-Droid privileged extension should be build with AOSP but if you REALLY wanna use a prebuilt:
 org.fdroid.fdroid.privileged_LATEST.apk|FDROIDREPO|priv-app|F-DroidPrivilegedExtension_pb.apk;PRESIGNED|true
