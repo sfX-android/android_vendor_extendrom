@@ -27,6 +27,8 @@ export SRC_TOP=$(build/soong/soong_ui.bash --dumpvar-mode TOP)
 echo "SRC_TOP: ${SRC_TOP}/"
 
 # boot debug log
+export EXTENDROM_PRODUCT_DEVICE=$(build/soong/soong_ui.bash --dumpvar-mode PRODUCT_DEVICE)
+echo "EXTENDROM_PRODUCT_DEVICE=$EXTENDROM_PRODUCT_DEVICE"
 echo "EXTENDROM_BOOT_DEBUG=$EXTENDROM_BOOT_DEBUG"
 # set default debug path if unset
 [ -z "$EXTENDROM_DEBUG_PATH" ] && export EXTENDROM_DEBUG_PATH=/data/vendor_de
@@ -246,7 +248,7 @@ F_BOOT_DEBUG(){
     if [ $? -ne 0 ];then
 	rm -rf $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... cleaned sepolicy dir"
 	mkdir -p $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... created sepolicy dir"
-	for p in $(find $MY_DIR/config/boot_debug/ -type f -name '*.sepolicy');do
+	for p in $(find $MY_DIR/config/boot_debug/ $MY_DIR/config/boot_debug/${EXTENDROM_PRODUCT_DEVICE}/ -maxdepth 1 -type f -name '*.sepolicy');do
 	    pf=$(basename $p)
 	    cp $p $MY_DIR/sepolicy/boot_debug/${pf/\.sepolicy/} && echo "[$FUNCNAME] ... copied sepolicy file: $pf"
 	done
