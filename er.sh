@@ -33,7 +33,7 @@ MKOPTS="ENABLE_EXTENDROM \
 	EXTENDROM_FDROID_REPOS"
 
 for opt in $MKOPTS; do
-    [ -z "${!opt}" ] && export ${opt}=$(build/soong/soong_ui.bash --dumpvar-mode $opt 2>/dev/null) && [ ! -z "${!opt}" ] && echo ".. setting $opt=${!opt} by makefile"
+    [ -z "${!opt}" ] && export ${opt}="$(build/soong/soong_ui.bash --dumpvar-mode $opt 2>/dev/null)" && [ ! -z "${!opt}" ] && echo ".. setting $opt=${!opt} by makefile"
 done
 
 
