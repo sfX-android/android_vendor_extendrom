@@ -112,6 +112,9 @@ $(BOARD_$(call to-upper,$(subst .img,,$(subst $(2),kernel,$(notdir $(1)))))_BOOT
 endef
 endif # get-bootimage-partition-size
 
+# create the boot image + kernel itself
+$(foreach b,$(INSTALLED_BOOTIMAGE_TARGET), $(eval $(call add-dependency,$(b),$(call bootimage-to-kernel,$(b)))))
+
 ifeq (true,$(BOARD_AVB_ENABLE))
 
 define er_preroot_avb
