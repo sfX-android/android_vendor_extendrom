@@ -16,15 +16,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+######################
+# parse through all supported makefile options
+# vendorsetup.sh will always take precedence though
+
+MKOPTS="ENABLE_EXTENDROM \
+	EXTENDROM_PACKAGES \
+	EXTENDROM_BOOT_DEBUG \
+	EXTENDROM_DEBUG_PATH \
+	EXTENDROM_DEBUG_PATH_SIZE_FULL \
+	EXTENDROM_DEBUG_PATH_SIZE_CRASH \
+	EXTENDROM_DEBUG_PATH_SIZE_KERNEL \
+	EXTENDROM_DEBUG_PATH_SIZE_SELINUX \
+	EXTENDROM_PREROOT_BOOT \
+	EXTENDROM_FDROID_REPOS"
+
+for opt in $MKOPTS; do
+    [ -z "${!opt}" ] && export ${opt}=$(build/soong/soong_ui.bash --dumpvar-mode $opt 2>/dev/null) && [ ! -z "${!opt}" ] && echo ".. setting $opt=${!opt} by makefile"
+done
+
+
 ####################
 # base info
 echo "ENABLE_EXTENDROM: $ENABLE_EXTENDROM"
 echo "EXTENDROM_PACKAGES: $EXTENDROM_PACKAGES"
 echo "EOS_EDITION: $EOS_EDITION"
-export EXTENDROM_TARGET_VERSION=$(build/soong/soong_ui.bash --dumpvar-mode PLATFORM_VERSION)
+export EXTENDROM_TARGET_VERSION=$(build/soong/soong_ui.bash --dumpvar-mode PLATFORM_VERSION  2>/dev/null)
 echo "EXTENDROM_TARGET_VERSION: $EXTENDROM_TARGET_VERSION"
 export SRC_TOP=$(build/soong/soong_ui.bash --dumpvar-mode TOP)
 echo "SRC_TOP: ${SRC_TOP}/"
+
+[ "$ENABLE_EXTENDROM" != true ] && echo "extendrom is disabled so no further processing" && exit
 
 # boot debug log
 export EXTENDROM_PRODUCT_DEVICE=$(build/soong/soong_ui.bash --dumpvar-mode PRODUCT_DEVICE)
