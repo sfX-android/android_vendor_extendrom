@@ -15,6 +15,8 @@
 # limitations under the License.
 #
 
+set +e
+
 COMMON=-1
 
 TMPDIR=$(mktemp -d)
@@ -203,7 +205,7 @@ F_WRITE_MAKEFILE(){
 	[ ! -z "$_appsign" ] && appsign="\nLOCAL_CERTIFICATE := $_appsign"
 
         # do not process what we do not want to build
-	echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -E "^${package_human}\$"
+	echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -Eq "^${package_human}\$"
 	if [ $? -ne 0 ];then
             echo "[$FUNCNAME] ... skipping $package_human as not requested by EXTENDROM_PACKAGES"
             continue

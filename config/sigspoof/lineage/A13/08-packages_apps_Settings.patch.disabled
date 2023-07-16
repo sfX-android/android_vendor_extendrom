@@ -1,0 +1,33 @@
+
+project packages/apps/Settings/
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index 044d70e429..a4b7e91194 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -14545,4 +14545,9 @@
+     <!-- [CHAR LIMIT=NONE] Hint for QR code process failure -->
+     <string name="bt_le_audio_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
+ 
++    <!-- signature spoofing patch: Allow fake signature checkbox in developer settings -->
++    <string name="allow_signature_fake">Allow signature spoofing</string>
++    <string name="allow_signature_fake_summary">Allow apps to bypass security systems by pretending to be a different app</string>
++    <string name="allow_signature_fake_warning">Allowing apps to bypass security systems can lead to serious security and privacy problems! Check that only benign apps use the corresponding permission when this is active.</string>
++
+ </resources>
+diff --git a/res/xml/development_settings.xml b/res/xml/development_settings.xml
+index 160d81d83c..37dc076af3 100644
+--- a/res/xml/development_settings.xml
++++ b/res/xml/development_settings.xml
+@@ -579,6 +579,12 @@
+         android:title="@string/debug_applications_category"
+         android:order="1000">
+ 
++	<SwitchPreference
++            android:key="allow_signature_fake"
++            android:title="@string/allow_signature_fake"
++            android:summary="@string/allow_signature_fake_summary"
++            android:defaultValue="false" />
++
+         <SwitchPreference
+             android:key="immediately_destroy_activities"
+             android:title="@string/immediately_destroy_activities"
