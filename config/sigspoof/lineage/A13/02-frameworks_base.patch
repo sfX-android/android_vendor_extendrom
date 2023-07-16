@@ -1,0 +1,22 @@
+
+project frameworks/base/
+diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
+index 4c80a5924eb9..120e017e4b41 100644
+--- a/core/java/android/provider/Settings.java
++++ b/core/java/android/provider/Settings.java
+@@ -7177,6 +7177,15 @@ public final class Settings {
+         @Readable
+         public static final String INSTALL_NON_MARKET_APPS = "install_non_market_apps";
+ 
++        /**
++         * Whether applications can fake a signature.
++         *
++         * <p>1 = permit apps to fake signature
++         * <p>0 = disable this feature
++         * @hide
++         */
++        public static final String ALLOW_SIGNATURE_FAKE = "allow_signature_fake";
++
+         /**
+          * A flag to tell {@link com.android.server.devicepolicy.DevicePolicyManagerService} that
+          * the default for {@link #INSTALL_NON_MARKET_APPS} is reversed for this user on OTA. So it

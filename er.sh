@@ -32,7 +32,10 @@ MKOPTS="ENABLE_EXTENDROM \
 	EXTENDROM_DEBUG_PATH_SIZE_KERNEL \
 	EXTENDROM_DEBUG_PATH_SIZE_SELINUX \
 	EXTENDROM_PREROOT_BOOT \
-	EXTENDROM_FDROID_REPOS"
+	EXTENDROM_FDROID_REPOS \
+	EXTENDROM_SIGNATURE_SPOOFING \
+	EXTENDROM_SIGSPOOF_RESET \
+	EXTENDROM_SIGSPOOF_FORCE_PDIR"
 
 for opt in $MKOPTS; do
     [ -z "${!opt}" ] && export ${opt}="$(build/soong/soong_ui.bash --dumpvar-mode $opt 2>/dev/null)" && [ ! -z "${!opt}" ] && echo ".. setting $opt=${!opt} by makefile"
@@ -47,8 +50,14 @@ echo -e "\n\n************************************************** STARTING EXTENDR
 echo "ENABLE_EXTENDROM: $ENABLE_EXTENDROM"
 echo "EXTENDROM_PACKAGES: $EXTENDROM_PACKAGES"
 echo "EOS_EDITION: $EOS_EDITION"
+echo "EXTENDROM_SIGNATURE_SPOOFING: $EXTENDROM_SIGNATURE_SPOOFING"
+echo "EXTENDROM_SIGSPOOF_RESET: $EXTENDROM_SIGSPOOF_RESET"
+echo "EXTENDROM_SIGSPOOF_FORCE_PDIR: $EXTENDROM_SIGSPOOF_FORCE_PDIR"
 export EXTENDROM_TARGET_VERSION=$(build/soong/soong_ui.bash --dumpvar-mode PLATFORM_VERSION  2>/dev/null)
 echo "EXTENDROM_TARGET_VERSION: $EXTENDROM_TARGET_VERSION"
+EXTENDROM_TARGET_PRODUCT_F=$(build/soong/soong_ui.bash --dumpvar-mode TARGET_PRODUCT  2>/dev/null)
+export EXTENDROM_TARGET_PRODUCT=${EXTENDROM_TARGET_PRODUCT_F/_*}
+echo "EXTENDROM_TARGET_PRODUCT: $EXTENDROM_TARGET_PRODUCT"
 export SRC_TOP=$(build/soong/soong_ui.bash --dumpvar-mode TOP)
 echo "SRC_TOP: ${SRC_TOP}/"
 
@@ -305,6 +314,22 @@ F_BOOT_DEBUG(){
 	echo -e "[$FUNCNAME] ... ERROR: it seems you have legacy code in your device/ path!\nFix this first before enabling EXTENDROM_BOOT_DEBUG"
     fi
 }
+
+# signature spoofing patch
+F_SIGPATCH(){
+    echo "[$FUNCNAME] Signature spoofing patch requested ..."
+
+    PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
+    PDIR="$MY_DIR/config/sigspoof/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
+    [ ! -z "$EXTENDROM_SIGSPOOF_FORCE_PDIR" ] && [ -d "$EXTENDROM_SIGSPOOF_FORCE_PDIR" ] && PDIR=$EXTENDROM_SIGSPOOF_FORCE_PDIR
+
+    $PATCHX $PDIR $EXTENDROM_SIGSPOOF_RESET
+    ERR=$?
+    echo "[$FUNCNAME] Signature spoofing patching ended with $ERR"
+    if [ $ERR -eq 0 ];then return; else exit 3;fi
+}
+
+if [ "$EXTENDROM_SIGNATURE_SPOOFING" == "true" ];then F_SIGPATCH ;fi
 
 F_GET_GPG_KEYS
 get_packages "$MY_DIR/repo/packages.txt"

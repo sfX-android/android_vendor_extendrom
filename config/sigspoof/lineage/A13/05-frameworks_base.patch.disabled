@@ -1,0 +1,18 @@
+
+project frameworks/base/
+diff --git a/core/res/res/values/strings.xml b/core/res/res/values/strings.xml
+index 2091c0502b6f..2857159431f7 100644
+--- a/core/res/res/values/strings.xml
++++ b/core/res/res/values/strings.xml
+@@ -982,6 +982,11 @@
+ 
+     <!--  Permissions -->
+ 
++    <!-- Title for the spoof signature permission -->
++    <string name="permlab_fakePackageSignature">Spoof package signature</string>
++    <!-- Description of the spoof signature permission -->
++    <string name="permdesc_fakePackageSignature">pretend to be ANY app. This permission is highly dangerous! For example, the app can claim to be the Play Store and install malicious apps completely unnoticed, or accessing your private data, contacts, ... . So allow this only with EXTREMELY caution and still keep in mind how dangerous this authorization is (reset permissions in Apps - Advanced - App Permissions - Spoof Package Signature)</string>
++
+     <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+     <string name="permlab_statusBar">disable or modify status bar</string>
+     <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->

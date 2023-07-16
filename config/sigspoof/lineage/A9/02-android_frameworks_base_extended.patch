@@ -1,0 +1,94 @@
+
+project frameworks/base/
+diff --git a/frameworks/base/core/java/android/app/Activity.java b/frameworks/base/core/java/android/app/Activity.java
+index 85a969b8003..b4d9e36a60e 100644
+--- a/frameworks/base/core/java/android/app/Activity.java
++++ b/frameworks/base/core/java/android/app/Activity.java
+@@ -72,6 +72,7 @@ import android.os.ServiceManager.ServiceNotFoundException;
+ import android.os.StrictMode;
+ import android.os.SystemProperties;
+ import android.os.UserHandle;
++import android.provider.Settings.Secure;
+ import android.text.Selection;
+ import android.text.SpannableStringBuilder;
+ import android.text.TextUtils;
+@@ -4478,6 +4479,26 @@ public class Activity extends ContextThemeWrapper
+             onRequestPermissionsResult(requestCode, new String[0], new int[0]);
+             return;
+         }
++
++	/*
++	Only when the requested permission asks for signature spoofing, check if that is allowed
++	in developer options and skip the dialog if not
++	*/
++	List<String> permlist = Arrays.asList(permissions);
++	if (permlist.contains("android.permission.FAKE_PACKAGE_SIGNATURE")) {
++	    if (android.provider.Settings.Secure.getInt(getContentResolver(),
++		   android.provider.Settings.Secure.ALLOW_SIGNATURE_FAKE, 0) == 0) {
++		Log.w(TAG, "Requested signature spoofing permission ("
++			+ Arrays.toString(permissions)
++			+ ") has been denied as it is not enabled in developer options");
++		return;
++	    } else {
++		Log.w(TAG, "The app's permission request for: "
++			+ Arrays.toString(permissions)
++			+ " will be processed as signature spoofing is enabled in developer options!");
++	    }
++	}
++
+         Intent intent = getPackageManager().buildRequestPermissionsIntent(permissions);
+         startActivityForResult(REQUEST_PERMISSIONS_WHO_PREFIX, intent, requestCode, null);
+         mHasCurrentPermissionsRequest = true;
+diff --git a/frameworks/base/core/java/android/provider/Settings.java b/frameworks/base/core/java/android/provider/Settings.java
+index 5faf17f88ce..76f0bad43b3 100644
+--- a/frameworks/base/core/java/android/provider/Settings.java
++++ b/frameworks/base/core/java/android/provider/Settings.java
+@@ -5681,6 +5681,15 @@ public final class Settings {
+          */
+         public static final String INSTALL_NON_MARKET_APPS = "install_non_market_apps";
+ 
++        /**
++         * Whether applications can fake a signature.
++         *
++         * <p>1 = permit apps to fake signature
++         * <p>0 = disable this feature
++         * @hide
++         */
++        public static final String ALLOW_SIGNATURE_FAKE = "allow_signature_fake";
++
+         /**
+          * A flag to tell {@link com.android.server.devicepolicy.DevicePolicyManagerService} that
+          * the default for {@link #INSTALL_NON_MARKET_APPS} is reversed for this user on OTA. So it
+diff --git a/frameworks/base/core/res/res/values/strings.xml b/frameworks/base/core/res/res/values/strings.xml
+index bd96a09684f..8cf3e5bde49 100644
+--- a/frameworks/base/core/res/res/values/strings.xml
++++ b/frameworks/base/core/res/res/values/strings.xml
+@@ -785,10 +785,10 @@
+ 
+     <!--  Permissions -->
+ 
+-    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
++    <!-- Title for the spoof signature permission -->
+     <string name="permlab_fakePackageSignature">Spoof package signature</string>
+-    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+-    <string name="permdesc_fakePackageSignature">Allows the app to pretend to be a different app. Malicious applications might be able to use this to access private application data. Legitimate uses include an emulator pretending to be what it emulates. Grant this permission with caution only!</string>
++    <!-- Description of the spoof signature permission -->
++    <string name="permdesc_fakePackageSignature">pretend to be ANY app. This permission is highly dangerous! For example, the app can claim to be the Play Store and install malicious apps completely unnoticed, or accessing your private data, contacts, ... . So allow this only with EXTREMELY caution and still keep in mind how dangerous this authorization is (reset permissions in Apps - Advanced - App Permissions - Spoof Package Signature)</string>
+ 
+     <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+     <string name="permlab_statusBar">disable or modify status bar</string>
+diff --git a/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java b/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java
+index abf7e748bf2..cda66b52e3c 100644
+--- a/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java
+@@ -4095,6 +4095,10 @@ public class PackageManagerService extends IPackageManager.Stub
+             if (permissions.contains("android.permission.FAKE_PACKAGE_SIGNATURE")
+                     && p.applicationInfo.targetSdkVersion > Build.VERSION_CODES.LOLLIPOP_MR1
+                     && p.mAppMetaData != null) {
++                // stop here when not enabled in developer settings
++                if (android.provider.Settings.Secure.getInt(mContext.getContentResolver(),
++                    android.provider.Settings.Secure.ALLOW_SIGNATURE_FAKE, 0) == 0)
++                    return pi;
+                 String sig = p.mAppMetaData.getString("fake-signature");
+                 if (sig != null) {
+                     pi.signatures = new Signature[] {new Signature(sig)};

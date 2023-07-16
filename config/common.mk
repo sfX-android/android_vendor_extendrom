@@ -32,6 +32,14 @@ PRODUCT_PACKAGES += eOSTrebuchetQuickStep
 endif
 
 ##################################################################
+# Signature spoofing overlays
+
+ifeq ($(EXTENDROM_SIGNATURE_SPOOFING),true)
+DEVICE_PACKAGE_OVERLAYS += \
+    vendor/extendrom/overlay-sigspoof
+endif
+
+##################################################################
 # extendrom vendor makefile
 
 $(call inherit-product, vendor/extendrom/er.mk)
