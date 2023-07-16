@@ -16,9 +16,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# be strict on failures
+set -e
 
 ######################
-# parse through all supported makefile options
+# parse through all supported makefile options and set them as env variable
 # vendorsetup.sh will always take precedence though
 
 MKOPTS="ENABLE_EXTENDROM \
@@ -36,6 +38,9 @@ for opt in $MKOPTS; do
     [ -z "${!opt}" ] && export ${opt}="$(build/soong/soong_ui.bash --dumpvar-mode $opt 2>/dev/null)" && [ ! -z "${!opt}" ] && echo ".. setting $opt=${!opt} by makefile"
 done
 
+# check first if we want extendrom at all
+[ "$ENABLE_EXTENDROM" != true ] && echo "extendrom is disabled so no further processing" && exit
+echo -e "\n\n************************************************** STARTING EXTENDROM **************************************************\n\n"
 
 ####################
 # base info
@@ -46,8 +51,6 @@ export EXTENDROM_TARGET_VERSION=$(build/soong/soong_ui.bash --dumpvar-mode PLATF
 echo "EXTENDROM_TARGET_VERSION: $EXTENDROM_TARGET_VERSION"
 export SRC_TOP=$(build/soong/soong_ui.bash --dumpvar-mode TOP)
 echo "SRC_TOP: ${SRC_TOP}/"
-
-[ "$ENABLE_EXTENDROM" != true ] && echo "extendrom is disabled so no further processing" && exit
 
 # boot debug log
 export EXTENDROM_PRODUCT_DEVICE=$(build/soong/soong_ui.bash --dumpvar-mode PRODUCT_DEVICE)
@@ -192,12 +195,12 @@ function get_packages() {
 	fi
 
         local package="$PREBUILT_DIR/$package_name"
-       local target_split=$(echo ${line} |cut -d "|" -f4)
+	local target_split=$(echo ${line} |cut -d "|" -f4)
         target_pkg="$PREBUILT_DIR/$(target_file $target_split | sed 's/\;.*//')"
-       local package_human=$(echo $(target_file $target_split | sed 's/\;.*//;s/\.apk//g;s/\.zip//g'))
+	local package_human=$(echo $(target_file $target_split | sed 's/\;.*//;s/\.apk//g;s/\.zip//g'))
 
-       # do not download what we do not want to build
-       if [[ ! "$EXTENDROM_PACKAGES" =~ "$package_human" ]];then
+	# do not download what we do not want to build
+	if [[ ! "$EXTENDROM_PACKAGES" =~ "$package_human" ]];then
            echo "[$FUNCNAME] ... skipping $package_human as not requested by EXTENDROM_PACKAGES"
            continue
 	else
@@ -213,13 +216,13 @@ function get_packages() {
 		echo "[$FUNCNAME] ... skipping $package_human as not requested by EXTENDROM_PACKAGES"
 		continue
 	    fi
-       fi
-
-	echo "$package_name" | grep -q "LATEST"
-	if [ $? -eq 0 ];then
+	fi
+	ERR=0
+	echo "$package_name" | grep -q "LATEST" || ERR=1
+	if [ $ERR -eq 0 ];then
 	    echo "[$FUNCNAME] ... parsing repo to find latest apk file name"
 	    old_package_name="$package_name"
-	    echo "PARSEAPK -repourl ${repouri} -apkname $package_name"
+	    #echo "PARSEAPK -repourl ${repouri} -apkname $package_name"
 	    package_name=$(python3 $PARSEAPK -repourl "${repouri}" -apkname "$package_name")
 	    PERR=$?
 	    if [ $PERR -eq 0 ];then
@@ -231,9 +234,9 @@ function get_packages() {
 	fi
 	local repo="${repouri}/${package_name}"
 
-       should_verify=$(echo ${line} |cut -d "|" -f5)
-       download_package "$repo" "$package"
-       [ $? -ne 0 ] && echo "[$FUNCNAME] ERROR occured while downloading, aborted"  && exit 3
+	should_verify=$(echo ${line} |cut -d "|" -f5)
+	download_package "$repo" "$package"
+	if [ $? -ne 0 ];then echo "[$FUNCNAME] ERROR occured while downloading, aborted"  && exit 3; fi
         
 	if [ "$should_verify" == "true" ];then
 	    verify_package "$package"
@@ -243,7 +246,7 @@ function get_packages() {
         target_pkg="$PREBUILT_DIR/$(target_file $target_split | sed 's/\;.*//')"
         echo "[$FUNCNAME] ... target package: $target_pkg"
         cp $package $target_pkg
-       [ $? -ne 0 ] && echo "[$FUNCNAME] ERROR occured during copying, aborted"  && exit 3
+        if [ $? -ne 0 ];then echo "[$FUNCNAME] ERROR occured during copying, aborted"  && exit 3;fi
         echo
     done
 }
@@ -267,11 +270,12 @@ F_GET_GPG_KEYS(){
 F_BOOT_DEBUG(){
     export EXTENDROM_DEBUG_PATH="${EXTENDROM_DEBUG_PATH}/boot_debug"
     # check conflicts first
-    grep -qr "type boot_debug" ${SRC_TOP}device/ 2>&1
-    if [ $? -ne 0 ];then
+    ERR=0
+    grep -qr "type boot_debug" ${SRC_TOP}device/ >/dev/null 2>&1|| ERR=1
+    if [ $ERR -ne 0 ];then
 	rm -rf $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... cleaned sepolicy dir"
 	mkdir -p $MY_DIR/sepolicy/boot_debug && echo "[$FUNCNAME] ... created sepolicy dir"
-	for p in $(find $MY_DIR/config/boot_debug/ $MY_DIR/config/boot_debug/${EXTENDROM_PRODUCT_DEVICE}/ -maxdepth 1 -type f -name '*.sepolicy');do
+	for p in $(find $MY_DIR/config/boot_debug/ $MY_DIR/config/boot_debug/${EXTENDROM_PRODUCT_DEVICE}/ -maxdepth 1 -type f -name '*.sepolicy' 2>/dev/null);do
 	    pf=$(basename $p)
 	    cp $p $MY_DIR/sepolicy/boot_debug/${pf/\.sepolicy/} && echo "[$FUNCNAME] ... copied sepolicy file: $pf"
 	done
@@ -324,7 +328,6 @@ fi
 
 # MAGISK rooting preparation
 if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
-    echo
     echo "[MAGISK] preparing the root process as requested"
     MAGISKOUT=$(realpath $MY_DIR/../../out/.magisk)
     [ -d "$MAGISKOUT" ] && rm -rf $MAGISKOUT
@@ -355,6 +358,7 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
 	cp $MAGISKOUT/src/lib/armeabi-v7a/libmagiskinit.so $MAGISKOUT/magiskinit
     fi
     chmod 755 $MAGISKOUT/src/assets/boot_patch.sh
+    rm -rf $MAGISKOUT/src/assets/dexopt $MAGISKOUT/src/assets/chromeos
     cp $MAGISKOUT/src/assets/* $MAGISKOUT/
     # keep backwards compability
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/root_boot.sh
@@ -382,17 +386,17 @@ _EOFFD
 
     if [ ! -z "$EXTENDROM_FDROID_REPOS" ];then
 	for repo in $EXTENDROM_FDROID_REPOS;do
-	    [ ! -f "$FDROID_REPO_DIR/$repo" ] && echo "[$FUNCNAME] ERROR: missing $FDROID_REPO_DIR/$repo" && exit 4
-	    grep -v 'xml version=' $FDROID_REPO_DIR/$repo >> $_OUTDIR/_additional_repos.xml && echo "[$FUNCNAME] ... added $repo to additional_repos.xml"
+	    if [ ! -f "$FDROID_REPO_DIR/$repo" ];then echo "[$FUNCNAME] ERROR: missing $FDROID_REPO_DIR/$repo" && exit 4;fi
+	    ERR=0
+	    grep -v 'xml version=' $FDROID_REPO_DIR/$repo >> $_OUTDIR/_additional_repos.xml || ERR=1
+	    if [ "$ERR" -eq 0 ];then echo "[$FUNCNAME] ... added $repo to additional_repos.xml";fi
 	done
     fi
 }
 
-echo
 echo "[main] Writing makefiles (if needed)"
-echo
 F_WRITE_MAKEFILE "$MY_DIR/repo/packages.txt"
-[[ "$EXTENDROM_PACKAGES" =~ "additional_repos.xml" ]] && F_WRITE_MAKEFILE_FDROID
+if [[ "$EXTENDROM_PACKAGES" =~ "additional_repos.xml" ]];then F_WRITE_MAKEFILE_FDROID; fi
 cat >> $ANDROIDMK <<EOMK
 
 # include additional static configs
@@ -415,9 +419,11 @@ if [ "$EOS_GESTURES" == "true" ];then
        exit 3
     fi
     # remove duplicated tests causing build errors
-    [ -f "$TBTESTMK" ] && rm $TBTESTMK
+    if [ -f "$TBTESTMK" ];then rm $TBTESTMK;fi
     # remove duplicated iconloaderlib causing build errors
-    [ -d "$ICOLIB" ] && rm -rf $ICOLIB
+    if [ -d "$ICOLIB" ];then rm -rf $ICOLIB;fi
     # remove legacy recents activated in /e/
-    [ -f "$LOSMK" ] && sed -E -i '/SystemUIWithLegacyRecents\s+\\/d' $LOSMK
+    if [ -f "$LOSMK" ];then sed -E -i '/SystemUIWithLegacyRecents\s+\\/d' $LOSMK;fi
 fi
+
+echo -e "\n\n************************************************** EXTENDROM FINISHED **************************************************\n\n"
