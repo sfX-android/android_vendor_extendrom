@@ -5,6 +5,20 @@
     android:sharedUserLabel="@string/android_system_label">
 
 
+    <application android:process="system"
+                 android:persistent="true"
+                 android:hasCode="false"
+                 android:label="@string/android_system_label"
+                 android:allowClearUserData="false"
+                 android:backupAgent="com.android.server.backup.SystemBackupAgent"
+                 android:killAfterRestore="false"
+                 android:icon="@drawable/ic_launcher_android"
+                 android:supportsRtl="true"
+                 android:theme="@style/Theme.DeviceDefault.Light.DarkActionBar"
+                 android:defaultToDeviceProtectedStorage="true"
+                 android:forceQueryable="true"
+                 android:directBootAware="true">
+
     <!-- Dummy user-facing group for faking package signature -->
     <permission-group android:name="android.permission-group.FAKE_PACKAGE"
         android:label="@string/permgrouplab_fake_package_signature"
@@ -19,5 +33,7 @@
         android:protectionLevel="dangerous"
         android:label="@string/permlab_fakePackageSignature"
         android:description="@string/permdesc_fakePackageSignature" />
+
+    </application>
 
 </manifest>

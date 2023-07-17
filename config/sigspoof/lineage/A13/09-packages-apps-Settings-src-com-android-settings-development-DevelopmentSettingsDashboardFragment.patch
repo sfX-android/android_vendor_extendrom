@@ -1,0 +1,14 @@
+
+project packages/apps/Settings/
+diff --git a/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java b/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java
+index 70237e061f..14fddcdd66 100644
+--- a/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java
++++ b/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java
+@@ -623,6 +623,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
+         controllers.add(new StylusHandwritingPreferenceController(context));
+         controllers.add(new IngressRateLimitPreferenceController((context)));
+         controllers.add(new BackAnimationPreferenceController(context, fragment));
++	controllers.add(new SpoofSignaturePreferenceController(context));	// signature spoofing patch
+ 
+         return controllers;
+     }
