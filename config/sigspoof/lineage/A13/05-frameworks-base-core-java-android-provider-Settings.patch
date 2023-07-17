@@ -9,7 +9,7 @@ index 4c80a5924eb9..120e017e4b41 100644
          public static final String INSTALL_NON_MARKET_APPS = "install_non_market_apps";
  
 +        /**
-+         * Whether applications can fake a signature.
++         * extendrom: whether applications can fake a signature.
 +         *
 +         * <p>1 = permit apps to fake signature
 +         * <p>0 = disable this feature
