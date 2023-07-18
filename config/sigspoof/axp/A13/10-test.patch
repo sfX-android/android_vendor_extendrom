@@ -1,0 +1,25 @@
+
+project packages/apps/Settings/
+diff --git a/res/xml/development_settings.xml b/res/xml/development_settings.xml
+index 160d81d83c..7069a7f1bf 100644
+--- a/res/xml/development_settings.xml
++++ b/res/xml/development_settings.xml
+@@ -19,6 +19,18 @@
+                   android:key="development_prefs_screen"
+                   android:title="@string/development_settings_title">
+ 
++    <PreferenceCategory
++        android:key="signature_spoof_category"
++        android:order="1111">
++
++       <SwitchPreference
++            android:key="allow_signature_fake"
++            android:title="@string/allow_signature_fake"
++            android:summary="@string/allow_signature_fake_summary"
++            android:defaultValue="false" />
++
++    </PreferenceCategory>
++
+     <PreferenceCategory
+         android:key="debug_misc_category"
+         android:order="100">
