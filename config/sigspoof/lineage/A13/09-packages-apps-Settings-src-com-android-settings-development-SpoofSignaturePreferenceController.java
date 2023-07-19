@@ -8,16 +8,13 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class SpoofSignaturePreferenceController extends DeveloperOptionsPreferenceController
@@ -30,8 +27,6 @@ public class SpoofSignaturePreferenceController extends DeveloperOptionsPreferen
     @VisibleForTesting
     static final int SETTING_VALUE_OFF = 0;
 
-    private RestrictedSwitchPreference mPreference;
-
     public SpoofSignaturePreferenceController(Context context) {
         super(context);
     }
@@ -39,12 +34,6 @@ public class SpoofSignaturePreferenceController extends DeveloperOptionsPreferen
     @Override
     public String getPreferenceKey() {
         return ALLOW_SIGNATURE_FAKE_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -60,7 +49,7 @@ public class SpoofSignaturePreferenceController extends DeveloperOptionsPreferen
     public void updateState(Preference preference) {
         final int spoofingMode = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ALLOW_SIGNATURE_FAKE, SETTING_VALUE_OFF);
-	mPreference.setChecked(spoofingMode != SETTING_VALUE_OFF);
+
         ((SwitchPreference) mPreference).setChecked(spoofingMode != SETTING_VALUE_OFF);
     }
 

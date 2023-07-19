@@ -60,16 +60,19 @@ if [ $PATCHER_RESET == "true" ];then
 fi
 
 for p in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | sort | tr ' ' '#'); do
+    ERR=0
+    RES=1
     dp=$(basename ${p/:*})
     P=$(echo "$p" | sed 's#^#-i '$(pwd)'/#g;s/:project#/ -d /g')
     F_LOG "... applying >${dp}< within >${p/*#}< now:"
     POUT=$(patch -r - --no-backup-if-mismatch --forward --ignore-whitespace --verbose -p1 $P 2>&1)
-    ERR=0
     RERR=$?
+    # ensure there is a valid success message
+    echo "$POUT" | grep -Eqi "succeed" && RES=0
     # ensure we really fail even when some hunks succeed:
     echo "$POUT" | grep -Eqi "failed" && ERR=3
-    F_LOG "... ended with errorcode $ERR"
-    if [ $ERR -eq 3 ];then
+    F_LOG "... ended with errorcode $RERR/$ERR"
+    if [ $ERR -eq 3 ]||[ $RES -ne 0 ];then
 	echo -e "$POUT" && F_LOG "FATAL ERROR occured while applying >${dp}<!!!" && exit 3
     fi
 done
