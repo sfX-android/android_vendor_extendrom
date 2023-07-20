@@ -7,7 +7,7 @@
 
     <!-- add signature spoofing checkbox in developer settings -->
     <string name="allow_signature_fake">Enable signature spoofing backend</string>
-    <string name="allow_signature_fake_summary">Allows applications to impersonate another application (known as \"signature spoofing\").\n
+    <string name="allow_signature_fake_summary">Allows applications to impersonate another application (known as \"signature spoofing\").\n\n
 Malicious applications could use this to access private application data. Legitimate applications include microG or Phonesky (Google Play Store for microG).\n\n
 This option is only a global ON/OFF setting, i.e. applications must explicitly request signature spoofing, or signature spoofing must be manually enabled in each required app under \"Permissions\" (this permission can also be revoked here).\n\n
 If this option is disabled again, granted signature spoofing permissions remain in place, but no longer have any effect.</string>
