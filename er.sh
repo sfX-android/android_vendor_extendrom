@@ -15,6 +15,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+############################################################################
 
 # be strict on failures
 set -e
@@ -392,6 +393,14 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     # keep backwards compability
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/root_boot.sh
     ln -s $(which sleep) $MAGISKOUT/zygote_faker
+
+    rm -rf $MY_DIR/sepolicy/magisk && echo "[MAGISK] ... cleaned sepolicy dir"
+    mkdir -p $MY_DIR/sepolicy/magisk && echo "[MAGISK] ... created sepolicy dir"
+    for p in $(find $MY_DIR/config/magisk/sepolicy -maxdepth 1 -type f -name '*.sepolicy' 2>/dev/null);do
+	pf=$(basename $p)
+	cp $p $MY_DIR/sepolicy/magisk/${pf/\.sepolicy/} && echo "[MAGISK] ... copied sepolicy file: $pf"
+    done
+
     echo "[MAGISK] preparing root finished"
 fi
 

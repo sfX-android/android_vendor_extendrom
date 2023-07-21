@@ -94,6 +94,10 @@ endif # BOARD_KERNEL_SEPARATED_DT
 # BOOT.IMG | boot.img
 ############################################################################################################
 
+define copy-magisk-app
+    
+endef
+
 # backwards compatibility
 ifndef bootimage-to-kernel
 # $1: boot image target
