@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- custom category for signature spoofing patch in developer options -->
+    <string name="signature_spoof_category">Signature spoofing support</string>
+
+    <!-- add signature spoofing checkbox in developer settings -->
+    <string name="allow_signature_fake">Allow signature spoofing</string>
+    <string name="allow_signature_fake_summary">If disabled, any previously granted signature spoofing permissions remain in place, but no longer have any effect</string>
+    <string name="allow_signature_fake_details">Allows applications to impersonate another application (known as \"signature spoofing\").\n\nLegitimate applications include microG or Phonesky (Google Play Store for microG).\n\nThis option is a global ON/OFF setting, i.e. applications must explicitly request signature spoofing, or it must be manually enabled within each App\'s \"Permission\" screen (this permission can also be revoked there).</string>
+
+</resources>

@@ -26,7 +26,7 @@ endif
 ifeq ($(EOS_GESTURES),true)
 # set specific overlay
 DEVICE_PACKAGE_OVERLAYS += \
-    vendor/extendrom/overlay-gestures
+    vendor/extendrom/overlays/gestures
 # build TrebuchetQuickStep (get_prebuilts.sh must be executed once at least)
 PRODUCT_PACKAGES += eOSTrebuchetQuickStep
 endif
@@ -36,7 +36,7 @@ endif
 
 ifeq ($(EXTENDROM_SIGNATURE_SPOOFING),true)
 DEVICE_PACKAGE_OVERLAYS += \
-    vendor/extendrom/overlay-sigspoof
+    vendor/extendrom/overlays/sigspoof
 endif
 
 ##################################################################

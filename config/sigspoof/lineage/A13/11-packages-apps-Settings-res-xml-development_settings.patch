@@ -1,10 +1,10 @@
 
 project packages/apps/Settings/
 diff --git a/res/xml/development_settings.xml b/res/xml/development_settings.xml
-index 160d81d83c..497aa8ef2d 100644
+index 160d81d83c..518039adfb 100644
 --- a/res/xml/development_settings.xml
 +++ b/res/xml/development_settings.xml
-@@ -19,6 +19,21 @@
+@@ -19,6 +19,26 @@
                    android:key="development_prefs_screen"
                    android:title="@string/development_settings_title">
  
@@ -14,11 +14,16 @@ index 160d81d83c..497aa8ef2d 100644
 +        android:title="@string/signature_spoof_category"
 +        android:order="9999">
 +
++       <Preference
++            android:key="allow_signature_fake_info"
++            android:summary="@string/allow_signature_fake_details" />
++
 +       <SwitchPreference
 +            android:key="allow_signature_fake"
 +            android:title="@string/allow_signature_fake"
 +            android:summary="@string/allow_signature_fake_summary"
 +            android:defaultValue="false" />
++
 +    <!-- end: extendrom signature spoofing patch -->
 +
 +    </PreferenceCategory>
