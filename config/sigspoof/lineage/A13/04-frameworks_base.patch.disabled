@@ -1,0 +1,15 @@
+
+project frameworks/base/
+diff --git a/core/res/res/values/config.xml b/core/res/res/values/config.xml
+index f5ed2e508411..e70791aabed7 100644
+--- a/core/res/res/values/config.xml
++++ b/core/res/res/values/config.xml
+@@ -2014,6 +2014,8 @@
+     <string-array name="config_locationProviderPackageNames" translatable="false">
+         <!-- The standard AOSP fused location provider -->
+         <item>com.android.location.fused</item>
++        <!-- The (faked) microg fused location provider -->
++        <item>com.google.android.gms</item>
+     </string-array>
+ 
+     <!-- Package name(s) of Advanced Driver Assistance applications. These packages have additional
