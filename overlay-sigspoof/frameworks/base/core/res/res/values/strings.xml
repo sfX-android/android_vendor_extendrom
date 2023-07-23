@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
-    <!-- Title for the spoof signature permission -->
-    <string name="permlab_fakePackageSignature">Spoof package signature</string>
-    <!-- Description of the spoof signature permission -->
-    <string name="permdesc_fakePackageSignature">pretend to be ANY app. This permission is highly dangerous! For example, the app can claim to be the Play Store and install malicious apps completely unnoticed, or accessing your private data, contacts, ... . So allow this only with EXTREMELY caution and still keep in mind how dangerous this authorization is (reset permissions in Apps - Advanced - App Permissions - Spoof Package Signature)</string>
-
-</resources>
