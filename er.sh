@@ -326,7 +326,11 @@ F_SIGPATCH(){
     $PATCHX $PDIR $EXTENDROM_SIGSPOOF_RESET
     ERR=$?
     echo "[$FUNCNAME] Signature spoofing patching ended with $ERR"
-    if [ $ERR -eq 0 ];then return; else exit 3;fi
+    echo "[$FUNCNAME] adding signature spoof controller"
+    cp $PDIR/09-packages-apps-Settings-src-com-android-settings-development-SpoofSignaturePreferenceController.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignaturePreferenceController.java || exit 3
+    cp $PDIR/10-packages-apps-Settings-src-com-android-settings-development-SpoofSignatureInfo.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignatureInfo.java || exit 3
+    echo "[$FUNCNAME] adding signature spoof controller ended with $?"
+    if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished" && return; else exit 3;fi
 }
 
 if [ "$EXTENDROM_SIGNATURE_SPOOFING" == "true" ];then F_SIGPATCH ;fi

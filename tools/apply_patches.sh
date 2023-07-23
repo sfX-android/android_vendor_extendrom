@@ -42,20 +42,39 @@ PDIR=$1
 [ -z "$PDIR" -o ! -d "$PDIR" ] && echo "ABORT: missing parameter: $0 <patch-dir>" && exit 4
 [ -z "$PATCHER_RESET" ] && PATCHER_RESET=true
 
+F_LOG "starting"
 F_LOG "... detecting patches in: $PDIR"
 
+if [ $PATCHER_RESET == "true" ];then
+    F_LOG "... will reset project paths first (bc PATCHER_RESET=true or unset)"
+    for reset in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | sort | tr ' ' '#'); do
+	dp=$(basename ${reset/:*})
+	P=$(echo "$reset" | sed 's#^#-i '$(pwd)'/#g;s/:project#/ -d /g')
+	    ROUT=$(repo forall "${reset/*#}" -c 'git reset --hard' 2>&1)
+	    if [ $? -eq 0 ];then
+		F_LOG "... git reset hard finished for ${reset/*#}"
+	    else
+		F_LOG "WARNING: issue occured while resetting:\n\n $ROUT"
+	    fi
+    done
+fi
+
 for p in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | sort | tr ' ' '#'); do
+    ERR=0
+    RES=1
     dp=$(basename ${p/:*})
     P=$(echo "$p" | sed 's#^#-i '$(pwd)'/#g;s/:project#/ -d /g')
     F_LOG "... applying >${dp}< within >${p/*#}< now:"
-    [ $PATCHER_RESET == "true" ] && repo forall "${p/*#}" -c 'git reset --hard' && echo "git reset hard finished for $p"
     POUT=$(patch -r - --no-backup-if-mismatch --forward --ignore-whitespace --verbose -p1 $P 2>&1)
-    ERR=0
     RERR=$?
+    # ensure there is a valid success message
+    echo "$POUT" | grep -Eqi "succeed" && RES=0
     # ensure we really fail even when some hunks succeed:
     echo "$POUT" | grep -Eqi "failed" && ERR=3
-    F_LOG "... ended with errorcode $ERR"
-    if [ $ERR -eq 3 ];then
+    F_LOG "... ended with errorcode $RERR/$ERR"
+    if [ $ERR -eq 3 ]||[ $RES -ne 0 ];then
 	echo -e "$POUT" && F_LOG "FATAL ERROR occured while applying >${dp}<!!!" && exit 3
     fi
 done
+
+F_LOG "finished"

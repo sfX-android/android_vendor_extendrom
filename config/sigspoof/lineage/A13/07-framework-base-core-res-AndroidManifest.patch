@@ -1,0 +1,30 @@
+
+project frameworks/base/
+diff --git a/core/res/AndroidManifest.xml b/core/res/AndroidManifest.xml
+index c4837e504f58..1a9d5d33e9f8 100644
+--- a/core/res/AndroidManifest.xml
++++ b/core/res/AndroidManifest.xml
+@@ -832,6 +832,23 @@
+     <!-- ====================================================================== -->
+     <eat-comment />
+ 
++    <!-- Dummy user-facing group for faking package signature -->
++    <permission-group android:name="android.permission-group.FAKE_PACKAGE"
++        android:label="@string/permgrouplab_fake_package_signature"
++        android:description="@string/permgrouprequest_fake_package_signature"
++        android:request="@string/permgrouprequest_fake_package_signature"
++        android:priority="100" />
++
++    <!-- Allows an application to change the package signature as
++         seen by applications -->
++    <permission android:name="android.permission.FAKE_PACKAGE_SIGNATURE"
++        android:permissionGroup="android.permission-group.UNDEFINED"
++        android:protectionLevel="dangerous"
++        android:label="@string/permlab_fakePackageSignature"
++        android:description="@string/permdesc_fakePackageSignature" />
++
++
++
+     <!-- Grouping for platform runtime permissions is not accessible to apps
+          @hide
+          @SystemApi
