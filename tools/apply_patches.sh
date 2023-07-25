@@ -34,6 +34,8 @@
 
 # DO NOT set -e !
 
+INDI=EXTENDROM_PATCHER_DONE
+
 F_LOG(){
     echo -e "[PATCHER] " "$1"
 }
@@ -41,6 +43,8 @@ F_LOG(){
 PDIR=$1
 [ -z "$PDIR" -o ! -d "$PDIR" ] && echo "ABORT: missing parameter: $0 <patch-dir>" && exit 4
 [ -z "$PATCHER_RESET" ] && PATCHER_RESET=true
+
+[ -f $INDI ] && echo -e "\n\n***************************************************************************\nWARNING: EXTENDROM sources are already patched!\nIf you want to force patching remove the indicator file:\n./${INDI}\n***************************************************************************\n\n" && exit
 
 F_LOG "starting"
 F_LOG "... detecting patches in: $PDIR"
@@ -76,5 +80,8 @@ for p in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | s
 	echo -e "$POUT" && F_LOG "FATAL ERROR occured while applying >${dp}<!!!" && exit 3
     fi
 done
+
+# create patch indicator
+> $INDI
 
 F_LOG "finished"
