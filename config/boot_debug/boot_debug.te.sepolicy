@@ -22,6 +22,9 @@ init_daemon_domain(boot_debug)
 allow boot_debug boot_log_file:dir { open read search write add_name remove_name };
 allow boot_debug boot_log_file:file { open read append create getattr ioctl write rename unlink write };
 
+# when using /metadata
+allow boot_debug metadata_file:dir search;
+
 # allow accessing logd used by er-logcat
 allow boot_debug logd:unix_stream_socket connectto;
 allow boot_debug logdr_socket:sock_file write;
