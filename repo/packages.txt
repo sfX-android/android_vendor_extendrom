@@ -73,6 +73,12 @@ opencamera_sfX_j5_fixPreview.apk|https://leech.binbash.rocks:8008/misc|app|openc
 # LAUNCHERS
 ##########################################################################################################
 
+# W Launcher
+app-release-2.3.3.apk|https://github.com/achunt2143/W-Launcher/releases/download/release-apk-2.3.3|app|WLauncher.apk;PRESIGNED|false
+
+# Simple Launcher
+com.simplemobiletools.launcher_LATEST.apk|FDROIDREPO|app|SimpleLauncher.apk;PRESIGNED|true
+
 # Omega Launcher
 Omega.v0.8.0.Build.168.apk|https://github.com/otakuhqz/Omega/releases/download/v0.8.0|app|Omega.apk;PRESIGNED|false
 
