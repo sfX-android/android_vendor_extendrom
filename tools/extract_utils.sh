@@ -195,8 +195,11 @@ F_WRITE_MAKEFILE(){
         package_human="${appnamefull/\.apk}"
 
 	if [[ "$appname" =~ .*Magisk.* ]];then
-	    echo "[$FUNCNAME] ... skipping $package_human (Magisk is not allowed to be a system app)"
-	    continue
+	    #echo "[$FUNCNAME] ... skipping $package_human (Magisk is not allowed to be a system app)"
+	    echo "[$FUNCNAME] ... adding workaround for $package_human (Magisk is not allowed to be a system app)"
+	    #continue
+	    EXTRA="LOCAL_MODULE_PATH := out/target/product/hotdog/system/er"
+	    appname="er-r-wa"
 	fi
 
 	# allow empty LOCAL_CERTIFICATE
@@ -214,7 +217,7 @@ F_WRITE_MAKEFILE(){
         fi
 
 	if [[ "$appdir" =~ .*priv-app ]];then
-	    EXTRA="LOCAL_PRIVILEGED_MODULE := true"
+	    EXTRA="${EXTRA}LOCAL_PRIVILEGED_MODULE := true"
 	fi
 	if [ ! -z "$overrides" ];then
 	   p_overrides=$(echo "$overrides" | tr ";" " ")

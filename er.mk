@@ -36,10 +36,19 @@ endif
 
 ifeq ($(EXTENDROM_PREROOT_BOOT),true)
 
+BOARD_VENDOR_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/magisk
+
+PRODUCT_PACKAGES += \
+        er-r-wa
+
 # do not overwrite a custom bootimg mk
 ifneq (true,$(BOARD_CUSTOM_BOOTIMG))
 BOARD_CUSTOM_BOOTIMG := true
-BOARD_CUSTOM_BOOTIMG_MK := $(VENDOR_DIR)/preroot_bootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := $(VENDOR_DIR)/config/magisk/preroot_bootimg.mk
+PRODUCT_COPY_FILES += \
+	$(VENDOR_DIR)/config/magisk/init.er-pi.rc:$(TARGET_COPY_OUT_SYSTEM)/etc/init/init.er-pi.rc \
+	$(VENDOR_DIR)/config/magisk/er-preinstaller.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/er-preinstaller
+
 else
 $(error EXTENDROM_PREROOT_BOOT and BOARD_CUSTOM_BOOTIMG are both set to true but are mutually exclusive)
 endif # BOARD_CUSTOM_BOOTIMG

@@ -1,0 +1,16 @@
+##########################################################################################
+#
+# This code is part of extendrom (https://github.com/sfX-android/android_vendor_extendrom)
+# Copyright (C) 2023 steadfasterX <steadfasterX@binbash.rocks>
+#
+##########################################################################################
+
+on property:sys.boot_completed=1
+    start er-preinstaller
+
+service er-preinstaller /system/bin/er-preinstaller
+    seclabel u:r:init_er:s0
+    user root
+    group root system
+    disabled
+    oneshot
