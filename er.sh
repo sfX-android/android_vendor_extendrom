@@ -15,6 +15,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+############################################################################
 
 # be strict on failures
 set -e
@@ -25,6 +26,7 @@ set -e
 
 MKOPTS="ENABLE_EXTENDROM \
 	EXTENDROM_PACKAGES \
+	EXTENDROM_PACKAGES_SKIP_DL \
 	EXTENDROM_BOOT_DEBUG \
 	EXTENDROM_DEBUG_PATH \
 	EXTENDROM_DEBUG_PATH_SIZE_FULL \
@@ -122,7 +124,7 @@ CURLARGS=" -L $CURLDNS"
 CURL="$MY_DIR/tools/curl_x64_static $CURLARGS"
 source $MY_DIR/tools/extract_utils.sh
 
-if [ -d "$PREBUILT_DIR" ]; then
+if [ -d "$PREBUILT_DIR" ] && [ "$EXTENDROM_PACKAGES_SKIP_DL" != "true" ]; then
     rm -rf "$PREBUILT_DIR"
 fi
 mkdir $PREBUILT_DIR $PREBUILT_DIR/app $PREBUILT_DIR/priv-app
@@ -139,6 +141,12 @@ function download_package() {
 
     if [ ! -d "$pkg_dir" ]; then
         mkdir -p "$pkg_dir"
+    fi
+
+    # skip download if the file exists locally and the user wants to
+    if [ -s "$pkg_path" ] && [ "$EXTENDROM_PACKAGES_SKIP_DL" == "true" ];then
+	echo "[$FUNCNAME] ... skipping $pkg, as EXTENDROM_PACKAGES_SKIP_DL=true and pkg exists"
+	return
     fi
 
     echo "[$FUNCNAME] ... downloading package: $pkg"
