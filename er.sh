@@ -25,6 +25,7 @@ set -e
 # vendorsetup.sh will always take precedence though
 
 MKOPTS="ENABLE_EXTENDROM \
+	EXTENDROM_SIGNING_PATCHES \
 	EXTENDROM_PACKAGES \
 	EXTENDROM_PACKAGES_SKIP_DL \
 	EXTENDROM_BOOT_DEBUG \
@@ -52,6 +53,7 @@ echo -e "\n\n************************************************** STARTING EXTENDR
 echo "ENABLE_EXTENDROM: $ENABLE_EXTENDROM"
 echo "EXTENDROM_PACKAGES: $EXTENDROM_PACKAGES"
 echo "EOS_EDITION: $EOS_EDITION"
+echo "EXTENDROM_SIGNING_PATCHES: $EXTENDROM_SIGNING_PATCHES"
 echo "EXTENDROM_SIGNATURE_SPOOFING: $EXTENDROM_SIGNATURE_SPOOFING"
 echo "EXTENDROM_SIGSPOOF_RESET: $EXTENDROM_SIGSPOOF_RESET"
 echo "EXTENDROM_SIGSPOOF_FORCE_PDIR: $EXTENDROM_SIGSPOOF_FORCE_PDIR"
@@ -338,10 +340,22 @@ F_SIGPATCH(){
     cp $PDIR/09-packages-apps-Settings-src-com-android-settings-development-SpoofSignaturePreferenceController.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignaturePreferenceController.java || exit 3
     cp $PDIR/10-packages-apps-Settings-src-com-android-settings-development-SpoofSignatureInfo.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignatureInfo.java || exit 3
     echo "[$FUNCNAME] adding signature spoof controller ended with $?"
-    if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished" && return; else exit 3;fi
+    if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
+}
+
+# signing patches
+F_SIGNINGPATCHES(){
+    echo "[$FUNCNAME] Signing patches requested ..."
+    PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
+    PDIR="$MY_DIR/config/signing/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
+    $PATCHX $PDIR
+    ERR=$?
+    echo "[$FUNCNAME] Signature spoofing patching ended with $ERR"
+    if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
 }
 
 if [ "$EXTENDROM_SIGNATURE_SPOOFING" == "true" ];then F_SIGPATCH ;fi
+if [ "$EXTENDROM_SIGNING_PATCHES" == "true" ];then F_SIGNINGPATCHES ;fi
 
 F_GET_GPG_KEYS
 get_packages "$MY_DIR/repo/packages.txt"
