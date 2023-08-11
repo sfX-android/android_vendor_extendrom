@@ -34,16 +34,16 @@
 
 # DO NOT set -e !
 
-INDI=EXTENDROM_PATCHER_DONE
 
 F_LOG(){
     echo -e "[PATCHER] " "$1"
 }
 
 PDIR=$1
-[ -z "$PDIR" -o ! -d "$PDIR" ] && echo "ABORT: missing parameter: $0 <patch-dir>" && exit 4
+[ -z "$PDIR" -o ! -d "$PDIR" ] && echo "ABORT: missing or wrong parameter: $0 <patch-dir>" && exit 4
 [ -z "$PATCHER_RESET" ] && PATCHER_RESET=true
 
+INDI=$PDIR/EXTENDROM_PATCHER_DONE
 [ -f $INDI ] && echo -e "\n\n***************************************************************************\nWARNING: EXTENDROM sources are already patched!\nIf you want to force patching remove the indicator file:\n./${INDI}\n***************************************************************************\n\n" && exit
 
 F_LOG "starting"
