@@ -350,7 +350,7 @@ F_SIGNINGPATCHES(){
     PDIR="$MY_DIR/config/signing/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
     $PATCHX $PDIR
     ERR=$?
-    echo "[$FUNCNAME] Signature spoofing patching ended with $ERR"
+    echo "[$FUNCNAME] addding signing patches ended with $ERR"
     if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
 }
 
