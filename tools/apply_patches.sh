@@ -25,7 +25,7 @@
 #########################################################################################################
 #
 # a git hard reset before applying is done by default. if you do NOT want to reset before:
-# export PATCHER_RESET=false
+# export EXTENDROM_PATCHER_RESET=false
 #
 # usage:
 # ./apply_patches.sh <full-path-of-patch-dir>
@@ -41,7 +41,7 @@ F_LOG(){
 
 PDIR=$1
 [ -z "$PDIR" -o ! -d "$PDIR" ] && echo "ABORT: missing or wrong parameter: $0 <patch-dir>" && exit 4
-[ -z "$PATCHER_RESET" ] && PATCHER_RESET=true
+[ -z "$EXTENDROM_PATCHER_RESET" ] && EXTENDROM_PATCHER_RESET=true
 
 INDI=$PDIR/EXTENDROM_PATCHER_DONE
 [ -f $INDI ] && echo -e "\n\n***************************************************************************\nWARNING: EXTENDROM sources are already patched!\nIf you want to force patching remove the indicator file:\n./${INDI}\n***************************************************************************\n\n" && exit
@@ -49,7 +49,7 @@ INDI=$PDIR/EXTENDROM_PATCHER_DONE
 F_LOG "starting"
 F_LOG "... detecting patches in: $PDIR"
 
-if [ $PATCHER_RESET == "true" ];then
+if [ $EXTENDROM_PATCHER_RESET == "true" ];then
     F_LOG "... will reset project paths first (bc PATCHER_RESET=true or unset)"
     for reset in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | sort | tr ' ' '#'); do
 	dp=$(basename ${reset/:*})
