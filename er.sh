@@ -37,7 +37,7 @@ MKOPTS="ENABLE_EXTENDROM \
 	EXTENDROM_PREROOT_BOOT \
 	EXTENDROM_FDROID_REPOS \
 	EXTENDROM_SIGNATURE_SPOOFING \
-	EXTENDROM_SIGSPOOF_RESET \
+	EXTENDROM_PATCHER_RESET \
 	EXTENDROM_SIGSPOOF_FORCE_PDIR"
 
 for opt in $MKOPTS; do
@@ -333,7 +333,7 @@ F_SIGPATCH(){
     PDIR="$MY_DIR/config/sigspoof/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
     [ ! -z "$EXTENDROM_SIGSPOOF_FORCE_PDIR" ] && [ -d "$EXTENDROM_SIGSPOOF_FORCE_PDIR" ] && PDIR=$EXTENDROM_SIGSPOOF_FORCE_PDIR
 
-    $PATCHX $PDIR $EXTENDROM_SIGSPOOF_RESET
+    $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
     ERR=$?
     echo "[$FUNCNAME] Signature spoofing patching ended with $ERR"
     echo "[$FUNCNAME] adding signature spoof controller"
@@ -348,7 +348,7 @@ F_SIGNINGPATCHES(){
     echo "[$FUNCNAME] Signing patches requested ..."
     PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
     PDIR="$MY_DIR/config/signing/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
-    $PATCHX $PDIR
+    $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
     ERR=$?
     echo "[$FUNCNAME] addding signing patches ended with $ERR"
     if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
