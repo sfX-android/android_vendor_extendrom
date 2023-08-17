@@ -1,6 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="additional_repos">
         <!-- name -->
         <item>Bromite F-Droid repo</item>
         <!-- address -->
@@ -15,6 +12,3 @@
         <item>ignore</item>
         <!-- pubkey -->
         <item>E1EE5CD076D7B0DC84CB2B45FB78B86DF2EB39A3B6C56BA3DC292A5E0C3B9504</item>
-
-    </string-array>
-</resources>
