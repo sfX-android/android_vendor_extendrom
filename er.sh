@@ -432,17 +432,21 @@ LOCAL_SRC_FILES := out/_additional_repos.xml
 include \$(BUILD_PREBUILT)
 _EOFFD
 
-    echo "[$FUNCNAME] copying additional_repos.xml"
-    cp $FDROID_REPO_DIR/additional_repos.xml $_OUTDIR/_additional_repos.xml
+    echo "[$FUNCNAME] constructing additional_repos.xml"
+    cat > $_OUTDIR/_additional_repos.xml <<_EOFF
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+_EOFF
+    cat $FDROID_REPO_DIR/additional_repos.xml >> $_OUTDIR/_additional_repos.xml
 
     if [ ! -z "$EXTENDROM_FDROID_REPOS" ];then
 	for repo in $EXTENDROM_FDROID_REPOS;do
 	    if [ ! -f "$FDROID_REPO_DIR/$repo" ];then echo "[$FUNCNAME] ERROR: missing $FDROID_REPO_DIR/$repo" && exit 4;fi
-	    ERR=0
-	    grep -v 'xml version=' $FDROID_REPO_DIR/$repo >> $_OUTDIR/_additional_repos.xml || ERR=1
-	    if [ "$ERR" -eq 0 ];then echo "[$FUNCNAME] ... added $repo to additional_repos.xml";fi
+     	    cat $FDROID_REPO_DIR/$repo >> $_OUTDIR/_additional_repos.xml && echo "[$FUNCNAME] ... added $repo to additional_repos.xml"
 	done
+ 	echo '</resources>' >> $_OUTDIR/_additional_repos.xml
     fi
+    echo "[$FUNCNAME] constructing additional_repos.xml completed"
 }
 
 echo "[main] Writing makefiles (if needed)"
