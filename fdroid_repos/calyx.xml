@@ -3,7 +3,7 @@
         <!-- address -->
         <item>https://calyxos.gitlab.io/calyx-fdroid-repo/fdroid/repo</item>
         <!-- description -->
-        <item>F-Droid repo for Bitwarden.</item>
+        <item>This is a copy of the Calyx Institute F-Droid repository for test purposes. It is a repository of apps to be used with CalyxOS. Applications in this repository are either official binaries built from the source by the developers of calyxos.org using the tools on https://gitlab.com/u/fdroid</item>
         <!-- version -->
         <item>1</item>
         <!-- enabled -->
