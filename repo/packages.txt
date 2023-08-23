@@ -45,7 +45,7 @@ Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app
 # Phonesky (Google in-app purchase support) by nanolx (https://gitlab.com/Nanolx/microg-phonesky-iap-support)
 Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 # Phonesky (Google in-app purchase support) by AXP.OS (sames as nanolx, just more recent, some bugfixes)
-Phonesky_AXP.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/37.0.23-21|priv-app|Phonesky_AXP.apk;user-keys/shared|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/37.0.23-21|priv-app|Phonesky_AXP.OS.apk;user-keys/shared|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 # MicrogGmsCore
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
