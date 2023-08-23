@@ -8,5 +8,5 @@ See wiki: [Setup](https://github.com/sfX-android/android_vendor_extendrom/wiki/S
 
 # Support
 
-- Matrix: [#sfX_Android:matrix.org](https://matrix.to/#/#mAid_Linux:matrix.org)
+- Matrix: [#sfX_Android:matrix.org](https://matrix.to/#/#sfX_Android:matrix.org)
 - Telegram: [https://t.me/sfX_android](https://t.me/sfX_android)
