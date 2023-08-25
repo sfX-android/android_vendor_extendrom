@@ -138,7 +138,10 @@ at.bitfire.davdroid_LATEST.apk|FDROIDREPO|app|DAVx5.apk;PRESIGNED|true
 # NextCloud Sync client
 com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
 
-# Bromite Browser
+# Cromite browser (successor of Bromite)
+arm64_ChromePublic.apk|https://github.com/uazo/cromite/releases/download/v116.0.5845.111-0747986f1c3f5fd1ad219a23c34a460b6d44aff3|app|Cromite.apk;PRESIGNED|false||
+
+# Bromite Browser (deprecated)
 arm64_ChromePublic.apk|https://github.com/bromite/bromite/releases/download/102.0.5005.67|app|Bromite.apk;PRESIGNED|false||
 
 ##########################################################################################################
