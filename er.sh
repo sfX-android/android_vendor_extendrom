@@ -264,7 +264,7 @@ function get_packages() {
 	local target_split=$(echo ${line} |cut -d "|" -f4)
         target_pkg="$PREBUILT_DIR/$(target_file $target_split | sed 's/\;.*//')"
         echo "[$FUNCNAME] ... target package: $target_pkg"
-        cp $package $target_pkg
+        if [ "$package" != "$target_pkg" ];then cp $package $target_pkg; fi
         if [ $? -ne 0 ];then echo "[$FUNCNAME] ERROR occured during copying, aborted"  && exit 3;fi
         echo
     done
