@@ -45,14 +45,13 @@ Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app
 # Phonesky (Google in-app purchase support) by nanolx (https://gitlab.com/Nanolx/microg-phonesky-iap-support)
 Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 # Phonesky (Google in-app purchase support) by AXP.OS (sames as nanolx, just more recent, some bugfixes)
-Phonesky_AXP.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/37.0.23-21|priv-app|Phonesky_AXP.OS.apk;user-keys/shared|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP.OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/37.0.23-21|priv-app|Phonesky_AXP.OS.apk;user-keys/shared|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 # MicrogGmsCore
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 # as microg.org is ultra slow atm, here a "xxx_GH" fallback to github:
 com.google.android.gms-231657056.apk|https://github.com/microg/GmsCore/releases/download/v0.2.28.231657/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
-# it seems the latest fully re-written GMScore causes several issues. The following is the last
-# one before that full rewrite:
+# it seems the latest fully re-written GMScore causes several issues. The following is the last one before that full rewrite:
 com.google.android.gms-223616054.apk|https://github.com/microg/GmsCore/releases/download/v0.2.27.223616/|app|MicrogGmsCore_unified-latest.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 
 # GsfProxy  <https://microg.org/fdroid/repo/com.google.android.gsf-8.apk>
