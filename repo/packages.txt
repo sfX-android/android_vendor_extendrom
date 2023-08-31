@@ -89,6 +89,9 @@ com.simplemobiletools.launcher_LATEST.apk|FDROIDREPO|app|SimpleLauncher.apk;PRES
 # Omega Launcher
 Omega.v0.8.0.Build.168.apk|https://github.com/otakuhqz/Omega/releases/download/v0.8.0|app|Omega.apk;PRESIGNED|false
 
+# Neo Launcher
+NeoLauncher-release.apk|https://github.com/NeoApplications/Neo-Launcher/releases/download/0.9.3|app|NeoLauncher.apk;PRESIGNED|false
+
 # Lawnchair - stable
 # taken from PlayStore via AuroraStore:
 Lawnchair_202589.apk|https://www.dropbox.com/s/qi551e1y2ubd1zd|app|Lawnchair-stable.apk;PRESIGNED|false
