@@ -18,7 +18,7 @@
 ############################################################################
 
 # be strict on failures
-set -e
+#set -e
 
 ######################
 # parse through all supported makefile options and set them as env variable
