@@ -29,10 +29,13 @@ org.adaway_LATEST.apk|FDROIDREPO|app|AdAway.apk;PRESIGNED|false
 org.jak_linux.dns66_LATEST.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 
 # Magisk latest
+Magisk-v26.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.3|app|Magisk.apk;PRESIGNED|false
+Magisk-v26.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.3|app|SignMagisk.apk;user-keys/shared|false
+# Magisk older versions
+Magisk-v26.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.2|app|Magisk.apk;PRESIGNED|false
+Magisk-v26.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.2|app|SignMagisk.apk;user-keys/shared|false
 Magisk-v26.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.1|app|Magisk.apk;PRESIGNED|false
 Magisk-v26.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.1|app|SignMagisk.apk;user-keys/shared|false
-# Magisk older versions
-# Note: v21.4 and older are NOT supported anymore!
 Magisk-v25.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v25.2|app|Magisk_v25.2.apk;PRESIGNED|false
 Magisk-v25.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v25.2|app|SignMagisk_v25.2.apk;user-keys/shared|false
 Magisk-v24.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v24.3|app|Magisk_v24.3.apk;PRESIGNED|false
@@ -41,6 +44,7 @@ Magisk-v23.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v23.0|app
 Magisk-v23.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v23.0|app|SignMagisk_v23.0.apk;user-keys/shared|false
 Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app|Magisk_v22.1.apk;PRESIGNED|false
 Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app|SignMagisk_v22.1.apk;user-keys/shared|false
+# Note: v21.4 and older are NOT supported anymore!
 
 # Phonesky (Google in-app purchase support) by nanolx (https://gitlab.com/Nanolx/microg-phonesky-iap-support)
 Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
