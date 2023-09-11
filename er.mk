@@ -39,7 +39,7 @@ ifeq ($(EXTENDROM_PREROOT_BOOT),true)
 # do not overwrite a custom bootimg mk
 ifneq (true,$(BOARD_CUSTOM_BOOTIMG))
 BOARD_CUSTOM_BOOTIMG := true
-BOARD_CUSTOM_BOOTIMG_MK := $(VENDOR_DIR)/preroot_bootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := $(VENDOR_DIR)/magisk/preroot_bootimg.mk
 else
 $(error EXTENDROM_PREROOT_BOOT and BOARD_CUSTOM_BOOTIMG are both set to true but are mutually exclusive)
 endif # BOARD_CUSTOM_BOOTIMG
