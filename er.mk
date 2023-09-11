@@ -30,4 +30,3 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(VENDOR_DIR)/config/init.er.rc:$(TARGET_COPY_OUT_SYSTEM)/etc/init/init.extendrom.rc
 endif
-
