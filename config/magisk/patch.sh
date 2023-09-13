@@ -31,8 +31,8 @@
 export BOOTIMG="$1"
 echo -e "\n\nStarting: $0 with: >$BOOTIMG<"
 
-# LEGACYSAR can't be detected during by the magisk patcher so must be set 
-# by us where needed (e.g. fajita). ensures kernel gets patched if required.
+# LEGACYSAR can't be detected by the magisk patcher so must be set by us where needed (e.g. fajita).
+# LEGACYSAR ensures kernel gets patched if required.
 # https://github.com/topjohnwu/Magisk/blob/9aa466c7730ef4ef73195b476f9804ebf86932d2/scripts/boot_patch.sh#L220-L243
 export LEGACYSAR=${system_root_image}
 
