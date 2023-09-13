@@ -18,7 +18,42 @@
 ############################################################################
 
 # be strict on failures
-#set -e
+set -e
+
+# colored (optional) output
+PRINT(){
+    MSG="$2"
+    case $1 in
+	ERROR)
+	    echo -e "\e[0;31mERROR: ${MSG}\e[0m" ;;
+	INFO)
+	    echo -e "\e[1;34mINFO: ${MSG}\e[0m" ;;
+	OK)
+	    echo -e "\e[0;32mOK: ${MSG}\e[0m" ;;
+	*)
+	    echo -e "${MSG}" ;;
+    esac
+}
+
+# trap and print errors
+_fetchError(){
+    local cnt=1
+    local last_status="$1"
+    local error_line_number="$2"
+    local last_func="$3"
+    local file="$4"
+    echo -e "\n\e[0;31mbash stack trace (first occurence is likely where you should look at):\e[0m\n"
+    if [ ! -z "$last_func" ] && [ ! -z "$file" ];then
+	PRINT ERROR "$file -> function: ${last_func}() ended with status >${last_status}< at line >$((error_line_number -1))< of that function"
+    else
+	PRINT ERROR "last command ended with status >${last_status}< at line >$((error_line_number -1))<"
+    fi
+    trap - EXIT ERR
+}; export -f _fetchError
+
+# ERR: needed to fetch aborts when set -e is set
+trap 'ret=$?; _fetchError $ret $LINENO $FUNCNAME $BASH_SOURCE' EXIT ERR
+#SIGINT SIGHUP TERM
 
 ######################
 # parse through all supported makefile options and set them as env variable
@@ -45,7 +80,7 @@ for opt in $MKOPTS; do
 done
 
 # check first if we want extendrom at all
-[ "$ENABLE_EXTENDROM" != true ] && echo "extendrom is disabled so no further processing" && exit
+if [ "$ENABLE_EXTENDROM" != "true" ];then echo "extendrom is disabled so no further processing" && exit;fi
 echo -e "\n\n************************************************** STARTING EXTENDROM **************************************************\n\n"
 
 ####################
@@ -105,8 +140,7 @@ GPG_FORCE_DL=0
 REQ_BINARIES="aapt"
 
 for bin in $REQ_BINARIES;do
-    which $bin
-    [ $? -ne 0 ] && echo "ERROR: missing required binary: $bin" && exit 3
+    which $bin || (PRINT ERROR "missing required binary: $bin" && false)
 done
 
 MY_DIR="$1"
@@ -489,4 +523,5 @@ if [ "$EOS_GESTURES" == "true" ];then
     if [ -f "$LOSMK" ];then sed -E -i '/SystemUIWithLegacyRecents\s+\\/d' $LOSMK;fi
 fi
 
+trap - EXIT ERR
 echo -e "\n\n************************************************** EXTENDROM FINISHED **************************************************\n\n"
