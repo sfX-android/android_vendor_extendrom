@@ -31,17 +31,3 @@ PRODUCT_COPY_FILES += \
     $(VENDOR_DIR)/config/init.er.rc:$(TARGET_COPY_OUT_SYSTEM)/etc/init/init.extendrom.rc
 endif
 
-#########################################
-# pre-rooting with magisk
-
-ifeq ($(EXTENDROM_PREROOT_BOOT),true)
-
-# do not overwrite a custom bootimg mk
-ifneq (true,$(BOARD_CUSTOM_BOOTIMG))
-BOARD_CUSTOM_BOOTIMG := true
-BOARD_CUSTOM_BOOTIMG_MK := $(VENDOR_DIR)/magisk/preroot_bootimg.mk
-else
-$(error EXTENDROM_PREROOT_BOOT and BOARD_CUSTOM_BOOTIMG are both set to true but are mutually exclusive)
-endif # BOARD_CUSTOM_BOOTIMG
-
-endif # EXTENDROM_PREROOT_BOOT
