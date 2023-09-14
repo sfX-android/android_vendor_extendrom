@@ -18,6 +18,8 @@
 
 VENDOR_DIR := vendor/extendrom
 
+ifeq ($(ENABLE_EXTENDROM),true)
+
 ##########################################
 # boot debugger
 
@@ -45,3 +47,4 @@ $(error EXTENDROM_PREROOT_BOOT and BOARD_CUSTOM_BOOTIMG are both set to true but
 endif # BOARD_CUSTOM_BOOTIMG
 
 endif # EXTENDROM_PREROOT_BOOT
+endif # ENABLE_EXTENDROM = true
