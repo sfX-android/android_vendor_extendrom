@@ -18,6 +18,8 @@
 
 VENDOR_DIR := vendor/extendrom
 
+ifeq ($(ENABLE_EXTENDROM),true)
+
 ##########################################
 # boot debugger
 
@@ -30,3 +32,5 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(VENDOR_DIR)/config/init.er.rc:$(TARGET_COPY_OUT_SYSTEM)/etc/init/init.extendrom.rc
 endif
+
+endif # ENABLE_EXTENDROM = true
