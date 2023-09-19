@@ -462,7 +462,6 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     cp $MAGISKOUT/src/assets/* $MAGISKOUT/
     # keep backwards compability
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/root_boot.sh
-    ln -s $(which sleep) $MAGISKOUT/zygote_faker
     echo "[MAGISK] preparing root finished"
 fi
 
