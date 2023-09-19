@@ -9,7 +9,7 @@ index 0785c746eb..b83a28a4dd 100644
      img_keyblock.close()
  
 +  # EXTENDROM: Magisk patcher
-+  if partition_name == "boot":
++  if (partition_name == "boot" and info_dict.get("init_boot") != "true") or partition_name == "init_boot":
 +    mpatcher = [ 'vendor/extendrom/config/magisk/patch.sh', img.name ]
 +    RunAndCheckOutput(mpatcher, verbose=True, env={'system_root_image': info_dict.get("system_root_image", "false")})
 +
