@@ -11,7 +11,7 @@ index 0785c746eb..b83a28a4dd 100644
 +  # EXTENDROM: Magisk patcher
 +  if partition_name == "boot":
 +    mpatcher = [ 'vendor/extendrom/config/magisk/patch.sh', img.name ]
-+    RunAndCheckOutput(mpatcher, verbose=True, env={'system_root_image': info_dict["system_root_image"]})
++    RunAndCheckOutput(mpatcher, verbose=True, env={'system_root_image': info_dict.get("system_root_image", "false")})
 +
    # AVB: if enabled, calculate and add hash to boot.img or recovery.img.
    if info_dict.get("avb_enable") == "true":
