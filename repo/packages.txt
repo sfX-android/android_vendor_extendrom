@@ -144,7 +144,7 @@ com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
 
 # Cromite browser (successor of Bromite)
 # Note: Cromite does not support armeabi-v7/7a atm (https://github.com/uazo/cromite/issues/237)
-arm64_ChromePublic.apk|https://www.cromite.org/fdroid/repo/|app|Cromite_arm64.apk;PRESIGNED|false||
+arm64_ChromePublic.apk|https://www.cromite.org/fdroid/repo/|app|Cromite_arm64.apk;PRESIGNED-extractlibs|false||
 #arm64_ChromePublic.apk|https://github.com/uazo/cromite/releases/download/v116.0.5845.111-0747986f1c3f5fd1ad219a23c34a460b6d44aff3|app|Cromite.apk;PRESIGNED|false||
 
 ##########################################################################################################
