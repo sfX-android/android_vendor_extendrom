@@ -85,7 +85,11 @@ echo -e "\n\n************************************************** STARTING EXTENDR
 
 ####################
 # base info
+
+echo "extendrom version: $(repo forall vendor/extendrom -c 'git rev-parse --symbolic-full-name HEAD; git rev-parse --short=7 HEAD' 2>/dev/null | tr '\n' ' ')"
+echo -e "\n\n"
 echo "ENABLE_EXTENDROM: $ENABLE_EXTENDROM"
+echo "EXTENDROM_PREROOT_BOOT: $EXTENDROM_PREROOT_BOOT"
 echo "EXTENDROM_PACKAGES: $EXTENDROM_PACKAGES"
 echo "EOS_EDITION: $EOS_EDITION"
 echo "EXTENDROM_SIGNING_PATCHES: $EXTENDROM_SIGNING_PATCHES"
@@ -397,6 +401,9 @@ get_packages "$MY_DIR/repo/packages.txt"
 if [ ! -z "$EXTENDROM_BOOT_DEBUG" -a  "$EXTENDROM_BOOT_DEBUG" == "true" ];then
     F_BOOT_DEBUG
 fi
+
+# clean tmp
+find $_OUTDIR -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} \;
 
 INITIAL_COPYRIGHT_YEAR=2021
 VENDOR="extendrom"
