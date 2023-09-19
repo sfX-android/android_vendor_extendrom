@@ -192,6 +192,8 @@ F_WRITE_MAKEFILE(){
 	requiredmods=$(echo "$line" |cut -d "|" -f7)
 	uses_required_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull | grep "uses-library:" | sed -n "s/uses-library:'\(.*\)'/\1/p" | tr "\n" " ")
 	uses_optional_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull | grep "uses-library-not-required:" | sed -n "s/uses-library-not-required:'\(.*\)'/\1/p" | tr "\n" " ")
+	app_target_sdk=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull |grep -i ^targetSdkVersion | grep -oE '[0-9]+')
+	app_own_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt list -a vendor/extendrom/prebuilt/$appnamefull | grep lib/ | sed "s#^lib/#out/${appnamefull}_libs/lib/#g" | tr "\n" " ")
         package_human="${appnamefull/\.apk}"
 
 	if [[ "$appname" =~ .*Magisk.* ]];then
@@ -202,7 +204,13 @@ F_WRITE_MAKEFILE(){
 	# allow empty LOCAL_CERTIFICATE
 	# that means DEFAULT_SYSTEM_DEV_CERTIFICATE will be used
 	# https://github.com/aosp-mirror/platform_build/blob/master/core/package_internal.mk#L446-L452
-	[ ! -z "$_appsign" ] && appsign="\nLOCAL_CERTIFICATE := $_appsign"
+	if [ ! -z "$_appsign" ];then
+	    if [ "$_appsign" == "PRESIGNED-extractlibs" ];then
+		appsign="\nLOCAL_CERTIFICATE := PRESIGNED"
+	    else
+		appsign="\nLOCAL_CERTIFICATE := $_appsign"
+	    fi
+	fi
 
         # do not process what we do not want to build
 	echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -Eq "^${package_human}\$"
@@ -216,6 +224,31 @@ F_WRITE_MAKEFILE(){
 	if [[ "$appdir" =~ .*priv-app ]];then
 	    EXTRA="LOCAL_PRIVILEGED_MODULE := true"
 	fi
+
+	# extract libs if requested
+	if [ ! -z "$app_own_libs" ] && [ "$_appsign" == "PRESIGNED-extractlibs" ];then
+	    unzip vendor/extendrom/prebuilt/$appnamefull lib/* -d vendor/extendrom/out/${appnamefull}_libs
+	    [ ! -z "$EXTRA" ] && EXTRA="$EXTRA
+"
+	    EXTRA="${EXTRA}LOCAL_PREBUILT_JNI_LIBS := $app_own_libs"
+	fi
+
+	# special handling for presigned apps
+	# which actually should absolutely keep untouched
+	if [ "$_appsign" == "PRESIGNED" ] || [ "$_appsign" == "PRESIGNED-extractlibs" ];then
+	    [ ! -z "$EXTRA" ] && EXTRA="$EXTRA
+"
+	    # special handling for newer presigned apps
+	    # see: https://cs.android.com/android/_/android/platform/build/+/b34f64fc7a017ebadd5fb2b1c81341491e4de9a1:core/app_prebuilt_internal.mk;dlc=fc15d50d6d07317f75c1b996f419afc37bf958d4
+	    if [ $app_target_sdk -gt 29 ];then
+		EXTRA="${EXTRA}LOCAL_SDK_VERSION := $app_target_sdk"
+	    fi
+
+	    [ ! -z "$EXTRA" ] && EXTRA="$EXTRA
+"
+	    EXTRA="${EXTRA}LOCAL_REPLACE_PREBUILT_APK_INSTALLED := vendor/extendrom/\$(LOCAL_SRC_FILES)"
+	fi
+
 	if [ ! -z "$overrides" ];then
 	   p_overrides=$(echo "$overrides" | tr ";" " ")
 	    [ ! -z "$EXTRA" ] && EXTRA="$EXTRA
