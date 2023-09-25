@@ -1,0 +1,16 @@
+diff --git a/build/make/tools/releasetools/sign_target_files_apks.py b/build/make/tools/releasetools/sign_target_files_apks.py
+index 089d8f745..eb6aa77e1 100755
+--- a/build/make/tools/releasetools/sign_target_files_apks.py
++++ b/build/make/tools/releasetools/sign_target_files_apks.py
+@@ -946,8 +946,9 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
+       raise common.ExternalError(k + " does not exist or is not a file")
+ 
+   mapped_keys = []
+-  for k in keylist:
+-    m = re.match(r"^(.*)\.x509\.pem$", k)
++  for kl in keylist:
++    k = kl.decode('ISO-8859-1')
++    m = re.match(r"^(.*)$", k)
+     if not m:
+       raise common.ExternalError(
+           "can't parse \"%s\" from META/otakeys.txt" % (k,))
