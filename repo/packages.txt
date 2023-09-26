@@ -94,6 +94,7 @@ com.simplemobiletools.launcher_LATEST.apk|FDROIDREPO|app|SimpleLauncher.apk;PRES
 Omega.v0.8.0.Build.168.apk|https://github.com/otakuhqz/Omega/releases/download/v0.8.0|app|Omega.apk;PRESIGNED|false
 
 # Neo Launcher
+com.saggitt.omega_LATEST.apk|https://apt.izzysoft.de/fdroid/repo|app|NeoLauncher-latest.apk;PRESIGNED|false
 NeoLauncher-release.apk|https://github.com/NeoApplications/Neo-Launcher/releases/download/0.9.3|app|NeoLauncher.apk;PRESIGNED|false
 
 # Lawnchair - stable
@@ -145,7 +146,7 @@ com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
 # Cromite browser (successor of Bromite)
 # Note: Cromite does not support armeabi-v7/7a atm (https://github.com/uazo/cromite/issues/237)
 arm64_ChromePublic.apk|https://www.cromite.org/fdroid/repo/|app|Cromite_arm64.apk;PRESIGNED-extractlibs|false||
-#arm64_ChromePublic.apk|https://github.com/uazo/cromite/releases/download/v116.0.5845.111-0747986f1c3f5fd1ad219a23c34a460b6d44aff3|app|Cromite_arm64.apk;PRESIGNED-extractlibs|false||
+#arm64_ChromePublic.apk|https://github.com/uazo/cromite/releases/download/v116.0.5845.111-0747986f1c3f5fd1ad219a23c34a460b6d44aff3|app|Cromite.apk;PRESIGNED|false||
 
 ##########################################################################################################
 # OFFICE
