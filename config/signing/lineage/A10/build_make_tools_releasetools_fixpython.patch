@@ -1,7 +1,9 @@
-diff --git a/build/make/tools/releasetools/sign_target_files_apks.py b/build/make/tools/releasetools/sign_target_files_apks.py
-index 089d8f745..eb6aa77e1 100755
---- a/build/make/tools/releasetools/sign_target_files_apks.py
-+++ b/build/make/tools/releasetools/sign_target_files_apks.py
+
+project build/make/
+diff --git a/tools/releasetools/sign_target_files_apks.py b/tools/releasetools/sign_target_files_apks.py
+index 089d8f7455..eb6aa77e14 100755
+--- a/tools/releasetools/sign_target_files_apks.py
++++ b/tools/releasetools/sign_target_files_apks.py
 @@ -946,8 +946,9 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
        raise common.ExternalError(k + " does not exist or is not a file")
  
