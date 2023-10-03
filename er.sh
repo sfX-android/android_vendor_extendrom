@@ -421,6 +421,14 @@ fi
 # MAGISK rooting preparation
 if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     echo "[MAGISK] preparing the root process as requested"
+
+    # inject magisk patcher to releasetools
+    PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
+    PDIR="$MY_DIR/config/magisk/patches"
+    $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
+    ERR=$?
+    echo "[MAGISK] Injecting Magisk patcher ended with $ERR"
+
     MAGISKOUT=$(realpath $MY_DIR/../../out/.magisk)
     [ -d "$MAGISKOUT" ] && rm -rf $MAGISKOUT
     mkdir -p $MAGISKOUT
@@ -454,7 +462,6 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     cp $MAGISKOUT/src/assets/* $MAGISKOUT/
     # keep backwards compability
     cp $MAGISKOUT/src/assets/boot_patch.sh $MAGISKOUT/root_boot.sh
-    ln -s $(which sleep) $MAGISKOUT/zygote_faker
     echo "[MAGISK] preparing root finished"
 fi
 
