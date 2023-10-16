@@ -20,25 +20,11 @@ _describe your problem including any hints to reproduce it:_
 
 # Required(!) information
 
+- custom OS name you build for: `LOS, AXP.OS, ...`
 - Android version: `A9, A10, A11, ...`
 - COMPLETE(!!!) output when executing: `vendor/extendrom/er.sh`
 
 # Note
 
-```
-when sharing logs or longer texts it is recommended 
-using a so-called "paste service". 
-
-Here are some examples:
-
-- https://gists.github.com (strongly recommended)
-
-- https://hastebin.com
-- https://controlc.com
-- https://justpaste.me
-- https://privatebin.net
-- https://pastebin.com
-
-Once you pasted your text in there you will get an URL
-which you then can simply share.
-```
+_when sharing logs or longer texts it is strongly recommended 
+using [github gists](https://gists.github.com)_
