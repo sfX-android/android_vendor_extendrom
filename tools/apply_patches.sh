@@ -67,7 +67,7 @@ for p in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | s
     ERR=0
     RES=1
     dp=$(basename ${p/:*})
-    P=$(echo "$p" | sed 's#^#-i ''/#g;s/:project#/ -d /g')
+    P=$(echo "$p" | sed 's#^#-i #g;s/:project#/ -d /g')
     F_LOG "... applying >${dp}< within >${p/*#}< now:"
     POUT=$(patch -r - --no-backup-if-mismatch --forward --ignore-whitespace --verbose -p1 $P 2>&1)
     RERR=$?
