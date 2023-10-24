@@ -34,6 +34,8 @@
 
 # DO NOT set -e !
 
+# ensure we talk english only
+export LC_ALL=C
 
 F_LOG(){
     echo -e "[PATCHER] " "$1"
