@@ -430,6 +430,7 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
     ERR=$?
     echo "[MAGISK] Injecting Magisk patcher ended with $ERR"
+    [ "$ERR" -ne 0 ] && exit $ERR
 
     MAGISKOUT=$(realpath $MY_DIR/../../out/.magisk)
     [ -d "$MAGISKOUT" ] && rm -rf $MAGISKOUT
