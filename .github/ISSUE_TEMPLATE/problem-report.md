@@ -13,16 +13,18 @@ _describe your problem including any hints to reproduce it:_
 
 ...
 
-# Optional information
+# Required(!) information
+
+- custom OS name you build for (e.g. LOS, AXP.OS, ...) -> 
+- Android version (e.g. A9, A10, A11, ...) -> 
+- COMPLETE(!!!) output when executing: `vendor/extendrom/er.sh` -> (see "Note" topic)
+- content of `vendor/extendrom/Android.mk` after running extendrom/a build  -> (see "Note" topic)
+
+### Optional
 
 - device tree: _link_
 - custom OS: _link to their manifest_
-
-# Required(!) information
-
-- custom OS name you build for: `LOS, AXP.OS, ...`
-- Android version: `A9, A10, A11, ...`
-- COMPLETE(!!!) output when executing: `vendor/extendrom/er.sh`
+- full build log -> see "Note" topic
 
 # Note
 
