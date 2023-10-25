@@ -424,7 +424,7 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
 
     # inject magisk patcher to releasetools
     PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
-    PDIR="$MY_DIR/config/magisk/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
+    PDIR="$SRC_TOP/$MY_DIR/config/magisk/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
     echo "[MAGISK] using patch dir: $PDIR"
 
     $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
