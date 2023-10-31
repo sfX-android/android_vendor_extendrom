@@ -32,6 +32,8 @@ org.jak_linux.dns66_LATEST.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 Magisk.v26.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.3|app|Magisk.apk;PRESIGNED|false
 Magisk.v26.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.3|app|SignMagisk.apk;user-keys/shared|false
 # Magisk older versions
+Magisk-v26.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.2|app|Magisk_v26.2.apk;PRESIGNED|false
+Magisk-v26.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.2|app|SignMagisk_v26.2.apk;user-keys/shared|false
 Magisk-v25.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v25.2|app|Magisk_v25.2.apk;PRESIGNED|false
 Magisk-v25.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v25.2|app|SignMagisk_v25.2.apk;user-keys/shared|false
 Magisk-v24.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v24.3|app|Magisk_v24.3.apk;PRESIGNED|false
