@@ -16,7 +16,7 @@ endif
 # Custom packages
 
 ifdef EXTENDROM_PACKAGES
-PRODUCT_PACKAGES += $(EXTENDROM_PACKAGES)
+PRODUCT_PACKAGES += $(shell echo $$EXTENDROM_PACKAGES)
 endif
 
 ##################################################################
