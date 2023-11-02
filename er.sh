@@ -468,7 +468,7 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
 
     # remove Magisk from Android mk list - as we do not build/add the Magisk app
     # see https://github.com/sfX-android/android_vendor_extendrom/wiki/FAQ#extendrom_preroot_boot
-    export EXTENDROM_PACKAGES=$(echo "$EXTENDROM_PACKAGES" | grep -vo "$MAGNAME")
+    export EXTENDROM_PACKAGES=$(echo "$EXTENDROM_PACKAGES" | sed "s/$MAGNAME//g")
     echo -e "[MAGISK] removed >$MAGNAME< from Android makefile:\nEXTENDROM_PACKAGES is now: $EXTENDROM_PACKAGES"
     echo "[MAGISK] preparing root finished"
 fi
