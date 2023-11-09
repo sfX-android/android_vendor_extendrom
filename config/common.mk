@@ -16,7 +16,7 @@ endif
 # Custom packages
 
 ifdef EXTENDROM_PACKAGES
-PRODUCT_PACKAGES += $(shell echo $$EXTENDROM_PACKAGES | sed "s/Magisk//g")
+PRODUCT_PACKAGES += $(shell echo "$$EXTENDROM_PACKAGES" | tr ' ' '\n' | sed "s/$$MAGNAME//g")
 endif
 
 ##################################################################
