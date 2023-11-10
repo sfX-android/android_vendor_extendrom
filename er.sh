@@ -148,7 +148,8 @@ for bin in $REQ_BINARIES;do
 done
 
 MY_DIR="$1"
-[ -z "$MY_DIR" ] && MY_DIR=${0%/*}
+[ -z "$MY_DIR" ] && MY_DIR=vendor/extendrom
+echo MY_DIR: $MY_DIR
 _OUTDIR="$MY_DIR/out"
 [ ! -d "$_OUTDIR" ] && mkdir $_OUTDIR
 FDROID_REPO_DIR="$MY_DIR/fdroid_repos"
