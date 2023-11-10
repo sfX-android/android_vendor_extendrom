@@ -371,7 +371,7 @@ F_SIGPATCH(){
     echo "[$FUNCNAME] Signature spoofing patch requested ..."
 
     PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
-    PDIR="$MY_DIR/config/sigspoof/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
+    PDIR="$SRC_TOP_FULL/$MY_DIR/config/sigspoof/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
     [ ! -z "$EXTENDROM_SIGSPOOF_FORCE_PDIR" ] && [ -d "$EXTENDROM_SIGSPOOF_FORCE_PDIR" ] && PDIR=$EXTENDROM_SIGSPOOF_FORCE_PDIR
 
     $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
@@ -388,7 +388,7 @@ F_SIGPATCH(){
 F_SIGNINGPATCHES(){
     echo "[$FUNCNAME] Signing patches requested ..."
     PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
-    PDIR="$MY_DIR/config/signing/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
+    PDIR="$SRC_TOP_FULL/$MY_DIR/config/signing/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
     $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
     ERR=$?
     echo "[$FUNCNAME] addding signing patches ended with $ERR"
@@ -427,7 +427,7 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
 
     # inject magisk patcher to releasetools
     PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
-    PDIR="$MY_DIR/config/magisk/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
+    PDIR="$SRC_TOP_FULL/$MY_DIR/config/magisk/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
     echo "[MAGISK] using patch dir: $PDIR"
 
     $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
