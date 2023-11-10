@@ -101,11 +101,13 @@ echo "EXTENDROM_TARGET_VERSION: $EXTENDROM_TARGET_VERSION"
 EXTENDROM_TARGET_PRODUCT_F=$(build/soong/soong_ui.bash --dumpvar-mode TARGET_PRODUCT  2>/dev/null)
 export EXTENDROM_TARGET_PRODUCT=${EXTENDROM_TARGET_PRODUCT_F/_*}
 echo "EXTENDROM_TARGET_PRODUCT: $EXTENDROM_TARGET_PRODUCT"
-export SRC_TOP=$(build/soong/soong_ui.bash --dumpvar-mode TOP)
+export SRC_TOP=$(build/soong/soong_ui.bash --dumpvar-mode TOP  2>/dev/null)
 echo "SRC_TOP: ${SRC_TOP}/"
+SRC_TOP_FULL=$(pwd)
+echo SRC_TOP_FULL: $SRC_TOP_FULL
 
 # boot debug log
-export EXTENDROM_PRODUCT_DEVICE=$(build/soong/soong_ui.bash --dumpvar-mode PRODUCT_DEVICE)
+export EXTENDROM_PRODUCT_DEVICE=$(build/soong/soong_ui.bash --dumpvar-mode PRODUCT_DEVICE 2>/dev/null)
 echo "EXTENDROM_PRODUCT_DEVICE=$EXTENDROM_PRODUCT_DEVICE"
 echo "EXTENDROM_BOOT_DEBUG=$EXTENDROM_BOOT_DEBUG"
 # set default debug path if unset

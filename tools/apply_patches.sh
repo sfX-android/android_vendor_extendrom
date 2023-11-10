@@ -42,7 +42,7 @@ F_LOG(){
 }
 
 PDIR=$1
-[ -z "$PDIR" -o ! -d "$PDIR" ] && echo "ABORT: missing or wrong parameter: $0 <patch-dir>" && exit 4
+[ -z "$PDIR" -o ! -d "$PDIR" ] && echo -e "ABORT: missing or wrong parameter: $0 <patch-dir>\narg was: >$PDIR<" && exit 4
 [ -z "$EXTENDROM_PATCHER_RESET" ] && EXTENDROM_PATCHER_RESET=true
 
 INDI=$PDIR/EXTENDROM_PATCHER_DONE
@@ -63,6 +63,8 @@ if [ $EXTENDROM_PATCHER_RESET == "true" ];then
 		F_LOG "WARNING: issue occured while resetting:\n\n $ROUT"
 	    fi
     done
+else
+    echo EXTENDROM_PATCHER_RESET=false
 fi
 
 for p in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | sort | tr ' ' '#'); do
