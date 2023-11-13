@@ -1,0 +1,41 @@
+
+project frameworks/base/
+diff --git a/core/java/android/app/Activity.java b/core/java/android/app/Activity.java
+index 85a969b8003..b4d9e36a60e 100644
+--- a/core/java/android/app/Activity.java
++++ b/base/core/java/android/app/Activity.java
+@@ -72,6 +72,7 @@ import android.os.ServiceManager.ServiceNotFoundException;
+ import android.os.StrictMode;
+ import android.os.SystemProperties;
+ import android.os.UserHandle;
++import android.provider.Settings.Secure;
+ import android.text.Selection;
+ import android.text.SpannableStringBuilder;
+ import android.text.TextUtils;
+@@ -4478,6 +4479,26 @@ public class Activity extends ContextThemeWrapper
+             onRequestPermissionsResult(requestCode, new String[0], new int[0]);
+             return;
+         }
++
++	/*
++	Only when the requested permission asks for signature spoofing, check if that is allowed
++	in developer options and skip the dialog if not
++	*/
++	List<String> permlist = Arrays.asList(permissions);
++	if (permlist.contains("android.permission.FAKE_PACKAGE_SIGNATURE")) {
++	    if (android.provider.Settings.Secure.getInt(getContentResolver(),
++		   android.provider.Settings.Secure.ALLOW_SIGNATURE_FAKE, 0) == 0) {
++		Log.w(TAG, "Requested signature spoofing permission ("
++			+ Arrays.toString(permissions)
++			+ ") has been denied as it is not enabled in developer options");
++		return;
++	    } else {
++		Log.w(TAG, "The app's permission request for: "
++			+ Arrays.toString(permissions)
++			+ " will be processed as signature spoofing is enabled in developer options!");
++	    }
++	}
++
+         Intent intent = getPackageManager().buildRequestPermissionsIntent(permissions);
+         startActivityForResult(REQUEST_PERMISSIONS_WHO_PREFIX, intent, requestCode, null);
+         mHasCurrentPermissionsRequest = true;

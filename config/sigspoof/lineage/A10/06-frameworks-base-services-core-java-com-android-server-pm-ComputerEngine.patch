@@ -1,0 +1,17 @@
+
+project frameworks/base/
+diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
+index abf7e748bf2..cda66b52e3c 100644
+--- a/services/core/java/com/android/server/pm/PackageManagerService.java
++++ b/services/core/java/com/android/server/pm/PackageManagerService.java
+@@ -4095,6 +4095,10 @@ public class PackageManagerService extends IPackageManager.Stub
+             if (permissions.contains("android.permission.FAKE_PACKAGE_SIGNATURE")
+                     && p.applicationInfo.targetSdkVersion > Build.VERSION_CODES.LOLLIPOP_MR1
+                     && p.mAppMetaData != null) {
++		// extendrom: stop here when not enabled in developer settings
++                if (android.provider.Settings.Secure.getInt(mContext.getContentResolver(),
++                    android.provider.Settings.Secure.ALLOW_SIGNATURE_FAKE, 0) == 0)
++                    return pi;
+                 String sig = p.mAppMetaData.getString("fake-signature");
+                 if (sig != null) {
+                     pi.signatures = new Signature[] {new Signature(sig)};
