@@ -1,9 +1,9 @@
 
 project bootable/recovery/
-diff --git a/install/verifier.cpp b/install/verifier.cpp
-index 6ba1d77c..8aaacf91 100644
---- a/install/verifier.cpp
-+++ b/install/verifier.cpp
+diff --git a/otautil/verifier.cpp b/otautil/verifier.cpp
+index 8a65566e..37f3bc88 100644
+--- a/otautil/verifier.cpp
++++ b/otautil/verifier.cpp
 @@ -196,6 +196,7 @@ int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys
  
    bool need_sha1 = false;
@@ -52,6 +52,17 @@ index 6ba1d77c..8aaacf91 100644
  
    const uint8_t* signature = eocd + eocd_size - signature_start;
    size_t signature_size = signature_start - FOOTER_SIZE;
+@@ -257,8 +270,8 @@ int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys
+ 
+   // Check to make sure at least one of the keys matches the signature. Since any key can match,
+   // we need to try each before determining a verification failure has happened.
+-  for (size_t i = 0; i < keys.size(); i++) {
+-    const auto& key = keys[i];
++  size_t i = 0;
++  for (const auto& key : keys) {
+     const uint8_t* hash;
+     int hash_nid;
+     switch (key.hash_len) {
 @@ -270,6 +283,10 @@ int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys
          hash = sha256;
          hash_nid = NID_sha256;
@@ -63,7 +74,7 @@ index 6ba1d77c..8aaacf91 100644
        default:
          continue;
      }
-@@ -291,6 +308,13 @@ int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys
+@@ -291,11 +308,20 @@ int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys
          continue;
        }
  
@@ -74,10 +85,17 @@ index 6ba1d77c..8aaacf91 100644
 +        LOG(INFO) << "failed to verify against EC key " << i;
 +        continue;
 +      }
++
        LOG(INFO) << "whole-file signature verified against EC key " << i;
        return VERIFY_SUCCESS;
      } else {
-@@ -305,6 +329,9 @@ int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys
+       LOG(INFO) << "Unknown key type " << key.key_type;
+     }
++    i++;
+   }
+ 
+   if (need_sha1) {
+@@ -304,6 +330,9 @@ int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys
    if (need_sha256) {
      LOG(INFO) << "SHA-256 digest: " << print_hex(sha256, SHA256_DIGEST_LENGTH);
    }
@@ -87,7 +105,7 @@ index 6ba1d77c..8aaacf91 100644
    LOG(ERROR) << "failed to verify whole-file signature";
    return VERIFY_FAILURE;
  }
-@@ -372,8 +399,8 @@ bool CheckRSAKey(const std::unique_ptr<RSA, RSADeleter>& rsa) {
+@@ -375,8 +404,8 @@ bool CheckRSAKey(const std::unique_ptr<RSA, RSADeleter>& rsa) {
    const BIGNUM* out_e;
    RSA_get0_key(rsa.get(), &out_n, &out_e, nullptr /* private exponent */);
    auto modulus_bits = BN_num_bits(out_n);
@@ -98,7 +116,7 @@ index 6ba1d77c..8aaacf91 100644
      return false;
    }
  
-@@ -397,8 +424,8 @@ bool CheckECKey(const std::unique_ptr<EC_KEY, ECKEYDeleter>& ec_key) {
+@@ -400,8 +429,8 @@ bool CheckECKey(const std::unique_ptr<EC_KEY, ECKEYDeleter>& ec_key) {
      return false;
    }
    auto degree = EC_GROUP_get_degree(ec_group);
@@ -109,7 +127,7 @@ index 6ba1d77c..8aaacf91 100644
      return false;
    }
  
-@@ -426,6 +453,9 @@ bool LoadCertificateFromBuffer(const std::vector<uint8_t>& pem_content, Certific
+@@ -429,6 +458,9 @@ bool LoadCertificateFromBuffer(const std::vector<uint8_t>& pem_content, Certific
      case NID_sha1WithRSAEncryption:
        cert->hash_len = SHA_DIGEST_LENGTH;
        break;
@@ -119,62 +137,3 @@ index 6ba1d77c..8aaacf91 100644
      case NID_sha256WithRSAEncryption:
      case NID_ecdsa_with_SHA256:
        cert->hash_len = SHA256_DIGEST_LENGTH;
-diff --git a/recovery_ui/screen_ui.cpp b/recovery_ui/screen_ui.cpp
-index abd87b98..2f2014b5 100644
---- a/recovery_ui/screen_ui.cpp
-+++ b/recovery_ui/screen_ui.cpp
-@@ -563,15 +563,15 @@ void ScreenRecoveryUI::SetColor(UIElement e) const {
-   switch (e) {
-     case UIElement::INFO:
-       if (fastbootd_logo_enabled_)
--        gr_color(0xfd, 0xd8, 0x35, 255);
-+        gr_color(0x8b, 0xc3, 0x4a, 255);
-       else
--        gr_color(0xf8, 0x90, 0xff, 255);
-+        gr_color(0xff, 0x98, 0x00, 255);
-       break;
-     case UIElement::HEADER:
-       if (fastbootd_logo_enabled_)
--        gr_color(0xfd, 0xd8,0x35, 255);
-+        gr_color(0x8b, 0xc3, 0x4a, 255);
-       else
--        gr_color(0xf8, 0x90, 0xff, 255);
-+        gr_color(0xff, 0x98, 0x00, 255);
-       break;
-     case UIElement::MENU:
-       gr_color(0xd8, 0xd8, 0xd8, 255);
-@@ -579,9 +579,9 @@ void ScreenRecoveryUI::SetColor(UIElement e) const {
-     case UIElement::MENU_SEL_BG:
-     case UIElement::SCROLLBAR:
-       if (fastbootd_logo_enabled_)
--        gr_color(0xe6, 0x51, 0x00, 255);
-+        gr_color(0x4c, 0xaf, 0x50, 255);
-       else
--        gr_color(0x7c, 0x4d, 0xff, 255);
-+        gr_color(0xff, 0x57, 0x22, 255);
-       break;
-     case UIElement::MENU_SEL_BG_ACTIVE:
-       gr_color(0, 156, 100, 255);
-@@ -807,7 +807,6 @@ void ScreenRecoveryUI::draw_menu_and_text_buffer_locked(
-     auto logo_width = gr_get_width(logo.get());
-     auto logo_height = gr_get_height(logo.get());
-     auto centered_x = ScreenWidth() / 2 - logo_width / 2;
--    DrawSurface(logo.get(), 0, 0, logo_width, logo_height, centered_x, y);
-     y += logo_height;
- 
-     if (!menu_->IsMain()) {
-diff --git a/res-hdpi/images/ic_back_sel.png b/res-hdpi/images/ic_back_sel.png
-index 13fcaea1..fb549b28 100644
-Binary files a/res-hdpi/images/ic_back_sel.png and b/res-hdpi/images/ic_back_sel.png differ
-diff --git a/res-mdpi/images/ic_back_sel.png b/res-mdpi/images/ic_back_sel.png
-index b9a013b0..23f01612 100644
-Binary files a/res-mdpi/images/ic_back_sel.png and b/res-mdpi/images/ic_back_sel.png differ
-diff --git a/res-xhdpi/images/ic_back_sel.png b/res-xhdpi/images/ic_back_sel.png
-index f69573dd..e1cd6d88 100644
-Binary files a/res-xhdpi/images/ic_back_sel.png and b/res-xhdpi/images/ic_back_sel.png differ
-diff --git a/res-xxhdpi/images/ic_back_sel.png b/res-xxhdpi/images/ic_back_sel.png
-index 4657b57d..9e5c976e 100644
-Binary files a/res-xxhdpi/images/ic_back_sel.png and b/res-xxhdpi/images/ic_back_sel.png differ
-diff --git a/res-xxxhdpi/images/ic_back_sel.png b/res-xxxhdpi/images/ic_back_sel.png
-index efe1b02e..94be59ca 100644
-Binary files a/res-xxxhdpi/images/ic_back_sel.png and b/res-xxxhdpi/images/ic_back_sel.png differ
