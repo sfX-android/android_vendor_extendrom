@@ -28,8 +28,12 @@
 
 # DO NOT set -e !
 
+# parse calling params
 export BOOTIMG="$1"
-echo -e "\n\nStarting: $0 with: >$BOOTIMG<"
+export TOP="$2"
+[ -z "$TOP" -o ! -d "$TOP" ] && TOP=$PWD
+
+echo -e "\n\nStarting: $0 with: >$BOOTIMG< (TOP=$TOP)"
 
 # LEGACYSAR can't be detected by the magisk patcher so must be set by us where needed (e.g. fajita).
 # LEGACYSAR ensures kernel gets patched if required.
@@ -53,7 +57,7 @@ export KEEPVERITY=true
 export KEEPFORCEENCRYPT=true
 
 # set magisk environment
-export OUT_DIR=$PWD/out
+export OUT_DIR=$TOP/out
 export MAG_DIR="$OUT_DIR/.magisk"
 
 # disable due to not allowed binary or useless within the build process

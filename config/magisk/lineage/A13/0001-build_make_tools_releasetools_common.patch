@@ -1,10 +1,10 @@
 
 project build/make/
 diff --git a/tools/releasetools/common.py b/tools/releasetools/common.py
-index 71679e8cb2..72fd4d3780 100644
+index 71679e8cb2..185d858b00 100644
 --- a/tools/releasetools/common.py
 +++ b/tools/releasetools/common.py
-@@ -766,6 +766,18 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
+@@ -766,6 +766,20 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
    the source files in 'unpack_dir'/'tree_subdir'."""
  
    prebuilt_path = os.path.join(unpack_dir, "BOOTABLE_IMAGES", prebuilt_name)
@@ -16,7 +16,9 @@ index 71679e8cb2..72fd4d3780 100644
 +    img = tempfile.NamedTemporaryFile()
 +    shutil.copy(prebuilt_path, img.name)
 +    logger.info("Patching (GetBootableImage): %s", img.name)
-+    mpatcher = [ 'vendor/extendrom/config/magisk/patch.sh', img.name ]
++    print(os.environ)
++    top_dir = os.environ.get('PWD')
++    mpatcher = [ top_dir + '/vendor/extendrom/config/magisk/patch.sh', img.name , top_dir ]
 +    RunAndCheckOutput(mpatcher, verbose=True, env={'system_root_image': info_dict.get("system_root_image", "false")})
 +    shutil.copy(img.name, prebuilt_path)
 +
