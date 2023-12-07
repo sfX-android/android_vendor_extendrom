@@ -339,6 +339,14 @@ F_BOOT_DEBUG(){
 	    pf=$(basename $p)
 	    cp $p $MY_DIR/sepolicy/boot_debug/${pf/\.sepolicy/} && echo "[$FUNCNAME] ... copied sepolicy file: $pf"
 	done
+        # special handling for dedicated /cache partition
+        if [ "${EXTENDROM_DEBUG_PATH}" == "/cache" ];then
+            for p in $(find $MY_DIR/config/boot_debug/cache -maxdepth 1 -type f -name '*.sepolicy' 2>/dev/null);do
+                pf=$(basename $p)
+                cp $p $MY_DIR/sepolicy/boot_debug/${pf/\.sepolicy/} && echo "[$FUNCNAME] ... copied sepolicy file: $pf"
+            done
+        fi
+        # special flag since A11 to disable encryption on EXTENDROM_DEBUG_PATH 
 	if [ $EXTENDROM_TARGET_VERSION -ge 11 ];then
 	    MKDARG="encryption=None"
 	else

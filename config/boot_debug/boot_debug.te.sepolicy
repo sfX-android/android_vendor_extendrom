@@ -31,8 +31,6 @@ allow boot_debug logdr_socket:sock_file write;
 
 allow boot_debug mnt_vendor_file:dir search;
 
-# when using /cache/boot_debug
-allow boot_debug cache_file:dir search;
 # more recent android versions do not have an own cache partition anymore.
 # therefor lnk_file is required here
 allow boot_debug cache_file:lnk_file read;
