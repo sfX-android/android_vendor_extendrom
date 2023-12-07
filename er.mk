@@ -18,13 +18,18 @@
 
 VENDOR_DIR := vendor/extendrom
 
-ifeq ($(ENABLE_EXTENDROM),true)
+ifeq ($(ENABLE_EXTENDROM), true)
 
 ##########################################
 # boot debugger
 
-ifeq ($(EXTENDROM_BOOT_DEBUG),true)
+ifeq ($(EXTENDROM_BOOT_DEBUG), true)
+
+ifeq ($(call math_gt_or_eq,$(PLATFORM_VERSION),11),true)
 BOARD_VENDOR_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/boot_debug
+else
+BOARD_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/boot_debug
+endif
 
 PRODUCT_PACKAGES += \
 	er-logcat
