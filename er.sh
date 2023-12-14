@@ -156,6 +156,19 @@ _OUTDIR="$MY_DIR/out"
 [ ! -d "$_OUTDIR" ] && mkdir $_OUTDIR
 FDROID_REPO_DIR="$MY_DIR/fdroid_repos"
 
+# write $PRODUCTMK so all EXTENDROM_PACKAGES (except Magisk) will be built by the Android build process
+export PRODUCTMK="$MY_DIR/packages.mk"
+
+# prepare to remove Magisk from EXTENDROM_PACKAGES as we don't build it
+# see https://github.com/sfX-android/android_vendor_extendrom/wiki/FAQ#extendrom_preroot_boot
+if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
+    export MAGNAME=$(echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -E '^Magisk$|Magisk_v[0-9]+\.[0-9]+$|SignMagisk$')
+    export EXTENDROM_PACKAGES_CLEANED=$(echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | sed "s/$MAGNAME//g" | tr '\n' ' ')
+    echo "PRODUCT_PACKAGES += $EXTENDROM_PACKAGES_CLEANED" > $PRODUCTMK
+else
+    echo "PRODUCT_PACKAGES += $EXTENDROM_PACKAGES" > $PRODUCTMK
+fi
+
 unset CURLDNS
 CUSTDNS="$2"
 [ ! -z "$CUSTDNS" ] && CURLDNS="--dns-servers $CUSTDNS"
@@ -448,8 +461,6 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     mkdir -p $MAGISKOUT
     [ -z $MAGISK_TARGET_ARCH ] && MAGISK_TARGET_ARCH=arm64
 
-    MAGNAME=$(echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -E '^Magisk$|Magisk_v[0-9]+\.[0-9]+$|SignMagisk$')
-
     if [ ! -f $MY_DIR/prebuilt/${MAGNAME}.apk ];then
 	echo "[MAGISK] ERROR: apk cannot be found! Keep in mind that extendrom supports v22 and later only!"
 	echo "[MAGISK] ERROR: Do you have set 'Magisk' or 'SignMagisk' in your vendorsetup.sh??"
@@ -479,8 +490,8 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
 
     # remove Magisk from Android mk list - as we do not build/add the Magisk app
     # see https://github.com/sfX-android/android_vendor_extendrom/wiki/FAQ#extendrom_preroot_boot
-    export EXTENDROM_PACKAGES=$(echo "$EXTENDROM_PACKAGES" | sed "s/$MAGNAME//g")
-    echo -e "[MAGISK] removed >$MAGNAME< from Android makefile:\nEXTENDROM_PACKAGES is now: $EXTENDROM_PACKAGES"
+    export EXTENDROM_PACKAGES="$EXTENDROM_PACKAGES_CLEANED"
+    echo -e "[MAGISK] removed >$MAGNAME< from Android makefile generation:\nEXTENDROM_PACKAGES is now: $EXTENDROM_PACKAGES"
     echo "[MAGISK] preparing root finished"
 fi
 

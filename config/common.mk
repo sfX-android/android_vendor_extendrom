@@ -15,11 +15,6 @@ endif
 ##################################################################
 # Custom packages
 
-ifdef EXTENDROM_PACKAGES
-MAGNAME := $(shell echo "$$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -E '^Magisk$$|Magisk_v[0-9]+\.[0-9]+$$|SignMagisk$$')
-PRODUCT_PACKAGES += $(shell echo "$$EXTENDROM_PACKAGES" | tr ' ' '\n' | sed "s/$(MAGNAME)//g")
-endif
-
 ##################################################################
 # enable gesture support in /e/ OS
 # DEPRECATED?!
