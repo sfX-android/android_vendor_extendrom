@@ -341,6 +341,7 @@ F_GET_GPG_KEYS(){
 
 # the ultimate boot debugger
 F_BOOT_DEBUG(){
+    export EXTENDROM_DEBUG_PATH_ORIGIN="${EXTENDROM_DEBUG_PATH}"
     export EXTENDROM_DEBUG_PATH="${EXTENDROM_DEBUG_PATH}/boot_debug"
     # check conflicts first
     ERR=0
@@ -353,7 +354,7 @@ F_BOOT_DEBUG(){
 	    cp $p $MY_DIR/sepolicy/boot_debug/${pf/\.sepolicy/} && echo "[$FUNCNAME] ... copied sepolicy file: $pf"
 	done
         # special handling for dedicated /cache partition
-        if [ "${EXTENDROM_DEBUG_PATH}" == "/cache" ];then
+        if [ "${EXTENDROM_DEBUG_PATH_ORIGIN}" == "/cache" ];then
             for p in $(find $MY_DIR/config/boot_debug/cache -maxdepth 1 -type f -name '*.sepolicy' 2>/dev/null);do
                 pf=$(basename $p)
                 cp $p $MY_DIR/sepolicy/boot_debug/${pf/\.sepolicy/} && echo "[$FUNCNAME] ... copied sepolicy file: $pf"
