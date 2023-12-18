@@ -1,6 +1,6 @@
 #!/bin/bash
 #################################################################################
-# Copyright (C) 2021-2022 steadfasterX <steadfasterX -AT- gmail #DOT# com>
+# Copyright (C) 2021-2023 steadfasterX <steadfasterX -AT- gmail #DOT# com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -288,6 +288,7 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 ${EXTRA}
+
 _EOAPP
     done < <(grep -E -v '(^#|^[[:space:]]*$)' "$LIST" | LC_ALL=C sort | uniq)
 }
