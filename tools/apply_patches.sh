@@ -9,6 +9,7 @@
 #########################################################################################################
 #
 # Copyright (C) 2023 steadfasterX <steadfasterX -AT- binbash #DOT# rocks>
+# Copyright (C) 2024 steadfasterX <steadfasterX -AT- binbash #DOT# rocks>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,15 +54,16 @@ F_LOG "... detecting patches in: $PDIR"
 
 if [ $EXTENDROM_PATCHER_RESET == "true" ];then
     F_LOG "... will reset project paths first (bc PATCHER_RESET=true or unset)"
-    for reset in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | sort | tr ' ' '#'); do
-	dp=$(basename ${reset/:*})
-	P=$(echo "$reset" | sed 's#^#-i '$(pwd)'/#g;s/:project#/ -d /g')
-	    ROUT=$(repo forall "${reset/*#}" -c 'git reset --hard' 2>&1)
-	    if [ $? -eq 0 ];then
-		F_LOG "... git reset hard finished for ${reset/*#}"
-	    else
-		F_LOG "WARNING: issue occured while resetting:\n\n $ROUT"
-	    fi
+    for proj in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | sort | tr ' ' '#'); do
+        echo "$RESPATHS" | grep -q "${proj/*#}" || RESPATHS="$RESPATHS ${proj/*#}"
+    done
+    for reset in $RESPATHS;do
+        ROUT=$(repo forall "${reset/*#}" -c 'git reset --hard' 2>&1)
+        if [ $? -eq 0 ];then
+            F_LOG "... git reset hard finished for ${reset/*#}"
+        else
+            F_LOG "WARNING: issue occured while resetting:\n\n $ROUT"
+        fi
     done
 else
     echo EXTENDROM_PATCHER_RESET=false
