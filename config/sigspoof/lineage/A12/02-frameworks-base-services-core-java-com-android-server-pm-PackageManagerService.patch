@@ -1,43 +1,61 @@
 
-project frameworks/base/
+project frameworks/base
 diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
-index 1b5a03b0..0f4f97ab 100644
+index f69922f64787..9517e4032646 100644
 --- a/services/core/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/core/java/com/android/server/pm/PackageManagerService.java
-@@ -4105,8 +4105,9 @@ public class PackageManagerService extends IPackageManager.Stub
-             final Set<String> permissions = ArrayUtils.isEmpty(p.requestedPermissions)
-                     ? Collections.emptySet() : permissionsState.getPermissions(userId);
-
--            PackageInfo packageInfo = PackageInfoUtils.generate(p, gids, flags,
--                       ps.firstInstallTime, ps.lastUpdateTime, permissions, state, userId, ps);
-+            PackageInfo packageInfo = mayFakeSignature(p, PackageInfoUtils.generate(p, gids, flags,
-+                ps.firstInstallTime, ps.lastUpdateTime, permissions, state, userId),
-+                permissions);
-
-             if (packageInfo == null) {
-                 return null;
-@@ -4142,6 +4143,24 @@ public class PackageManagerService extends IPackageManager.Stub
+@@ -3325,6 +3325,33 @@ public class PackageManagerService extends IPackageManager.Stub
+             return result;
          }
-     }
-
-+    private PackageInfo mayFakeSignature(PackageParser.Package p, PackageInfo pi,
-+            Set<String> permissions) {
-+        try {
-+            if (permissions.contains("android.permission.FAKE_PACKAGE_SIGNATURE")
-+                    && p.applicationInfo.targetSdkVersion > Build.VERSION_CODES.LOLLIPOP_MR1
-+                    && p.mAppMetaData != null) {
-+                String sig = p.mAppMetaData.getString("fake-signature");
-+                if (sig != null) {
-+                    pi.signatures = new Signature[] {new Signature(sig)};
-+                }
+ 
++        @Nullable
++        private static String getRequestedFakeSignature(AndroidPackage p) {
++            Bundle metaData = p.getMetaData();
++            if (metaData != null) {
++                return metaData.getString("fake-signature");
 +            }
-+        } catch (Throwable t) {
-+            // We should never die because of any failures, this is system code!
-+            Log.w("PackageManagerService.FAKE_PACKAGE_SIGNATURE", t);
-+    }
-+        return pi;
-+    }
++            return null;
++        }
 +
-     @Override
-     public void checkPackageStartable(String packageName, int userId) {
-         final int callingUid = Binder.getCallingUid();
++        private static PackageInfo applyFakeSignature(AndroidPackage p, PackageInfo pi,
++                Set<String> permissions) {
++            try {
++                if (permissions.contains("android.permission.FAKE_PACKAGE_SIGNATURE")
++                        && p.getTargetSdkVersion() > Build.VERSION_CODES.LOLLIPOP_MR1) {
++                    String sig = getRequestedFakeSignature(p);
++                    if (sig != null) {
++                        pi.signatures = new Signature[] { new Signature(sig) };
++                    }
++                }
++            } catch (Throwable t) {
++                // We should never die because of any failures, this is system code!
++                Log.w("PackageManagerService.FAKE_PACKAGE_SIGNATURE", t);
++            }
++            return pi;
++        }
++
++
+         public final PackageInfo generatePackageInfo(PackageSetting ps, int flags, int userId) {
+             if (!mUserManager.exists(userId)) return null;
+             if (ps == null) {
+@@ -3353,13 +3380,17 @@ public class PackageManagerService extends IPackageManager.Stub
+                 final int[] gids = (flags & PackageManager.GET_GIDS) == 0 ? EMPTY_INT_ARRAY
+                         : mPermissionManager.getGidsForUid(UserHandle.getUid(userId, ps.appId));
+                 // Compute granted permissions only if package has requested permissions
+-                final Set<String> permissions = ((flags & PackageManager.GET_PERMISSIONS) == 0
+-                        || ArrayUtils.isEmpty(p.getRequestedPermissions())) ? Collections.emptySet()
+-                        : mPermissionManager.getGrantedPermissions(ps.name, userId);
++                boolean computePermissions = !ArrayUtils.isEmpty(p.getRequestedPermissions()) &&
++                    ((flags & PackageManager.GET_PERMISSIONS) != 0 || getRequestedFakeSignature(p) != null);
++                final Set<String> permissions = computePermissions ?
++                            mPermissionManager.getGrantedPermissions(ps.name, userId)
++                            : Collections.emptySet();
+ 
+                 PackageInfo packageInfo = PackageInfoUtils.generate(p, gids, flags,
+                         ps.firstInstallTime, ps.lastUpdateTime, permissions, state, userId, ps);
+ 
++                packageInfo = applyFakeSignature(p, packageInfo, permissions);
++
+                 if (packageInfo == null) {
+                     return null;
+                 }
