@@ -1,10 +1,16 @@
 
 project frameworks/base/
 diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
-index 1085c9232214..d436c30a8583 100644
+index 1085c9232214..d738fe3004c0 100644
 --- a/services/core/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/core/java/com/android/server/pm/PackageManagerService.java
-@@ -3344,6 +3344,10 @@ public class PackageManagerService extends IPackageManager.Stub
+@@ -3339,11 +3339,15 @@ public class PackageManagerService extends IPackageManager.Stub
+             return null;
+         }
+ 
+-        private static PackageInfo applyFakeSignature(AndroidPackage p, PackageInfo pi,
++        private PackageInfo applyFakeSignature(AndroidPackage p, PackageInfo pi,
+                 Set<String> permissions) {
              try {
                  if (permissions.contains("android.permission.FAKE_PACKAGE_SIGNATURE")
                          && p.getTargetSdkVersion() > Build.VERSION_CODES.LOLLIPOP_MR1) {
