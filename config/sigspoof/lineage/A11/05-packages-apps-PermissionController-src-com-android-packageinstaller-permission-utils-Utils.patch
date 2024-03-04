@@ -1,0 +1,23 @@
+
+project packages/apps/PermissionController/
+diff --git a/src/com/android/permissioncontroller/permission/utils/Utils.java b/src/com/android/permissioncontroller/permission/utils/Utils.java
+index 90acf9223..f692f9862 100644
+--- a/src/com/android/permissioncontroller/permission/utils/Utils.java
++++ b/src/com/android/permissioncontroller/permission/utils/Utils.java
+@@ -23,6 +23,7 @@ import static android.Manifest.permission_group.CALENDAR;
+ import static android.Manifest.permission_group.CALL_LOG;
+ import static android.Manifest.permission_group.CAMERA;
+ import static android.Manifest.permission_group.CONTACTS;
++import static android.Manifest.permission_group.FAKE_PACKAGE;
+ import static android.Manifest.permission_group.LOCATION;
+ import static android.Manifest.permission_group.MICROPHONE;
+ import static android.Manifest.permission_group.NETWORK;
+@@ -221,6 +222,8 @@ public final class Utils {
+         SPECIAL_RUNTIME_PERMISSIONS.put(Manifest.permission.INTERNET, NETWORK);
+         SPECIAL_RUNTIME_PERMISSIONS.put(Manifest.permission.OTHER_SENSORS, OTHER_SENSORS);
+ 
++        PLATFORM_PERMISSIONS.put(Manifest.permission.FAKE_PACKAGE_SIGNATURE, FAKE_PACKAGE);
++
+         PLATFORM_PERMISSION_GROUPS = new ArrayMap<>();
+         int numPlatformPermissions = PLATFORM_PERMISSIONS.size();
+         for (int i = 0; i < numPlatformPermissions; i++) {
