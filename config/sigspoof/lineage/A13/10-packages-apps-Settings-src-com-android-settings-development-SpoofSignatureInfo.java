@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2019-2023 steadfasterX <steadfasterX |AT| binbash #DOT# rocks>
+ * Copyright (C) 2019-2024 steadfasterX <steadfasterX |AT| binbash #DOT# rocks>
  * LICENSE: GNU General Public License v3.0
  *
  */
