@@ -400,8 +400,8 @@ F_SIGPATCH(){
     ERR=$?
     echo "[$FUNCNAME] Signature spoofing patching ended with $ERR"
     echo "[$FUNCNAME] adding signature spoof controller"
-    cp $PDIR/09-packages-apps-Settings-src-com-android-settings-development-SpoofSignaturePreferenceController.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignaturePreferenceController.java || exit 3
-    cp $PDIR/10-packages-apps-Settings-src-com-android-settings-development-SpoofSignatureInfo.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignatureInfo.java || exit 3
+    cp $PDIR/*-packages-apps-Settings-src-com-android-settings-development-SpoofSignaturePreferenceController.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignaturePreferenceController.java || exit 3
+    cp $PDIR/*-packages-apps-Settings-src-com-android-settings-development-SpoofSignatureInfo.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignatureInfo.java || exit 3
     echo "[$FUNCNAME] adding signature spoof controller ended with $?"
     if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
 }
