@@ -277,6 +277,10 @@ F_WRITE_MAKEFILE(){
 	    EXTRA="$EXTRA
 include \$(BUILD_PREBUILT)"
 	fi
+	if [ $app_target_sdk -gt 29 ];then
+            MP='LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+'
+        fi
 	cat >> $ANDROIDMK << _EOAPP
 
 include \$(CLEAR_VARS)
@@ -287,7 +291,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
-${EXTRA}
+${MP}${EXTRA}
 
 _EOAPP
     done < <(grep -E -v '(^#|^[[:space:]]*$)' "$LIST" | LC_ALL=C sort | uniq)

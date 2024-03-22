@@ -10,6 +10,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Apps
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ BlissLauncher
@@ -22,6 +25,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := BlissLauncher
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ Mail
@@ -34,6 +40,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Mail
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ Calendar
@@ -46,6 +55,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Calendar
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ Message
@@ -58,6 +70,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Message
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ PdfViewer
@@ -70,6 +85,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := PdfViewer
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ LibreOfficeViewer
@@ -82,6 +100,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := LibreOfficeViewer
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ Camera
@@ -94,6 +115,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Camera
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ eSpeakTTS
@@ -106,6 +130,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := eSpeakTTS
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override eSpeakNG
@@ -118,6 +145,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := eSpeakNG
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ GmsCore
@@ -130,6 +160,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := GmsCore
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ GsfProxy
@@ -142,6 +175,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := GsfProxy
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ FakeStore
@@ -154,6 +190,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := FakeStore
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ com.google.android.maps.jar
@@ -166,6 +205,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := com.google.android.maps.jar
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ BlissIconPack
@@ -178,6 +220,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := BlissIconPack
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ MozillaNlpBackend
@@ -190,6 +235,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := MozillaNlpBackend
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ OpenWeatherMapWeatherProvider
@@ -202,6 +250,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := OpenWeatherMapWeatherProvider
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ AccountManager
@@ -214,6 +265,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := AccountManager
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ eDrive
@@ -226,6 +280,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := eDrive
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ Notes
@@ -238,6 +295,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Notes
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ Tasks
@@ -250,6 +310,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Tasks
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ ESmsSync
@@ -262,6 +325,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := ESmsSync
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ NominatimNlpBackend
@@ -274,6 +340,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := NominatimNlpBackend
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ DroidGuard
@@ -286,6 +355,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := DroidGuard
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ OpenKeychain
@@ -298,6 +370,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := OpenKeychain
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ Browser
@@ -310,6 +385,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Browser
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ BrowserWebView
@@ -322,6 +400,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := BrowserWebView
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ PwaPlayer
@@ -334,6 +415,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := PwaPlayer
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override /e/ MagicEarth
@@ -346,6 +430,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := MagicEarth
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 
@@ -499,7 +586,11 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := com.android.vending.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/permissions
+else
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+endif
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
@@ -508,7 +599,11 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := phonesky-permissions.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/default-permissions
+else
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/default-permissions
+endif
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
@@ -527,7 +622,11 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := er_microg.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/permissions
+else
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+endif
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
@@ -535,7 +634,11 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := er_privapp-permissions-com.google.android.gms.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/permissions
+else
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+endif
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
@@ -543,7 +646,11 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := er_sysconfig-com.google.android.gms.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/sysconfig
+else
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/sysconfig
+endif
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
@@ -551,7 +658,11 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := er_exceptions-com.google.android.gms.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/permissions
+else
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+endif
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
@@ -572,7 +683,11 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := permissions_com.aurora.services.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/permissions
+else
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+endif
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
@@ -586,6 +701,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Email 
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override lineageOS Messaging
@@ -598,6 +716,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := messaging
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override lineageOS Snap
@@ -610,6 +731,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Snap
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
 
 # override lineageOS Jelly
@@ -622,6 +746,9 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 LOCAL_OVERRIDES_PACKAGES := Jelly
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
 include $(BUILD_PREBUILT)
  
 # Permissions for microG FakeStore
