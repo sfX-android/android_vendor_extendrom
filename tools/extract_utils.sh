@@ -277,9 +277,16 @@ F_WRITE_MAKEFILE(){
 	    EXTRA="$EXTRA
 include \$(BUILD_PREBUILT)"
 	fi
+        # move all to /system_ext when A11 or later (except Play Store)
 	if [ $app_target_sdk -gt 29 ];then
-            MP='LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+            # /system_ext EXCEPTIONS must be added here (and in er.mk)
+            case "$appname" in
+                Phonesky_AXP-OS) unset MP;; # Google Play Store HAS TO be in /system or it will FC
+                # for the rest move them to /system_ext
+                *) MP='LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
 '
+                ;;
+            esac
         fi
 	cat >> $ANDROIDMK << _EOAPP
 
