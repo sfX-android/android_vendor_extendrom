@@ -20,6 +20,7 @@ com.aurora.store_LATEST.apk|FDROIDREPO|app|AuroraStore.apk;PRESIGNED|true
 
 # Aurora Services
 # Allow Aurora Store to install updates automatically
+# deprecated! support will be removed with 4.5.0 - see: https://gitlab.com/AuroraOSS/AuroraStore/-/issues/967
 AuroraServices_v1.1.1.apk|https://gitlab.com/AuroraOSS/AuroraServices/uploads/c22e95975571e9db143567690777a56e|priv-app|AuroraServices.apk;user-keys/shared|false||permissions_com.aurora.services.xml
 
 # AdAway
