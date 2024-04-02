@@ -87,6 +87,10 @@ net.sourceforge.opencamera_LATEST.apk|FDROIDREPO|app|OpenCamera.apk;PRESIGNED|tr
 # J5 OpenCamera (preview fix)
 opencamera_sfX_j5_fixPreview.apk|https://leech.binbash.rocks:8008/misc|app|opencamera_j5_latest.apk;PRESIGNED|false
 
+# Latest OpenEUICC build (https://gitea.angry.im/PeterCxy/OpenEUICC) signed by AXP.OS
+# Note: requires A11 or later (https://gitea.angry.im/PeterCxy/OpenEUICC/issues/7#issuecomment-27)
+OpenEUICC-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/download/latest|priv-app|OpenEUICC_AXP-OS.apk;PRESIGNED|false||er_privapp_whitelist_im.angry.openeuicc.xml
+
 ##########################################################################################################
 # LAUNCHERS
 ##########################################################################################################
