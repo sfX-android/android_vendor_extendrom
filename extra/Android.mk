@@ -759,3 +759,16 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT_ETC)/default-permissions
 LOCAL_SRC_FILES := default-permissions-com.android.vending.xml
 include $(BUILD_PREBUILT)
+
+# OpenEUICC permissions
+include $(CLEAR_VARS)
+LOCAL_MODULE := er_privapp_whitelist_im.angry.openeuicc.xml
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/permissions
+else
+LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+endif
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
