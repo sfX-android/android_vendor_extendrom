@@ -110,8 +110,9 @@ NeoLauncher-release.apk|https://github.com/NeoApplications/Neo-Launcher/releases
 Lawnchair_202589.apk|https://www.dropbox.com/s/qi551e1y2ubd1zd|app|Lawnchair-stable.apk;PRESIGNED|false
 
 # Lawnchair - latest
-# taken directly from the official Lawnchair github
-Lawnchair.12.1.0.Alpha.4.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v12.1.0-alpha.4|app|Lawnchair-latest.apk;PRESIGNED|false
+Lawnchair.14.0.0.Beta.1.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v14.0.0-beta1|app|Lawnchair-latest.apk;PRESIGNED|false
+# Lawnchair v12.1 alpha4
+Lawnchair.12.1.0.Alpha.4.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v12.1.0-alpha.4|app|Lawnchair-12.apk;PRESIGNED|false
 
 # OpenLauncher
 com.benny.openlauncher_LATEST.apk|FDROIDREPO|app|OpenLauncher.apk;PRESIGNED|true
