@@ -90,6 +90,7 @@ opencamera_sfX_j5_fixPreview.apk|https://leech.binbash.rocks:8008/misc|app|openc
 # Latest OpenEUICC build (https://gitea.angry.im/PeterCxy/OpenEUICC) signed by AXP.OS
 # Note: requires A11 or later (https://gitea.angry.im/PeterCxy/OpenEUICC/issues/7#issuecomment-27)
 OpenEUICC-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/download/latest|priv-app|OpenEUICC_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
+OpenEUICC_hidden-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/download/latest|priv-app|OpenEUICC-hidden_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
 
 ##########################################################################################################
 # LAUNCHERS
