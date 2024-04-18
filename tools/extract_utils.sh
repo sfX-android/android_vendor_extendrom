@@ -284,8 +284,14 @@ include \$(BUILD_PREBUILT)"
                 Phonesky_AXP-OS) unset MP;; # Google Play Store HAS TO be in /system or it will FC
                 phonesky-permissions.xml|com.android.vending.xml) unset MP;; # required for Google Play Store
                 # for the rest move them to /system_ext
-                *) MP='LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+                *)
+                if [[ "$appdir" =~ .*priv-app ]];then
+                    MP='LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS_PRIVILEGED)
 '
+                else
+                    MP='LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+'
+                fi
                 ;;
             esac
         fi
