@@ -159,6 +159,14 @@ FDROID_REPO_DIR="$MY_DIR/fdroid_repos"
 # write $PRODUCTMK so all EXTENDROM_PACKAGES (except Magisk) will be built by the Android build process
 export PRODUCTMK="$MY_DIR/packages.mk"
 
+# write mk vars
+export ERMKVARS="ENABLE_EXTENDROM EXTENDROM_BOOT_DEBUG EXTENDROM_PREROOT_BOOT EXTENDROM_SIGNATURE_SPOOFING
+"
+> $MY_DIR/mkvars.mk
+for ermk in $ERMKVARS;do
+    echo "$ermk: ${!ermk}" >> $MY_DIR/mkvars.mk
+done
+
 # prepare to remove Magisk from EXTENDROM_PACKAGES as we don't build it
 # see https://github.com/sfX-android/android_vendor_extendrom/wiki/FAQ#extendrom_preroot_boot
 if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
