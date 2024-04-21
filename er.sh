@@ -164,7 +164,7 @@ export ERMKVARS="ENABLE_EXTENDROM EXTENDROM_BOOT_DEBUG EXTENDROM_PREROOT_BOOT EX
 "
 > $MY_DIR/mkvars.mk
 for ermk in $ERMKVARS;do
-    echo "$ermk: ${!ermk}" >> $MY_DIR/mkvars.mk
+    echo "$ermk := ${!ermk}" >> $MY_DIR/mkvars.mk
 done
 
 # prepare to remove Magisk from EXTENDROM_PACKAGES as we don't build it
