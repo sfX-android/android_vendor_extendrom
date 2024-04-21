@@ -2,6 +2,8 @@
 # backwards compat for at least A9 where the environment vars
 # do not get parsed and become build flags automatically
 
+$(call inherit-product-if-exists, vendor/extendrom/mkvars.mk)
+
 ifeq ($(EXTENDROM_BOOT_DEBUG),)
 EXTENDROM_BOOT_DEBUG := $(shell echo $$EXTENDROM_BOOT_DEBUG)
 endif
