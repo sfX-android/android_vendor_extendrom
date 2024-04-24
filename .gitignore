@@ -5,3 +5,4 @@ config/init.er.rc
 sepolicy
 EXTENDROM_PATCHER_DONE
 packages.mk
+mkvars.mk
