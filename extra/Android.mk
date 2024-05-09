@@ -760,6 +760,22 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT_ETC)/default-permissions
 LOCAL_SRC_FILES := default-permissions-com.android.vending.xml
 include $(BUILD_PREBUILT)
 
+# Default permissions for Neo Launcher
+include $(CLEAR_VARS)
+LOCAL_MODULE := er_default-permissions-neolauncher.xml
+LOCAL_MODULE_CLASS := ETC
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/default-permissions
+else
+LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/default-permissions
+endif # LOCAL_MODULE_PATH
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),33), true)
+LOCAL_SRC_FILES := er_default-permissions-neolauncher.xml
+else
+LOCAL_SRC_FILES := er_default-permissions-neolauncher_legacy.xml
+endif # LOCAL_SRC_FILES
+include $(BUILD_PREBUILT)
+
 # OpenEUICC permissions
 include $(CLEAR_VARS)
 LOCAL_MODULE := er_privapp_whitelist_im.angry.openeuicc.xml

@@ -1,0 +1,12 @@
+<exceptions>
+    <exception package="com.saggitt.omega">
+        <!-- photos, videos, audio (when app manifest is targeting A12 or lower) -->
+        <permission name="android.permission.READ_EXTERNAL_STORAGE" fixed="false"/>
+        <!-- photos (when app manifest is targeting A13 or later) -->
+        <permission name="android.permission.READ_MEDIA_IMAGES" fixed="false"/>
+        <!-- videos (when app manifest is targeting A13 or later) -->
+        <permission name="android.permission.READ_MEDIA_VIDEO" fixed="false"/>
+        <!-- music and audio (when app manifest is targeting A13 or later) -->
+        <permission name="android.permission.READ_MEDIA_AUDIO" fixed="false"/>
+    </exception>
+</exceptions>
