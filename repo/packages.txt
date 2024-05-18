@@ -54,8 +54,8 @@ Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|
 
 # Phonesky (Google in-app purchase support) by AXP.OS (based on nanolx, way more recent, tons of bugfixes)
 # require a new key to be created named: "apps" (supported by buildtools since https://github.com/sfX-android/android_buildtools/commit/b59ce99439e488)
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/41.0.28-23_84102800|priv-app|Phonesky_AXP-OS-latest.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/41.0.28-23_84102800|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS_38-1.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 # MicrogGmsCore
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
