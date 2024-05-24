@@ -402,6 +402,19 @@ F_BOOT_DEBUG(){
 F_SIGPATCH(){
     echo "[$FUNCNAME] Signature spoofing patch requested ..."
 
+    # revert LOS patches
+    case ${EXTENDROM_TARGET_VERSION} in
+    	14) MGCOMMITS="6b793fa98a40dd6c2d6eb02988161ed123439428" ;;
+     	13) MGCOMMITS="6d2955f0bd55e9938d5d49415182c27b50900b95" ;;
+      	12) MGCOMMITS="83fe523914728a3674debba17a6019cb74803045" ;;
+        11) MGCOMMITS="438d9feacfcad73d3ee918541574132928a93644" ;;
+    esac
+    if [ ! -z "$MGCOMMITS" ];then
+    	cd frameworks/base
+    	git revert --no-edit $MGCOMMITS
+    	cd ../..
+    fi
+    
     PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
     PDIR="$SRC_TOP_FULL/$MY_DIR/config/sigspoof/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
     [ ! -z "$EXTENDROM_SIGSPOOF_FORCE_PDIR" ] && [ -d "$EXTENDROM_SIGSPOOF_FORCE_PDIR" ] && PDIR=$EXTENDROM_SIGSPOOF_FORCE_PDIR
