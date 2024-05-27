@@ -53,6 +53,7 @@ Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app
 # by AXP.OS (based on nanolx but way more recent and tons of bugfixes)
 # IMPORTANT NOTE: requires a new signing key to be created named: "apps" (supported by "buildtools" since https://github.com/sfX-android/android_buildtools/commit/b59ce99439e488)
 # current version:
+#Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/latest|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/41.0.28-23_84102800|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 # older versions:
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS_38-1.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
