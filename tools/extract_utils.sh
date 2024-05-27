@@ -278,7 +278,7 @@ F_WRITE_MAKEFILE(){
 include \$(BUILD_PREBUILT)"
 	fi
         # move all to /system_ext when A11 or later (except Play Store)
-	if [ $app_target_sdk -gt 29 ];then
+	if [ $app_target_sdk -gt 29 ] || [ $EXTENDROM_TARGET_VERSION -gt 10 ];then
             # /system_ext EXCEPTIONS must be added here (and in er.mk)
             case "$appname" in
                 Phonesky_AXP-OS) unset MP;; # Google Play Store HAS TO be in /system or it will FC
