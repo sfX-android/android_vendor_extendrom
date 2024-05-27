@@ -49,34 +49,43 @@ Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app
 Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app|SignMagisk_v22.1.apk;user-keys/shared|false
 # Note: v21.4 and older are NOT supported anymore!
 
-# Phonesky (Google in-app purchase support) by nanolx (https://gitlab.com/Nanolx/microg-phonesky-iap-support)
-Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
-
-# Phonesky (Google in-app purchase support) by AXP.OS (based on nanolx, way more recent, tons of bugfixes)
-# require a new key to be created named: "apps" (supported by buildtools since https://github.com/sfX-android/android_buildtools/commit/b59ce99439e488)
+# Phonesky (Google in-app purchase support)
+# by AXP.OS (based on nanolx but way more recent and tons of bugfixes)
+# IMPORTANT NOTE: requires a new signing key to be created named: "apps" (supported by "buildtools" since https://github.com/sfX-android/android_buildtools/commit/b59ce99439e488)
+# current version:
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/41.0.28-23_84102800|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+# older versions:
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS_38-1.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
-# MicrogGmsCore
-com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
-# as microg.org is ultra slow atm, here a "xxx_GH" fallback to github:
-com.google.android.gms-231657056.apk|https://github.com/microg/GmsCore/releases/download/v0.2.28.231657/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
-# it seems the latest fully re-written GMScore causes several issues. The following is the last one before that full rewrite:
-com.google.android.gms-223616054.apk|https://github.com/microg/GmsCore/releases/download/v0.2.27.223616/|app|MicrogGmsCore_unified-latest.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+# Phonesky - LEGACY (Google in-app purchase support)
+# by nanolx (https://gitlab.com/Nanolx/microg-phonesky-iap-support)
+Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
-# GsfProxy  <https://microg.org/fdroid/repo/com.google.android.gsf-8.apk>
+# MicroG GmsCore
+# - FDroid repo
+#   easiest as you get the latest always - but it is sometimes incredible slow
+com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+# - Github release
+#   a "xxx_GH" fallback to github which is fast always
+com.google.android.gms-240913004.apk|https://github.com/microg/GmsCore/releases/download/v0.3.2.240913/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+
+# MicroG GsfProxy
+# - FDroid repo
+#   easiest as you get the latest always - but it is sometimes incredible slow
 com.google.android.gsf-LATEST.apk|https://microg.org/fdroid/repo/|app|GsfProxy.apk;PRESIGNED|false
-# as microg.org is ultra slow atm, here a "xxx_GH" fallback to github:
+# - Github release
+#   a "xxx_GH" fallback to github which is fast always
 GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/download/v0.1.0|app|GsfProxy_GH.apk;PRESIGNED|false
 
-# FakeStore
-com.android.vending-16.apk|https://microg.org/fdroid/repo/|priv-app|FakeStore.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
-# as microg.org is ultra slow atm, here a "xxx_GH" fallback to github:
-com.android.vending-30.apk|https://github.com/microg/FakeStore/releases/download/v0.2.0|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+# MicroG FakeStore - LEGACY
+# is part of GmsCore now: https://github.com/microg/GmsCore/tree/master/vending-app
+com.android.vending-83700037.apk|https://github.com/microg/FakeStore/releases/download/v0.2.1|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 
+# MicroG GmsCore - LEGACY
+# it seems the latest fully re-written GMScore causes several issues for some. The following is the last one -before- that full rewrite:
+com.google.android.gms-223616054.apk|https://github.com/microg/GmsCore/releases/download/v0.2.27.223616/|app|MicrogGmsCore_unified-latest.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 # DEPRECATED: NominatimBackend
 org.microg.nlp.backend.nominatim_LATEST.apk|FDROIDREPO|app|NominatimBackend.apk;PRESIGNED|false
-
 # DEPRECATED: MozillaNlpBackend
 org.microg.nlp.backend.ichnaea_LATEST.apk|FDROIDREPO|app|MozillaNlpBackend.apk;PRESIGNED|false
 
