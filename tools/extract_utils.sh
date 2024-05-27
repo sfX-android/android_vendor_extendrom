@@ -1,6 +1,6 @@
 #!/bin/bash
 #################################################################################
-# Copyright (C) 2021-2023 steadfasterX <steadfasterX -AT- gmail #DOT# com>
+# Copyright (C) 2021-2024 steadfasterX <steadfasterX -AT- gmail #DOT# com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
