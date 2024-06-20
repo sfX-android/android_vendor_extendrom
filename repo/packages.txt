@@ -17,6 +17,8 @@ org.fdroid.fdroid.privileged_LATEST.apk|FDROIDREPO|priv-app|F-DroidPrivilegedExt
 
 # AuroraStore
 com.aurora.store_LATEST.apk|FDROIDREPO|app|AuroraStore.apk;PRESIGNED|true
+# AuroraStore v4.4.4
+com.aurora.store_58.apk|FDROIDREPO|app|AuroraStore_444.apk;PRESIGNED|true
 
 # Aurora Services
 # Allow Aurora Store to install updates automatically
