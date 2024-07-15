@@ -22,7 +22,7 @@ com.aurora.store_58.apk|FDROIDREPO|app|AuroraStore_444.apk;PRESIGNED|true
 
 # Aurora Services
 # Allow Aurora Store to install updates automatically
-# deprecated! support will be removed with 4.5.0 - see: https://gitlab.com/AuroraOSS/AuroraStore/-/issues/967
+# DEPRECATED! support has been removed since v4.5.0 of the AuroraStore - see: https://gitlab.com/AuroraOSS/AuroraStore/-/issues/967
 AuroraServices_v1.1.1.apk|https://gitlab.com/AuroraOSS/AuroraServices/uploads/c22e95975571e9db143567690777a56e|priv-app|AuroraServices.apk;user-keys/shared|false||permissions_com.aurora.services.xml
 
 # AdAway
@@ -37,6 +37,7 @@ Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app
 # Magisk older versions
 Magisk-v26.4.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.4|app|Magisk_v26.4.apk;PRESIGNED|false
 Magisk-v26.4.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.4|app|SignMagisk_v26.4.apk;user-keys/shared|false
+# Magisk LEGACY versions (should still work)
 Magisk.v26.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.3|app|Magisk_v26.3.apk;PRESIGNED|false
 Magisk.v26.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.3|app|SignMagisk_v26.3.apk;user-keys/shared|false
 Magisk-v26.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.2|app|Magisk_v26.2.apk;PRESIGNED|false
@@ -49,15 +50,16 @@ Magisk-v23.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v23.0|app
 Magisk-v23.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v23.0|app|SignMagisk_v23.0.apk;user-keys/shared|false
 Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app|Magisk_v22.1.apk;PRESIGNED|false
 Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app|SignMagisk_v22.1.apk;user-keys/shared|false
-# Note: v21.4 and older are NOT supported anymore!
+# Note: v21.4 and older are NOT working with extendrom!
 
 # Phonesky (Google in-app purchase support)
 # by AXP.OS (based on nanolx but way more recent and tons of bugfixes)
 # IMPORTANT NOTE: requires a new signing key to be created named: "apps" (supported by "buildtools" since https://github.com/sfX-android/android_buildtools/commit/b59ce99439e488)
-# current version:
-#Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/latest|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+# current stable:
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/41.0.28-23_84102800|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
-# older versions:
+# current testing:
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/41.7.16-23_84171600|priv-app|Phonesky_AXP-OS-testing.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+# previous stable:
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS_38-1.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 # Phonesky - LEGACY (Google in-app purchase support)
