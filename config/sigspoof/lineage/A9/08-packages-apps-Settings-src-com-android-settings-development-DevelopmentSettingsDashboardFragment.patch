@@ -1,0 +1,14 @@
+
+project packages/apps/Settings/
+diff --git a/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java b/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java
+index 0090045573..9f3b0b0e00 100644
+--- a/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java
++++ b/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java
+@@ -502,6 +502,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
+         controllers.add(new DefaultLaunchPreferenceController(context, "density"));
+         controllers.add(new DefaultLaunchPreferenceController(context, "background_check"));
+         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));
++        controllers.add(new SpoofSignaturePreferenceController(context));      // extendrom: signature spoofing patch
++        controllers.add(new SpoofSignatureInfo(context));       // extendrom: signature spoofing patch
+         return controllers;
+     }
