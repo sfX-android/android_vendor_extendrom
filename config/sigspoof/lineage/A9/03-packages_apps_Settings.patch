@@ -1,0 +1,35 @@
+
+project packages/apps/Settings/
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index 9f78d9b654..28a2421b9d 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -10088,6 +10088,11 @@
+     <!-- Title for Connected device shortcut [CHAR LIMIT=30] -->
+     <string name="devices_title">Devices</string>
+ 
++    <!-- Allow fake signature checkbox in developer settings -->
++    <string name="allow_signature_fake">Allow signature spoofing</string>
++    <string name="allow_signature_fake_summary">Allow apps to bypass security systems by pretending to be a different app</string>
++    <string name="allow_signature_fake_warning">Allowing apps to bypass security systems can lead to serious security and privacy problems! Check that only benign apps use the corresponding permission when this is active.</string>
++
+     <!-- Bluetooth message permission alert for notification content [CHAR LIMIT=none] -->
+     <string name="bluetooth_message_access_notification_content">A device wants to access your messages. Tap for details.</string>
+     <!-- Bluetooth message permission alert for dialog title [CHAR LIMIT=none] -->
+diff --git a/res/xml/development_settings.xml b/res/xml/development_settings.xml
+index 8a8d2d4def..abfd8cc637 100644
+--- a/res/xml/development_settings.xml
++++ b/res/xml/development_settings.xml
+@@ -569,6 +569,12 @@
+             android:key="reset_shortcut_manager_throttling"
+             android:title="@string/reset_shortcut_manager_throttling" />
+ 
++       <SwitchPreference
++            android:key="allow_signature_fake"
++            android:title="@string/allow_signature_fake"
++            android:summary="@string/allow_signature_fake_summary"
++            android:defaultValue="false" />
++
+         <lineageos.preference.LineageSecureSettingSwitchPreference
+             android:key="kill_app_longpress_back"
+             android:title="@string/kill_app_longpress_back"
