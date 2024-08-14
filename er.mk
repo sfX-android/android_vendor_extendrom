@@ -36,7 +36,7 @@ PRODUCT_PACKAGES += \
 
 ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
 PRODUCT_COPY_FILES += \
-    $(VENDOR_DIR)/config/init.er.rc:$(TARGET_OUT_SYSTEM_EXT_ETC)/init/init.extendrom.rc
+    $(VENDOR_DIR)/config/init.er.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.extendrom.rc
 else
 PRODUCT_COPY_FILES += \
     $(VENDOR_DIR)/config/init.er.rc:$(TARGET_COPY_OUT_SYSTEM)/etc/init/init.extendrom.rc
