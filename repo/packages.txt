@@ -57,16 +57,12 @@ Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app
 # by AXP.OS (based on nanolx but way more recent and tons of bugfixes)
 # IMPORTANT NOTE: requires a new signing key to be created named: "apps" (supported by "buildtools" since https://github.com/sfX-android/android_buildtools/commit/b59ce99439e488)
 # current stable:
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/41.8.14-23_84181400|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/download/41.8.14-23_84181400|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 # current testing:
-#
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/42.1.28-23_84212800|priv-app|Phonesky_AXP-OS_testing.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 # previous stable:
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/41.0.28-23_84102800|priv-app|Phonesky_AXP-OS-41-0.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/microg-phonesky-iap-support/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS_38-1.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
-
-# Phonesky - LEGACY (Google in-app purchase support)
-# by nanolx (https://gitlab.com/Nanolx/microg-phonesky-iap-support)
-Phonesky_132.apk|https://nanolx.org/fdroid/repo|priv-app|Phonesky.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/41.0.28-23_84102800|priv-app|Phonesky_AXP-OS-41-0.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS_38-1.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 # MicroG GmsCore
 # - FDroid repo
