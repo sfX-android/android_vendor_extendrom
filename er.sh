@@ -409,8 +409,9 @@ F_SIGPATCH(){
       	12) MGCOMMITS="83fe523914728a3674debba17a6019cb74803045" ;;
         11) MGCOMMITS="438d9feacfcad73d3ee918541574132928a93644" ;;
     esac
-    if [ ! -z "$MGCOMMITS" ];then
+    if [ ! -z "$MGCOMMITS" ] && [ "$EXTENDROM_SIGSPOOF_RESET" != "false" ];then
     	cd frameworks/base
+        echo "[$FUNCNAME] reverting DOS commit to allow sigspoofing"
     	git revert --no-edit $MGCOMMITS
     	cd ../..
     fi
@@ -419,7 +420,7 @@ F_SIGPATCH(){
     PDIR="$SRC_TOP_FULL/$MY_DIR/config/sigspoof/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
     [ ! -z "$EXTENDROM_SIGSPOOF_FORCE_PDIR" ] && [ -d "$EXTENDROM_SIGSPOOF_FORCE_PDIR" ] && PDIR=$EXTENDROM_SIGSPOOF_FORCE_PDIR
 
-    $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
+    $PATCHX $PDIR $EXTENDROM_SIGSPOOF_RESET
     ERR=$?
     echo "[$FUNCNAME] Signature spoofing patching ended with $ERR"
     echo "[$FUNCNAME] adding signature spoof controller"

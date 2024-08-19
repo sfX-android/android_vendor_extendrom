@@ -66,7 +66,7 @@ if [ $EXTENDROM_PATCHER_RESET == "true" ];then
         fi
     done
 else
-    echo EXTENDROM_PATCHER_RESET=false
+    F_LOG "EXTENDROM_PATCHER_RESET=false"
 fi
 
 for p in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | sort | tr ' ' '#'); do
