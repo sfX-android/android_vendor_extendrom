@@ -8,5 +8,7 @@
         <permission name="android.permission.READ_MEDIA_VIDEO" fixed="false"/>
         <!-- music and audio (when app manifest is targeting A13 or later) -->
         <permission name="android.permission.READ_MEDIA_AUDIO" fixed="false"/>
+        <!-- close dialog permission -->
+        <permission name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS" fixed="false"/>
     </exception>
 </exceptions>
