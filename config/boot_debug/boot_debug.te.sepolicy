@@ -33,6 +33,5 @@ allow boot_debug cache_file:lnk_file read;
 # when using /metadata
 allow boot_debug metadata_file:dir search;
 
-# when using /mnt/vendor/persist
+# when using /data/vendor_de
 allow boot_debug mnt_vendor_file:dir search;
-allow boot_debug persist_file:dir search;
