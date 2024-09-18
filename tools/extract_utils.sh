@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+#################################################################################
 
 set +e
 
@@ -281,7 +282,7 @@ include \$(BUILD_PREBUILT)"
 	if [ $app_target_sdk -gt 29 ] || [ $EXTENDROM_TARGET_VERSION -gt 10 ];then
             # /system_ext EXCEPTIONS must be added here (and in er.mk)
             case "$appname" in
-                Phonesky_AXP-OS) unset MP;; # Google Play Store HAS TO be in /system or it will FC
+                Phonesky_AXP-OS|Phonesky_AXP-OS_testing) unset MP;; # Google Play Store HAS TO be in /system or it will FC
                 phonesky-permissions.xml|com.android.vending.xml) unset MP;; # required for Google Play Store
                 # for the rest move them to /system_ext
                 *)
