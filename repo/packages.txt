@@ -61,7 +61,7 @@ Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/do
 # current testing:
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/42.6.23-23_84262300|priv-app|Phonesky_AXP-OS_testing.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 # previous stable:
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/41.8.14-23_84181400|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/41.8.14-23_84181400|priv-app|Phonesky_AXP-OS_41-8.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/41.0.28-23_84102800|priv-app|Phonesky_AXP-OS-41-0.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS_38-1.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
