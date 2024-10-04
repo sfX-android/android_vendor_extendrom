@@ -32,13 +32,15 @@ org.adaway_LATEST.apk|FDROIDREPO|app|AdAway.apk;PRESIGNED|false
 # DNS66
 org.jak_linux.dns66_LATEST.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 
-# Magisk latest
+# Magisk latest stable version
 Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app|Magisk.apk;PRESIGNED|false
 Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app|SignMagisk.apk;user-keys/shared|false
-# Magisk older versions
+
+# Magisk previous stable version
 Magisk-v26.4.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.4|app|Magisk_v26.4.apk;PRESIGNED|false
 Magisk-v26.4.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.4|app|SignMagisk_v26.4.apk;user-keys/shared|false
-# Magisk LEGACY versions (should still work)
+
+# Magisk LEGACY versions
 Magisk.v26.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.3|app|Magisk_v26.3.apk;PRESIGNED|false
 Magisk.v26.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.3|app|SignMagisk_v26.3.apk;user-keys/shared|false
 Magisk-v26.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.2|app|Magisk_v26.2.apk;PRESIGNED|false
@@ -52,6 +54,12 @@ Magisk-v23.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v23.0|app
 Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app|Magisk_v22.1.apk;PRESIGNED|false
 Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app|SignMagisk_v22.1.apk;user-keys/shared|false
 # Note: v21.4 and older are NOT working with extendrom!
+
+# Magisk latest known DEBUG version (only use this for DEBUGGING magisk)
+# main issue with this one:
+# they remove canary releases once a stable release has been made so this can be easily get outdated!
+app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-27008|app|Magisk_DEBUG.apk;PRESIGNED|false
+app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-27008|app|SignMagisk_DEBUG.apk;user-keys/shared|false
 
 # Phonesky (Google in-app purchase support)
 # by AXP.OS (based on nanolx but way more recent and tons of bugfixes)
