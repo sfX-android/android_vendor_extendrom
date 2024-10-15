@@ -508,11 +508,12 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     chmod 755 $MAGISKOUT/magiskboot
     echo "[MAGISK] ... MAGISK_TARGET_ARCH specified as $MAGISK_TARGET_ARCH"
 
-    cp $MAGISKOUT/src/lib/armeabi-v7a/libmagisk32.so $MAGISKOUT/magisk32
     if [ $MAGISK_TARGET_ARCH == "arm64" ];then
-	cp $MAGISKOUT/src/lib/arm64-v8a/libmagisk64.so $MAGISKOUT/magisk64
+	cp $MAGISKOUT/src/lib/arm64-v8a/libmagisk64.so $MAGISKOUT/magisk64 || cp $MAGISKOUT/src/lib/arm64-v8a/libmagisk.so $MAGISKOUT/magisk
 	cp $MAGISKOUT/src/lib/arm64-v8a/libmagiskinit.so $MAGISKOUT/magiskinit
+        if [ -f $MAGISKOUT/src/lib/arm64-v8a/libinit-ld.so ]; then cp $MAGISKOUT/src/lib/arm64-v8a/libinit-ld.so $MAGISKOUT/init-ld; fi
     else
+        if [ -f $MAGISKOUT/src/lib/armeabi-v7a/libmagisk32.so ]; then cp $MAGISKOUT/src/lib/armeabi-v7a/libmagisk32.so $MAGISKOUT/magisk32;fi
 	cp $MAGISKOUT/src/lib/armeabi-v7a/libmagiskinit.so $MAGISKOUT/magiskinit
     fi
     chmod 755 $MAGISKOUT/src/assets/boot_patch.sh
