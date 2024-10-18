@@ -33,8 +33,12 @@ org.adaway_LATEST.apk|FDROIDREPO|app|AdAway.apk;PRESIGNED|false
 org.jak_linux.dns66_LATEST.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 
 # Magisk latest stable version
-Magisk-v28.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v28.0|app|Magisk.apk;PRESIGNED|false
-Magisk-v28.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v28.0|app|SignMagisk.apk;user-keys/shared|false
+Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app|Magisk.apk;PRESIGNED|false
+Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app|SignMagisk.apk;user-keys/shared|false
+
+# v28.0 disabled (again) as the stub apk within is buggy (https://github.com/topjohnwu/Magisk/issues/8474)
+#Magisk-v28.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v28.0|app|Magisk.apk;PRESIGNED|false
+#Magisk-v28.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v28.0|app|SignMagisk.apk;user-keys/shared|false
 
 # Magisk previous stable version
 Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app|Magisk_v27.0.apk;PRESIGNED|false
