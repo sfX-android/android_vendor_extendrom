@@ -40,7 +40,8 @@ body:
     id: log_er
     attributes:
       label: extendrom log
-      description: COMPLETE(!!!) output when executing: `vendor/extendrom/er.sh` (e.g. as [gist](https://gists.github.com))
+      description: |
+        COMPLETE(!!!) output when executing: `vendor/extendrom/er.sh` (e.g. as [gist](https://gists.github.com))
       placeholder: <LINK to a paste/gist>
     validations:
       required: true
@@ -48,7 +49,8 @@ body:
     id: log_build
     attributes:
       label: Build log
-      description: Full terminal output (e.g. by mka > build.log 2>&1) e.g. as a [gist](https://gists.github.com)
+      description: |
+        Full terminal output (e.g. by mka > build.log 2>&1) e.g. as a [gist](https://gists.github.com)
       placeholder: <LINK to a paste/gist>
     validations:
       required: false
@@ -56,7 +58,8 @@ body:
     id: log_mk
     attributes:
       label: extendrom's Android.mk
-      description: Content of `vendor/extendrom/Android.mk` after running extendrom/a build  -> (see "Note" topic)
+      description: |
+        Content of `vendor/extendrom/Android.mk` after running extendrom/a build  -> (see "Note" topic)
       placeholder: <LINK to a paste/gist>
     validations:
       required: false
