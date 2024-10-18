@@ -1,6 +1,6 @@
 name: Problem report
 description: Default issue template for problems or questions
-labels: bug
+labels: problem
 
 body:
   - type: textarea
