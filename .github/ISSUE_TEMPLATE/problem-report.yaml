@@ -1,0 +1,73 @@
+name: Problem report
+description: Default issue template for problems or questions
+
+body:
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps / Problem description
+      description: "Describe your problem including any hints to reproduce it. Please walk us through it step by step."
+      value: |
+        1. 
+        2. 
+    validations:
+      required: true
+  - type: input
+    id: vendor
+    attributes:
+      label: Device vendor
+      description: What's your device vendor and model?
+      placeholder: Google Pixel 7 Pro, OnePlus 6T, Sony xxx, ...
+    validations:
+      required: false
+  - type: input
+    id: os
+    attributes:
+      label: Custom OS
+      description: Custom OS name you build for
+      placeholder: LOS, AXP.OS, AOSP, ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: OS version
+      description: What Android version you build for
+      placeholder: Android 9, 10, 11, 12, ...
+    validations:
+      required: true
+  - type: input
+    id: log_er
+    attributes:
+      label: extendrom log
+      description: COMPLETE(!!!) output when executing: `vendor/extendrom/er.sh` (e.g. as [gist](https://gists.github.com))
+      placeholder: <LINK to a paste/gist>
+    validations:
+      required: true
+  - type: input
+    id: log_build
+    attributes:
+      label: Build log
+      description: Full terminal output (e.g. by mka > build.log 2>&1) e.g. as a [gist](https://gists.github.com)
+      placeholder: <LINK to a paste/gist>
+    validations:
+      required: false
+  - type: input
+    id: log_mk
+    attributes:
+      label: extendrom's Android.mk
+      description: Content of `vendor/extendrom/Android.mk` after running extendrom/a build  -> (see "Note" topic)
+      placeholder: <LINK to a paste/gist>
+    validations:
+      required: false
+  - type: textarea
+    id: free
+    attributes:
+      label: Free form for additional info
+      description: |
+        **Note: do NOT add full log files within this issue!**
+        Always use a paste service and/or for bigger logs it is strongly recommended using [github gists](https://gists.github.com).
+      value: |
+        _any other info you might find useful to report_
+    validations:
+      required: false
