@@ -70,7 +70,6 @@ body:
       description: |
         **Note: do NOT add full log files within this issue!**
         Always use a paste service and/or for bigger logs it is strongly recommended using [github gists](https://gists.github.com).
-      value: |
-        _any other info you might find useful to report_
+      placeholder: "add any other info you might find useful to report, add screenshots or whatever helps ;)"
     validations:
       required: false
