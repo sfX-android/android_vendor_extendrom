@@ -67,9 +67,9 @@ app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-28001
 # by AXP.OS (based on nanolx but way more recent and tons of bugfixes)
 # IMPORTANT NOTE: requires a new signing key to be created named: "apps" (supported by "buildtools" since https://github.com/sfX-android/android_buildtools/commit/b59ce99439e488)
 # current stable:
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/43.1.19-23_84311900|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
-# current testing:
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/43.1.19-23_84311900|priv-app|Phonesky_AXP-OS_testing.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/latest/download|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+# testing:
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/43.2.16-23_84321600|priv-app|Phonesky_AXP-OS_testing.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 # previous stable:
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/41.8.14-23_84181400|priv-app|Phonesky_AXP-OS_41-8.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/41.0.28-23_84102800|priv-app|Phonesky_AXP-OS-41-0.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
@@ -114,8 +114,8 @@ opencamera_sfX_j5_fixPreview.apk|https://leech.binbash.rocks:8008/misc|app|openc
 
 # Latest OpenEUICC build (https://gitea.angry.im/PeterCxy/OpenEUICC) signed by AXP.OS
 # Note: requires A11 or later (https://gitea.angry.im/PeterCxy/OpenEUICC/issues/7#issuecomment-27)
-OpenEUICC-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/download/latest|priv-app|OpenEUICC_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
-OpenEUICC_hidden-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/download/latest|priv-app|OpenEUICC-hidden_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
+OpenEUICC-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/latest/download|priv-app|OpenEUICC_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
+OpenEUICC_hidden-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/latest/download|priv-app|OpenEUICC-hidden_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
 
 ##########################################################################################################
 # LAUNCHERS
@@ -123,9 +123,6 @@ OpenEUICC_hidden-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/re
 
 # Simple Launcher
 com.simplemobiletools.launcher_LATEST.apk|FDROIDREPO|app|SimpleLauncher.apk;PRESIGNED|true
-
-# Omega Launcher
-Omega.v0.8.0.Build.168.apk|https://github.com/otakuhqz/Omega/releases/download/v0.8.0|app|Omega.apk;PRESIGNED|false
 
 # Neo Launcher
 com.saggitt.omega_LATEST.apk|https://apt.izzysoft.de/fdroid/repo|app|NeoLauncher-latest.apk;PRESIGNED|false||er_default-permissions-neolauncher.xml
@@ -136,7 +133,7 @@ NeoLauncher-release.apk|https://github.com/NeoApplications/Neo-Launcher/releases
 Lawnchair_202589.apk|https://www.dropbox.com/s/qi551e1y2ubd1zd|app|Lawnchair-stable.apk;PRESIGNED|false
 
 # Lawnchair - latest
-Lawnchair.14.0.0.Beta.2.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v14.0.0-beta2|app|Lawnchair-latest.apk;PRESIGNED|false
+Lawnchair.14.0.0.Beta.3.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v14.0.0-beta3|app|Lawnchair-latest.apk;PRESIGNED|false
 # Lawnchair - v12.1 alpha4
 Lawnchair.12.1.0.Alpha.4.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v12.1.0-alpha.4|app|Lawnchair-12.apk;PRESIGNED|false
 
@@ -181,7 +178,6 @@ com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
 # Cromite browser (successor of Bromite)
 # Note: Cromite does not support armeabi-v7/7a atm (https://github.com/uazo/cromite/issues/237)
 arm64_ChromePublic.apk|https://www.cromite.org/fdroid/repo/|app|Cromite_arm64.apk;PRESIGNED-extractlibs|false||
-#arm64_ChromePublic.apk|https://github.com/uazo/cromite/releases/download/v116.0.5845.111-0747986f1c3f5fd1ad219a23c34a460b6d44aff3|app|Cromite.apk;PRESIGNED|false||
 
 ##########################################################################################################
 # OFFICE
