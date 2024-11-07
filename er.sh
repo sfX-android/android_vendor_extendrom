@@ -73,6 +73,7 @@ MKOPTS="ENABLE_EXTENDROM \
 	EXTENDROM_PREROOT_BOOT \
 	EXTENDROM_FDROID_REPOS \
 	EXTENDROM_SIGNATURE_SPOOFING \
+        EXTENDROM_ALLOW_ANY_CALL_RECORDING \
 	EXTENDROM_PATCHER_RESET \
 	EXTENDROM_SIGSPOOF_FORCE_PDIR"
 
@@ -95,6 +96,7 @@ echo "EXTENDROM_PACKAGES: $EXTENDROM_PACKAGES"
 echo "EOS_EDITION: $EOS_EDITION"
 echo "EXTENDROM_SIGNING_PATCHES: $EXTENDROM_SIGNING_PATCHES"
 echo "EXTENDROM_SIGNING_FORCE_PDIR: $EXTENDROM_SIGNING_FORCE_PDIR"
+echo "EXTENDROM_ALLOW_ANY_CALL_RECORDING: $EXTENDROM_ALLOW_ANY_CALL_RECORDING"
 echo "EXTENDROM_SIGNATURE_SPOOFING: $EXTENDROM_SIGNATURE_SPOOFING"
 echo "EXTENDROM_SIGSPOOF_RESET: $EXTENDROM_SIGSPOOF_RESET"
 echo "EXTENDROM_SIGSPOOF_FORCE_PDIR: $EXTENDROM_SIGSPOOF_FORCE_PDIR"
@@ -449,8 +451,163 @@ F_SIGNINGPATCHES(){
     if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
 }
 
+# allow unrestricted call recording
+F_CALLREC(){
+    echo "[$FUNCNAME] unrestricted call recordings requested ..."
+
+    OLMK="vendor/extendrom/overlays/call-rec/active"
+    PDIR="$SRC_TOP_FULL/$MY_DIR/config/call-rec/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
+    DEVOPTSETTINGS="$SRC_TOP_FULL/packages/apps/Settings/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java"
+    DEVOPTXML="$SRC_TOP_FULL/packages/apps/Settings/res/xml/development_settings.xml"
+    CALLRECORDER="$SRC_TOP_FULL/packages/apps/Dialer/java/com/android/incallui/call/CallRecorder.java"
+    SECSETTINGS="frameworks/base/core/java/android/provider/Settings.java"
+
+    echo "[$FUNCNAME] adding call recording overlay"
+    if [ -L "$OLMK" ]; then rm $OLMK; fi
+    ln -s $EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION} $OLMK
+
+    echo "[$FUNCNAME] adding call recording controller"
+    cp $PDIR/packages-apps-Settings-src-com-android-settings-development-CallRecPreferenceController.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/ER_CallRecPreferenceController.java || exit 3
+    cp $PDIR/packages-apps-Settings-src-com-android-settings-development-CallRecInfo.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/ER_CallRecInfo.java || exit 3
+
+    # add controller after the last controllers.add line
+    PREQ=0
+    grep -q 'ER_CallRec' $DEVOPTSETTINGS || PREQ=1
+    if [ $PREQ -eq 1 ];then
+        echo "[$FUNCNAME] adding call recording controller - java"
+        awk '
+        /controllers.add/ { last = NR; lines[NR] = $0 }
+        { lines[NR] = $0 }
+        END {
+            for (i = 1; i <= NR; i++) {
+                print lines[i]
+                if (i == last) {
+                    print "        controllers.add(new ER_CallRecPreferenceController(context)); // extendrom call recording"
+                    print "        controllers.add(new ER_CallRecInfo(context)); // extendrom call recording"
+                }
+            }
+        }' $DEVOPTSETTINGS > ${DEVOPTSETTINGS}.temp && mv ${DEVOPTSETTINGS}.temp ${DEVOPTSETTINGS}
+    else
+        echo "[$FUNCNAME] SKIPPED: adding call recording controller - java (already patched)"
+    fi
+
+    # add key to settings.secure
+    PREQ=0
+    grep -q 'ER_ALLOW_ANY_CALL_REC' $SECSETTINGS || PREQ=1
+    if [ $PREQ -eq 1 ];then
+        echo "[$FUNCNAME] adding call recording key to secure settings"
+        awk '
+        /public static final class Secure extends NameValueTable {/ && !done {
+            print
+            print ""
+            print "        /**"
+            print "         * extendrom: unrestricted call recording"
+            print "         *"
+            print "         * <p>1 = permit any country to record"
+            print "         * <p>0 = allow only defined countries to record"
+            print "         * @hide"
+            print "         */"
+            print "        public static final String ER_ALLOW_ANY_CALL_REC = \"extendrom_call_recording\";"
+            print ""
+            done = 1
+            next
+        }
+        { print }
+        ' $SECSETTINGS > ${SECSETTINGS}.temp && mv ${SECSETTINGS}.temp ${SECSETTINGS}
+    else
+        echo "[$FUNCNAME] SKIPPED: adding call recording key to secure settings (already patched)"
+    fi
+
+    # add controller to developer options
+    PREQ=0
+    grep -q 'extendrom call recording' $DEVOPTXML || PREQ=1
+    if [ $PREQ -eq 1 ];then
+        echo "[$FUNCNAME] adding call recording to developer options"
+        awk '
+        /android:title="@string\/development_settings_title">/ && !done {
+            print
+            print ""
+            print "    <!-- extendrom call recording patch -->"
+            print "    <PreferenceCategory"
+            print "        android:key=\"extendrom_call_recording_category\""
+            print "        android:title=\"@string/extendrom_call_recording_category\""
+            print "        android:order=\"9998\">"
+            print ""
+            print "       <Preference"
+            print "            android:key=\"extendrom_call_recording_info\""
+            print "            android:summary=\"@string/extendrom_call_recording_details\" />"
+            print ""
+            print "       <SwitchPreference"
+            print "            android:key=\"extendrom_call_recording\""
+            print "            android:title=\"@string/extendrom_call_recording\""
+            print "            android:summary=\"@string/extendrom_call_recording_summary\""
+            print "            android:defaultValue=\"false\" />"
+            print ""
+            print "    </PreferenceCategory>"
+            print "    <!-- end: extendrom call recording patch -->"
+            print ""
+            done = 1
+            next
+        }
+        { print }
+        ' $DEVOPTXML > ${DEVOPTXML}.temp && mv ${DEVOPTXML}.temp ${DEVOPTXML}
+    else
+        echo "[$FUNCNAME] SKIPPED: adding call recording controller to developer options (already patched)"
+    fi
+
+    # add required import line to dialer
+    PREQ=0
+    grep -q 'import android.provider.Settings' $CALLRECORDER || PREQ=1
+    if [ $PREQ -eq 1 ];then
+        echo "[$FUNCNAME] adding import to call recording controller"
+        awk '
+        /import / { last = NR; lines[NR] = $0 }
+        { lines[NR] = $0 }
+        END {
+            for (i = 1; i <= NR; i++) {
+                print lines[i]
+                if (i == last) {
+                    print "import android.provider.Settings; // extendrom call recording"
+                }
+            }
+        }' $CALLRECORDER > ${CALLRECORDER}.temp && mv ${CALLRECORDER}.temp ${CALLRECORDER}
+    else
+        echo "[$FUNCNAME] SKIPPED: adding import to call recording controller (already there)"
+    fi
+
+    # enforce extendrom overwrite in dialer
+    PREQ=0
+    grep -q 'ER_CallRec' $CALLRECORDER || PREQ=1
+    if [ $PREQ -eq 1 ];then
+        echo "[$FUNCNAME] force call recording in dialer"
+        awk '
+            /public boolean canRecordInCurrentCountry.*/ && !done {
+            print
+            print "      // extendrom - any call recording"
+            print "      int ER_CallRecordingEnabled = Settings.Secure.getInt("
+            print "      context.getContentResolver(),"
+            print "      \"extendrom_call_recording\", 0);"
+            print ""
+            print "      if (ER_CallRecordingEnabled == 1) {"
+            print "          return true;"
+            print "      }"
+            print "      // END: extendrom - any call recording"
+            print ""
+            done = 1
+            next
+        }
+        { print }
+        ' $CALLRECORDER > ${CALLRECORDER}.temp && mv ${CALLRECORDER}.temp ${CALLRECORDER}
+    else
+        echo "[$FUNCNAME] SKIPPED: force call recording in dialer (already patched)"
+    fi
+
+    if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
+}
+
 if [ "$EXTENDROM_SIGNATURE_SPOOFING" == "true" ];then F_SIGPATCH ;fi
 if [ "$EXTENDROM_SIGNING_PATCHES" == "true" ];then F_SIGNINGPATCHES ;fi
+if [ "$EXTENDROM_ALLOW_ANY_CALL_RECORDING" == "true" ];then F_CALLREC; fi
 
 F_GET_GPG_KEYS
 get_packages "$MY_DIR/repo/packages.txt"

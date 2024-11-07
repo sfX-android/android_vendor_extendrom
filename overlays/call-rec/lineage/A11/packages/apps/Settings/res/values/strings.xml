@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- custom category in developer options -->
+    <string name="extendrom_call_recording_category">Call recording support</string>
+
+    <!-- add checkbox in developer settings -->
+    <string name="extendrom_call_recording">Disable call recording restrictions</string>
+    <string name="extendrom_call_recording_summary">If activated call recording limitations per country will be disabled</string>
+    <string name="extendrom_call_recording_details">YOU are responsible for checking whether call recording is legal in your country before overriding the default restrictions with this setting!\nSee: https://axpos.org/r</string>
+
+</resources>
