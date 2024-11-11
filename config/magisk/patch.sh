@@ -5,7 +5,7 @@
 #
 #########################################################################################################
 #
-# Copyright (C) 2023 steadfasterX <steadfasterX -AT- binbash #DOT# rocks>
+# Copyright (C) 2023-2024 steadfasterX <steadfasterX -AT- binbash #DOT# rocks>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -79,6 +79,13 @@ echo "testing existence of >$BOOTIMG< returned: $?"
 /bin/bash $MAG_DIR/boot_patch.sh "$BOOTIMG" \
     && cp -v $MAG_DIR/new-boot.img "$BOOTIMG"
 RET=$?
+
+# simple check if magisk can be found in the resulting boot.img
+# TODO: use "magiskboot cpio <cpio> test" instead
+grep -q --text '.backup/.magisk' $BOOTIMG
+MCHK=$?
+if [ "$MCHK" -eq 0 ];then echo "MAGISK found in $BOOTIMG!";else echo "ERROR: Magisk not found in $BOOTIMG!";fi
+RET=$((RET + $MCHK))
 
 echo -e "\n\n$0 ended with: $RET\n\n"
 exit $RET
