@@ -39,6 +39,7 @@ echo -e "\n\nStarting: $0 with: >$BOOTIMG< (TOP=$TOP)"
 # LEGACYSAR ensures kernel gets patched if required.
 # https://github.com/topjohnwu/Magisk/blob/9aa466c7730ef4ef73195b476f9804ebf86932d2/scripts/boot_patch.sh#L220-L243
 export LEGACYSAR=${system_root_image}
+echo "system_root_image=$LEGACYSAR"
 
 # PREINITDEVICE can't be detected during build so must be set manually
 # otherwise  "Requires Additional Setup" on first start will not be able to patch w/o direct flash
