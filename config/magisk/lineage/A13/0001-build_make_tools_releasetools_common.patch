@@ -1,10 +1,10 @@
 
 project build/make/
 diff --git a/tools/releasetools/common.py b/tools/releasetools/common.py
-index c8389388df..48e399465c 100644
+index 0785c746e..947bbec9e 100644
 --- a/tools/releasetools/common.py
 +++ b/tools/releasetools/common.py
-@@ -1323,6 +1323,13 @@ def _BuildBootableImage(image_name, sourcedir, fs_config_file, info_dict=None,
+@@ -1723,6 +1723,13 @@ def _BuildBootableImage(image_name, sourcedir, fs_config_file, info_dict=None,
      img_unsigned.close()
      img_keyblock.close()
  
@@ -18,8 +18,8 @@ index c8389388df..48e399465c 100644
    # AVB: if enabled, calculate and add hash to boot.img or recovery.img.
    if info_dict.get("avb_enable") == "true":
      avbtool = info_dict["avb_avbtool"]
-@@ -1358,6 +1365,24 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
-   the source files in 'unpack_dir'/'tree_subdir'."""
+@@ -1825,6 +1832,19 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
+     info_dict = OPTIONS.info_dict
  
    prebuilt_path = os.path.join(unpack_dir, "BOOTABLE_IMAGES", prebuilt_name)
 +
@@ -27,18 +27,13 @@ index c8389388df..48e399465c 100644
 +  if (prebuilt_name == "boot.img" or prebuilt_name == "init_boot.img") and os.path.exists(prebuilt_path):
 +    if info_dict is None:
 +        info_dict = OPTIONS.info_dict
-+    logger.info("Re-direct patching (prebuilt): %s", prebuilt_name)
-+    has_ramdisk = (info_dict.get("system_root_image") != "true" or
-+                     prebuilt_name != "boot.img" or
-+                     info_dict.get("recovery_as_boot") == "true")
-+    fs_config = "META/" + tree_subdir.lower() + "_filesystem_config.txt"
-+    data = _BuildBootableImage(prebuilt_name, os.path.join(unpack_dir, tree_subdir),
-+                                 os.path.join(unpack_dir, fs_config),
-+                                 info_dict, has_ramdisk, two_step_image)
-+    if data:
-+        return File(name, data)
-+    else:
-+        assert False, "COULD NOT INJECT MAGISK to %s" % (prebuilt_name,)
++    img = tempfile.NamedTemporaryFile()
++    top_dir = os.getenv('ANDROID_BUILD_TOP', os.environ.get('PWD'))
++    mpatcher = [ top_dir + '/vendor/extendrom/config/magisk/patch.sh', img.name , top_dir ]
++    shutil.copy(prebuilt_path, img.name)
++    logger.info("Patching (prebuilt): %s", img.name)
++    RunAndCheckOutput(mpatcher, verbose=True, env={'system_root_image': info_dict.get("system_root_image", "false")})
++    shutil.copy(img.name, prebuilt_path)
 +
    if os.path.exists(prebuilt_path):
      logger.info("using prebuilt %s from BOOTABLE_IMAGES...", prebuilt_name)
