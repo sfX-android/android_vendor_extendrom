@@ -93,6 +93,7 @@ echo -e "\n\n"
 echo "ENABLE_EXTENDROM: $ENABLE_EXTENDROM"
 echo "EXTENDROM_PREROOT_BOOT: $EXTENDROM_PREROOT_BOOT"
 echo "MAGISK_TARGET_ARCH: $MAGISK_TARGET_ARCH"
+export ER_TARGET_ARCH=$(build/soong/soong_ui.bash --dumpvar-mode TARGET_ARCH  2>/dev/null)
 echo "ER_TARGET_ARCH: $ER_TARGET_ARCH"
 echo "EXTENDROM_PACKAGES: $EXTENDROM_PACKAGES"
 echo "EOS_EDITION: $EOS_EDITION"
@@ -111,7 +112,6 @@ export SRC_TOP=$(build/soong/soong_ui.bash --dumpvar-mode TOP  2>/dev/null)
 echo "SRC_TOP: ${SRC_TOP}/"
 SRC_TOP_FULL=$(pwd)
 echo SRC_TOP_FULL: $SRC_TOP_FULL
-export ER_TARGET_ARCH=$(build/soong/soong_ui.bash --dumpvar-mode TARGET_ARCH  2>/dev/null)
 
 # boot debug log
 export EXTENDROM_PRODUCT_DEVICE=$(build/soong/soong_ui.bash --dumpvar-mode PRODUCT_DEVICE 2>/dev/null)
