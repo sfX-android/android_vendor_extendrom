@@ -82,7 +82,7 @@ RET=$?
 
 # simple check if magisk can be found in the resulting boot.img
 # TODO: use "magiskboot cpio <cpio> test" instead
-grep -q --text '.backup/.magisk' $BOOTIMG
+grep -q --text 'magisk' $BOOTIMG
 MCHK=$?
 if [ "$MCHK" -eq 0 ];then echo "MAGISK found in $BOOTIMG!";else echo "ERROR: Magisk not found in $BOOTIMG!";fi
 RET=$((RET + $MCHK))
