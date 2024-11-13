@@ -122,7 +122,7 @@ com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|Micro
 com.google.android.gms-240913004.apk|https://github.com/microg/GmsCore/releases/download/v0.3.2.240913/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 #com.google.android.gms-240913008.apk|https://github.com/microg/GmsCore/releases/download/v0.3.4.240913/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 # old stable:
-com.google.android.gms-240913004.apk|https://github.com/microg/GmsCore/releases/download/v0.3.2.240913/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore-v032|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+com.google.android.gms-240913004.apk|https://github.com/microg/GmsCore/releases/download/v0.3.2.240913/|app|MicrogGmsCore_v032.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 # latest version before the fully re-written GMScore (requires NominatimBackend/MozillaNlpBackend):
 com.google.android.gms-223616054.apk|https://github.com/microg/GmsCore/releases/download/v0.2.27.223616/|app|MicrogGmsCore_unified-latest.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 
