@@ -1,10 +1,18 @@
 ##########################################################################################################
-# HOW TO / FORMAT:
-# https://github.com/sfX-android/android_vendor_extendrom/wiki/packages.txt
+# available apps to use via EXTENDROM_PACKAGES flag
+# 
+# HOW TO / LINE FORMAT: https://github.com/sfX-android/android_vendor_extendrom/wiki/packages.txt
+# HOW TO USE: https://github.com/sfX-android/android_vendor_extendrom/wiki/EXTENDROM_PACKAGES
+#
+# credits: category titles created via https://www.asciiart.eu/text-to-ascii-art (font: standard)
 ##########################################################################################################
 
 ##########################################################################################################
-# SYSTEM
+#  _____ ____            _     _ 
+# |  ___|  _ \ _ __ ___ (_) __| |
+# | |_  | | | | '__/ _ \| |/ _` |
+# |  _| | |_| | | | (_) | | (_| |
+# |_|   |____/|_|  \___/|_|\__,_|
 ##########################################################################################################
 
 # F-Droid
@@ -16,6 +24,14 @@ org.fdroid.fdroid_1016053.apk|FDROIDREPO|app|F-Droid_v1.16.3.apk;PRESIGNED|true
 # should be build with AOSP but if you REALLY wanna use a prebuilt:
 org.fdroid.fdroid.privileged_LATEST.apk|FDROIDREPO|priv-app|F-DroidPrivilegedExtension_pb.apk;PRESIGNED|true
 
+##########################################################################################################
+#     _                             
+#    / \  _   _ _ __ ___  _ __ __ _ 
+#   / _ \| | | | '__/ _ \| '__/ _` |
+#  / ___ \ |_| | | | (_) | | | (_| |
+# /_/   \_\__,_|_|  \___/|_|  \__,_|
+##########################################################################################################
+
 # AuroraStore
 com.aurora.store_LATEST.apk|FDROIDREPO|app|AuroraStore.apk;PRESIGNED|true
 # AuroraStore v4.4.4
@@ -26,11 +42,14 @@ com.aurora.store_58.apk|FDROIDREPO|app|AuroraStore_444.apk;PRESIGNED|true
 # DEPRECATED! support has been removed since v4.5.0 of the AuroraStore - see: https://gitlab.com/AuroraOSS/AuroraStore/-/issues/967
 AuroraServices_v1.1.1.apk|https://gitlab.com/AuroraOSS/AuroraServices/uploads/c22e95975571e9db143567690777a56e|priv-app|AuroraServices.apk;user-keys/shared|false||permissions_com.aurora.services.xml
 
-# AdAway
-org.adaway_LATEST.apk|FDROIDREPO|app|AdAway.apk;PRESIGNED|false
-
-# DNS66
-org.jak_linux.dns66_LATEST.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
+##########################################################################################################
+#  __  __             _     _    
+# |  \/  | __ _  __ _(_)___| | __
+# | |\/| |/ _` |/ _` | / __| |/ /
+# | |  | | (_| | (_| | \__ \   < 
+# |_|  |_|\__,_|\__, |_|___/_|\_\
+#               |___/            
+##########################################################################################################
 
 # Magisk latest stable version
 Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app|Magisk.apk;PRESIGNED|false
@@ -63,6 +82,15 @@ Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app
 app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-28001|app|Magisk_DEBUG.apk;PRESIGNED|false
 app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-28001|app|SignMagisk_DEBUG.apk;user-keys/shared|false
 
+##########################################################################################################
+#  ____  _                           _          
+# |  _ \| |__   ___  _ __   ___  ___| | ___   _ 
+# | |_) | '_ \ / _ \| '_ \ / _ \/ __| |/ / | | |
+# |  __/| | | | (_) | | | |  __/\__ \   <| |_| |
+# |_|   |_| |_|\___/|_| |_|\___||___/_|\_\\__, |
+#                                         |___/ 
+##########################################################################################################
+
 # Phonesky (Google in-app purchase support)
 # by AXP.OS (based on nanolx but way more recent and tons of bugfixes)
 # IMPORTANT NOTE: requires a new signing key to be created named: "apps" (supported by "buildtools" since https://github.com/sfX-android/android_buildtools/commit/b59ce99439e488)
@@ -76,13 +104,27 @@ Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/do
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/41.0.28-23_84102800|priv-app|Phonesky_AXP-OS-41-0.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS_38-1.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
+##########################################################################################################
+#  __  __ _                 ____ 
+# |  \/  (_) ___ _ __ ___  / ___|
+# | |\/| | |/ __| '__/ _ \| |  _ 
+# | |  | | | (__| | | (_) | |_| |
+# |_|  |_|_|\___|_|  \___/ \____|
+##########################################################################################################
+
 # MicroG GmsCore
 # - FDroid repo
 #   easiest as you get the latest always - but it is sometimes incredible slow
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 # - Github release
 #   a "xxx_GH" fallback to github which is fast always
+# current stable (not enabled yet):
 com.google.android.gms-240913004.apk|https://github.com/microg/GmsCore/releases/download/v0.3.2.240913/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+#com.google.android.gms-240913008.apk|https://github.com/microg/GmsCore/releases/download/v0.3.4.240913/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+# old stable:
+com.google.android.gms-240913004.apk|https://github.com/microg/GmsCore/releases/download/v0.3.2.240913/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore-v032|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+# latest version before the fully re-written GMScore (requires NominatimBackend/MozillaNlpBackend):
+com.google.android.gms-223616054.apk|https://github.com/microg/GmsCore/releases/download/v0.2.27.223616/|app|MicrogGmsCore_unified-latest.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 
 # MicroG GsfProxy
 # - FDroid repo
@@ -96,16 +138,18 @@ GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/d
 # is part of GmsCore now: https://github.com/microg/GmsCore/tree/master/vending-app
 com.android.vending-83700037.apk|https://github.com/microg/FakeStore/releases/download/v0.2.1|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 
-# MicroG GmsCore - LEGACY
-# it seems the latest fully re-written GMScore causes several issues for some. The following is the last one -before- that full rewrite:
-com.google.android.gms-223616054.apk|https://github.com/microg/GmsCore/releases/download/v0.2.27.223616/|app|MicrogGmsCore_unified-latest.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 # DEPRECATED: NominatimBackend
 org.microg.nlp.backend.nominatim_LATEST.apk|FDROIDREPO|app|NominatimBackend.apk;PRESIGNED|false
 # DEPRECATED: MozillaNlpBackend
 org.microg.nlp.backend.ichnaea_LATEST.apk|FDROIDREPO|app|MozillaNlpBackend.apk;PRESIGNED|false
 
-# DroidGuard
-org.microg.gms.droidguard-LATEST.apk|https://microg.org/fdroid/repo/|app|DroidGuard.apk;PRESIGNED|false
+##########################################################################################################
+#   ____                               
+#  / ___|__ _ _ __ ___   ___ _ __ __ _ 
+# | |   / _` | '_ ` _ \ / _ \ '__/ _` |
+# | |__| (_| | | | | | |  __/ | | (_| |
+#  \____\__,_|_| |_| |_|\___|_|  \__,_|
+##########################################################################################################
 
 # OpenCamera
 net.sourceforge.opencamera_LATEST.apk|FDROIDREPO|app|OpenCamera.apk;PRESIGNED|true
@@ -113,13 +157,12 @@ net.sourceforge.opencamera_LATEST.apk|FDROIDREPO|app|OpenCamera.apk;PRESIGNED|tr
 # J5 OpenCamera (preview fix)
 opencamera_sfX_j5_fixPreview.apk|https://leech.binbash.rocks:8008/misc|app|opencamera_j5_latest.apk;PRESIGNED|false
 
-# Latest OpenEUICC build (https://gitea.angry.im/PeterCxy/OpenEUICC) signed by AXP.OS
-# Note: requires A11 or later (https://gitea.angry.im/PeterCxy/OpenEUICC/issues/7#issuecomment-27)
-OpenEUICC-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/latest/download|priv-app|OpenEUICC_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
-OpenEUICC_hidden-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/latest/download|priv-app|OpenEUICC-hidden_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
-
 ##########################################################################################################
-# LAUNCHERS
+#  _                           _                   
+# | |    __ _ _   _ _ __   ___| |__   ___ _ __ ___ 
+# | |   / _` | | | | '_ \ / __| '_ \ / _ \ '__/ __|
+# | |__| (_| | |_| | | | | (__| | | |  __/ |  \__ \
+# |_____\__,_|\__,_|_| |_|\___|_| |_|\___|_|  |___/
 ##########################################################################################################
 
 # Simple Launcher
@@ -145,8 +188,18 @@ com.benny.openlauncher_LATEST.apk|FDROIDREPO|app|OpenLauncher.apk;PRESIGNED|true
 foundation.e.blisslauncher_LATEST.apk|FDROIDREPO|app|BlissLauncher.apk;PRESIGNED|true
 
 ##########################################################################################################
-# INTERNET
+#  ___       _                       _   
+# |_ _|_ __ | |_ ___ _ __ _ __   ___| |_ 
+#  | || '_ \| __/ _ \ '__| '_ \ / _ \ __|
+#  | || | | | ||  __/ |  | | | |  __/ |_ 
+# |___|_| |_|\__\___|_|  |_| |_|\___|\__|
 ##########################################################################################################
+
+# AdAway
+org.adaway_LATEST.apk|FDROIDREPO|app|AdAway.apk;PRESIGNED|false
+
+# DNS66
+org.jak_linux.dns66_LATEST.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 
 # K9-Mail
 # latest version has no IMAP-idle / push
@@ -181,7 +234,11 @@ com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
 arm64_ChromePublic.apk|https://www.cromite.org/fdroid/repo/|app|Cromite_arm64.apk;PRESIGNED-extractlibs|false||
 
 ##########################################################################################################
-# OFFICE
+#   ___   __  __ _          
+#  / _ \ / _|/ _(_) ___ ___ 
+# | | | | |_| |_| |/ __/ _ \
+# | |_| |  _|  _| | (_|  __/
+#  \___/|_| |_| |_|\___\___|
 ##########################################################################################################
 
 # Etar Calendar
@@ -193,3 +250,24 @@ org.dmfs.tasks_LATEST.apk|FDROIDREPO|app|OpenTasks.apk;PRESIGNED|true
 # NextCloudNotes
 it.niedermann.owncloud.notes_LATEST.apk|FDROIDREPO|app|NextCloudNotes.apk;PRESIGNED|true
 
+##########################################################################################################
+#  __  __ _          
+# |  \/  (_)___  ___ 
+# | |\/| | / __|/ __|
+# | |  | | \__ \ (__ 
+# |_|  |_|_|___/\___|   
+##########################################################################################################
+
+# Latest OpenEUICC build (https://gitea.angry.im/PeterCxy/OpenEUICC) signed by AXP.OS
+# Note: requires A11 or later (https://gitea.angry.im/PeterCxy/OpenEUICC/issues/7#issuecomment-27)
+OpenEUICC-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/latest/download|priv-app|OpenEUICC_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
+OpenEUICC_hidden-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/latest/download|priv-app|OpenEUICC-hidden_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
+
+
+##########################################################################################################
+#  _____ _            _____           _ 
+# |_   _| |__   ___  | ____|_ __   __| |
+#   | | | '_ \ / _ \ |  _| | '_ \ / _` |
+#   | | | | | |  __/ | |___| | | | (_| |
+#   |_| |_| |_|\___| |_____|_| |_|\__,_|
+##########################################################################################################
