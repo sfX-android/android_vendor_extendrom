@@ -33,13 +33,28 @@ export BOOTIMG="$1"
 export TOP="$2"
 [ -z "$TOP" -o ! -d "$TOP" ] && TOP=$PWD
 
-echo -e "\n\nStarting: $0 with: >$BOOTIMG< (TOP=$TOP)"
+# colored (optional) output
+PRINT(){
+    MSG="$2"
+    case $1 in
+        [1-9]*|E|ERROR)
+            echo -e "\e[0;31m$0 - ERROR: ${MSG}\e[0m" ;;
+        I|INFO)
+            echo -e "\e[1;34m$0 - INFO: ${MSG}\e[0m" ;;
+        0|OK|SUCCESS)
+            echo -e "\e[0;32m$0 - OK: ${MSG}\e[0m" ;;
+        *)
+            echo -e "$0 - ${MSG}" ;;
+    esac
+}
+
+PRINT I "Starting: $0 with: >$BOOTIMG< (TOP=$TOP)"
 
 # LEGACYSAR can't be detected by the magisk patcher so must be set by us where needed (e.g. fajita).
 # LEGACYSAR ensures kernel gets patched if required.
 # https://github.com/topjohnwu/Magisk/blob/9aa466c7730ef4ef73195b476f9804ebf86932d2/scripts/boot_patch.sh#L220-L243
 export LEGACYSAR=${system_root_image}
-echo "system_root_image=$LEGACYSAR"
+PRINT I "system_root_image=$LEGACYSAR"
 
 # PREINITDEVICE can't be detected during build so must be set manually
 # otherwise  "Requires Additional Setup" on first start will not be able to patch w/o direct flash
@@ -73,7 +88,7 @@ getprop(){
 }; export -f getprop
 
 test -e $BOOTIMG
-echo "testing existence of >$BOOTIMG< returned: $?"
+PRINT $? "testing existence of >$BOOTIMG< returned: $?"
 
 # do the magisk magic
 /bin/bash $MAG_DIR/boot_patch.sh "$BOOTIMG" \
@@ -81,11 +96,27 @@ echo "testing existence of >$BOOTIMG< returned: $?"
 RET=$?
 
 # simple check if magisk can be found in the resulting boot.img
-# TODO: use "magiskboot cpio <cpio> test" instead
 grep -q --text 'magisk' $BOOTIMG
 MCHK=$?
-if [ "$MCHK" -eq 0 ];then echo "MAGISK found in $BOOTIMG!";else echo "ERROR: Magisk not found in $BOOTIMG!";fi
+
+# sometimes the above is not valid even though patching was successful
+if [ $MCHK -ne 0 ];then
+    PRINT I "Simple magisk check failed, unpacking for a detailed test..\n"
+    [ -d "$MAG_DIR/test" ] && rm -rf $MAG_DIR/test
+    mkdir $MAG_DIR/test
+    cd $MAG_DIR/test
+    $MAG_DIR/magiskboot unpack $BOOTIMG && $MAG_DIR/magiskboot cpio ramdisk.cpio test
+    case $? in
+        1|4) MCHK=0;;
+        *) ;;
+    esac
+    cd $TOP
+    rm -rf $MAG_DIR/test
+fi
+
+# check & print result
+if [ "$MCHK" -eq 0 ];then PRINT OK "MAGISK found in $BOOTIMG!";else PRINT E "Magisk not found in $BOOTIMG!";fi
 RET=$((RET + $MCHK))
 
-echo -e "\n\n$0 ended with: $RET\n\n"
+PRINT $RET "ended with: $RET\n\n"
 exit $RET
