@@ -1,0 +1,52 @@
+
+project build/make/
+diff --git a/tools/releasetools/common.py b/tools/releasetools/common.py
+index 71679e8cb2..70c75cd40b 100644
+--- a/tools/releasetools/common.py
++++ b/tools/releasetools/common.py
+@@ -734,6 +734,14 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
+     img_unsigned.close()
+     img_keyblock.close()
+ 
++  # EXTENDROM: Magisk patch (build)
++  if (partition_name == "boot" and info_dict.get("init_boot") != "true") or partition_name == "init_boot":
++    top_dir = os.getenv('ANDROID_BUILD_TOP', os.environ.get('PWD'))
++    mpatcher = [ top_dir + '/vendor/extendrom/config/magisk/patch.sh', img.name , top_dir ]
++    logger.info("Patching (build): %s", img.name)
++    RunAndCheckOutput(mpatcher, verbose=True, env={'system_root_image': info_dict.get("system_root_image", "false")})
++  # END # EXTENDROM: Magisk patch (build)
++
+   # AVB: if enabled, calculate and add hash to boot.img or recovery.img.
+   if info_dict.get("avb_enable") == "true":
+     avbtool = info_dict["avb_avbtool"]
+@@ -766,6 +774,30 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
+   the source files in 'unpack_dir'/'tree_subdir'."""
+ 
+   prebuilt_path = os.path.join(unpack_dir, "BOOTABLE_IMAGES", prebuilt_name)
++
++  # EXTENDROM: Magisk patcher (prebuilt)
++  if (prebuilt_name == "boot.img" or prebuilt_name == "init_boot.img") and os.path.exists(prebuilt_path):
++    if info_dict is None:
++        info_dict = OPTIONS.info_dict
++    top_dir = os.getenv('ANDROID_BUILD_TOP', os.environ.get('PWD'))
++    from ota_from_target_files import BuildInfo
++    emptyd = []
++    build_info = BuildInfo(info_dict, emptyd)
++    codename = build_info.GetOemProperty("ro.product.device")
++    targetimg = top_dir + "/out/target/product/" + codename + "/" + prebuilt_name
++    if os.path.exists(prebuilt_path):
++        bimg = os.path.join(top_dir, prebuilt_path)
++    else:
++        bimg = os.path.join(top_dir, unpack_dir, "IMAGES", prebuilt_name)
++        if not os.path.exists(bimg):
++            assert False, "MAGISK ERROR: couldn't find valid file to patch!"
++    logger.info("Patching (prebuilt): %s", bimg)
++    mpatcher = [ top_dir + '/vendor/extendrom/config/magisk/patch.sh', bimg , top_dir ]
++    RunAndCheckOutput(mpatcher, verbose=True, env={'system_root_image': info_dict.get("system_root_image", "false")})
++    logger.info("avoid user confusion (prebuilt): %s", targetimg)
++    shutil.copy(bimg, targetimg) # not actually required - but to avoid user mistakes
++  # END # EXTENDROM: Magisk patcher (prebuilt)
++
+   if os.path.exists(prebuilt_path):
+     logger.info("using prebuilt %s from BOOTABLE_IMAGES...", prebuilt_name)
+     return File.FromLocalFile(name, prebuilt_path)
