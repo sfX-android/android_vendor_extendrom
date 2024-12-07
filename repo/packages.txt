@@ -71,8 +71,7 @@ Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app
 # Magisk latest known DEBUG version (only use this for DEBUGGING magisk)
 # main issue with this one:
 # they remove canary releases once a stable release has been made so this can be easily get outdated!
-app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-28001|app|Magisk_DEBUG.apk;PRESIGNED|false
-app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-28001|app|SignMagisk_DEBUG.apk;user-keys/shared|false
+app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-28101|app|Magisk_DEBUG.apk;PRESIGNED|false
 
 ##########################################################################################################
 #  ____  _                           _          
