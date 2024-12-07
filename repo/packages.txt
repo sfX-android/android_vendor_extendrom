@@ -52,22 +52,14 @@ AuroraServices_v1.1.1.apk|https://gitlab.com/AuroraOSS/AuroraServices/uploads/c2
 ##########################################################################################################
 
 # Magisk latest stable version
-Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app|Magisk.apk;PRESIGNED|false
-Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app|SignMagisk.apk;user-keys/shared|false
-
-# v28.0 disabled (again) as the stub apk within is buggy (https://github.com/topjohnwu/Magisk/issues/8474)
-#Magisk-v28.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v28.0|app|Magisk.apk;PRESIGNED|false
-#Magisk-v28.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v28.0|app|SignMagisk.apk;user-keys/shared|false
+Magisk-v28.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v28.1|app|Magisk.apk;PRESIGNED|false
 
 # Magisk previous stable version
 Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app|Magisk_v27.0.apk;PRESIGNED|false
-Magisk-v27.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v27.0|app|SignMagisk_v27.0.apk;user-keys/shared|false
 
 # Magisk LEGACY versions (only latest bugfix version per major release)
 Magisk-v26.4.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.4|app|Magisk_v26.4.apk;PRESIGNED|false
-Magisk-v26.4.apk|https://github.com/topjohnwu/Magisk/releases/download/v26.4|app|SignMagisk_v26.4.apk;user-keys/shared|false
 Magisk-v25.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v25.2|app|Magisk_v25.2.apk;PRESIGNED|false
-Magisk-v25.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v25.2|app|SignMagisk_v25.2.apk;user-keys/shared|false
 Magisk-v24.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v24.3|app|Magisk_v24.3.apk;PRESIGNED|false
 Magisk-v24.3.apk|https://github.com/topjohnwu/Magisk/releases/download/v24.3|app|SignMagisk_v24.3.apk;user-keys/shared|false
 Magisk-v23.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v23.0|app|Magisk_v23.0.apk;PRESIGNED|false
