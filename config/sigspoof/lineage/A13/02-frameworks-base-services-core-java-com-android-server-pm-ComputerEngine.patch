@@ -1,11 +1,18 @@
-
 project frameworks/base/
 diff --git a/services/core/java/com/android/server/pm/ComputerEngine.java b/services/core/java/com/android/server/pm/ComputerEngine.java
-index 46b7460dff1b..90f75dedef59 100644
+index 63e3deffe97a..e5cc5584b4b6 100644
 --- a/services/core/java/com/android/server/pm/ComputerEngine.java
 +++ b/services/core/java/com/android/server/pm/ComputerEngine.java
-@@ -1603,6 +1603,29 @@ public class ComputerEngine implements Computer {
-         return result;
+@@ -161,6 +161,7 @@ import java.io.FileOutputStream;
+ import java.io.IOException;
+ import java.io.PrintWriter;
+ import java.nio.charset.StandardCharsets;
++import java.security.cert.CertificateException;
+ import java.util.ArrayList;
+ import java.util.Collection;
+ import java.util.Collections;
+@@ -1656,6 +1657,29 @@ public class ComputerEngine implements Computer {
+         return Optional.of(fakeSignature);
      }
  
 +    private boolean requestsFakeSignature(AndroidPackage p) {
@@ -34,7 +41,7 @@ index 46b7460dff1b..90f75dedef59 100644
      public final PackageInfo generatePackageInfo(PackageStateInternal ps,
              @PackageManager.PackageInfoFlagsBits long flags, int userId) {
          if (!mUserManager.exists(userId)) return null;
-@@ -1632,13 +1655,15 @@ public class ComputerEngine implements Computer {
+@@ -1685,13 +1709,15 @@ public class ComputerEngine implements Computer {
              final int[] gids = (flags & PackageManager.GET_GIDS) == 0 ? EMPTY_INT_ARRAY
                      : mPermissionManager.getGidsForUid(UserHandle.getUid(userId, ps.getAppId()));
              // Compute granted permissions only if package has requested permissions
@@ -53,3 +60,22 @@ index 46b7460dff1b..90f75dedef59 100644
  
              if (packageInfo == null) {
                  return null;
+@@ -1702,6 +1728,18 @@ public class ComputerEngine implements Computer {
+
+             generateFakeSignature(p).ifPresent(fakeSignature -> {
+                 packageInfo.signatures = new Signature[]{fakeSignature};
++                try {
++                    packageInfo.signingInfo = new SigningInfo(
++                            new SigningDetails(
++                                    packageInfo.signatures,
++                                    SigningDetails.SignatureSchemeVersion.SIGNING_BLOCK_V3,
++                                    SigningDetails.toSigningKeys(packageInfo.signatures),
++                                    null
++                            )
++                    );
++                } catch (CertificateException e) {
++                    Slog.e(TAG, "Caught an exception when creating signing keys: ", e);
++                }
+             });
+
+             return packageInfo;
