@@ -1,9 +1,9 @@
 project frameworks/base/
 diff --git a/services/core/java/com/android/server/pm/ComputerEngine.java b/services/core/java/com/android/server/pm/ComputerEngine.java
-index 63e3deffe97a..e5cc5584b4b6 100644
+index 58448bfefdaf..cc3db2db7759 100644
 --- a/services/core/java/com/android/server/pm/ComputerEngine.java
 +++ b/services/core/java/com/android/server/pm/ComputerEngine.java
-@@ -161,6 +161,7 @@ import java.io.FileOutputStream;
+@@ -160,6 +160,7 @@ import java.io.FileOutputStream;
  import java.io.IOException;
  import java.io.PrintWriter;
  import java.nio.charset.StandardCharsets;
@@ -11,8 +11,8 @@ index 63e3deffe97a..e5cc5584b4b6 100644
  import java.util.ArrayList;
  import java.util.Collection;
  import java.util.Collections;
-@@ -1656,6 +1657,29 @@ public class ComputerEngine implements Computer {
-         return Optional.of(fakeSignature);
+@@ -1603,6 +1604,41 @@ public class ComputerEngine implements Computer {
+         return result;
      }
  
 +    private boolean requestsFakeSignature(AndroidPackage p) {
@@ -27,8 +27,20 @@ index 63e3deffe97a..e5cc5584b4b6 100644
 +                    p.getTargetSdkVersion() > Build.VERSION_CODES.LOLLIPOP_MR1) {
 +                String sig = p.getMetaData().getString("fake-signature");
 +                if (sig != null &&
-+                        permissions.contains("android.permission.FAKE_PACKAGE_SIGNATURE")) {
-+                    pi.signatures = new Signature[] {new Signature(sig)};
++                    permissions.contains("android.permission.FAKE_PACKAGE_SIGNATURE")) {
++                        pi.signatures = new Signature[] {new Signature(sig)};
++                        try {
++                            packageInfo.signingInfo = new SigningInfo(
++                                new SigningDetails(
++                                        pi.signatures,
++                                        SigningDetails.SignatureSchemeVersion.SIGNING_BLOCK_V3,
++                                        SigningDetails.toSigningKeys(pi.signatures),
++                                        null
++                                )
++                            );
++                        } catch (CertificateException e) {
++                            Slog.e(TAG, "Caught an exception when creating signing keys: ", e);
++                        }
 +                }
 +            }
 +        } catch (Throwable t) {
@@ -41,7 +53,7 @@ index 63e3deffe97a..e5cc5584b4b6 100644
      public final PackageInfo generatePackageInfo(PackageStateInternal ps,
              @PackageManager.PackageInfoFlagsBits long flags, int userId) {
          if (!mUserManager.exists(userId)) return null;
-@@ -1685,13 +1709,15 @@ public class ComputerEngine implements Computer {
+@@ -1632,13 +1668,15 @@ public class ComputerEngine implements Computer {
              final int[] gids = (flags & PackageManager.GET_GIDS) == 0 ? EMPTY_INT_ARRAY
                      : mPermissionManager.getGidsForUid(UserHandle.getUid(userId, ps.getAppId()));
              // Compute granted permissions only if package has requested permissions
@@ -60,22 +72,3 @@ index 63e3deffe97a..e5cc5584b4b6 100644
  
              if (packageInfo == null) {
                  return null;
-@@ -1702,6 +1728,18 @@ public class ComputerEngine implements Computer {
-
-             generateFakeSignature(p).ifPresent(fakeSignature -> {
-                 packageInfo.signatures = new Signature[]{fakeSignature};
-+                try {
-+                    packageInfo.signingInfo = new SigningInfo(
-+                            new SigningDetails(
-+                                    packageInfo.signatures,
-+                                    SigningDetails.SignatureSchemeVersion.SIGNING_BLOCK_V3,
-+                                    SigningDetails.toSigningKeys(packageInfo.signatures),
-+                                    null
-+                            )
-+                    );
-+                } catch (CertificateException e) {
-+                    Slog.e(TAG, "Caught an exception when creating signing keys: ", e);
-+                }
-             });
-
-             return packageInfo;
