@@ -1,10 +1,10 @@
 
 project frameworks/base
 diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
-index f69922f64787..9517e4032646 100644
+index 5bbde18f7e9e..76410f266cf9 100644
 --- a/services/core/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/core/java/com/android/server/pm/PackageManagerService.java
-@@ -3325,6 +3325,33 @@ public class PackageManagerService extends IPackageManager.Stub
+@@ -3330,6 +3330,45 @@ public class PackageManagerService extends IPackageManager.Stub
              return result;
          }
  
@@ -25,6 +25,18 @@ index f69922f64787..9517e4032646 100644
 +                    String sig = getRequestedFakeSignature(p);
 +                    if (sig != null) {
 +                        pi.signatures = new Signature[] { new Signature(sig) };
++			try {
++			    pi.signingInfo = new SigningInfo(
++				new SigningDetails(
++					pi.signatures,
++					SigningDetails.SignatureSchemeVersion.SIGNING_BLOCK_V3,
++					SigningDetails.toSigningKeys(pi.signatures),
++					null
++				)
++			    );
++			} catch (CertificateException e) {
++			    Slog.e(TAG, "Caught an exception when creating signing keys: ", e);
++			}
 +                    }
 +                }
 +            } catch (Throwable t) {
@@ -38,7 +50,7 @@ index f69922f64787..9517e4032646 100644
          public final PackageInfo generatePackageInfo(PackageSetting ps, int flags, int userId) {
              if (!mUserManager.exists(userId)) return null;
              if (ps == null) {
-@@ -3353,13 +3380,17 @@ public class PackageManagerService extends IPackageManager.Stub
+@@ -3358,13 +3397,17 @@ public class PackageManagerService extends IPackageManager.Stub
                  final int[] gids = (flags & PackageManager.GET_GIDS) == 0 ? EMPTY_INT_ARRAY
                          : mPermissionManager.getGidsForUid(UserHandle.getUid(userId, ps.appId));
                  // Compute granted permissions only if package has requested permissions
