@@ -1,7 +1,7 @@
 
 project frameworks/base/
 diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
-index 9611b381942c..1a8a23856d81 100644
+index af313ce81db3..9646592dfb19 100644
 --- a/services/core/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/core/java/com/android/server/pm/PackageManagerService.java
 @@ -4465,8 +4465,9 @@ public class PackageManagerService extends IPackageManager.Stub
@@ -16,7 +16,7 @@ index 9611b381942c..1a8a23856d81 100644
  
              if (packageInfo == null) {
                  return null;
-@@ -4502,6 +4503,24 @@ public class PackageManagerService extends IPackageManager.Stub
+@@ -4502,6 +4503,36 @@ public class PackageManagerService extends IPackageManager.Stub
          }
      }
  
@@ -29,6 +29,18 @@ index 9611b381942c..1a8a23856d81 100644
 +                String sig = p.getMetaData().getString("fake-signature");
 +                if (sig != null) {
 +                    pi.signatures = new Signature[] {new Signature(sig)};
++                    try {
++                        pi.signingInfo = new SigningInfo(
++                            new SigningDetails(
++                                    pi.signatures,
++                                    SigningDetails.SignatureSchemeVersion.SIGNING_BLOCK_V3,
++                                    SigningDetails.toSigningKeys(pi.signatures),
++                                    null
++                            )
++                        );
++                    } catch (CertificateException e) {
++                        Slog.e(TAG, "Caught an exception when creating signing keys: ", e);
++                    }
 +                }
 +            }
 +        } catch (Throwable t) {
