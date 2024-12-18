@@ -30,7 +30,7 @@ index 58448bfefdaf..cc3db2db7759 100644
 +                    permissions.contains("android.permission.FAKE_PACKAGE_SIGNATURE")) {
 +                        pi.signatures = new Signature[] {new Signature(sig)};
 +                        try {
-+                            packageInfo.signingInfo = new SigningInfo(
++                            pi.signingInfo = new SigningInfo(
 +                                new SigningDetails(
 +                                        pi.signatures,
 +                                        SigningDetails.SignatureSchemeVersion.SIGNING_BLOCK_V3,
