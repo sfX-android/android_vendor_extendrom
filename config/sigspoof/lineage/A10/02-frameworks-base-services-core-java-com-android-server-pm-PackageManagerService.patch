@@ -1,25 +1,25 @@
 
 project frameworks/base/
 diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
-index 1b5a03b0..0f4f97ab 100644
+index 9a4edcc5ea39..c9943c842ffb 100644
 --- a/services/core/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/core/java/com/android/server/pm/PackageManagerService.java
-@@ -4105,8 +4105,9 @@ public class PackageManagerService extends IPackageManager.Stub
-             final Set<String> permissions = ArrayUtils.isEmpty(p.requestedPermissions)
-                     ? Collections.emptySet() : permissionsState.getPermissions(userId);
-
+@@ -4203,8 +4203,9 @@ public class PackageManagerService extends IPackageManager.Stub
+                 });
+             }
+ 
 -            PackageInfo packageInfo = PackageParser.generatePackageInfo(p, gids, flags,
 -                    ps.firstInstallTime, ps.lastUpdateTime, permissions, state, userId);
 +            PackageInfo packageInfo = mayFakeSignature(p, PackageParser.generatePackageInfo(p, gids, flags,
 +                ps.firstInstallTime, ps.lastUpdateTime, permissions, state, userId),
 +                permissions);
-
+ 
              if (packageInfo == null) {
                  return null;
-@@ -4142,6 +4143,24 @@ public class PackageManagerService extends IPackageManager.Stub
+@@ -4240,6 +4241,36 @@ public class PackageManagerService extends IPackageManager.Stub
          }
      }
-
+ 
 +    private PackageInfo mayFakeSignature(PackageParser.Package p, PackageInfo pi,
 +            Set<String> permissions) {
 +        try {
@@ -29,6 +29,18 @@ index 1b5a03b0..0f4f97ab 100644
 +                String sig = p.mAppMetaData.getString("fake-signature");
 +                if (sig != null) {
 +                    pi.signatures = new Signature[] {new Signature(sig)};
++		    try {
++                        pi.signingInfo = new SigningInfo(
++                            new SigningDetails(
++                                    pi.signatures,
++                                    SigningDetails.SignatureSchemeVersion.SIGNING_BLOCK_V3,
++                                    SigningDetails.toSigningKeys(pi.signatures),
++                                    null
++                            )
++                        );
++                    } catch (CertificateException e) {
++                        Slog.e(TAG, "Caught an exception when creating signing keys: ", e);
++                    }
 +                }
 +            }
 +        } catch (Throwable t) {
