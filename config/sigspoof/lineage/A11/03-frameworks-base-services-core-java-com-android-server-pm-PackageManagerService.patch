@@ -34,7 +34,7 @@ index af313ce81db3..9646592dfb19 100644
 +                            new SigningDetails(
 +                                    pi.signatures,
 +                                    SigningDetails.SignatureSchemeVersion.SIGNING_BLOCK_V3,
-+                                    SigningDetails.toSigningKeys(pi.signatures),
++                                    PackageParser.toSigningKeys(pi.signatures),
 +                                    null
 +                            )
 +                        );
