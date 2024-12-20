@@ -112,6 +112,7 @@ com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|Micro
 #
 # current stable: (keep an eye on: https://github.com/microg/GmsCore/issues/2635)
 com.google.android.gms-240913010.apk|https://github.com/microg/GmsCore/releases/download/v0.3.5.240913/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+com.google.android.gms-240913010.apk|https://github.com/microg/GmsCore/releases/download/v0.3.5.240913/|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 #
 # old stable:
 com.google.android.gms-240913008.apk|https://github.com/microg/GmsCore/releases/download/v0.3.4.240913/|app|MicrogGmsCore_v034.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
