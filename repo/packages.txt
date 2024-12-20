@@ -127,6 +127,7 @@ com.google.android.gsf-LATEST.apk|https://microg.org/fdroid/repo/|app|GsfProxy.a
 # - Github release
 #   a "xxx_GH" fallback to github which is fast always
 GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/download/v0.1.0|app|GsfProxy_GH.apk;PRESIGNED|false
+GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/download/v0.1.0|priv-app|GsfProxy_GH_PRIV.apk;PRESIGNED|false
 
 # MicroG FakeStore - LEGACY
 # is part of GmsCore now: https://github.com/microg/GmsCore/tree/master/vending-app
