@@ -675,14 +675,20 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     cp $MAGISKOUT/src/lib/x86/libmagiskboot.so $MAGISKOUT/magiskboot
     chmod 755 $MAGISKOUT/magiskboot
     echo "[MAGISK] ... MAGISK_TARGET_ARCH specified as $MAGISK_TARGET_ARCH"
+    echo "[MAGISK] ... Preparing work dir.."
 
     if [ $MAGISK_TARGET_ARCH == "arm64" ];then
-	cp $MAGISKOUT/src/lib/arm64-v8a/libmagisk64.so $MAGISKOUT/magisk64 || cp $MAGISKOUT/src/lib/arm64-v8a/libmagisk.so $MAGISKOUT/magisk
-	cp $MAGISKOUT/src/lib/arm64-v8a/libmagiskinit.so $MAGISKOUT/magiskinit
-        if [ -f $MAGISKOUT/src/lib/arm64-v8a/libinit-ld.so ]; then cp $MAGISKOUT/src/lib/arm64-v8a/libinit-ld.so $MAGISKOUT/init-ld; fi
+	echo "[MAGISK] ... $(cp -v $MAGISKOUT/src/lib/arm64-v8a/libmagisk64.so $MAGISKOUT/magisk64 || cp -v $MAGISKOUT/src/lib/arm64-v8a/libmagisk.so $MAGISKOUT/magisk)"
+	echo "[MAGISK] ... $(cp -v $MAGISKOUT/src/lib/arm64-v8a/libmagiskinit.so $MAGISKOUT/magiskinit)"
+        if [ -f $MAGISKOUT/src/lib/arm64-v8a/libinit-ld.so ]; then echo "[MAGISK] ... $(cp -v $MAGISKOUT/src/lib/arm64-v8a/libinit-ld.so $MAGISKOUT/init-ld)"; fi
     else
-        if [ -f $MAGISKOUT/src/lib/armeabi-v7a/libmagisk32.so ]; then cp $MAGISKOUT/src/lib/armeabi-v7a/libmagisk32.so $MAGISKOUT/magisk32;fi
-	cp $MAGISKOUT/src/lib/armeabi-v7a/libmagiskinit.so $MAGISKOUT/magiskinit
+        if [ -f $MAGISKOUT/src/lib/armeabi-v7a/libmagisk32.so ]; then
+            echo "[MAGISK] ... $(cp -v $MAGISKOUT/src/lib/armeabi-v7a/libmagisk32.so $MAGISKOUT/magisk32)"
+        else
+            echo "[MAGISK] ... $(cp -v $MAGISKOUT/src/lib/armeabi-v7a/libmagisk.so $MAGISKOUT/magisk)"
+        fi
+        echo "[MAGISK] ... $(cp -v $MAGISKOUT/src/lib/armeabi-v7a/libmagiskinit.so $MAGISKOUT/magiskinit)"
+        echo "[MAGISK] ... $(cp -v $MAGISKOUT/src/lib/armeabi-v7a/libinit-ld.so $MAGISKOUT/init-ld)"
     fi
     chmod 755 $MAGISKOUT/src/assets/boot_patch.sh
     rm -rf $MAGISKOUT/src/assets/dexopt $MAGISKOUT/src/assets/chromeos
