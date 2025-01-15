@@ -2,7 +2,7 @@
 ############################################################################
 #
 # Copyright (C) 2017-2018 Andreas Schneider <asn@crytpomilk.org>
-# Copyright (C) 2020-2024 steadfasterX <steadfasterX@binbash.rocks>
+# Copyright (C) 2020-2025 steadfasterX <steadfasterX |AT| binbash #DOT# rocks>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -89,6 +89,7 @@ echo -e "\n\n************************************************** STARTING EXTENDR
 # base info
 
 echo "extendrom version: $(repo forall vendor/extendrom -c 'git rev-parse --symbolic-full-name HEAD; git rev-parse --short=7 HEAD' 2>/dev/null | tr '\n' ' ')"
+
 echo -e "\n\n"
 echo "ENABLE_EXTENDROM: $ENABLE_EXTENDROM"
 echo "EXTENDROM_PREROOT_BOOT: $EXTENDROM_PREROOT_BOOT"
@@ -103,6 +104,7 @@ echo "EXTENDROM_ALLOW_ANY_CALL_RECORDING: $EXTENDROM_ALLOW_ANY_CALL_RECORDING"
 echo "EXTENDROM_SIGNATURE_SPOOFING: $EXTENDROM_SIGNATURE_SPOOFING"
 echo "EXTENDROM_SIGSPOOF_RESET: $EXTENDROM_SIGSPOOF_RESET"
 echo "EXTENDROM_SIGSPOOF_FORCE_PDIR: $EXTENDROM_SIGSPOOF_FORCE_PDIR"
+
 export EXTENDROM_TARGET_VERSION=$(build/soong/soong_ui.bash --dumpvar-mode PLATFORM_VERSION  2>/dev/null)
 echo "EXTENDROM_TARGET_VERSION: $EXTENDROM_TARGET_VERSION"
 EXTENDROM_TARGET_PRODUCT_F=$(build/soong/soong_ui.bash --dumpvar-mode TARGET_PRODUCT  2>/dev/null)
@@ -609,6 +611,20 @@ F_CALLREC(){
 
     if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
 }
+
+# append a signature to every overlay in vendor/ 
+# (as we cannot predict which will be used during build)
+F_ADD_WV(){
+    WV="$1"
+    for x in $(find vendor/ -type f -name config_webview_packages.xml);do
+    	sed -i "/<\/webviewprovider>/ r $WV" $x && echo "[$FUNCNAME] appended $WV webview to: $x"
+    done
+}
+
+echo "$EXTENDROM_PACKAGES" | grep -qi 'Cromite_SystemWebView' && EXTENDROM_WEBVIEW_CROMITE=true
+echo "$EXTENDROM_PACKAGES" | grep -qi 'AXP.OS_WebView' && EXTENDROM_WEBVIEW_AXP=true
+if [ "$EXTENDROM_WEBVIEW_CROMITE" == "true" ];then F_ADD_WV "extra/webview_cromite.sig.xml" ;fi
+if [ "$EXTENDROM_WEBVIEW_AXP" == "true" ];then F_ADD_WV "extra/webview_axp.os.sig.xml" ;fi
 
 if [ "$EXTENDROM_SIGNATURE_SPOOFING" == "true" ];then F_SIGPATCH ;fi
 if [ "$EXTENDROM_SIGNING_PATCHES" == "true" ];then F_SIGNINGPATCHES ;fi
