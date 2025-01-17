@@ -235,8 +235,8 @@ at.bitfire.davdroid_LATEST.apk|FDROIDREPO|app|DAVx5.apk;PRESIGNED|true
 com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
 
 # AXP.OS webview (successor of Mulch)
-webview32-signed.apk|https://codeberg.org/AXP-OS_releases/webview_mulch/releases/download/|priv-app|AXP.OS_webview32.apk;PRESIGNED-extractlibs|false||
-webview64-signed.apk|https://codeberg.org/AXP-OS_releases/webview_mulch/releases/download/|priv-app|AXP.OS_webview64.apk;PRESIGNED-extractlibs|false||
+webview32-signed.apk|https://codeberg.org/AXP-OS_releases/webview_mulch/releases/download/latest/|priv-app|AXP.OS_webview32.apk;PRESIGNED-extractlibs|false||
+webview64-signed.apk|https://codeberg.org/AXP-OS_releases/webview_mulch/releases/download/latest/|priv-app|AXP.OS_webview64.apk;PRESIGNED-extractlibs|false||
 
 # Cromite browser (successor of Bromite)
 # Note: Cromite does not support armeabi-v7/7a atm (https://github.com/uazo/cromite/issues/237)
