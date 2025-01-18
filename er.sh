@@ -623,8 +623,8 @@ F_ADD_WV(){
 
 echo "$EXTENDROM_PACKAGES" | grep -qi 'Cromite_SystemWebView' && EXTENDROM_WEBVIEW_CROMITE=true
 echo "$EXTENDROM_PACKAGES" | grep -qi 'AXP.OS_WebView' && EXTENDROM_WEBVIEW_AXP=true
-if [ "$EXTENDROM_WEBVIEW_CROMITE" == "true" ];then F_ADD_WV "extra/webview_cromite.sig.xml" ;fi
-if [ "$EXTENDROM_WEBVIEW_AXP" == "true" ];then F_ADD_WV "extra/webview_axp.os.sig.xml" ;fi
+if [ "$EXTENDROM_WEBVIEW_CROMITE" == "true" ];then F_ADD_WV "${SRC_TOP}/vendor/extendrom/extra/webview_cromite.sig.xml" ;fi
+if [ "$EXTENDROM_WEBVIEW_AXP" == "true" ];then F_ADD_WV "${SRC_TOP}/vendor/extendrom/extra/webview_axp.os.sig.xml" ;fi
 
 if [ "$EXTENDROM_SIGNATURE_SPOOFING" == "true" ];then F_SIGPATCH ;fi
 if [ "$EXTENDROM_SIGNING_PATCHES" == "true" ];then F_SIGNINGPATCHES ;fi
