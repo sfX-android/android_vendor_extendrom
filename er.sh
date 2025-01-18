@@ -615,16 +615,34 @@ F_CALLREC(){
 # append a signature to every overlay in vendor/ 
 # (as we cannot predict which will be used during build)
 F_ADD_WV(){
-    WV="$1"
+    WVS="$1"
+
     for x in $(find vendor/ -type f -name config_webview_packages.xml);do
-    	sed -i "/<\/webviewprovider>/ r $WV" $x && echo "[$FUNCNAME] appended $WV webview to: $x"
+        # start fresh xml
+        echo "[$FUNCNAME] constructing config_webview_packages.xml"
+
+        cat > $_OUTDIR/_config_webview_packages.xml <<_EOFF
+<?xml version="1.0" encoding="utf-8"?>
+<webviewproviders>
+
+_EOFF
+        # add all webviews
+        for w in $WVS;do
+            WV="${w/:*/}"
+            IND="${w/*:/}"
+	    cat ${SRC_TOP}/vendor/extendrom/extra/$WV >> $_OUTDIR/_config_webview_packages.xml && echo "[$FUNCNAME] ... added $w to config_webview_packages.xml"
+        done
+        # finalize the xml and overwrite the source
+        echo -e '\n</webviewproviders>' >> $_OUTDIR/_config_webview_packages.xml
+        mv $_OUTDIR/_config_webview_packages.xml $x && echo "[$FUNCNAME] constructing config_webview_packages.xml completed"
     done
 }
 
-echo "$EXTENDROM_PACKAGES" | grep -qi 'Cromite_SystemWebView' && EXTENDROM_WEBVIEW_CROMITE=true
-echo "$EXTENDROM_PACKAGES" | grep -qi 'AXP.OS_WebView' && EXTENDROM_WEBVIEW_AXP=true
-if [ "$EXTENDROM_WEBVIEW_CROMITE" == "true" ];then F_ADD_WV "${SRC_TOP}/vendor/extendrom/extra/webview_cromite.sig.xml" ;fi
-if [ "$EXTENDROM_WEBVIEW_AXP" == "true" ];then F_ADD_WV "${SRC_TOP}/vendor/extendrom/extra/webview_axp.os.sig.xml" ;fi
+# webviews handling
+# format: <filename>:<existence-check-string>
+if [[ "$EXTENDROM_PACKAGES" =~ "AXP.OS_webview" ]];then WVL="webview_axp.os.sig.xml:org.axpos.webview_wv"; fi
+if [[ "$EXTENDROM_PACKAGES" =~ "Cromite_webview" ]];then WVL="${WVL} webview_cromite.sig.xml:Cromite"; fi
+if [ ! -z "$WVL" ]; then F_ADD_WV "$WVL";fi
 
 if [ "$EXTENDROM_SIGNATURE_SPOOFING" == "true" ];then F_SIGPATCH ;fi
 if [ "$EXTENDROM_SIGNING_PATCHES" == "true" ];then F_SIGNINGPATCHES ;fi

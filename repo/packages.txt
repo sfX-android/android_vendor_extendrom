@@ -243,7 +243,7 @@ webview64-signed.apk|https://codeberg.org/AXP-OS_releases/webview_mulch/releases
 arm64_ChromePublic.apk|https://www.cromite.org/fdroid/repo/|app|Cromite_arm64.apk;PRESIGNED-extractlibs|false||
 
 # Cromite webview (arm64)
-arm64_SystemWebView64.apk|https://github.com/uazo/cromite/releases/latest/download/|priv-app|Cromite_SystemWebView64.apk;PRESIGNED-extractlibs|false||
+arm64_SystemWebView64.apk|https://github.com/uazo/cromite/releases/latest/download/|priv-app|Cromite_webview64.apk;PRESIGNED-extractlibs|false||
 
 ##########################################################################################################
 #   ___   __  __ _          
