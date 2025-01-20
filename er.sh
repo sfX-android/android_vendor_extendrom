@@ -628,9 +628,7 @@ F_ADD_WV(){
 _EOFF
         # add all webviews
         for w in $WVS;do
-            WV="${w/:*/}"
-            IND="${w/*:/}"
-	    cat ${SRC_TOP}/vendor/extendrom/extra/$WV >> $_OUTDIR/_config_webview_packages.xml && echo "[$FUNCNAME] ... added $w to config_webview_packages.xml"
+	    cat ${SRC_TOP}/vendor/extendrom/extra/$w >> $_OUTDIR/_config_webview_packages.xml && echo "[$FUNCNAME] ... added $w to config_webview_packages.xml"
         done
         # finalize the xml and overwrite the source
         echo -e '\n</webviewproviders>' >> $_OUTDIR/_config_webview_packages.xml
@@ -640,8 +638,8 @@ _EOFF
 
 # webviews handling
 # format: <filename>:<existence-check-string>
-if [[ "$EXTENDROM_PACKAGES" =~ "AXP.OS_webview" ]];then WVL="webview_axp.os.sig.xml:org.axpos.webview_wv"; fi
-if [[ "$EXTENDROM_PACKAGES" =~ "Cromite_webview" ]];then WVL="${WVL} webview_cromite.sig.xml:Cromite"; fi
+if [[ "$EXTENDROM_PACKAGES" =~ "AXP.OS_webview" ]];then WVL="webview_axp.os.sig.xml"; fi
+if [[ "$EXTENDROM_PACKAGES" =~ "Cromite_webview" ]];then WVL="${WVL} webview_cromite.sig.xml"; fi
 if [ ! -z "$WVL" ]; then F_ADD_WV "$WVL";fi
 
 if [ "$EXTENDROM_SIGNATURE_SPOOFING" == "true" ];then F_SIGPATCH ;fi
