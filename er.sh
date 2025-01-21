@@ -638,7 +638,7 @@ _EOFF
 
 # webviews handling
 # format: <filename>:<existence-check-string>
-if [[ "$EXTENDROM_PACKAGES" =~ "AXP.OS_webview" ]];then WVL="webview_axp.os.sig.xml"; fi
+if [[ "$EXTENDROM_PACKAGES" =~ "AOSmium_webview" ]];then WVL="webview_aosmium.sig.xml"; fi
 if [[ "$EXTENDROM_PACKAGES" =~ "Cromite_webview" ]];then WVL="${WVL} webview_cromite.sig.xml"; fi
 if [ ! -z "$WVL" ]; then F_ADD_WV "$WVL";fi
 
