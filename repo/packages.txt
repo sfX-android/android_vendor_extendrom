@@ -94,10 +94,13 @@ app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-28101
 # Phonesky (Google in-app purchase support)
 # by AXP.OS (based on nanolx but way more recent and tons of bugfixes)
 # IMPORTANT NOTE: requires a new signing key to be created named: "apps" (supported by "buildtools" since https://github.com/sfX-android/android_buildtools/commit/b59ce99439e488)
+
 # current stable:
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/latest/download|priv-app|Phonesky_AXP-OS.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+
 # testing:
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/44.4.19-23_84441900|priv-app|Phonesky_AXP-OS_testing.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/44.5.23-23_84452300|priv-app|Phonesky_AXP-OS_testing.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+
 # previous stable:
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/43.7.20-23_84372000|priv-app|Phonesky_AXP-OS_testing.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/42.6.23-23_84262300|priv-app|Phonesky_AXP-OS_42-6.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
@@ -117,14 +120,17 @@ Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/do
 # - FDroid repo
 #   easiest as you get the latest always - but it is sometimes incredible slow
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+#
 # - Github release
 #   a "xxx_GH" fallback to github which is fast always
-#
-# current stable: (keep an eye on: https://github.com/microg/GmsCore/issues/2635)
-com.google.android.gms-240913010.apk|https://github.com/microg/GmsCore/releases/download/v0.3.5.240913/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
-com.google.android.gms-240913010.apk|https://github.com/microg/GmsCore/releases/download/v0.3.5.240913/|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
-#
+
+# current stable: (keep an eye on: https://github.com/microg/GmsCore/issues/2635 + https://github.com/microg/GmsCore/issues/2752)
+com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+
 # old stable:
+com.google.android.gms-240913010.apk|https://github.com/microg/GmsCore/releases/download/v0.3.5.240913/|app|MicrogGmsCore_GH_v035.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
+com.google.android.gms-240913010.apk|https://github.com/microg/GmsCore/releases/download/v0.3.5.240913/|priv-app|MicrogGmsCore_GH_PRIV_v035.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 com.google.android.gms-240913008.apk|https://github.com/microg/GmsCore/releases/download/v0.3.4.240913/|app|MicrogGmsCore_v034.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 com.google.android.gms-240913004.apk|https://github.com/microg/GmsCore/releases/download/v0.3.2.240913/|app|MicrogGmsCore_v032.apk;user-keys/shared|false|GmsCore|er_microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_exceptions-com.google.android.gms.xml
 # latest version before the fully re-written GMScore (requires NominatimBackend/MozillaNlpBackend):
