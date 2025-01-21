@@ -194,7 +194,7 @@ F_WRITE_MAKEFILE(){
 	uses_required_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull | grep "uses-library:" | sed -n "s/uses-library:'\(.*\)'/\1/p" | tr "\n" " ")
 	uses_optional_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull | grep "uses-library-not-required:" | sed -n "s/uses-library-not-required:'\(.*\)'/\1/p" | tr "\n" " ")
 	app_target_sdk=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt dump badging vendor/extendrom/prebuilt/$appnamefull |grep -i ^targetSdkVersion | grep -oE '[0-9]+')
-	app_own_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt list -a vendor/extendrom/prebuilt/$appnamefull | grep lib/ | sed "s#^lib/#out/${appnamefull}_libs/lib/#g" | tr "\n" " ")
+	app_own_libs=$([ -f vendor/extendrom/prebuilt/$appnamefull ] && aapt list -a vendor/extendrom/prebuilt/$appnamefull | grep lib/ | grep "$ER_TARGET_ARCH" | sed "s#^lib/#out/${appnamefull}_libs/lib/#g" | tr "\n" " ")
         package_human="${appnamefull/\.apk}"
 
 	if [[ "$appname" =~ .*Magisk.* ]];then
