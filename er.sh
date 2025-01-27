@@ -134,6 +134,8 @@ echo "EXTENDROM_DEBUG_PATH_SIZE_SELINUX=$EXTENDROM_DEBUG_PATH_SIZE_SELINUX KB"
 
 # main repo used for downloading F-Droid apk's
 FDROID_REPO_URL="https://mirror.cyberbits.eu/fdroid/repo/"
+# the mirror monitor repo README (as it gets updates with most active ones)
+FDROID_MIRRORMON="https://gitlab.com/fdroid/mirror-monitor/-/raw/master/README.md?ref_type=heads"
 
 # list of keyservers for importing gpg pub keys
 # space separated
@@ -201,6 +203,10 @@ if [ -d "$PREBUILT_DIR" ] && [ "$EXTENDROM_PACKAGES_SKIP_DL" != "true" ]; then
     rm -rf "$PREBUILT_DIR"
 fi
 mkdir $PREBUILT_DIR $PREBUILT_DIR/app $PREBUILT_DIR/priv-app
+
+F_GET_FDROID_MIRRORS(){
+    curl -s "$FDROID_MIRRORMON" | grep -E '^\*\s+http' |grep -v onion |cut -d ' ' -f2 | tail -n 3
+}
 
 function download_package() {
     local repo="$1"
@@ -312,21 +318,45 @@ function get_packages() {
 	if [ $ERR -eq 0 ];then
 	    echo "[$FUNCNAME] ... parsing repo to find latest apk file name"
 	    old_package_name="$package_name"
-	    #echo "PARSEAPK -repourl ${repouri} -apkname $package_name"
-	    package_name=$(python3 $PARSEAPK -repourl "${repouri}" -apkname "$package_name")
+	    package_name=$(python3 $PARSEAPK -repourl "${repouri}" -apkname "$package_name" 2>/dev/null)
 	    PERR=$?
 	    if [ $PERR -eq 0 ];then
 	        echo "[$FUNCNAME] ... parsing result: $old_package_name -> $package_name"
 	    else
-	        echo "[$FUNCNAME] ... ERROR $PERR occured while identifying the latest apk name from ${FDROID_REPO_URL}"
-	        exit 3
+                echo "[$FUNCNAME] ERROR occured while finding latest apk file name for $package, trying mirror(s)!"
+                for m in $(F_GET_FDROID_MIRRORS);do
+                    echo "[$FUNCNAME] re-trying from mirror:"
+                    echo -e "[$FUNCNAME] ${package/*\//} @ $m"
+                    repouri="${m}"
+                    repo="${repouri}/${package_name}"
+                    package_name=$(python3 $PARSEAPK -repourl "${repouri}" -apkname "$old_package_name")
+                    PERR=$?
+                    package="$PREBUILT_DIR/$package_name"
+                    target_split=$(echo ${line} |cut -d "|" -f4)
+                    target_pkg="$PREBUILT_DIR/$(target_file $target_split | sed 's/\;.*//')"
+                    package_human=$(echo $(target_file $target_split | sed 's/\;.*//;s/\.apk//g;s/\.zip//g'))
+                    if [ $PERR -eq 0 ];then echo -e "[$FUNCNAME] Mirror download: OK!" && break;fi
+                done
+                if [ $PERR -ne 0 ];then echo "[$FUNCNAME] ERROR: all mirrors tried without success.. Aborted!" && exit 3;fi
 	    fi
 	fi
 	local repo="${repouri}/${package_name}"
 
 	should_verify=$(echo ${line} |cut -d "|" -f5)
-	download_package "$repo" "$package"
-	if [ $? -ne 0 ];then echo "[$FUNCNAME] ERROR occured while downloading, aborted"  && exit 3; fi
+	DLRESP1=$(download_package "$repo" "$package")
+	if [ $? -ne 0 ];then
+            echo "[$FUNCNAME] ERROR occured while downloading $package, trying mirror(s)!"
+            for m in $(F_GET_FDROID_MIRRORS);do
+                echo "[$FUNCNAME] re-trying from mirror:"
+                echo -e "[$FUNCNAME] ${package/*\//} @ $m"
+                repouri="${m}"
+                repo="${repouri}/${package_name}"
+                DLRESP=$(download_package "$repo" "$package" 2>&1)
+                DERR=$?
+                if [ $DERR -eq 0 ];then echo -e "[$FUNCNAME] Mirror download: OK!" && break;fi
+            done
+            if [ $DERR -ne 0 ];then echo -e "[$FUNCNAME] ERROR: all mirrors tried without success.. Aborted!Last error:\n\n$DLRESP" && exit 3;fi
+        fi
         
 	if [ "$should_verify" == "true" ];then
 	    verify_package "$package"
