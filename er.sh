@@ -324,6 +324,7 @@ function get_packages() {
 	        echo "[$FUNCNAME] ... parsing result: $old_package_name -> $package_name"
 	    else
                 echo "[$FUNCNAME] ERROR occured while finding latest apk file name for $package, trying mirror(s)!"
+		PERR=99
                 for m in $(F_GET_FDROID_MIRRORS);do
                     echo "[$FUNCNAME] re-trying from mirror:"
                     echo -e "[$FUNCNAME] ${package/*\//} @ $m"
@@ -337,7 +338,7 @@ function get_packages() {
                     package_human=$(echo $(target_file $target_split | sed 's/\;.*//;s/\.apk//g;s/\.zip//g'))
                     if [ $PERR -eq 0 ];then echo -e "[$FUNCNAME] Mirror download: OK!" && break;fi
                 done
-                if [ $PERR -ne 0 ];then echo "[$FUNCNAME] ERROR: all mirrors tried without success.. Aborted!" && exit 3;fi
+                if [ $PERR -ne 0 ];then echo "[$FUNCNAME] ERROR: all mirrors tried without success.. Aborted with $PERR!" && exit 3;fi
 	    fi
 	fi
 	local repo="${repouri}/${package_name}"
@@ -346,6 +347,7 @@ function get_packages() {
 	DLRESP1=$(download_package "$repo" "$package")
 	if [ $? -ne 0 ];then
             echo "[$FUNCNAME] ERROR occured while downloading $package, trying mirror(s)!"
+	    DERR=99
             for m in $(F_GET_FDROID_MIRRORS);do
                 echo "[$FUNCNAME] re-trying from mirror:"
                 echo -e "[$FUNCNAME] ${package/*\//} @ $m"
@@ -355,7 +357,7 @@ function get_packages() {
                 DERR=$?
                 if [ $DERR -eq 0 ];then echo -e "[$FUNCNAME] Mirror download: OK!" && break;fi
             done
-            if [ $DERR -ne 0 ];then echo -e "[$FUNCNAME] ERROR: all mirrors tried without success.. Aborted!Last error:\n\n$DLRESP" && exit 3;fi
+            if [ $DERR -ne 0 ];then echo -e "[$FUNCNAME] ERROR: all mirrors tried without success.. Aborted!Last error ($DERR):\n\n$DLRESP" && exit 3;fi
         fi
         
 	if [ "$should_verify" == "true" ];then
