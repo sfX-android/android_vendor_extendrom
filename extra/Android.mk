@@ -555,6 +555,21 @@ LOCAL_OVERRIDES_PACKAGES := Seedvault
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
 include $(BUILD_PREBUILT)
 
+# override BrowserWebView (LOS, eOS, LOS-based ones)
+include $(CLEAR_VARS)
+LOCAL_MODULE := noBrowserWebView
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := BrowserWebView
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
+endif
+include $(BUILD_PREBUILT)
+
 # override Stk (com.android.stk)
 include $(CLEAR_VARS)
 LOCAL_MODULE := noStk
