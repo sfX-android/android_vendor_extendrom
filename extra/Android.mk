@@ -557,7 +557,7 @@ include $(BUILD_PREBUILT)
 
 # override BrowserWebView (LOS, eOS, LOS-based ones)
 include $(CLEAR_VARS)
-LOCAL_MODULE := noBrowserWebView
+LOCAL_MODULE := noDefaultBrowserWebView
 LOCAL_SRC_FILES := empty.apk
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_MODULE_TAGS := optional
