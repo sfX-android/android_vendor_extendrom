@@ -286,8 +286,10 @@ function get_packages() {
         local package_baseuri=$(echo ${line} |cut -d "|" -f2)
 	if [ "$package_baseuri" == "FDROIDREPO" ];then
 	    local repouri="${FDROID_REPO_URL}"
+            isfdroid=1
 	else
 	    local repouri="${package_baseuri}"
+            isfdroid=0
 	fi
 
         local package="$PREBUILT_DIR/$package_name"
@@ -346,9 +348,10 @@ function get_packages() {
 	should_verify=$(echo ${line} |cut -d "|" -f5)
 	DLRESP1=$(download_package "$repo" "$package")
 	if [ $? -ne 0 ];then
-            echo "[$FUNCNAME] ERROR occured while downloading $package, trying mirror(s)!"
+            echo "[$FUNCNAME] ERROR occured while downloading $package!"
 	    DERR=99
-            for m in $(F_GET_FDROID_MIRRORS);do
+            if [ $isfdroid -eq 1 ];then
+              for m in $(F_GET_FDROID_MIRRORS);do
                 echo "[$FUNCNAME] re-trying from mirror:"
                 echo -e "[$FUNCNAME] ${package/*\//} @ $m"
                 repouri="${m}"
@@ -356,8 +359,12 @@ function get_packages() {
                 DLRESP=$(download_package "$repo" "$package" 2>&1)
                 DERR=$?
                 if [ $DERR -eq 0 ];then echo -e "[$FUNCNAME] Mirror download: OK!" && break;fi
-            done
-            if [ $DERR -ne 0 ];then echo -e "[$FUNCNAME] ERROR: all mirrors tried without success.. Aborted!Last error ($DERR):\n\n$DLRESP" && exit 3;fi
+              done
+              if [ $DERR -ne 0 ];then echo -e "[$FUNCNAME] ERROR: all mirrors tried without success.. Aborted! Last error ($DERR):\n\n$DLRESP" && exit 3;fi
+	    else
+              echo -e "[$FUNCNAME] ERROR:\n$DLRESP1"
+	      exit 88
+            fi
         fi
         
 	if [ "$should_verify" == "true" ];then
