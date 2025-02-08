@@ -139,7 +139,7 @@ FDROID_MIRRORMON="https://gitlab.com/fdroid/mirror-monitor/-/raw/master/README.m
 
 # list of keyservers for importing gpg pub keys
 # space separated
-GPG_KEYSERVER="keyserver.ubuntu.com pgp.mit.edu keys.openpgp.org keyring.debian.org"
+GPG_KEYSERVER="hkps://keys.openpgp.org hkp://keys.openpgp.org:80 hkps://keyserver.ubuntu.com hkp://keyserver.ubuntu.com:80 hkps://pgp.mit.edu hkp://pgp.mit.edu:80"
 
 # gpg keys to import
 # space separated
@@ -387,7 +387,7 @@ F_GET_GPG_KEYS(){
            gpg -k $k 2>&1 >> /dev/null && echo "[$FUNCNAME] ... skipping already imported gpg pub key ($k)" && continue
        fi
        for s in $GPG_KEYSERVER;do
-           echo "- trying $k from $s"
+           echo "[$FUNCNAME] trying to receive $k from $s"
            gpg --keyserver $s --recv-key $k >> /dev/null 2>&1 && echo "[$FUNCNAME] ... imported gpg key $k from $s" && continue 2
        done
        echo "[$FUNCNAME] ERROR: Cannot download a required gpg pub key: $k"
