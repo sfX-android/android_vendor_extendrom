@@ -16,14 +16,14 @@
 ##########################################################################################################
 
 # apk version can be revealed by e.g.: 
-# https://gitlab.com/fdroid/fdroidclient/-/commit/13c142eee0d5d70a42aa229f138de0a93d5a2a8f
+# https://gitlab.com/fdroid/fdroidclient/-/commits/master/app/build.gradle?search=release
 
 # LATEST
-# (BEWARE: This can also point to beta or even ALPHA releases)
+# (BEWARE: This can also point to beta or even ALPHA releases!!)
 org.fdroid.fdroid_LATEST.apk|FDROIDREPO|app|F-Droid_latest.apk;PRESIGNED|true
 
 # latest STABLE
-org.fdroid.fdroid_1021051.apk|FDROIDREPO|app|F-Droid.apk;PRESIGNED|true
+org.fdroid.fdroid_1022050.apk|FDROIDREPO|app|F-Droid.apk;PRESIGNED|true
 
 # specific releases
 org.fdroid.fdroid_1021051.apk|FDROIDREPO|app|F-Droid_v1.21.1.apk;PRESIGNED|true
