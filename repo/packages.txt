@@ -285,6 +285,8 @@ it.niedermann.owncloud.notes_LATEST.apk|FDROIDREPO|app|NextCloudNotes.apk;PRESIG
 OpenEUICC-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/latest/download|priv-app|OpenEUICC_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
 OpenEUICC_hidden-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/latest/download|priv-app|OpenEUICC-hidden_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
 
+# FossifyGallery
+org.fossify.gallery_LATEST.apk|FDROIDREPO|app|FossifyGallery.apk;PRESIGNED|true
 
 ##########################################################################################################
 #  _____ _            _____           _ 
