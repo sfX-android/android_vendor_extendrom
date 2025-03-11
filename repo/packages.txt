@@ -264,7 +264,7 @@ arm64_SystemWebView64.apk|https://github.com/uazo/cromite/releases/latest/downlo
 ##########################################################################################################
 
 # Etar Calendar
-ws.xsoh.etar_LATEST.apk|FDROIDREPO|app|Etar.apk;PRESIGNED|true
+ws.xsoh.etar_LATEST.apk|FDROIDREPO|app|Etar.apk;PRESIGNED|true|Calendar|er_etar-permissions.xml
 
 # OpenTasks
 org.dmfs.tasks_LATEST.apk|FDROIDREPO|app|OpenTasks.apk;PRESIGNED|true
@@ -286,7 +286,7 @@ OpenEUICC-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/
 OpenEUICC_hidden-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/releases/latest/download|priv-app|OpenEUICC-hidden_AXP-OS.apk;user-keys/platform|false||er_privapp_whitelist_im.angry.openeuicc.xml
 
 # FossifyGallery
-org.fossify.gallery_LATEST.apk|FDROIDREPO|app|FossifyGallery.apk;PRESIGNED|true
+org.fossify.gallery_LATEST.apk|FDROIDREPO|app|FossifyGallery.apk;PRESIGNED|true|Gallery2;Glimpse
 
 ##########################################################################################################
 #  _____ _            _____           _ 
