@@ -264,7 +264,7 @@ arm64_SystemWebView64.apk|https://github.com/uazo/cromite/releases/latest/downlo
 ##########################################################################################################
 
 # Etar Calendar
-ws.xsoh.etar_LATEST.apk|FDROIDREPO|app|Etar.apk;PRESIGNED|true|Calendar|er_etar-permissions.xml
+ws.xsoh.etar_LATEST.apk|FDROIDREPO|app|Etar_ER.apk;PRESIGNED|true|Calendar;Etar|er_etar-permissions.xml
 
 # OpenTasks
 org.dmfs.tasks_LATEST.apk|FDROIDREPO|app|OpenTasks.apk;PRESIGNED|true
