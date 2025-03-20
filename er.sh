@@ -74,6 +74,7 @@ MKOPTS="ENABLE_EXTENDROM \
 	EXTENDROM_FDROID_REPOS \
 	EXTENDROM_SIGNATURE_SPOOFING \
         EXTENDROM_ALLOW_ANY_CALL_RECORDING \
+	EXTENDROM_INTERCEPT_INSTALLSRC \
 	EXTENDROM_PATCHER_RESET \
 	EXTENDROM_SIGSPOOF_FORCE_PDIR"
 
@@ -104,6 +105,7 @@ echo "EXTENDROM_ALLOW_ANY_CALL_RECORDING: $EXTENDROM_ALLOW_ANY_CALL_RECORDING"
 echo "EXTENDROM_SIGNATURE_SPOOFING: $EXTENDROM_SIGNATURE_SPOOFING"
 echo "EXTENDROM_SIGSPOOF_RESET: $EXTENDROM_SIGSPOOF_RESET"
 echo "EXTENDROM_SIGSPOOF_FORCE_PDIR: $EXTENDROM_SIGSPOOF_FORCE_PDIR"
+echo "EXTENDROM_INTERCEPT_INSTALLSRC: $EXTENDROM_INTERCEPT_INSTALLSRC"
 
 export EXTENDROM_TARGET_VERSION=$(build/soong/soong_ui.bash --dumpvar-mode PLATFORM_VERSION  2>/dev/null)
 echo "EXTENDROM_TARGET_VERSION: $EXTENDROM_TARGET_VERSION"
@@ -577,7 +579,7 @@ F_CALLREC(){
             print "    <PreferenceCategory"
             print "        android:key=\"extendrom_call_recording_category\""
             print "        android:title=\"@string/extendrom_call_recording_category\""
-            print "        android:order=\"9998\">"
+            print "        android:order=\"9980\">"
             print ""
             print "       <Preference"
             print "            android:key=\"extendrom_call_recording_info\""
@@ -651,6 +653,120 @@ F_CALLREC(){
     if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
 }
 
+# intercept installation source check
+F_ORR_INSTALLSRC(){
+    local ER_MOD_NAME="orr_installsrc"
+    echo "[$FUNCNAME] intercept installation source check requested ..."
+
+    OLMK="vendor/extendrom/overlays/${ER_MOD_NAME}/active"
+    PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
+    PDIR="$SRC_TOP_FULL/$MY_DIR/config/${ER_MOD_NAME}/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
+    DEVOPTSETTINGS="$SRC_TOP_FULL/packages/apps/Settings/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java"
+    DEVOPTXML="$SRC_TOP_FULL/packages/apps/Settings/res/xml/development_settings.xml"
+    SECSETTINGS="frameworks/base/core/java/android/provider/Settings.java"
+
+    echo "[$FUNCNAME] adding overlay"
+    if [ -L "$OLMK" ]; then rm $OLMK; fi
+    ln -s $EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION} $OLMK
+
+    echo "[$FUNCNAME] adding controller"
+    cp $PDIR/packages-apps-Settings-src-com-android-settings-development-OrrInstallSrcPreferenceController.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/ER_OrrInstallSrcPreferenceController.java || exit 3
+    cp $PDIR/packages-apps-Settings-src-com-android-settings-development-OrrInstallSrcInfo.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/ER_OrrInstallSrcInfo.java || exit 3
+
+    # add controller after the last 'controllers.add' line
+    PREQ=0
+    grep -q "${ER_MOD_NAME}" $DEVOPTSETTINGS || PREQ=1
+    if [ $PREQ -eq 1 ];then
+        echo "[$FUNCNAME] adding controller - java"
+        awk '
+        /controllers.add/ { last = NR; lines[NR] = $0 }
+        { lines[NR] = $0 }
+        END {
+            for (i = 1; i <= NR; i++) {
+                print lines[i]
+                if (i == last) {
+                    print "        controllers.add(new ER_OrrInstallSrcPreferenceController(context)); // extendrom '${ER_MOD_NAME}'"
+                    print "        controllers.add(new ER_OrrInstallSrcInfo(context)); // extendrom '${ER_MOD_NAME}'"
+                }
+            }
+        }' $DEVOPTSETTINGS > ${DEVOPTSETTINGS}.temp && mv ${DEVOPTSETTINGS}.temp ${DEVOPTSETTINGS}
+    else
+        echo "[$FUNCNAME] SKIPPED: adding controller - java (already patched)"
+    fi
+
+    # add key to settings.secure
+    PREQ=0
+    grep -q "${ER_MOD_NAME}" $SECSETTINGS || PREQ=1
+    if [ $PREQ -eq 1 ];then
+        echo "[$FUNCNAME] adapting secure settings"
+        awk '
+        /public static final class Secure extends NameValueTable {/ && !done {
+            print
+            print ""
+            print "        /**"
+            print "         * extendrom: '${ER_MOD_NAME}'"
+            print "         *"
+            print "         * <p>1 = intercept installation source check"
+            print "         * <p>0 = report real installation source"
+            print "         * @hide"
+            print "         */"
+            print "        public static final String ER_ORR_INSTALLSRC = \"extendrom_orr_installsrc\";"
+            print ""
+            done = 1
+            next
+        }
+        { print }
+        ' $SECSETTINGS > ${SECSETTINGS}.temp && mv ${SECSETTINGS}.temp ${SECSETTINGS}
+    else
+        echo "[$FUNCNAME] SKIPPED: adapting secure settings (already patched)"
+    fi
+
+    # add controller to developer options
+    PREQ=0
+    grep -q "${ER_MOD_NAME}" $DEVOPTXML || PREQ=1
+    if [ $PREQ -eq 1 ];then
+        echo "[$FUNCNAME] adding to developer options"
+        awk '
+        /android:title="@string\/development_settings_title">/ && !done {
+            print
+            print ""
+            print "    <!-- extendrom intercept installation source check -->"
+            print "    <PreferenceCategory"
+            print "        android:key=\"extendrom_orr_installsrc_category\""
+            print "        android:title=\"@string/extendrom_orr_installsrc_category\""
+            print "        android:order=\"9990\">"
+            print ""
+            print "       <Preference"
+            print "            android:key=\"extendrom_orr_installsrc_info\""
+            print "            android:summary=\"@string/extendrom_orr_installsrc_details\" />"
+            print ""
+            print "       <SwitchPreference"
+            print "            android:key=\"extendrom_orr_installsrc\""
+            print "            android:title=\"@string/extendrom_orr_installsrc\""
+            print "            android:summary=\"@string/extendrom_orr_installsrc_summary\""
+            print "            android:defaultValue=\"false\" />"
+            print ""
+            print "    </PreferenceCategory>"
+            print "    <!-- end: extendrom intercept installation source check -->"
+            print ""
+            done = 1
+            next
+        }
+        { print }
+        ' $DEVOPTXML > ${DEVOPTXML}.temp && mv ${DEVOPTXML}.temp ${DEVOPTXML}
+    else
+        echo "[$FUNCNAME] SKIPPED: adding controller to developer options (already patched)"
+    fi
+
+    echo "[$FUNCNAME] using patch dir: $PDIR"
+    $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
+    ERR=$?
+    echo "[$FUNCNAME] patching process ended with $ERR"
+
+    if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
+}
+
+
 # append a signature to every overlay in vendor/ 
 # (as we cannot predict which will be used during build)
 F_ADD_WV(){
@@ -684,6 +800,7 @@ if [ ! -z "$WVL" ]; then F_ADD_WV "$WVL";fi
 if [ "$EXTENDROM_SIGNATURE_SPOOFING" == "true" ];then F_SIGPATCH ;fi
 if [ "$EXTENDROM_SIGNING_PATCHES" == "true" ];then F_SIGNINGPATCHES ;fi
 if [ "$EXTENDROM_ALLOW_ANY_CALL_RECORDING" == "true" ];then F_CALLREC; fi
+if [ "$EXTENDROM_INTERCEPT_INSTALLSRC" == "true" ];then F_ORR_INSTALLSRC; fi
 
 F_GET_GPG_KEYS
 get_packages "$MY_DIR/repo/packages.txt"
@@ -715,8 +832,8 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     # inject magisk patcher to releasetools
     PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
     PDIR="$SRC_TOP_FULL/$MY_DIR/config/magisk/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
-    echo "[MAGISK] using patch dir: $PDIR"
 
+    echo "[MAGISK] using patch dir: $PDIR"
     $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
     ERR=$?
     echo "[MAGISK] Injecting Magisk patcher ended with $ERR"

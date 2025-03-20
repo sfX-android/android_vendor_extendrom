@@ -6,4 +6,4 @@ sepolicy
 EXTENDROM_PATCHER_DONE
 packages.mk
 mkvars.mk
-overlays/call-rec/active
+overlays/*/active

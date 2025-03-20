@@ -51,6 +51,14 @@ PRODUCT_PACKAGE_OVERLAYS += \
 endif # EXTENDROM_ALLOW_ANY_CALL_RECORDING
 
 ##################################################################
+# Override installation source overlay
+
+ifeq ($(EXTENDROM_OVERRIDE_INSTALLATION_SOURCE),true)
+PRODUCT_PACKAGE_OVERLAYS += \
+    vendor/extendrom/overlays/orr_installsrc/active
+endif # EXTENDROM_OVERRIDE_INSTALLATION_SOURCE
+
+##################################################################
 # extendrom vendor makefile
 
 $(call inherit-product, vendor/extendrom/er.mk)

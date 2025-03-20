@@ -1,0 +1,35 @@
+
+project frameworks/base/
+diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
+index af313ce81db3..ee842952cebb 100644
+--- a/services/core/java/com/android/server/pm/PackageManagerService.java
++++ b/services/core/java/com/android/server/pm/PackageManagerService.java
+@@ -21572,6 +21603,29 @@ public class PackageManagerService extends IPackageManager.Stub
+             return null;
+         }
+ 
++        // extendrom intercept installation source
++        private static final String PACKAGE_PLAY_STORE = "com.android.vending";
++        private static final String[] PACKAGES_SPOOF_INSTALLSOURCE =
++            new String[] { "com.aurora.store", "dev.imranr.obtainium" };
++
++        int ER_OrrInstallSrcEnabled = Settings.Secure.getInt(
++            context.getContentResolver(),"extendrom_orr_installsrc", 0);
++
++        if (ER_OrrInstallSrcEnabled == 1) {
++            return new InstallSourceInfo(PACKAGE_PLAY_STORE, null, PACKAGE_PLAY_STORE, PACKAGE_PLAY_STORE);
++            InstallSource installSource = ps.installSource;
++            if (installSource != null && installSource.installerPackageName != null
++                    && mSettings.mPackages.get(PACKAGE_PLAY_STORE) != null
++                    && callingUid != Process.SYSTEM_UID
++                    && ArrayUtils.contains(PACKAGES_SPOOF_INSTALLSOURCE, installSource.installerPackageName)) {
++                return InstallSource.create(PACKAGE_PLAY_STORE, PACKAGE_PLAY_STORE, PACKAGE_PLAY_STORE,
++                                ps.installSource.isOrphaned, false)
++                        .setInitiatingPackageSignatures(new PackageSignatures(
++                                mSettings.mPackages.get(PACKAGE_PLAY_STORE).getSigningDetails()));
++            }
++        }
++        // end: extendrom intercept installation source
++
+         return ps.installSource;
+     }
