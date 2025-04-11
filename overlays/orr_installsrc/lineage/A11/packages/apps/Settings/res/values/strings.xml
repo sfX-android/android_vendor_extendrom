@@ -3,11 +3,11 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- custom category in developer options -->
-    <string name="extendrom_call_recording_category">App Installation Check</string>
+    <string name="extendrom_orr_installsrc_category">App Installation Check (EXPERIMENTAL)</string>
 
     <!-- add checkbox in developer settings -->
     <string name="extendrom_orr_installsrc">Intercept App installation check</string>
-    <string name="extendrom_orr_installsrc_summary">If activated all Apps will report as installed by Google Play</string>
-    <string name="extendrom_orr_installsrc_details">Several Apps are checking the installation source, i.e. if they are installed by Google Play or not.\nSee https://axpos.org/s for details.</string>
+    <string name="extendrom_orr_installsrc_summary">If activated all Apps will report as installed by Google Play.\nREQUIRES: \"Allow signature spoofing\"</string>
+    <string name="extendrom_orr_installsrc_details">Several Apps are checking the installation source, i.e. if they are installed by Google Play or not.\nSee https://axpos.org/s for details.\n\nWARNING:\nENABLING THIS SETTING IS HIGHLY EXPERIMENTAL!\nREAD THE GUIDE BEFORE ENABLING:\nhttps://axpos.org/s</string>
 
 </resources>

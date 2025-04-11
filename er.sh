@@ -664,6 +664,7 @@ F_ORR_INSTALLSRC(){
     DEVOPTSETTINGS="$SRC_TOP_FULL/packages/apps/Settings/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java"
     DEVOPTXML="$SRC_TOP_FULL/packages/apps/Settings/res/xml/development_settings.xml"
     SECSETTINGS="frameworks/base/core/java/android/provider/Settings.java"
+    IMPORTSETTINGS="frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java"
 
     echo "[$FUNCNAME] adding overlay"
     if [ -L "$OLMK" ]; then rm $OLMK; fi
@@ -758,6 +759,26 @@ F_ORR_INSTALLSRC(){
         echo "[$FUNCNAME] SKIPPED: adding controller to developer options (already patched)"
     fi
 
+    # add required import line to access Settings.Secure after the last found import line
+    PREQ=0
+    grep -q 'import android.provider.Settings' $IMPORTSETTINGS || PREQ=1
+    if [ $PREQ -eq 1 ];then
+        echo "[$FUNCNAME] adding Settings import"
+        awk '
+        /import / { last = NR; lines[NR] = $0 }
+        { lines[NR] = $0 }
+        END {
+            for (i = 1; i <= NR; i++) {
+                print lines[i]
+                if (i == last) {
+                    print "import android.provider.Settings; // extendrom '${ER_MOD_NAME}'"
+                }
+            }
+        }' $IMPORTSETTINGS > ${IMPORTSETTINGS}.temp && mv ${IMPORTSETTINGS}.temp ${IMPORTSETTINGS}
+    else
+        echo "[$FUNCNAME] SKIPPED: adding Settings import (already there)"
+    fi
+
     echo "[$FUNCNAME] using patch dir: $PDIR"
     $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
     ERR=$?
@@ -800,7 +821,7 @@ if [ ! -z "$WVL" ]; then F_ADD_WV "$WVL";fi
 if [ "$EXTENDROM_SIGNATURE_SPOOFING" == "true" ];then F_SIGPATCH ;fi
 if [ "$EXTENDROM_SIGNING_PATCHES" == "true" ];then F_SIGNINGPATCHES ;fi
 if [ "$EXTENDROM_ALLOW_ANY_CALL_RECORDING" == "true" ];then F_CALLREC; fi
-if [ "$EXTENDROM_INTERCEPT_INSTALLSRC" == "true" ];then F_ORR_INSTALLSRC; fi
+if [ "$EXTENDROM_INTERCEPT_INSTALLSRC" == "true" ];then F_SIGPATCH; F_ORR_INSTALLSRC; fi
 
 F_GET_GPG_KEYS
 get_packages "$MY_DIR/repo/packages.txt"

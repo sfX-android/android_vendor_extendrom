@@ -1,35 +1,61 @@
 
 project frameworks/base/
 diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
-index af313ce81db3..ee842952cebb 100644
 --- a/services/core/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/core/java/com/android/server/pm/PackageManagerService.java
-@@ -21572,6 +21603,29 @@ public class PackageManagerService extends IPackageManager.Stub
-             return null;
-         }
+@@ -4465,6 +4465,55 @@ public class PackageManagerService extends IPackageManager.Stub
+                 });
+             }
  
-+        // extendrom intercept installation source
-+        private static final String PACKAGE_PLAY_STORE = "com.android.vending";
-+        private static final String[] PACKAGES_SPOOF_INSTALLSOURCE =
-+            new String[] { "com.aurora.store", "dev.imranr.obtainium" };
++            /**
++                extendrom intercept installation source
++                - com.machiav3lli.backup: Neo Backup
++                - F-Droid on e.g A11 results in: com.android.packageinstaller
++                - null: usually a system app
++            **/
++            String pkgName = resolveExternalPackageNameLPr(p);
++            String PACKAGE_PLAY_STORE = "com.android.vending";
++            String[] PACKAGES_SPOOF_INSTALLSOURCE =
++                new String[] {  "com.aurora.store",
++                                "dev.imranr.obtainium",
++                                "org.fdroid.fdroid",
++                                "com.machiav3lli.backup"
++                             };
++            ContentResolver contentResolver = mContext.getContentResolver();
++            if (contentResolver != null) {
++                try {
++                    int installSrcValue = android.provider.Settings.Secure.getInt(contentResolver,
++                        android.provider.Settings.Secure.ER_ORR_INSTALLSRC, 0);
 +
-+        int ER_OrrInstallSrcEnabled = Settings.Secure.getInt(
-+            context.getContentResolver(),"extendrom_orr_installsrc", 0);
++                    if (android.provider.Settings.Secure.getInt(contentResolver,
++                            android.provider.Settings.Secure.ER_ORR_INSTALLSRC, 0) == 1) {
++                        InstallSource installSource = ps.installSource;
++                        if (installSource != null && installSource.installerPackageName != null
++                                && mSettings.getPackageLPr(PACKAGE_PLAY_STORE) != null
++                                && callingUid != Process.SYSTEM_UID
++                                && Arrays.asList(PACKAGES_SPOOF_INSTALLSOURCE).contains(installSource.installerPackageName)) {
++                            Log.w(TAG, "EXTROM: Intercepting installation source for package >" + pkgName + "< originated from: >" + installSource.installerPackageName + "<");
 +
-+        if (ER_OrrInstallSrcEnabled == 1) {
-+            return new InstallSourceInfo(PACKAGE_PLAY_STORE, null, PACKAGE_PLAY_STORE, PACKAGE_PLAY_STORE);
-+            InstallSource installSource = ps.installSource;
-+            if (installSource != null && installSource.installerPackageName != null
-+                    && mSettings.mPackages.get(PACKAGE_PLAY_STORE) != null
-+                    && callingUid != Process.SYSTEM_UID
-+                    && ArrayUtils.contains(PACKAGES_SPOOF_INSTALLSOURCE, installSource.installerPackageName)) {
-+                return InstallSource.create(PACKAGE_PLAY_STORE, PACKAGE_PLAY_STORE, PACKAGE_PLAY_STORE,
-+                                ps.installSource.isOrphaned, false)
-+                        .setInitiatingPackageSignatures(new PackageSignatures(
-+                                mSettings.mPackages.get(PACKAGE_PLAY_STORE).getSigningDetails()));
++                            ps.installSource = InstallSource.create(
++                                PACKAGE_PLAY_STORE,
++                                PACKAGE_PLAY_STORE,
++                                PACKAGE_PLAY_STORE,
++                                installSource.isOrphaned,
++                                false)
++                                .setInitiatingPackageSignatures(new PackageSignatures(
++                                  mSettings.mPackages.get(PACKAGE_PLAY_STORE).getSigningDetails()));
++                        //} else {
++                        //    Log.d(TAG, "NOT intercepting bc origin installation source >" + installSource.installerPackageName + "< is not in spooflist for package " + pkgName);
++                        }
++                    } else {
++                        Log.d(TAG, "EXTROM: NOT intercepting bc condition not met for: " + pkgName + ", UID: " + callingUid + ", source: " + ps.installSource + ", dev options: " + installSrcValue);
++                    }
++                } catch (Exception e) {
++                    Log.e(TAG, "EXTROM: Error occured: " + e.getMessage());
++                }
 +            }
-+        }
-+        // end: extendrom intercept installation source
++            // end: extendrom intercept installation source
 +
-         return ps.installSource;
-     }
+             PackageInfo packageInfo = mayFakeSignature(p, PackageInfoUtils.generate(p, gids, flags,
+                     ps.firstInstallTime, ps.lastUpdateTime, permissions, state, userId, ps),
+                     permissions);
