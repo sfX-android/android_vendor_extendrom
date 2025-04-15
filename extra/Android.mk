@@ -435,6 +435,18 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_APPS)
 endif
 include $(BUILD_PREBUILT)
 
+# override graphene InfoApp
+include $(CLEAR_VARS)
+LOCAL_MODULE := noGOSinfo
+LOCAL_SRC_FILES := empty.apk
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_SUFFIX := .apk
+LOCAL_OVERRIDES_PACKAGES := InfoApp
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
+include $(BUILD_PREBUILT)
 
 # override graphene Vanadium
 include $(CLEAR_VARS)
