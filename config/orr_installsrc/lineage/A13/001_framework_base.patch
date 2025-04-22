@@ -1,0 +1,66 @@
+
+project frameworks/base/
+diff --git a/services/core/java/com/android/server/pm/ComputerEngine.java b/services/core/java/com/android/server/pm/ComputerEngine.java
+index ff27c7002f6c..0471c6101c0a 100644
+--- a/services/core/java/com/android/server/pm/ComputerEngine.java
++++ b/services/core/java/com/android/server/pm/ComputerEngine.java
+@@ -5136,6 +5138,59 @@ public class ComputerEngine implements Computer {
+             return null;
+         }
+ 
++        /**
++            extendrom intercept installation source
++            - com.machiav3lli.backup: Neo Backup
++            - F-Droid on e.g A11 results in: com.android.packageinstaller
++            - null: usually a system app
++        **/
++        //String pkgName = packageName; // enable for debugging systemApp condition
++        boolean systemApp = ps.isSystem();
++        if (!systemApp) {
++            String pkgName = packageName; // disable when above enabled
++            String PACKAGE_PLAY_STORE = "com.android.vending";
++            String PACKAGE_INTERCEPTED = "org.axpos.intercepted"; // indicator to avoid re-intercepting
++            String[] PACKAGES_SPOOF_INSTALLSOURCE =
++                new String[] {  "com.aurora.store",
++                                "dev.imranr.obtainium",
++                                "org.fdroid.fdroid",
++                                "com.machiav3lli.backup"
++                             };
++            try {
++                int installSrcValue = android.provider.Settings.Secure.getInt(mContext.getContentResolver(),
++                    android.provider.Settings.Secure.ER_ORR_INSTALLSRC, 0);
++                InstallSource installSource = ps.getInstallSource();
++
++                if (installSource != null && installSrcValue == 1
++                        && installSource.installerPackageName != null
++                        && mSettings.getPackage(PACKAGE_PLAY_STORE) != null
++                        && installSource.originatingPackageName != PACKAGE_INTERCEPTED
++                        && (Arrays.asList(PACKAGES_SPOOF_INSTALLSOURCE).contains(installSource.installerPackageName)
++                            || Arrays.asList(PACKAGES_SPOOF_INSTALLSOURCE).contains(installSource.initiatingPackageName))) {
++                    Log.w(TAG, "EXTENDROM: cond4: INTERCEPTING !!! installer/initiator: " + installSource.installerPackageName + "/" + installSource.initiatingPackageName + ", pkg: " + pkgName + ", UID: " + callingUid + ", systemApp: " + systemApp);
++
++                    // see: services/core/java/com/android/server/pm/InstallSource.java
++                    return InstallSource.create(
++                        installSource.initiatingPackageName,  /* initiatingPackageName */
++                        PACKAGE_INTERCEPTED,                  /* originatingPackageName */
++                        PACKAGE_PLAY_STORE,                   /* installerPackageName */
++                        installSource.initiatingPackageName,  /* installerAttributionTag */
++                        installSource.isOrphaned,
++                        false)
++                        .setInitiatingPackageSignatures(new PackageSignatures(
++                            mSettings.getPackage(PACKAGE_PLAY_STORE).getSigningDetails()));
++                //} else {
++                //    Log.d(TAG, "EXTENDROM: cond4: NOT intercepting installer/initiator: " + installSource.installerPackageName + "/" + installSource.initiatingPackageName + ", pkg: " + pkgName + ", UID: " + callingUid + ", systemApp: " + systemApp + ", originator: " + installSource.originatingPackageName);
++                }
++            } catch (Exception e) {
++                Log.e(TAG, "EXTENDROM: Error occured: " + e.getMessage());
++            }
++            //Log.d(TAG, "EXTENDROM: cond1: installer/initiator: " + ps.installSource.installerPackageName + "/" + ps.installSource.initiatingPackageName + ", pkg: " + pkgName + ", UID: " + callingUid + ", systemApp: " + systemApp);
++        //} else {
++        //    Log.d(TAG, "EXTENDROM: cond0: installer/initiator: " + ps.installSource.installerPackageName + "/" + ps.installSource.initiatingPackageName + ", pkg: " + packageName + ", UID: " + callingUid + ", systemApp: " + systemApp);
++        }
++        // end: extendrom intercept installation source
++
+         return ps.getInstallSource();
+     }
+

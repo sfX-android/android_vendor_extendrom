@@ -664,7 +664,12 @@ F_ORR_INSTALLSRC(){
     DEVOPTSETTINGS="$SRC_TOP_FULL/packages/apps/Settings/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java"
     DEVOPTXML="$SRC_TOP_FULL/packages/apps/Settings/res/xml/development_settings.xml"
     SECSETTINGS="frameworks/base/core/java/android/provider/Settings.java"
-    IMPORTSETTINGS="frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java"
+
+    IMPORTLIST="android.provider.Settings java.util.Arrays"
+    case ${EXTENDROM_TARGET_VERSION} in
+        9|10|11) IMPORTSETTINGS="frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java" ;;
+        *) IMPORTSETTINGS="frameworks/base/services/core/java/com/android/server/pm/ComputerEngine.java" ;;
+    esac
 
     echo "[$FUNCNAME] adding overlay"
     if [ -L "$OLMK" ]; then rm $OLMK; fi
@@ -761,23 +766,25 @@ F_ORR_INSTALLSRC(){
 
     # add required import line to access Settings.Secure after the last found import line
     PREQ=0
-    grep -q 'import android.provider.Settings' $IMPORTSETTINGS || PREQ=1
-    if [ $PREQ -eq 1 ];then
-        echo "[$FUNCNAME] adding Settings import"
-        awk '
-        /import / { last = NR; lines[NR] = $0 }
-        { lines[NR] = $0 }
-        END {
-            for (i = 1; i <= NR; i++) {
-                print lines[i]
-                if (i == last) {
-                    print "import android.provider.Settings; // extendrom '${ER_MOD_NAME}'"
+    for imp in $IMPORTLIST;do
+        grep -q "$imp" $IMPORTSETTINGS || PREQ=1
+        if [ $PREQ -eq 1 ];then
+            echo "[$FUNCNAME] adding Settings import: $imp"
+            awk '
+            /import / { last = NR; lines[NR] = $0 }
+            { lines[NR] = $0 }
+            END {
+                for (i = 1; i <= NR; i++) {
+                    print lines[i]
+                    if (i == last) {
+                        print "import '$imp'; // extendrom '${ER_MOD_NAME}'"
+                    }
                 }
-            }
-        }' $IMPORTSETTINGS > ${IMPORTSETTINGS}.temp && mv ${IMPORTSETTINGS}.temp ${IMPORTSETTINGS}
-    else
-        echo "[$FUNCNAME] SKIPPED: adding Settings import (already there)"
-    fi
+            }' $IMPORTSETTINGS > ${IMPORTSETTINGS}.temp && mv ${IMPORTSETTINGS}.temp ${IMPORTSETTINGS}
+        else
+            echo "[$FUNCNAME] SKIPPED: adding Settings import for $imp (already there)"
+        fi
+    done
 
     echo "[$FUNCNAME] using patch dir: $PDIR"
     $PATCHX $PDIR $EXTENDROM_PATCHER_RESET
