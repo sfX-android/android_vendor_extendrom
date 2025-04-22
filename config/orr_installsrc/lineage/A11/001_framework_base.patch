@@ -1,61 +1,76 @@
 
 project frameworks/base/
 diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
+index 6c209a2c0e34a..42cae6e489655 100644
 --- a/services/core/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/core/java/com/android/server/pm/PackageManagerService.java
-@@ -4465,6 +4465,55 @@ public class PackageManagerService extends IPackageManager.Stub
-                 });
-             }
+@@ -21607,6 +21607,69 @@ public class PackageManagerService extends IPackageManager.Stub
+             return null;
+         }
  
-+            /**
-+                extendrom intercept installation source
-+                - com.machiav3lli.backup: Neo Backup
-+                - F-Droid on e.g A11 results in: com.android.packageinstaller
-+                - null: usually a system app
-+            **/
-+            String pkgName = resolveExternalPackageNameLPr(p);
++        /**
++            extendrom intercept installation source
++            - com.machiav3lli.backup: Neo Backup
++            - F-Droid on e.g A11 results in: com.android.packageinstaller
++            - null: usually a system app
++        **/
++        //String pkgName = packageName; // enable for debugging systemApp condition
++        boolean systemApp = ps.pkg.isSystem();
++        if (!systemApp) {
++            String pkgName = packageName; // disable when above enabled
 +            String PACKAGE_PLAY_STORE = "com.android.vending";
++            String PACKAGE_INTERCEPTED = "org.axpos.intercepted"; // indicator to avoid re-intercepting
 +            String[] PACKAGES_SPOOF_INSTALLSOURCE =
 +                new String[] {  "com.aurora.store",
 +                                "dev.imranr.obtainium",
 +                                "org.fdroid.fdroid",
 +                                "com.machiav3lli.backup"
 +                             };
++            // ensure we can request settings value
 +            ContentResolver contentResolver = mContext.getContentResolver();
 +            if (contentResolver != null) {
 +                try {
 +                    int installSrcValue = android.provider.Settings.Secure.getInt(contentResolver,
 +                        android.provider.Settings.Secure.ER_ORR_INSTALLSRC, 0);
++                    InstallSource installSource = ps.installSource;
 +
 +                    if (android.provider.Settings.Secure.getInt(contentResolver,
 +                            android.provider.Settings.Secure.ER_ORR_INSTALLSRC, 0) == 1) {
-+                        InstallSource installSource = ps.installSource;
 +                        if (installSource != null && installSource.installerPackageName != null
 +                                && mSettings.getPackageLPr(PACKAGE_PLAY_STORE) != null
-+                                && callingUid != Process.SYSTEM_UID
-+                                && Arrays.asList(PACKAGES_SPOOF_INSTALLSOURCE).contains(installSource.installerPackageName)) {
-+                            Log.w(TAG, "EXTROM: Intercepting installation source for package >" + pkgName + "< originated from: >" + installSource.installerPackageName + "<");
++                                && installSource.originatingPackageName != PACKAGE_INTERCEPTED
++                                && (Arrays.asList(PACKAGES_SPOOF_INSTALLSOURCE).contains(installSource.installerPackageName)
++                                    || Arrays.asList(PACKAGES_SPOOF_INSTALLSOURCE).contains(installSource.initiatingPackageName))) {
++                            Log.w(TAG, "EXTENDROM: cond4: INTERCEPTING !!! installer/initiator: " + installSource.installerPackageName + "/" + installSource.initiatingPackageName + ", pkg: " + pkgName + ", UID: " + callingUid + ", systemApp: " + systemApp);
 +
++                            // see: services/core/java/com/android/server/pm/InstallSource.java
 +                            ps.installSource = InstallSource.create(
-+                                PACKAGE_PLAY_STORE,
-+                                PACKAGE_PLAY_STORE,
-+                                PACKAGE_PLAY_STORE,
++                                installSource.initiatingPackageName,  /* initiatingPackageName */
++                                PACKAGE_INTERCEPTED,                  /* originatingPackageName */
++                                PACKAGE_PLAY_STORE,                   /* installerPackageName */
 +                                installSource.isOrphaned,
 +                                false)
 +                                .setInitiatingPackageSignatures(new PackageSignatures(
 +                                  mSettings.mPackages.get(PACKAGE_PLAY_STORE).getSigningDetails()));
++                            ps.setInstallerPackageName(PACKAGE_PLAY_STORE);
 +                        //} else {
-+                        //    Log.d(TAG, "NOT intercepting bc origin installation source >" + installSource.installerPackageName + "< is not in spooflist for package " + pkgName);
++                        //    Log.d(TAG, "EXTENDROM: cond4: NOT intercepting installer/initiator: " + installSource.installerPackageName + "/" + installSource.initiatingPackageName + ", pkg: " + pkgName + ", UID: " + callingUid + ", systemApp: " + systemApp + ", originator: " + installSource.originatingPackageName);
 +                        }
-+                    } else {
-+                        Log.d(TAG, "EXTROM: NOT intercepting bc condition not met for: " + pkgName + ", UID: " + callingUid + ", source: " + ps.installSource + ", dev options: " + installSrcValue);
++                    //} else {
++                    //    Log.d(TAG, "EXTENDROM: cond3: NOT intercepting! installer/initiator: " + installSource.installerPackageName + "/" + installSource.initiatingPackageName + ", pkg: " + pkgName + ", UID: " + callingUid + ", dev options: " + installSrcValue);
 +                    }
 +                } catch (Exception e) {
-+                    Log.e(TAG, "EXTROM: Error occured: " + e.getMessage());
++                    Log.e(TAG, "EXTENDROM: Error occured: " + e.getMessage());
 +                }
++            //} else {
++            //    Log.e(TAG, "EXTENDROM: cond2: ContentResolver is NULL! NOT intercepting! installer/initiator: " + ps.installSource.installerPackageName + "/" + ps.installSource.initiatingPackageName + ", pkg: " + pkgName + ", UID: " + callingUid + ", systemApp: " + systemApp);
 +            }
-+            // end: extendrom intercept installation source
++            //Log.d(TAG, "EXTENDROM: cond1: installer/initiator: " + ps.installSource.installerPackageName + "/" + ps.installSource.initiatingPackageName + ", pkg: " + pkgName + ", UID: " + callingUid + ", systemApp: " + systemApp);
++        //} else {
++        //    Log.d(TAG, "EXTENDROM: cond0: installer/initiator: " + ps.installSource.installerPackageName + "/" + ps.installSource.initiatingPackageName + ", pkg: " + packageName + ", UID: " + callingUid + ", systemApp: " + systemApp);
++        }
++        // end: extendrom intercept installation source
 +
-             PackageInfo packageInfo = mayFakeSignature(p, PackageInfoUtils.generate(p, gids, flags,
-                     ps.firstInstallTime, ps.lastUpdateTime, permissions, state, userId, ps),
-                     permissions);
+         return ps.installSource;
+     }
+
