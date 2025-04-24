@@ -26,10 +26,16 @@ ifeq ($(ENABLE_EXTENDROM), true)
 ifeq ($(EXTENDROM_BOOT_DEBUG), true)
 
 ifeq ($(call math_gt_or_eq,$(PLATFORM_VERSION),11),true)
+ifeq ($(EXTENDROM_INTERCEPT_INSTALLSRC), true)
+BOARD_VENDOR_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/property
+endif # EXTENDROM_INTERCEPT_INSTALLSRC
 BOARD_VENDOR_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/boot_debug
 else
+ifeq ($(EXTENDROM_INTERCEPT_INSTALLSRC), true)
+BOARD_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/property
+endif # EXTENDROM_INTERCEPT_INSTALLSRC
 BOARD_SEPOLICY_DIRS += $(VENDOR_DIR)/sepolicy/boot_debug
-endif
+endif # PLATFORM_VERSION >= 11
 
 PRODUCT_PACKAGES += \
 	er-logcat

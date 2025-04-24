@@ -8,7 +8,7 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.provider.Settings;
+import android.os.SystemProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -21,11 +21,12 @@ public class ER_OrrInstallSrcPreferenceController extends DeveloperOptionsPrefer
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String ER_ORR_INSTALLSRC_KEY = "extendrom_orr_installsrc";
+    private static final String PERSIST_PROPERTY_ER_ORR_INSTALLSRC = "persist.vendor.er.orrinstallsrc";
 
     @VisibleForTesting
-    static final int SETTING_VALUE_ON = 1;
+    static final String SETTING_VALUE_ENABLED = "enabled";
     @VisibleForTesting
-    static final int SETTING_VALUE_OFF = 0;
+    static final String SETTING_VALUE_DISABLED = "disabled";
 
     public ER_OrrInstallSrcPreferenceController(Context context) {
         super(context);
@@ -39,25 +40,21 @@ public class ER_OrrInstallSrcPreferenceController extends DeveloperOptionsPrefer
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ER_ORR_INSTALLSRC,
-                isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        SystemProperties.set(PERSIST_PROPERTY_ER_ORR_INSTALLSRC,
+                isEnabled ? SETTING_VALUE_ENABLED : SETTING_VALUE_DISABLED);
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final int recMode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ER_ORR_INSTALLSRC, SETTING_VALUE_OFF);
-
-        ((SwitchPreference) mPreference).setChecked(recMode != SETTING_VALUE_OFF);
+        final String recMode = SystemProperties.get(PERSIST_PROPERTY_ER_ORR_INSTALLSRC, SETTING_VALUE_DISABLED);
+        ((SwitchPreference) preference).setChecked(SETTING_VALUE_ENABLED.equals(recMode));
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ER_ORR_INSTALLSRC, SETTING_VALUE_OFF);
+        SystemProperties.set(PERSIST_PROPERTY_ER_ORR_INSTALLSRC, SETTING_VALUE_DISABLED);
         ((SwitchPreference) mPreference).setChecked(false);
     }
 }

@@ -1,0 +1,8 @@
+# required to set and read our properties
+
+# developer options
+set_prop(system_app, extendrom_prop)
+get_prop(system_app, extendrom_prop)
+
+# installsource intercept in frameworks/base
+get_prop(system_server, extendrom_prop)

@@ -1,0 +1,2 @@
+#type extendrom_prop, vendor_property_type;
+vendor_public_prop(extendrom_prop);

@@ -658,6 +658,11 @@ F_ORR_INSTALLSRC(){
     local ER_MOD_NAME="orr_installsrc"
     echo "[$FUNCNAME] intercept installation source check requested ..."
 
+    rm -rf $MY_DIR/sepolicy/property 2>/dev/null; mkdir -p $MY_DIR/sepolicy/property 2>/dev/null
+    cp $MY_DIR/config/extendrom.te.sepolicy $MY_DIR/sepolicy/property/extendrom.te && echo "[$FUNCNAME] added extendrom sepolicy"
+    cp $MY_DIR/config/property.te.sepolicy $MY_DIR/sepolicy/property/property.te && echo "[$FUNCNAME] added property sepolicy"
+    cp $MY_DIR/config/property_contexts.sepolicy $MY_DIR/sepolicy/property/property_contexts && echo "[$FUNCNAME] added selinux property contexts"
+
     OLMK="vendor/extendrom/overlays/${ER_MOD_NAME}/active"
     PATCHX="/bin/bash $MY_DIR/tools/apply_patches.sh"
     PDIR="$SRC_TOP_FULL/$MY_DIR/config/${ER_MOD_NAME}/$EXTENDROM_TARGET_PRODUCT/A${EXTENDROM_TARGET_VERSION}"
@@ -665,7 +670,7 @@ F_ORR_INSTALLSRC(){
     DEVOPTXML="$SRC_TOP_FULL/packages/apps/Settings/res/xml/development_settings.xml"
     SECSETTINGS="frameworks/base/core/java/android/provider/Settings.java"
 
-    IMPORTLIST="android.provider.Settings java.util.Arrays"
+    IMPORTLIST="android.provider.Settings java.util.Arrays android.os.SystemProperties"
     case ${EXTENDROM_TARGET_VERSION} in
         9|10|11) IMPORTSETTINGS="frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java" ;;
         *) IMPORTSETTINGS="frameworks/base/services/core/java/com/android/server/pm/ComputerEngine.java" ;;
