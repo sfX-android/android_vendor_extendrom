@@ -670,7 +670,7 @@ F_ORR_INSTALLSRC(){
     DEVOPTXML="$SRC_TOP_FULL/packages/apps/Settings/res/xml/development_settings.xml"
     SECSETTINGS="frameworks/base/core/java/android/provider/Settings.java"
 
-    IMPORTLIST="android.provider.Settings java.util.Arrays android.os.SystemProperties"
+    IMPORTLIST="java.util.Arrays android.os.SystemProperties"
     case ${EXTENDROM_TARGET_VERSION} in
         9|10|11) IMPORTSETTINGS="frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java" ;;
         *) IMPORTSETTINGS="frameworks/base/services/core/java/com/android/server/pm/ComputerEngine.java" ;;
