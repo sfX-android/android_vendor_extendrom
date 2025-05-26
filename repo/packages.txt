@@ -98,11 +98,11 @@ app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-28101
 # IMPORTANT NOTE: requires a new signing key to be created named: "apps" (supported by "buildtools" since https://github.com/sfX-android/android_buildtools/commit/b59ce99439e488)
 
 # current stable:
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/latest/download|priv-app|Phonesky_AXP-OS.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP-OS-signed.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/latest/download|priv-app|Phonesky_AXP-OS.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 # testing:
-#Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/46.3.21-23_84632100|priv-app|Phonesky_AXP-OS_testing.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
-Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/46.1.39-23_84613900|priv-app|Phonesky_AXP-OS_testing.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+#Phonesky_AXP-OS-signed.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/46.3.21-23_84632100|priv-app|Phonesky_AXP-OS_testing.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
+Phonesky_AXP-OS-signed.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/46.1.39-23_84613900|priv-app|Phonesky_AXP-OS_testing.apk;PRESIGNED|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 # previous stable:
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/45.8.21-23_84582100|priv-app|Phonesky_AXP-OS_45-8.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
