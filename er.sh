@@ -206,6 +206,21 @@ if [ -d "$PREBUILT_DIR" ] && [ "$EXTENDROM_PACKAGES_SKIP_DL" != "true" ]; then
 fi
 mkdir $PREBUILT_DIR $PREBUILT_DIR/app $PREBUILT_DIR/priv-app
 
+F_GIT_COMMIT(){
+    local git_path="$1"
+    local git_msg="$2"
+    local cur_path="$(pwd)"
+    if [ -z "$git_path" -o -z "$git_msg" ];then
+    	echo "ERROR: missing git_path($git_path) or git_msg ($git_msg)"
+	exit 4
+    fi
+    cd $git_path
+    git add -A
+    git commit -m "$git_msg"
+    cd $cur_path
+}
+export -f F_GIT_COMMIT
+
 F_GET_FDROID_MIRRORS(){
     curl -s "$FDROID_MIRRORMON" | grep -E '^\*\s+http' |grep -v onion |cut -d ' ' -f2 | tail -n 3
 }
