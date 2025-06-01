@@ -484,7 +484,7 @@ F_SIGPATCH(){
     if [ ! -z "$MGCOMMITS" ] && [ "$EXTENDROM_SIGSPOOF_RESET" != "false" ];then
     	cd frameworks/base
         echo "[$FUNCNAME] reverting DOS commit to allow sigspoofing"
-    	git revert --no-edit $MGCOMMITS
+    	git revert $MGCOMMITS
     	cd ../..
     fi
     
@@ -498,6 +498,8 @@ F_SIGPATCH(){
     echo "[$FUNCNAME] adding signature spoof controller"
     cp $PDIR/*-packages-apps-Settings-src-com-android-settings-development-SpoofSignaturePreferenceController.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignaturePreferenceController.java || exit 3
     cp $PDIR/*-packages-apps-Settings-src-com-android-settings-development-SpoofSignatureInfo.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignatureInfo.java || exit 3
+    F_GIT_COMMIT "packages/apps/Settings" "ER: advanced signature spoofing\nF_SIGPATCH: adding controller files"
+    
     echo "[$FUNCNAME] adding signature spoof controller ended with $?"
     if [ $ERR -eq 0 ];then echo "[$FUNCNAME] finished successfully" && return; else exit 3;fi
 }
@@ -532,7 +534,8 @@ F_CALLREC(){
     echo "[$FUNCNAME] adding call recording controller"
     cp $PDIR/packages-apps-Settings-src-com-android-settings-development-CallRecPreferenceController.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/ER_CallRecPreferenceController.java || exit 3
     cp $PDIR/packages-apps-Settings-src-com-android-settings-development-CallRecInfo.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/ER_CallRecInfo.java || exit 3
-
+    F_GIT_COMMIT "packages/apps/Settings" "ER: unrestricted call recording\nF_CALLREC: adding controller files"
+    
     # add controller after the last controllers.add line
     PREQ=0
     grep -q 'ER_CallRec' $DEVOPTSETTINGS || PREQ=1
@@ -550,6 +553,7 @@ F_CALLREC(){
                 }
             }
         }' $DEVOPTSETTINGS > ${DEVOPTSETTINGS}.temp && mv ${DEVOPTSETTINGS}.temp ${DEVOPTSETTINGS}
+	F_GIT_COMMIT "packages/apps/Settings" "ER: unrestricted call recording\nF_CALLREC: DEVOPTSETTINGS"
     else
         echo "[$FUNCNAME] SKIPPED: adding call recording controller - java (already patched)"
     fi
@@ -577,6 +581,7 @@ F_CALLREC(){
         }
         { print }
         ' $SECSETTINGS > ${SECSETTINGS}.temp && mv ${SECSETTINGS}.temp ${SECSETTINGS}
+	F_GIT_COMMIT "frameworks/base" "ER: unrestricted call recording\nF_CALLREC: SECSETTINGS"
     else
         echo "[$FUNCNAME] SKIPPED: adding call recording key to secure settings (already patched)"
     fi
@@ -614,6 +619,7 @@ F_CALLREC(){
         }
         { print }
         ' $DEVOPTXML > ${DEVOPTXML}.temp && mv ${DEVOPTXML}.temp ${DEVOPTXML}
+	F_GIT_COMMIT "packages/apps/Settings" "ER: unrestricted call recording\nF_CALLREC: DEVOPTXML"
     else
         echo "[$FUNCNAME] SKIPPED: adding call recording controller to developer options (already patched)"
     fi
@@ -634,6 +640,7 @@ F_CALLREC(){
                 }
             }
         }' $CALLRECORDER > ${CALLRECORDER}.temp && mv ${CALLRECORDER}.temp ${CALLRECORDER}
+	F_GIT_COMMIT "packages/apps/Dialer" "ER: unrestricted call recording\nF_CALLREC: CALLRECORDER1"
     else
         echo "[$FUNCNAME] SKIPPED: adding import to call recording controller (already there)"
     fi
@@ -661,6 +668,7 @@ F_CALLREC(){
         }
         { print }
         ' $CALLRECORDER > ${CALLRECORDER}.temp && mv ${CALLRECORDER}.temp ${CALLRECORDER}
+	F_GIT_COMMIT "packages/apps/Dialer" "ER: unrestricted call recording\nF_CALLREC: CALLRECORDER2"
     else
         echo "[$FUNCNAME] SKIPPED: force call recording in dialer (already patched)"
     fi
@@ -698,6 +706,7 @@ F_ORR_INSTALLSRC(){
     echo "[$FUNCNAME] adding controller"
     cp $PDIR/packages-apps-Settings-src-com-android-settings-development-OrrInstallSrcPreferenceController.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/ER_OrrInstallSrcPreferenceController.java || exit 3
     cp $PDIR/packages-apps-Settings-src-com-android-settings-development-OrrInstallSrcInfo.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/ER_OrrInstallSrcInfo.java || exit 3
+    F_GIT_COMMIT "packages/apps/Settings" "ER: intercept installation source\nF_ORR_INSTALLSRC: add controller files"
 
     # add controller after the last 'controllers.add' line
     PREQ=0
@@ -716,6 +725,7 @@ F_ORR_INSTALLSRC(){
                 }
             }
         }' $DEVOPTSETTINGS > ${DEVOPTSETTINGS}.temp && mv ${DEVOPTSETTINGS}.temp ${DEVOPTSETTINGS}
+	F_GIT_COMMIT "packages/apps/Settings" "ER: intercept installation source\nF_ORR_INSTALLSRC: load controller"
     else
         echo "[$FUNCNAME] SKIPPED: adding controller - java (already patched)"
     fi
@@ -743,6 +753,7 @@ F_ORR_INSTALLSRC(){
         }
         { print }
         ' $SECSETTINGS > ${SECSETTINGS}.temp && mv ${SECSETTINGS}.temp ${SECSETTINGS}
+	F_GIT_COMMIT "frameworks/base" "ER: intercept installation source\nF_ORR_INSTALLSRC: SECSETTINGS"
     else
         echo "[$FUNCNAME] SKIPPED: adapting secure settings (already patched)"
     fi
@@ -780,6 +791,7 @@ F_ORR_INSTALLSRC(){
         }
         { print }
         ' $DEVOPTXML > ${DEVOPTXML}.temp && mv ${DEVOPTXML}.temp ${DEVOPTXML}
+	F_GIT_COMMIT "packages/apps/Settings" "ER: intercept installation source\nF_ORR_INSTALLSRC: DEVOPTXML"
     else
         echo "[$FUNCNAME] SKIPPED: adding controller to developer options (already patched)"
     fi
@@ -801,6 +813,7 @@ F_ORR_INSTALLSRC(){
                     }
                 }
             }' $IMPORTSETTINGS > ${IMPORTSETTINGS}.temp && mv ${IMPORTSETTINGS}.temp ${IMPORTSETTINGS}
+	    F_GIT_COMMIT "frameworks/base" "ER: intercept installation source\nF_ORR_INSTALLSRC: IMPORTSETTINGS"
         else
             echo "[$FUNCNAME] SKIPPED: adding Settings import for $imp (already there)"
         fi
