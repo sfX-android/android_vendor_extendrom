@@ -1,0 +1,15 @@
+
+project packages/modules/Permission/
+diff --git a/PermissionController/src/com/android/permissioncontroller/permission/utils/PermissionMapping.kt b/PermissionController/src/com/android/permissioncontroller/permission/utils/PermissionMapping.kt
+index 840a033c3..df012305c 100644
+--- a/PermissionController/src/com/android/permissioncontroller/permission/utils/PermissionMapping.kt
++++ b/PermissionController/src/com/android/permissioncontroller/permission/utils/PermissionMapping.kt
+@@ -176,6 +176,8 @@ object PermissionMapping {
+ 
+         PLATFORM_PERMISSIONS[Manifest.permission.BODY_SENSORS] = Manifest.permission_group.SENSORS
+ 
++       PLATFORM_PERMISSIONS[Manifest.permission.FAKE_PACKAGE_SIGNATURE] = Manifest.permission_group.FAKE_PACKAGE
++
+         if (SdkLevel.isAtLeastT()) {
+             PLATFORM_PERMISSIONS[Manifest.permission.POST_NOTIFICATIONS] =
+                 Manifest.permission_group.NOTIFICATIONS

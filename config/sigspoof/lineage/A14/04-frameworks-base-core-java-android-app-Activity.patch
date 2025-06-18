@@ -1,0 +1,48 @@
+
+project frameworks/base/
+diff --git a/core/java/android/app/Activity.java b/core/java/android/app/Activity.java
+index 63cafdc6c855..3118c20182b4 100644
+--- a/core/java/android/app/Activity.java
++++ b/core/java/android/app/Activity.java
+@@ -184,12 +184,13 @@ import java.lang.annotation.Retention;
+ import java.lang.annotation.RetentionPolicy;
+ import java.lang.ref.WeakReference;
+ import java.util.ArrayList;
++import java.util.Arrays;
+ import java.util.Collections;
+ import java.util.HashMap;
+ import java.util.List;
+ import java.util.concurrent.Executor;
+ import java.util.function.Consumer;
+-
++import android.provider.Settings.Secure;       // extendrom: signature spoofing patch
+ 
+ /**
+  * An activity is a single, focused thing that the user can do.  Almost all
+@@ -5695,6 +5696,26 @@ public class Activity extends ContextThemeWrapper
+ 
+         PackageManager packageManager = getDeviceId() == deviceId ? getPackageManager()
+                 : createDeviceContext(deviceId).getPackageManager();
++
++       /*
++        signature spoofing patch:
++        Only when the requested permission asks for signature spoofing, check if that is allowed
++        in developer options and skip the dialog if not
++        */
++        List<String> permlist = Arrays.asList(permissions);
++        if (permlist.contains("android.permission.FAKE_PACKAGE_SIGNATURE")) {
++            if (android.provider.Settings.Secure.getInt(getContentResolver(),
++                   android.provider.Settings.Secure.ALLOW_SIGNATURE_FAKE, 0) == 0) {
++                Log.w(TAG, "Requested signature spoofing permission ("
++                        + Arrays.toString(permissions)
++                        + ") has been denied as it is not enabled in developer options");
++                return;
++            } else {
++                Log.w(TAG, "The app's permission request for: "
++                        + Arrays.toString(permissions)
++                        + " will be processed as signature spoofing is enabled in developer options!");
++            }
++        }
+         final Intent intent = packageManager.buildRequestPermissionsIntent(permissions);
+         startActivityForResult(REQUEST_PERMISSIONS_WHO_PREFIX, intent, requestCode, null);
+         mHasCurrentPermissionsRequest = true;

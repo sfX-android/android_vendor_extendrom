@@ -1,4 +1,3 @@
-
 project bootable/recovery/
 diff --git a/otautil/verifier.cpp b/otautil/verifier.cpp
 index 8a65566e..37f3bc88 100644

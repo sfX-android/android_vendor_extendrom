@@ -1,0 +1,18 @@
+
+project frameworks/base/
+diff --git a/core/api/lint-baseline.txt b/core/api/lint-baseline.txt
+index 1b0da055038d..1574e481876e 100644
+--- a/core/api/lint-baseline.txt
++++ b/core/api/lint-baseline.txt
+@@ -1108,7 +1108,10 @@ Todo: android.hardware.camera2.params.StreamConfigurationMap:
+ Todo: android.provider.ContactsContract.RawContacts#newEntityIterator(android.database.Cursor):
+     Documentation mentions 'TODO'
+ 
+-
++UnflaggedApi: android.Manifest.permission#FAKE_PACKAGE_SIGNATURE:
++    New API must be flagged with @FlaggedApi: field android.Manifest.permission.FAKE_PACKAGE_SIGNATURE
++UnflaggedApi: android.Manifest.permission_group#FAKE_PACKAGE:
++    New API must be flagged with @FlaggedApi: field android.Manifest.permission_group.FAKE_PACKAGE
+ UnflaggedApi: android.R.color#on_surface_disabled_material:
+     New API must be flagged with @FlaggedApi: field android.R.color.on_surface_disabled_material
+ UnflaggedApi: android.R.color#outline_disabled_material:
