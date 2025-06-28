@@ -608,9 +608,9 @@ LOCAL_OVERRIDES_PACKAGES := SetupWizard SetupWizard2
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/app
 include $(BUILD_PREBUILT)
 
-# com.android.vending.xml permissions required by phonesky
+# Phonesky permissions 
 include $(CLEAR_VARS)
-LOCAL_MODULE := com.android.vending.xml
+LOCAL_MODULE := er_privapp-permissions-com.android.vending-phonesky.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
 # part of Phonesky - do not move to /system_ext !
@@ -618,9 +618,9 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
-# phonesky-permissions.xml permissions required by phonesky
+# Phonesky default permissions
 include $(CLEAR_VARS)
-LOCAL_MODULE := phonesky-permissions.xml
+LOCAL_MODULE := er_default-permissions-com.android.vending-phonesky.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
 # part of Phonesky - do not move to /system_ext !
@@ -640,14 +640,13 @@ include $(BUILD_PREBUILT)
 
 # required by MicrogGmsCore 
 include $(CLEAR_VARS)
-LOCAL_MODULE := er_microg.xml
+LOCAL_MODULE := microg.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
-ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
-LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/permissions
-else
-LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
-endif
+# hardcoded in Gms! - do not move to /system_ext !
+# - https://github.com/microg/GmsCore/blob/02c558c1405a5740d38a8ae3c05e43b6800c06b8/play-services-base/core/src/main/kotlin/org/microg/gms/settings/SettingsProvider.kt#L57C37-L57C60
+# - https://github.com/lineageos4microg/android_vendor_partner_gms/issues/44
+LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
@@ -676,13 +675,13 @@ LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := er_exceptions-com.google.android.gms.xml
+LOCAL_MODULE := er_default-permissions-com.google.android.gms.xml
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
 ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),30), true)
-LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/permissions
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/default-permissions
 else
-LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/default-permissions
 endif
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)

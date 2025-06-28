@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    SPDX-FileCopyrightText: none
+    SPDX-License-Identifier: CC0-1.0
+
+    This XML file declares which privileged permissions should be granted to privileged applications
+-->
 <permissions>
-    <privapp-permissions package="com.google.android.gms">
-      <permission name="android.permission.FAKE_PACKAGE_SIGNATURE"/>
-      <permission name="android.permission.CHANGE_DEVICE_IDLE_TEMP_WHITELIST"/>
-      <permission name="android.permission.FOREGROUND_SERVICE"/>
-      <permission name="android.permission.INSTALL_LOCATION_PROVIDER"/>
-      <permission name="android.permission.LOCATION_HARDWARE"/>
-      <permission name="android.permission.ACCESS_FINE_LOCATION"/>
-      <permission name="android.permission.MANAGE_USB"/>
-      <permission name="android.permission.MODIFY_PHONE_STATE"/>
-      <permission name="android.permission.NETWORK_SCAN"/>
-      <permission name="android.permission.READ_CONTACTS"/>
-      <permission name="android.permission.START_ACTIVITIES_FROM_BACKGROUND"/>
-      <permission name="android.permission.UPDATE_APP_OPS_STATS"/>
-      <permission name="android.permission.UPDATE_DEVICE_STATS"/>
-      <permission name="android.permission.WATCH_APPOPS"/>
-      <permission name="android.permission.INTERACT_ACROSS_PROFILES" />
-      <permission name="android.permission.INTERACT_ACROSS_USERS" />
+
+    <!-- sha digest: vendor/extendrom/tools/get-signature.sh vendor/extendrom/prebuilt/MicrogGmsCore_GH.apk -->
+    <privapp-permissions package="com.google.android.gms" sha256-cert-digest="9B:D0:67:27:E6:27:96:C0:13:0E:B6:DA:B3:9B:73:15:74:51:58:2C:BD:13:8E:86:C4:68:AC:C3:95:D1:41:65">
+
+        <permission name="android.permission.FAKE_PACKAGE_SIGNATURE"/>
+        <permission name="android.permission.CHANGE_DEVICE_IDLE_TEMP_WHITELIST"/>
+        <permission name="android.permission.FOREGROUND_SERVICE"/>
+        <permission name="android.permission.INSTALL_LOCATION_PROVIDER"/>
+        <permission name="android.permission.LOCATION_HARDWARE"/>
+        <permission name="android.permission.ACCESS_FINE_LOCATION"/>
+        <permission name="android.permission.MANAGE_USB"/>
+        <permission name="android.permission.MODIFY_PHONE_STATE"/>
+        <permission name="android.permission.NETWORK_SCAN"/>
+        <permission name="android.permission.READ_CONTACTS"/>
+        <permission name="android.permission.START_ACTIVITIES_FROM_BACKGROUND"/>
+        <permission name="android.permission.UPDATE_APP_OPS_STATS"/>
+        <permission name="android.permission.UPDATE_DEVICE_STATS"/>
+        <permission name="android.permission.WATCH_APPOPS"/>
+        <permission name="android.permission.INTERACT_ACROSS_PROFILES" />
+        <permission name="android.permission.INTERACT_ACROSS_USERS" />
+
+        <permission name="android.permission.GET_ACCOUNTS" />
+
      </privapp-permissions>
+
 </permissions>

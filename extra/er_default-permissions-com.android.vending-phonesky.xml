@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SPDX-FileCopyrightText: none
+    SPDX-License-Identifier: CC0-1.0
+
+    This file contains permissions to be granted by default.
+    Default permissions are granted to special platform components and to apps that are approved to get default grants.
+    The special components are apps that are expected to work out-of-the-box as they provide core use cases.
+    Fixed permissions cannot be controlled by the user.
+    Typically these are to ensure either legally mandated functions or the app is considered a part of the OS.
+-->
+
+<exceptions>
+
+    <!-- sha digest: vendor/extendrom/tools/get-signature.sh vendor/extendrom/prebuilt/Phonesky_AXP-OS-signed.apk -->
+    <exception package="com.android.vending" sha256-cert-digest="00:5C:98:05:D5:01:BF:50:C1:A8:BF:D3:20:4B:69:08:84:30:88:58:1F:DC:F3:DB:8A:B4:F6:88:FF:C0:E7:B6">
+
+        <!-- Account -->
+        <permission name="android.permission.GET_ACCOUNTS" fixed="false" />
+
+        <!-- Storage -->
+        <permission name="android.permission.READ_EXTERNAL_STORAGE" fixed="false" />
+        <permission name="android.permission.WRITE_EXTERNAL_STORAGE" fixed="false" />
+
+    </exception>
+
+</exceptions>

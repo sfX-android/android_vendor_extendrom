@@ -64,7 +64,8 @@ $(call inherit-product-if-exists, vendor/extendrom/packages.mk)
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST := \
     $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS/Phonesky_AXP-OS.apk \
     $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS_testing/Phonesky_AXP-OS_testing.apk \
-    $(TARGET_COPY_OUT_SYSTEM)/etc/default-permissions/phonesky-permissions.xml \
-    $(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.android.vending.xml \
+    $(TARGET_COPY_OUT_SYSTEM)/etc/default-permissions/er_default-permissions-com.android.vending-phonesky.xml \
+    $(TARGET_COPY_OUT_SYSTEM)/etc/permissions/er_privapp-permissions-com.android.vending-phonesky.xml \
+    $(TARGET_COPY_OUT_SYSTEM)/etc/microg.xml \
 
 endif # ENABLE_EXTENDROM = true

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<!--
+    default settings for MicroG
+    MUST be placed in /system/etc as this is hardcoded within MicroG!
+-->
+<map>
+        <set name="location_backends">
+            <string>org.microg.nlp.backend.ichnaea/org.microg.nlp.backend.ichnaea.BackendService/6ad8bcb1300536d2157d144f6b77cb09551048bd78aaf91522c4ab12ec2c526d</string>
+        </set>
+        <set name="geocoder_backends">
+            <string>org.microg.nlp.backend.nominatim/org.microg.nlp.backend.nominatim.BackendService/44226aa6b4ff69627283a28348976371558f039561f776208da08c294286d5d2</string>
+        </set>
+
+        <!-- 'Account' > 'Trust Google for app permissions' -->
+        <boolean name="auth_manager_trust_google" value="true" />
+
+        <!-- 'Account' > 'Allow apps to find accounts' -->
+        <boolean name="auth_manager_visible" value="false" />
+
+        <!-- 'Play Store services' > 'Answer license verification requests' -->
+        <boolean name="vending_licensing" value="true" />
+
+        <!-- 'Play Store services' > 'Automatically add free apps to library' -->
+        <boolean name="vending_licensing_purchase_free_apps" value="true" />
+
+        <!-- 'Play Store services' > 'Handle billing requests' -->
+        <boolean name="vending_billing" value="false" />
+
+        <!-- 'Play Store services' > 'On-demand component installation' -->
+        <boolean name="vending_split_install" value="true" />
+
+        <!-- 'Play Store services' > 'Enable on-demand asset delivery' -->
+        <boolean name="vending_asset_delivery" value="true" />
+
+        <!-- 'Play Store services' > 'Enable device information sync' -->
+        <boolean name="vending_device_sync" value="false" />
+
+        <!-- 'Google device registration > Register device' -->
+        <boolean name="checkin_enable_service" value="false" />
+
+        <!-- 'Cloud Messaging > Receive push notifications' -->
+        <boolean name="gcm_enable_mcs_service" value="false" />
+
+        <!-- 'Google SafetyNet > Allow device attestation' -->
+        <boolean name="safetynet_enabled" value="false" />
+        <boolean name="droidguard_enabled" value="false" />
+
+        <!-- Block 'Google SafetyNet > Advanced > DroidGuard operation mode > Embedded' -->
+        <!--<boolean name="droidguard_force_local_disabled" value="true" />-->
+
+        <!-- 'Location > Wi-Fi location > Request from BeaconDB / Positon' -->
+        <boolean name="location_wifi_mls" value="true" />
+
+        <!-- 'Location > Wi-Fi location > Request from Hotspot' -->
+        <boolean name="location_wifi_moving" value="false" />
+
+        <!-- 'Location > Wi-Fi location > Remember from GPS' -->
+        <boolean name="location_wifi_learning" value="false" />
+
+        <!-- 'Location > Mobile network location > Request from BeaconDB / Positon' -->
+        <boolean name="location_cell_mls" value="false" />
+
+        <!-- 'Location > Mobile network location > Remember from GPS' -->
+        <boolean name="location_cell_learning" value="false" />
+
+        <!-- 'Location > Address resolver > Use Nominatim' -->
+        <boolean name="location_geocoder_nominatim" value="true" />
+
+        <!-- 'Exposure Notifications > Use Exposure Notifications' -->
+        <boolean name="exposure_scanner_enabled" value="false" />
+
+</map>

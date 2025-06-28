@@ -1,6 +1,6 @@
 #!/bin/bash
 #################################################################################
-# Copyright (C) 2021-2024 steadfasterX <steadfasterX -AT- gmail #DOT# com>
+# Copyright (C) 2021-2025 steadfasterX <steadfasterX -AT- gmail #DOT# com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -280,10 +280,13 @@ include \$(BUILD_PREBUILT)"
 	fi
         # move all to /system_ext when A11 or later (except Play Store)
 	if [ $app_target_sdk -gt 29 ] || [ $EXTENDROM_TARGET_VERSION -gt 10 ];then
-            # /system_ext EXCEPTIONS must be added here (and in er.mk)
+
+            # /system_ext EXCEPTIONS must be added here (and in vendor/extendrom/er.mk)
+
             case "$appname" in
                 Phonesky_AXP-OS|Phonesky_AXP-OS_testing) unset MP;; # Google Play Store HAS TO be in /system or it will FC
-                phonesky-permissions.xml|com.android.vending.xml) unset MP;; # required for Google Play Store
+                er_default-permissions-com.android.vending-phonesky.xml|er_privapp-permissions-com.android.vending-phonesky.xml) unset MP;; # required for Google Play Store
+                microg.xml) unset MP;; # hardcoded in GmsCore to /system
                 # for the rest move them to /system_ext
                 *)
                 if [[ "$appdir" =~ .*priv-app ]];then
