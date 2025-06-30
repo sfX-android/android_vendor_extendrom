@@ -257,7 +257,7 @@ browser64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/l
 webview32-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|priv-app|AOSmium_webview32.apk;PRESIGNED-extractlibs|false||
 webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|priv-app|AOSmium_webview64.apk;PRESIGNED-extractlibs|false||
 
-webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/135.0.7049.100/|priv-app|AOSmium_webview64_oldstable.apk;PRESIGNED-extractlibs|false||
+webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/137.0.7151.89/|priv-app|AOSmium_webview64_oldstable.apk;PRESIGNED-extractlibs|false||
 
 https://codeberg.org/AXP-OS/app_aosmium/releases/download/138.0.7204.45/browser64-signed.apk
 
