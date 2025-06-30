@@ -259,8 +259,6 @@ webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/l
 
 webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/137.0.7151.89/|priv-app|AOSmium_webview64_oldstable.apk;PRESIGNED-extractlibs|false||
 
-https://codeberg.org/AXP-OS/app_aosmium/releases/download/138.0.7204.45/browser64-signed.apk
-
 # Cromite browser (successor of Bromite)
 # Note: Cromite does not support armeabi-v7/7a atm (https://github.com/uazo/cromite/issues/237)
 arm64_ChromePublic.apk|https://www.cromite.org/fdroid/repo/|app|Cromite_arm64.apk;PRESIGNED-extractlibs|false||
