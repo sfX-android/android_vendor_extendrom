@@ -118,6 +118,10 @@ Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/do
 # | |\/| | |/ __| '__/ _ \| |  _ 
 # | |  | | | (__| | | (_) | |_| |
 # |_|  |_|_|\___|_|  \___/ \____|
+#
+# user-keys/shared or user-keys/platform are required, otherwise:
+# - `stacktrace: java.lang.UnsatisfiedLinkError: dlopen failed: library "libcronet.102.0.5005.125.so" not found` (e.g. Google Rewards)
+# - `java.lang.RuntimeException: Unable to find a default SSL provider.` (e.g. Google Maps)
 ##########################################################################################################
 
 # MicroG GmsCore
@@ -129,11 +133,11 @@ com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|Micro
 #   a "xxx_GH" fallback to github which is fast always
 
 # current stable: (keep an eye on: https://github.com/microg/GmsCore/issues/2635)
-com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|app|MicrogGmsCore_GH.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
 # 0.3.7 has issues
 # see: https://github.com/microg/GmsCore/issues/2868
-#com.google.android.gms-250932014.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932/|app|MicrogGmsCore_GH.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+#com.google.android.gms-250932014.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
 # old stable:
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|app|MicrogGmsCore_GH_v036.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
@@ -250,14 +254,16 @@ at.bitfire.davdroid_LATEST.apk|FDROIDREPO|app|DAVx5.apk;PRESIGNED|true
 com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
 
 # AOSmium browser (successor of Mulch)
-browser32-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|priv-app|AOSmium32.apk;PRESIGNED-extractlibs|false||
-browser64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|priv-app|AOSmium64.apk;PRESIGNED-extractlibs|false||
+browser32-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|app|AOSmium32.apk;PRESIGNED-extractlibs|false||
+browser64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|app|AOSmium64.apk;PRESIGNED-extractlibs|false||
 
-# AOSmium webview
+# AOSmium webview - latest stable
 webview32-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|priv-app|AOSmium_webview32.apk;PRESIGNED-extractlibs|false||
 webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|priv-app|AOSmium_webview64.apk;PRESIGNED-extractlibs|false||
 
-webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/137.0.7151.89/|priv-app|AOSmium_webview64_oldstable.apk;PRESIGNED-extractlibs|false||
+# AOSmium webview - old stable
+webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/137.0.7151.89/|priv-app|AOSmium_webview64_137.0.7151.89.apk;PRESIGNED-extractlibs|false||
+webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/135.0.7049.100/|priv-app|AOSmium_webview64_135.0.7049.100.apk;PRESIGNED-extractlibs|false||
 
 # Cromite browser (successor of Bromite)
 # Note: Cromite does not support armeabi-v7/7a atm (https://github.com/uazo/cromite/issues/237)
