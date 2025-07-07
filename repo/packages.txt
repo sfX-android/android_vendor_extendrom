@@ -124,18 +124,23 @@ Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/do
 # - `java.lang.RuntimeException: Unable to find a default SSL provider.` (e.g. Google Maps)
 ##########################################################################################################
 
-# MicroG GmsCore
+# MicroG GmsCore - LATEST
 # - FDroid repo
+# the "_PRIV" one is not required on newer Android versions while required e.g. on Android 9
 #   easiest as you get the latest always - but it is sometimes incredible slow
-com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-#
+com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+
+# MicroG GmsCore - STABLE
 # - Github release
 #   a "xxx_GH" fallback to github which is fast always
+# the "_PRIV" one is not required on newer Android versions while required e.g. on Android 9
 
 # current stable: (keep an eye on: https://github.com/microg/GmsCore/issues/2635)
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
-# 0.3.7 has issues
+# 0.3.7 has issues!
 # see: https://github.com/microg/GmsCore/issues/2868
 #com.google.android.gms-250932014.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
