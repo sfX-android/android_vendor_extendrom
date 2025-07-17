@@ -1,0 +1,74 @@
+project frameworks/base/
+diff --git a/services/core/java/com/android/server/pm/ComputerEngine.java b/services/core/java/com/android/server/pm/ComputerEngine.java
+index 58448bfefdaf..cc3db2db7759 100644
+--- a/services/core/java/com/android/server/pm/ComputerEngine.java
++++ b/services/core/java/com/android/server/pm/ComputerEngine.java
+@@ -169,6 +170,7 @@ import java.io.FileOutputStream;
+ import java.io.IOException;
+ import java.io.PrintWriter;
+ import java.nio.charset.StandardCharsets;
++import java.security.cert.CertificateException;
+ import java.util.ArrayList;
+ import java.util.Collection;
+ import java.util.Collections;
+@@ -1466,6 +1467,41 @@ public class ComputerEngine implements Computer {
+         return result;
+     }
+ 
++    private boolean requestsFakeSignature(AndroidPackage p) {
++        return p.getMetaData() != null &&
++                p.getMetaData().getString("fake-signature") != null;
++    }
++
++    private PackageInfo mayFakeSignature(AndroidPackage p, PackageInfo pi,
++            Set<String> permissions) {
++        try {
++            if (p.getMetaData() != null &&
++                    p.getTargetSdkVersion() > Build.VERSION_CODES.LOLLIPOP_MR1) {
++                String sig = p.getMetaData().getString("fake-signature");
++                if (sig != null &&
++                    permissions.contains("android.permission.FAKE_PACKAGE_SIGNATURE")) {
++                        pi.signatures = new Signature[] {new Signature(sig)};
++                        try {
++                            pi.signingInfo = new SigningInfo(
++                                new SigningDetails(
++                                        pi.signatures,
++                                        SigningDetails.SignatureSchemeVersion.SIGNING_BLOCK_V3,
++                                        SigningDetails.toSigningKeys(pi.signatures),
++                                        null
++                                )
++                            );
++                        } catch (CertificateException e) {
++                            Slog.e(TAG, "Caught an exception when creating signing keys: ", e);
++                        }
++                }
++            }
++        } catch (Throwable t) {
++            // We should never die because of any failures, this is system code!
++            Log.w("PackageManagerService.FAKE_PACKAGE_SIGNATURE", t);
++        }
++        return pi;
++    }
++
+     public final PackageInfo generatePackageInfo(PackageStateInternal ps,
+             @PackageManager.PackageInfoFlagsBits long flags, int userId) {
+         if (!mUserManager.exists(userId)) return null;
+@@ -1500,13 +1668,15 @@ public class ComputerEngine implements Computer {
+             final int[] gids = (flags & PackageManager.GET_GIDS) == 0 ? EMPTY_INT_ARRAY
+                     : mPermissionManager.getGidsForUid(UserHandle.getUid(userId, ps.getAppId()));
+             // Compute granted permissions only if package has requested permissions
+-            final Set<String> grantedPermissions = ((flags & PackageManager.GET_PERMISSIONS) == 0
++            final Set<String> grantedPermissions = (((flags & PackageManager.GET_PERMISSIONS) == 0
++                        && !requestsFakeSignature(p))
+                     || ArrayUtils.isEmpty(p.getRequestedPermissions())) ? Collections.emptySet()
+                     : mPermissionManager.getGrantedPermissions(ps.getPackageName(), userId);
+ 
+-            PackageInfo packageInfo = PackageInfoUtils.generate(p, gids, flags,
++            PackageInfo packageInfo = mayFakeSignature(p, PackageInfoUtils.generate(p, gids, flags,
+                     state.getFirstInstallTimeMillis(), ps.getLastUpdateTime(), installedPermissions,
+-                    grantedPermissions, state, userId, ps);
++                    grantedPermissions, state, userId, ps),
++                    grantedPermissions);
+ 
+             if (packageInfo == null) {
+                 return null;

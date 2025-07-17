@@ -1,0 +1,22 @@
+
+project frameworks/base/
+diff --git a/core/api/current.txt b/core/api/current.txt
+index 487e57d114c9..04e69741b9fd 100644
+--- a/core/api/current.txt
++++ b/core/api/current.txt
+@@ -100,6 +101,7 @@ package android {
+     field public static final String EXECUTE_APP_ACTION = "android.permission.EXECUTE_APP_ACTION";
+     field public static final String EXPAND_STATUS_BAR = "android.permission.EXPAND_STATUS_BAR";
+     field public static final String FACTORY_TEST = "android.permission.FACTORY_TEST";
++    field public static final String FAKE_PACKAGE_SIGNATURE = "android.permission.FAKE_PACKAGE_SIGNATURE";
+     field public static final String FOREGROUND_SERVICE = "android.permission.FOREGROUND_SERVICE";
+     field public static final String FOREGROUND_SERVICE_CAMERA = "android.permission.FOREGROUND_SERVICE_CAMERA";
+     field public static final String FOREGROUND_SERVICE_CONNECTED_DEVICE = "android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE";
+@@ -244,6 +245,7 @@ package android {
+     field public static final String CALL_LOG = "android.permission-group.CALL_LOG";
+     field public static final String CAMERA = "android.permission-group.CAMERA";
+     field public static final String CONTACTS = "android.permission-group.CONTACTS";
++    field public static final String FAKE_PACKAGE = "android.permission-group.FAKE_PACKAGE";
+     field public static final String LOCATION = "android.permission-group.LOCATION";
+     field public static final String MICROPHONE = "android.permission-group.MICROPHONE";
+     field public static final String NEARBY_DEVICES = "android.permission-group.NEARBY_DEVICES";
