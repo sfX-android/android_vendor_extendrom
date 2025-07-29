@@ -1,0 +1,15 @@
+
+project packages/apps/Settings/
+diff --git a/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java b/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java
+index 4278e3a9bab..1fb51c69c80 100644
+--- a/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java
++++ b/src/com/android/settings/development/DevelopmentSettingsDashboardFragment.java
+@@ -767,6 +767,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
+         controllers.add(new ForceEnableNotesRolePreferenceController(context));
+         controllers.add(new GrammaticalGenderPreferenceController(context));
+         controllers.add(new SensitiveContentProtectionPreferenceController(context));
++        controllers.add(new SpoofSignaturePreferenceController(context));      // signature spoofing patch
++        controllers.add(new SpoofSignatureInfo(context));       // signature spoofing patch
+ 
+         return controllers;
+     }
