@@ -1,6 +1,6 @@
 ############################################################################
 #
-# Copyright (C) 2020-2024 steadfasterX <steadfasterX@binbash.rocks>
+# Copyright (C) 2020-2025 steadfasterX <steadfasterX@binbash.rocks>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

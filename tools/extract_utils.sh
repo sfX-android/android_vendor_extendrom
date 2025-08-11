@@ -110,21 +110,28 @@ EOF
     fi
     if [ "$EXTENDROM_BOOT_DEBUG" == true ];then
 	cat << EOF >> "$ANDROIDMK"
+# set local path to the regular out dir
 LOCAL_PATH := \$(PRODUCT_OUT)
+
 include \$(CLEAR_VARS)
 LOCAL_MODULE            := er-logcat
 LOCAL_REQUIRED_MODULES  := logcat
 LOCAL_MODULE_TAGS       := optional
 LOCAL_MODULE_CLASS      := EXECUTABLES
 LOCAL_SRC_FILES         := \$(TARGET_COPY_OUT_SYSTEM)/bin/logcat
-LOCAL_MODULE_PATH       := \$(TARGET_OUT_VENDOR_EXECUTABLES)
+ifeq (\$(call math_gt_or_eq,\$(PLATFORM_SDK_VERSION),30), true)
+LOCAL_MODULE_PATH       := \$(TARGET_OUT_SYSTEM_EXT_EXECUTABLES)
+else
+LOCAL_MODULE_PATH       := \$(TARGET_OUT_EXECUTABLES)
+endif
 ifeq (\$(call math_gt_or_eq,\$(PLATFORM_SDK_VERSION),29), true)
 LOCAL_CHECK_ELF_FILES   := false
 else
 LOCAL_SHARED_LIBRARIES  := libbase libc++ libprocessgroup
 endif
-#LOCAL_VENDOR_MODULE    := true
 include \$(BUILD_PREBUILT)
+
+# reset local path to extendrom dir
 LOCAL_PATH := \$(VENDOR_DIR)
 EOF
     else

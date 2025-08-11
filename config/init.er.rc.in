@@ -1,7 +1,7 @@
 ##########################################################################################
 #
 # This code is part of extendrom (https://github.com/sfX-android/android_vendor_extendrom)
-# Copyright (C) 2023 steadfasterX <steadfasterX@binbash.rocks>
+# Copyright (C) 2023-2025 steadfasterX <steadfasterX@binbash.rocks>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,14 +52,14 @@ on post-fs
     start boot_debug_crash
     start boot_debug_selinux
 
-service boot_debug_full /vendor/bin/er-logcat -b all -D -f %%DEBUGLOG_PATH%%/full.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_FULL%% --rotate-count=1
+service boot_debug_full %%DEBUGLOG_LOGCAT_PATH%%/bin/er-logcat -b all -D -f %%DEBUGLOG_PATH%%/full.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_FULL%% --rotate-count=1
     user system
     group system
     seclabel u:r:boot_debug:s0
     disabled
     oneshot
 
-service boot_debug_crash /vendor/bin/er-logcat -b crash -D -f %%DEBUGLOG_PATH%%/crash.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_CRASH%% --rotate-count=1
+service boot_debug_crash %%DEBUGLOG_LOGCAT_PATH%%/bin/er-logcat -b crash -D -f %%DEBUGLOG_PATH%%/crash.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_CRASH%% --rotate-count=1
     user system
     group system
     seclabel u:r:boot_debug:s0
@@ -67,14 +67,14 @@ service boot_debug_crash /vendor/bin/er-logcat -b crash -D -f %%DEBUGLOG_PATH%%/
     oneshot
 
 # note: kernel logs will appear on userdebug and/or eng builds only!
-service boot_debug_kernel /vendor/bin/er-logcat -b kernel -D -f %%DEBUGLOG_PATH%%/kernel.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_KERNEL%% --rotate-count=1
+service boot_debug_kernel %%DEBUGLOG_LOGCAT_PATH%%/bin/er-logcat -b kernel -D -f %%DEBUGLOG_PATH%%/kernel.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_KERNEL%% --rotate-count=1
     user system
     group system
     seclabel u:r:boot_debug:s0
     disabled
     oneshot
 
-service boot_debug_selinux /vendor/bin/er-logcat -b events --regex=avc: -D -f %%DEBUGLOG_PATH%%/selinux.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_SELINUX%% --rotate-count=1
+service boot_debug_selinux %%DEBUGLOG_LOGCAT_PATH%%/bin/er-logcat -b events --regex=avc: -D -f %%DEBUGLOG_PATH%%/selinux.txt --rotate-kbytes=%%DEBUGLOG_PATH_SIZE_SELINUX%% --rotate-count=1
     user system
     group system
     seclabel u:r:boot_debug:s0
