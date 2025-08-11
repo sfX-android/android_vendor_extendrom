@@ -615,7 +615,11 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
 # part of Phonesky - do not move to /system_ext !
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),35), true)
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
+else
+LOCAL_SRC_FILES := er_privapp-permissions-com.android.vending-phonesky-legacy.xml
+endif
 include $(BUILD_PREBUILT)
 
 # Phonesky default permissions
