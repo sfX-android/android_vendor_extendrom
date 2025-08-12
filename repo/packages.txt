@@ -204,6 +204,10 @@ com.simplemobiletools.launcher_LATEST.apk|FDROIDREPO|app|SimpleLauncher.apk;PRES
 com.saggitt.omega_LATEST.apk|https://apt.izzysoft.de/fdroid/repo|app|NeoLauncher-latest.apk;PRESIGNED|false||er_default-permissions-neolauncher.xml
 NeoLauncher-release.apk|https://github.com/NeoApplications/Neo-Launcher/releases/download/0.9.3|app|NeoLauncher.apk;PRESIGNED|false||er_default-permissions-neolauncher.xml
 
+# AXP.OS Launcher (Neo fork)
+NeoLauncher-signed.apk|https://github.com/AXP-OS/packages_apps_neo-launcher/releases/latest/download|app|AOSLauncher.apk;PRESIGNED|false||er_default-permissions-neolauncher.xml
+NeoLauncher-signed.apk|https://github.com/AXP-OS/packages_apps_neo-launcher/releases/download/1.0.0_AOS-1|app|AOSLauncher-1.0.0_AOS-1.apk;PRESIGNED|false||er_default-permissions-neolauncher.xml
+
 # Lawnchair - stable
 # taken from PlayStore via AuroraStore:
 Lawnchair_202589.apk|https://www.dropbox.com/s/qi551e1y2ubd1zd|app|Lawnchair-stable.apk;PRESIGNED|false
