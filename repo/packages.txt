@@ -269,6 +269,9 @@ com.nextcloud.client_LATEST.apk|FDROIDREPO|app|NextCloud.apk;PRESIGNED|true
 browser32-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|app|AOSmium32.apk;PRESIGNED-extractlibs|false||
 browser64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|app|AOSmium64.apk;PRESIGNED-extractlibs|false||
 
+# AOSmium webview - testing
+webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/139.0.7258.62/|priv-app|AOSmium_webview64_139.0.7258.62.apk;PRESIGNED-extractlibs|false||
+
 # AOSmium webview - latest stable
 webview32-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|priv-app|AOSmium_webview32.apk;PRESIGNED-extractlibs|false||
 webview64-signed.apk|https://codeberg.org/AXP-OS/app_aosmium/releases/download/latest/|priv-app|AOSmium_webview64.apk;PRESIGNED-extractlibs|false||
