@@ -320,7 +320,8 @@ OpenEUICC_hidden-signed.apk|https://github.com/AXP-OS/packages_apps_OpenEUICC/re
 # FossifyGallery - F-Droid (outdated!)
 org.fossify.gallery_LATEST.apk|FDROIDREPO|app|FossifyGallery_FD.apk;PRESIGNED|true|Gallery2;Glimpse
 # FossifyGallery - Github
-gallery-12-foss-release.apk|https://github.com/FossifyOrg/Gallery/releases/download/1.4.0/|app|FossifyGallery.apk;PRESIGNED|false|Gallery2;Glimpse
+gallery-13-foss-release.apk|https://github.com/FossifyOrg/Gallery/releases/download/1.4.1/|app|FossifyGallery.apk;PRESIGNED|false|Gallery2;Glimpse
+gallery-12-foss-release.apk|https://github.com/FossifyOrg/Gallery/releases/download/1.4.0/|app|FossifyGallery_1-40.apk;PRESIGNED|false|Gallery2;Glimpse
 gallery-11-foss-release.apk|https://github.com/FossifyOrg/Gallery/releases/download/1.3.1/|app|FossifyGallery_1-31.apk;PRESIGNED|false|Gallery2;Glimpse
 
 
