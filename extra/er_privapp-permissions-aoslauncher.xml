@@ -1,0 +1,8 @@
+<permissions>
+  <privapp-permissions package="com.saggitt.omega">
+    <permission name="android.permission.STATUS_BAR"/>
+    <permission name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <permission name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS"/>
+    <permission name="android.permission.BIND_APPWIDGET"/>
+  </privapp-permissions>
+</permissions>
