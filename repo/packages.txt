@@ -206,7 +206,8 @@ NeoLauncher-release.apk|https://github.com/NeoApplications/Neo-Launcher/releases
 
 # AXP.OS Launcher (Neo fork)
 NeoLauncher-signed.apk|https://github.com/AXP-OS/packages_apps_neo-launcher/releases/latest/download|priv-app|AOSLauncher.apk;PRESIGNED|false||er_default-permissions-neolauncher.xml;er_privapp-permissions-aoslauncher.xml
-NeoLauncher-signed.apk|https://github.com/AXP-OS/packages_apps_neo-launcher/releases/download/1.0.0_AOS-2|priv-app|AOSLauncher-1.0.0_AOS-2.apk;PRESIGNED|false||er_default-permissions-neolauncher.xml;er_privapp-permissions-aoslauncher.xml
+NeoLauncher-signed.apk|https://github.com/AXP-OS/packages_apps_neo-launcher/releases/download/1.0.0_AOS-3|priv-app|AOSLauncher-1.0.0_AOS-3.apk;PRESIGNED|false||er_default-permissions-neolauncher.xml;er_privapp-permissions-aoslauncher.xml
+NeoLauncher-signed.apk|https://github.com/AXP-OS/packages_apps_neo-launcher/releases/download/1.0.0_AOS-1|priv-app|AOSLauncher-1.0.0_AOS-1.apk;PRESIGNED|false||er_default-permissions-neolauncher.xml;er_privapp-permissions-aoslauncher.xml
 
 # Lawnchair - stable
 # taken from PlayStore via AuroraStore:
