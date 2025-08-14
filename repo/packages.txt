@@ -62,7 +62,7 @@ AuroraServices_v1.1.1.apk|https://gitlab.com/AuroraOSS/AuroraServices/uploads/c2
 ##########################################################################################################
 
 # Pre-releases
-Magisk-v30.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v30.1|app|Magisk_v30.apk;PRESIGNED|false
+Magisk-v30.2.apk|https://github.com/topjohnwu/Magisk/releases/download/v30.2|app|Magisk_v30.apk;PRESIGNED|false
 
 # Magisk latest stable version
 Magisk-v29.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v29.0|app|Magisk.apk;PRESIGNED|false
