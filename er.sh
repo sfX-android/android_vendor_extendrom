@@ -189,7 +189,7 @@ done
 # prepare to remove Magisk from EXTENDROM_PACKAGES as we don't build it
 # see https://github.com/sfX-android/android_vendor_extendrom/wiki/FAQ#extendrom_preroot_boot
 if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
-    export MAGNAME=$(echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -E '^Magisk$|Magisk_v[0-9]+\.[0-9]+$|SignMagisk$')
+    export MAGNAME=$(echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | grep -E '^Magisk$|Magisk_v[0-9]+(\.[0-9])*$|SignMagisk$')
     export EXTENDROM_PACKAGES_CLEANED=$(echo "$EXTENDROM_PACKAGES" | tr ' ' '\n' | sed "s/$MAGNAME//g" | tr '\n' ' ')
     echo "PRODUCT_PACKAGES += $EXTENDROM_PACKAGES_CLEANED" > $PRODUCTMK
 else
