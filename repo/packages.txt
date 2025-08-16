@@ -104,9 +104,10 @@ app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-28101
 Phonesky_AXP-OS-signed.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/latest/download|priv-app|Phonesky_AXP-OS.apk;PRESIGNED|false|FakeStore|er_privapp-permissions-com.android.vending-phonesky.xml;er_default-permissions-com.android.vending-phonesky.xml
 
 # testing:
-Phonesky_AXP-OS-signed.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/46.6.21-23_84662100|priv-app|Phonesky_AXP-OS_testing.apk;PRESIGNED|false|FakeStore|er_privapp-permissions-com.android.vending-phonesky.xml;er_default-permissions-com.android.vending-phonesky.xml
+Phonesky_AXP-OS-signed.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/47.4.32-23_84743200|priv-app|Phonesky_AXP-OS_testing.apk;PRESIGNED|false|FakeStore|er_privapp-permissions-com.android.vending-phonesky.xml;er_default-permissions-com.android.vending-phonesky.xml
 
 # previous stable:
+Phonesky_AXP-OS-signed.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/46.6.21-23_84662100|priv-app|Phonesky_AXP-OS_46-6.apk;PRESIGNED|false|FakeStore|er_privapp-permissions-com.android.vending-phonesky.xml;er_default-permissions-com.android.vending-phonesky.xml
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/45.8.21-23_84582100|priv-app|Phonesky_AXP-OS_45-8.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/45.2.19-23_84521900|priv-app|Phonesky_AXP-OS_45-2.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/43.7.20-23_84372000|priv-app|Phonesky_AXP-OS_43-7.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
