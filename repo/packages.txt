@@ -22,10 +22,11 @@
 # (BEWARE: This can also point to beta or even ALPHA releases!!)
 org.fdroid.fdroid_LATEST.apk|FDROIDREPO|app|F-Droid_latest.apk;PRESIGNED|true
 
-# latest STABLE (1.23.0)
-org.fdroid.fdroid_1023050.apk|FDROIDREPO|app|F-Droid.apk;PRESIGNED|true
+# latest STABLE (1.23.1)
+org.fdroid.fdroid_1023051.apk|FDROIDREPO|app|F-Droid.apk;PRESIGNED|true
 
 # older releases
+org.fdroid.fdroid_1023050.apk|FDROIDREPO|app|F-Droid_v1.23.0.apk;PRESIGNED|true
 org.fdroid.fdroid_1022050.apk|FDROIDREPO|app|F-Droid_v1.22.0.apk;PRESIGNED|true
 org.fdroid.fdroid_1021051.apk|FDROIDREPO|app|F-Droid_v1.21.1.apk;PRESIGNED|true
 org.fdroid.fdroid_1016053.apk|FDROIDREPO|app|F-Droid_v1.16.3.apk;PRESIGNED|true
