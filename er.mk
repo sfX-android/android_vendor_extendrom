@@ -63,9 +63,17 @@ $(call inherit-product-if-exists, vendor/extendrom/packages.mk)
 # 2. add an exception in tools/extract_utils.sh to not use /system_ext for them
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST := \
     $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS/Phonesky_AXP-OS.apk \
-    $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS_testing/Phonesky_AXP-OS_testing.apk \
     $(TARGET_COPY_OUT_SYSTEM)/etc/default-permissions/er_default-permissions-com.android.vending-phonesky.xml \
     $(TARGET_COPY_OUT_SYSTEM)/etc/permissions/er_privapp-permissions-com.android.vending-phonesky.xml \
     $(TARGET_COPY_OUT_SYSTEM)/etc/microg.xml \
+
+# disabling PS testing atm. it causes on A15 (only) this:
+#build/make/core/artifact_path_requirements.mk:31: warning: device/google/sunfish/lineage_sunfish.mk includes redundant artifact path requirement allowed list entries.
+#Offending entries:
+#system/priv-app/Phonesky_AXP-OS_testing/Phonesky_AXP-OS_testing.apk
+#In file included from build/make/core/main.mk:1173:
+#build/make/core/artifact_path_requirements.mk:31: error: Build failed.
+#    $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS_testing/Phonesky_AXP-OS_testing.apk \
+# redundant artifact path? they are different! so likely that check only checks up to priv-app/ ?
 
 endif # ENABLE_EXTENDROM = true
