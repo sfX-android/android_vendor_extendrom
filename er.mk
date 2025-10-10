@@ -68,18 +68,31 @@ endif # EXTENDROM_BOOT_DEBUG = true
 # > system/priv-app/Phonesky_AXP-OS_testing/Phonesky_AXP-OS_testing.apk
 # > In file included from build/make/core/main.mk:1173:
 # > build/make/core/artifact_path_requirements.mk:31: error: Build failed.
-EXTENDROM_FLAG_FILE := $(OUT_DIR)/.extendrom_artifacts_added
-ifneq ($(wildcard $(EXTENDROM_FLAG_FILE)),)
-$(warning EXTENDROM: skipping artifact path additions (already added))
-else
-$(shell mkdir -p $(dir $(EXTENDROM_FLAG_FILE)) && touch $(EXTENDROM_FLAG_FILE))
+
+#EXTENDROM_FLAG_FILE := $(OUT_DIR)/.extendrom_artifacts_added
+#ifneq ($(wildcard $(EXTENDROM_FLAG_FILE)),)
+#$(warning EXTENDROM: skipping artifact path additions (already added))
+#else
+#$(shell mkdir -p $(dir $(EXTENDROM_FLAG_FILE)) && touch $(EXTENDROM_FLAG_FILE))
+#PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST := \
+#           $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS/Phonesky_AXP-OS.apk \
+#           $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS_testing/Phonesky_AXP-OS_testing.apk \
+#           $(TARGET_COPY_OUT_SYSTEM)/etc/default-permissions/er_default-permissions-com.android.vending-phonesky.xml \
+#           $(TARGET_COPY_OUT_SYSTEM)/etc/permissions/er_privapp-permissions-com.android.vending-phonesky.xml \
+#           $(TARGET_COPY_OUT_SYSTEM)/etc/microg.xml
+#$(shell echo "$(PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST)" > $(EXTENDROM_FLAG_FILE))
+#endif
+
+# Always append
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+    $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS/Phonesky_AXP-OS.apk \
+    $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS_testing/Phonesky_AXP-OS_testing.apk \
+    $(TARGET_COPY_OUT_SYSTEM)/etc/default-permissions/er_default-permissions-com.android.vending-phonesky.xml \
+    $(TARGET_COPY_OUT_SYSTEM)/etc/permissions/er_privapp-permissions-com.android.vending-phonesky.xml \
+    $(TARGET_COPY_OUT_SYSTEM)/etc/microg.xml
+
+# Deduplicate
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST := \
-           $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS/Phonesky_AXP-OS.apk \
-           $(TARGET_COPY_OUT_SYSTEM)/priv-app/Phonesky_AXP-OS_testing/Phonesky_AXP-OS_testing.apk \
-           $(TARGET_COPY_OUT_SYSTEM)/etc/default-permissions/er_default-permissions-com.android.vending-phonesky.xml \
-           $(TARGET_COPY_OUT_SYSTEM)/etc/permissions/er_privapp-permissions-com.android.vending-phonesky.xml \
-           $(TARGET_COPY_OUT_SYSTEM)/etc/microg.xml
-$(shell echo "$(PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST)" > $(EXTENDROM_FLAG_FILE))
-endif
+    $(sort $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST))
 
 endif # ENABLE_EXTENDROM = true
