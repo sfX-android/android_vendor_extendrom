@@ -145,9 +145,12 @@ com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|Micro
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
+# latest pre-release, EXPECT ISSUES!
+com.google.android.gms-250932020.apk|https://github.com/microg/GmsCore/releases/download/v0.3.10.250932/|app|MicrogGmsCore_GH_PRERELEASE.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+
 # 0.3.7 has issues!
 # see: https://github.com/microg/GmsCore/issues/2868
-#com.google.android.gms-250932014.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932014.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932/|app|MicrogGmsCore_GH_v037.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
 # old stable:
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|app|MicrogGmsCore_GH_v036.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
