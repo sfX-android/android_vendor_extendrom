@@ -118,25 +118,25 @@ Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/do
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS_38-1.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 ##########################################################################################################
-#  __  __ _                 ____ 
-# |  \/  (_) ___ _ __ ___  / ___|
-# | |\/| | |/ __| '__/ _ \| |  _ 
-# | |  | | | (__| | | (_) | |_| |
-# |_|  |_|_|\___|_|  \___/ \____|
+#            _                 ____ 
+#  _ __ ___ (_) ___ _ __ ___  / ___|
+# | '_ ` _ \| |/ __| '__/ _ \| |  _ 
+# | | | | | | | (__| | | (_) | |_| |
+# |_| |_| |_|_|\___|_|  \___/ \____|
 #
 # user-keys/shared or user-keys/platform are required, otherwise:
 # - `stacktrace: java.lang.UnsatisfiedLinkError: dlopen failed: library "libcronet.102.0.5005.125.so" not found` (e.g. Google Rewards)
 # - `java.lang.RuntimeException: Unable to find a default SSL provider.` (e.g. Google Maps)
 ##########################################################################################################
 
-# MicroG GmsCore - LATEST
+# microG GmsCore - LATEST
 # - FDroid repo
 # the "_PRIV" one is not required on newer Android versions while required e.g. on Android 9
 #   easiest as you get the latest always - but it is sometimes incredible slow
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
-# MicroG GmsCore - STABLE
+# microG GmsCore - STABLE
 # - Github release
 #   a "xxx_GH" fallback to github which is fast always
 # the "_PRIV" one is not required on newer Android versions while required e.g. on Android 9
@@ -162,7 +162,7 @@ com.google.android.gms-240913004.apk|https://github.com/microg/GmsCore/releases/
 # latest version before the fully re-written GMScore (requires NominatimBackend/MozillaNlpBackend):
 com.google.android.gms-223616054.apk|https://github.com/microg/GmsCore/releases/download/v0.2.27.223616/|app|MicrogGmsCore_unified-latest.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
-# MicroG GsfProxy
+# microG GsfProxy
 # - FDroid repo
 #   easiest as you get the latest always - but it is sometimes incredible slow
 com.google.android.gsf-LATEST.apk|https://microg.org/fdroid/repo/|app|GsfProxy.apk;PRESIGNED|false
@@ -171,7 +171,7 @@ com.google.android.gsf-LATEST.apk|https://microg.org/fdroid/repo/|app|GsfProxy.a
 GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/download/v0.1.0|app|GsfProxy_GH.apk;PRESIGNED|false
 GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/download/v0.1.0|priv-app|GsfProxy_GH_PRIV.apk;PRESIGNED|false
 
-# MicroG FakeStore - LEGACY
+# microG FakeStore - LEGACY
 # is part of GmsCore now: https://github.com/microg/GmsCore/tree/master/vending-app
 com.android.vending-83700037.apk|https://github.com/microg/FakeStore/releases/download/v0.2.1|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 

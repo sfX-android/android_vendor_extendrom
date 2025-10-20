@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
 <!--
-    default settings for MicroG
-    MUST be placed in /system/etc as this is hardcoded within MicroG!
+    default settings for microG
+    MUST be placed in /system/etc as this is hardcoded within microG!
 -->
 <map>
         <set name="location_backends">
