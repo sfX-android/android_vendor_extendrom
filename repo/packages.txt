@@ -145,7 +145,7 @@ com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|Micro
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
-# latest pre-release, EXPECT ISSUES!
+# LATEST PRE-RELEASE, EXPECT ISSUES!
 com.google.android.gms-250932020.apk|https://github.com/microg/GmsCore/releases/download/v0.3.10.250932/|app|MicrogGmsCore_GH_PRERELEASE.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
 # 0.3.7 has issues!
@@ -171,9 +171,15 @@ com.google.android.gsf-LATEST.apk|https://microg.org/fdroid/repo/|app|GsfProxy.a
 GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/download/v0.1.0|app|GsfProxy_GH.apk;PRESIGNED|false
 GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/download/v0.1.0|priv-app|GsfProxy_GH_PRIV.apk;PRESIGNED|false
 
-# microG FakeStore - LEGACY
-# is part of GmsCore now: https://github.com/microg/GmsCore/tree/master/vending-app
-com.android.vending-83700037.apk|https://github.com/microg/FakeStore/releases/download/v0.2.1|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+# microG companion - STABLE (aka FakeStore)
+com.android.vending-84022614.apk|https://github.com/microg/FakeStore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+
+# microG companion - LATEST PRE-RELEASE, EXPECT ISSUES!
+com.android.vending-84022620.apk|https://github.com/microg/FakeStore/releases/download/v0.3.10.250932|priv-app|FakeStore_GH_v0310.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+com.android.vending-84022614.apk|https://github.com/microg/FakeStore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH_v037.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+
+# microG companion - OLD STABLE (aka FakeStore)
+com.android.vending-83700037.apk|https://github.com/microg/FakeStore/releases/download/v0.2.1|priv-app|FakeStore_GH_v021.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 
 # DEPRECATED: NominatimBackend
 org.microg.nlp.backend.nominatim_LATEST.apk|FDROIDREPO|app|NominatimBackend.apk;PRESIGNED|false
