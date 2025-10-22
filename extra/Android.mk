@@ -797,14 +797,18 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := er_privapp-permissions-com.android.vending.xml
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT_ETC)/permissions
-LOCAL_SRC_FILES := permissions-com.android.vending.xml
+ifeq ($(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),29), true)
+LOCAL_SRC_FILES := er_privapp-permissions-com.android.vending.xml
+else
+LOCAL_SRC_FILES := er_privapp-permissions-com.android.vending_max-sdk28.xml
+endif # LOCAL_SRC_FILES
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := er_default-permissions-com.android.vending.xml
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT_ETC)/default-permissions
-LOCAL_SRC_FILES := default-permissions-com.android.vending.xml
+LOCAL_SRC_FILES := er_default-permissions-com.android.vending.xml
 include $(BUILD_PREBUILT)
 
 # Default permissions for Neo Launcher
