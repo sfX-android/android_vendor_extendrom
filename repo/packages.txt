@@ -172,11 +172,11 @@ GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/d
 GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/download/v0.1.0|priv-app|GsfProxy_GH_PRIV.apk;PRESIGNED|false
 
 # microG companion - STABLE (aka FakeStore)
-com.android.vending-84022614.apk|https://github.com/microg/FakeStore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+com.android.vending-84022614.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 
 # microG companion - LATEST PRE-RELEASE, EXPECT ISSUES!
-com.android.vending-84022620.apk|https://github.com/microg/FakeStore/releases/download/v0.3.10.250932|priv-app|FakeStore_GH_v0310.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
-com.android.vending-84022614.apk|https://github.com/microg/FakeStore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH_v037.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+com.android.vending-84022620.apk|https://github.com/microg/GmsCore/releases/download/v0.3.10.250932|priv-app|FakeStore_GH_v0310.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+com.android.vending-84022614.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH_v037.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 
 # microG companion - OLD STABLE (aka FakeStore)
 com.android.vending-83700037.apk|https://github.com/microg/FakeStore/releases/download/v0.2.1|priv-app|FakeStore_GH_v021.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
