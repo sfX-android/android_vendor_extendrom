@@ -1,6 +1,6 @@
 ##########################################################################################################
 # available apps to use via EXTENDROM_PACKAGES flag
-# 
+#
 # HOW TO / LINE FORMAT: https://github.com/sfX-android/android_vendor_extendrom/wiki/packages.txt
 # HOW TO USE: https://github.com/sfX-android/android_vendor_extendrom/wiki/EXTENDROM_PACKAGES
 #
@@ -8,14 +8,14 @@
 ##########################################################################################################
 
 ##########################################################################################################
-#  _____ ____            _     _ 
+#  _____ ____            _     _
 # |  ___|  _ \ _ __ ___ (_) __| |
 # | |_  | | | | '__/ _ \| |/ _` |
 # |  _| | |_| | | | (_) | | (_| |
 # |_|   |____/|_|  \___/|_|\__,_|
 ##########################################################################################################
 
-# apk version can be revealed by e.g.: 
+# apk version can be revealed by e.g.:
 # https://gitlab.com/fdroid/fdroidclient/-/commits/master/app/build.gradle?search=release
 
 # LATEST
@@ -31,13 +31,13 @@ org.fdroid.fdroid_1022050.apk|FDROIDREPO|app|F-Droid_v1.22.0.apk;PRESIGNED|true
 org.fdroid.fdroid_1021051.apk|FDROIDREPO|app|F-Droid_v1.21.1.apk;PRESIGNED|true
 org.fdroid.fdroid_1016053.apk|FDROIDREPO|app|F-Droid_v1.16.3.apk;PRESIGNED|true
 
-# DEPRECATED! F-Droid privileged extension 
+# DEPRECATED! F-Droid privileged extension
 # should be build with AOSP but if you REALLY wanna use a prebuilt:
 org.fdroid.fdroid.privileged_LATEST.apk|FDROIDREPO|priv-app|F-DroidPrivilegedExtension_pb.apk;PRESIGNED|true
 
 ##########################################################################################################
-#     _                             
-#    / \  _   _ _ __ ___  _ __ __ _ 
+#     _
+#    / \  _   _ _ __ ___  _ __ __ _
 #   / _ \| | | | '__/ _ \| '__/ _` |
 #  / ___ \ |_| | | | (_) | | | (_| |
 # /_/   \_\__,_|_|  \___/|_|  \__,_|
@@ -54,12 +54,12 @@ com.aurora.store_58.apk|FDROIDREPO|app|AuroraStore_444.apk;PRESIGNED|true
 AuroraServices_v1.1.1.apk|https://gitlab.com/AuroraOSS/AuroraServices/uploads/c22e95975571e9db143567690777a56e|priv-app|AuroraServices.apk;user-keys/shared|false||permissions_com.aurora.services.xml
 
 ##########################################################################################################
-#  __  __             _     _    
+#  __  __             _     _
 # |  \/  | __ _  __ _(_)___| | __
 # | |\/| |/ _` |/ _` | / __| |/ /
-# | |  | | (_| | (_| | \__ \   < 
+# | |  | | (_| | (_| | \__ \   <
 # |_|  |_|\__,_|\__, |_|___/_|\_\
-#               |___/            
+#               |___/
 ##########################################################################################################
 
 # Pre-releases
@@ -89,12 +89,12 @@ Magisk-v22.1.apk|https://github.com/topjohnwu/Magisk/releases/download/v22.1|app
 app-debug.apk|https://github.com/topjohnwu/Magisk/releases/download/canary-28101|app|Magisk_DEBUG.apk;PRESIGNED|false
 
 ##########################################################################################################
-#  ____  _                           _          
-# |  _ \| |__   ___  _ __   ___  ___| | ___   _ 
+#  ____  _                           _
+# |  _ \| |__   ___  _ __   ___  ___| | ___   _
 # | |_) | '_ \ / _ \| '_ \ / _ \/ __| |/ / | | |
 # |  __/| | | | (_) | | | |  __/\__ \   <| |_| |
 # |_|   |_| |_|\___/|_| |_|\___||___/_|\_\\__, |
-#                                         |___/ 
+#                                         |___/
 ##########################################################################################################
 
 # Phonesky (Google in-app purchase support)
@@ -118,9 +118,9 @@ Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/do
 Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/download/38.1.18-21|priv-app|Phonesky_AXP-OS_38-1.apk;user-keys/apps|false|FakeStore|phonesky-permissions.xml;com.android.vending.xml
 
 ##########################################################################################################
-#            _                 ____ 
+#            _                 ____
 #  _ __ ___ (_) ___ _ __ ___  / ___|
-# | '_ ` _ \| |/ __| '__/ _ \| |  _ 
+# | '_ ` _ \| |/ __| '__/ _ \| |  _
 # | | | | | | | (__| | | (_) | |_| |
 # |_| |_| |_|_|\___|_|  \___/ \____|
 #
@@ -187,8 +187,8 @@ org.microg.nlp.backend.nominatim_LATEST.apk|FDROIDREPO|app|NominatimBackend.apk;
 org.microg.nlp.backend.ichnaea_LATEST.apk|FDROIDREPO|app|MozillaNlpBackend.apk;PRESIGNED|false
 
 ##########################################################################################################
-#   ____                               
-#  / ___|__ _ _ __ ___   ___ _ __ __ _ 
+#   ____
+#  / ___|__ _ _ __ ___   ___ _ __ __ _
 # | |   / _` | '_ ` _ \ / _ \ '__/ _` |
 # | |__| (_| | | | | | |  __/ | | (_| |
 #  \____\__,_|_| |_| |_|\___|_|  \__,_|
@@ -201,8 +201,8 @@ net.sourceforge.opencamera_LATEST.apk|FDROIDREPO|app|OpenCamera.apk;PRESIGNED|tr
 opencamera_sfX_j5_fixPreview.apk|https://leech.binbash.rocks:8008/misc|app|opencamera_j5_latest.apk;PRESIGNED|false
 
 ##########################################################################################################
-#  _                           _                   
-# | |    __ _ _   _ _ __   ___| |__   ___ _ __ ___ 
+#  _                           _
+# | |    __ _ _   _ _ __   ___| |__   ___ _ __ ___
 # | |   / _` | | | | '_ \ / __| '_ \ / _ \ '__/ __|
 # | |__| (_| | |_| | | | | (__| | | |  __/ |  \__ \
 # |_____\__,_|\__,_|_| |_|\___|_| |_|\___|_|  |___/
@@ -236,10 +236,10 @@ com.benny.openlauncher_LATEST.apk|FDROIDREPO|app|OpenLauncher.apk;PRESIGNED|true
 foundation.e.blisslauncher_LATEST.apk|FDROIDREPO|app|BlissLauncher.apk;PRESIGNED|true
 
 ##########################################################################################################
-#  ___       _                       _   
-# |_ _|_ __ | |_ ___ _ __ _ __   ___| |_ 
+#  ___       _                       _
+# |_ _|_ __ | |_ ___ _ __ _ __   ___| |_
 #  | || '_ \| __/ _ \ '__| '_ \ / _ \ __|
-#  | || | | | ||  __/ |  | | | |  __/ |_ 
+#  | || | | | ||  __/ |  | | | |  __/ |_
 # |___|_| |_|\__\___|_|  |_| |_|\___|\__|
 ##########################################################################################################
 
@@ -251,7 +251,7 @@ org.jak_linux.dns66_LATEST.apk|FDROIDREPO|app|DNS66.apk;PRESIGNED|true
 
 # K9-Mail
 # latest version has no IMAP-idle / push
-# Earlier version 5.600 *with* IMAP-idle / push is available in F-Droid 
+# Earlier version 5.600 *with* IMAP-idle / push is available in F-Droid
 # (if the F-Droid Archive repo is enabled)
 com.fsck.k9_LATEST.apk|FDROIDREPO|app|K9-Mail-latest.apk;PRESIGNED|true
 
@@ -268,7 +268,7 @@ com.moez.QKSMS_LATEST.apk|FDROIDREPO|app|QKSMS.apk;PRESIGNED|true
 # Allow usesr to pick a Firefox-based browser
 de.marmaro.krt.ffupdater_LATEST.apk|FDROIDREPO|app|FFUpdater.apk;PRESIGNED|true
 
-# ICSx5 
+# ICSx5
 at.bitfire.icsdroid_LATEST.apk|FDROIDREPO|app|ICSx5.apk;PRESIGNED|true
 
 # DAVx5
@@ -300,8 +300,8 @@ arm64_ChromePublic.apk|https://www.cromite.org/fdroid/repo/|app|Cromite_arm64.ap
 arm64_SystemWebView64.apk|https://github.com/uazo/cromite/releases/latest/download/|priv-app|Cromite_webview64.apk;PRESIGNED-extractlibs|false||
 
 ##########################################################################################################
-#   ___   __  __ _          
-#  / _ \ / _|/ _(_) ___ ___ 
+#   ___   __  __ _
+#  / _ \ / _|/ _(_) ___ ___
 # | | | | |_| |_| |/ __/ _ \
 # | |_| |  _|  _| | (_|  __/
 #  \___/|_| |_| |_|\___\___|
@@ -317,11 +317,11 @@ org.dmfs.tasks_LATEST.apk|FDROIDREPO|app|OpenTasks.apk;PRESIGNED|true
 it.niedermann.owncloud.notes_LATEST.apk|FDROIDREPO|app|NextCloudNotes.apk;PRESIGNED|true
 
 ##########################################################################################################
-#  __  __ _          
-# |  \/  (_)___  ___ 
+#  __  __ _
+# |  \/  (_)___  ___
 # | |\/| | / __|/ __|
-# | |  | | \__ \ (__ 
-# |_|  |_|_|___/\___|   
+# | |  | | \__ \ (__
+# |_|  |_|_|___/\___|
 ##########################################################################################################
 
 # Latest OpenEUICC build (https://gitea.angry.im/PeterCxy/OpenEUICC) signed by AXP.OS
@@ -338,7 +338,7 @@ gallery-11-foss-release.apk|https://github.com/FossifyOrg/Gallery/releases/downl
 
 
 ##########################################################################################################
-#  _____ _            _____           _ 
+#  _____ _            _____           _
 # |_   _| |__   ___  | ____|_ __   __| |
 #   | | | '_ \ / _ \ |  _| | '_ \ / _` |
 #   | | | | | |  __/ | |___| | | | (_| |
