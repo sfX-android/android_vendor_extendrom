@@ -26,10 +26,13 @@
         <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="false"/>
         <permission name="android.permission.ACCESS_COARSE_LOCATION" fixed="false"/>
         <permission name="org.microg.permission.FORCE_COARSE_LOCATION" fixed="false"/>
-         
+        
+        <!-- SMS -->
+        <permission name="android.permission.RECEIVE_SMS" fixed="false" whitelisted="true" />
+        
         <!-- Storage -->
-        <permission name="android.permission.READ_EXTERNAL_STORAGE" fixed="false"/>
-        <permission name="android.permission.WRITE_EXTERNAL_STORAGE" fixed="false"/>
+        <permission name="android.permission.READ_EXTERNAL_STORAGE" fixed="false" whitelisted="true" />
+        <permission name="android.permission.WRITE_EXTERNAL_STORAGE" fixed="false" whitelisted="true" />
          
         <!-- Notifications -->
         <permission name="android.permission.POST_NOTIFICATIONS" fixed="false" />
