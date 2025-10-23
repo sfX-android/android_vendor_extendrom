@@ -148,11 +148,10 @@ com.google.android.gms-250932018.apk|https://github.com/microg/GmsCore/releases/
 # LATEST PRE-RELEASE, EXPECT ISSUES!
 com.google.android.gms-250932020.apk|https://github.com/microg/GmsCore/releases/download/v0.3.10.250932/|app|MicrogGmsCore_GH_PRERELEASE.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
+# old stable:
 # 0.3.7 has issues!
 # see: https://github.com/microg/GmsCore/issues/2868
 com.google.android.gms-250932014.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932/|app|MicrogGmsCore_GH_v037.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-
-# old stable:
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|app|MicrogGmsCore_GH_v036.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|priv-app|MicrogGmsCore_GH_PRIV_v036.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-240913010.apk|https://github.com/microg/GmsCore/releases/download/v0.3.5.240913/|app|MicrogGmsCore_GH_v035.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
