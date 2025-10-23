@@ -136,7 +136,7 @@ Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/do
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 # "PRESIGNED" versions
-com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|app|MicrogGmsCore.apk_PRESIGNED;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|app|MicrogGmsCore_PRESIGNED.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore_PRIV_PRESIGNED.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
 # microG GmsCore - STABLE
