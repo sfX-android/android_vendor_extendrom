@@ -867,6 +867,18 @@ _EOFF
     done
 }
 
+# ensure PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS is always relaxed, if set.
+# this avoids errors like:
+# > build/make/core/artifact_path_requirements.mk:30: warning: device/xxx/xxx.mk includes redundant artifact path requirement allowed list entries.
+F_RELAX_ARTIFACTS(){
+    echo "[$FUNCNAME] ... checking PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS"
+
+    for a in $(find device/ -type f -name '*.mk' -exec grep --files-with-matches -E "^PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS.*(strict|true)" {} \;);do
+       sed -i 's/^PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS.*/PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed/g' $a \
+           && echo "[$FUNCNAME] enforced PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS to >relaxed< on $a"
+    done
+}
+
 # webviews handling
 # format: <filename>:<existence-check-string>
 if [[ "$EXTENDROM_PACKAGES" =~ "AOSmium_webview" ]];then WVL="webview_aosmium.sig.xml"; fi
@@ -884,6 +896,8 @@ get_packages "$MY_DIR/repo/packages.txt"
 if [ ! -z "$EXTENDROM_BOOT_DEBUG" -a  "$EXTENDROM_BOOT_DEBUG" == "true" ];then
     F_BOOT_DEBUG
 fi
+
+F_RELAX_ARTIFACTS
 
 # clean tmp
 find $_OUTDIR -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} \;
