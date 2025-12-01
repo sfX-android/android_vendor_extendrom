@@ -209,8 +209,9 @@ source $MY_DIR/tools/extract_utils.sh
 
 if [ -d "$PREBUILT_DIR" ] && [ "$EXTENDROM_PACKAGES_SKIP_DL" != "true" ]; then
     rm -rf "$PREBUILT_DIR"
+else
+    mkdir -p $PREBUILT_DIR/app $PREBUILT_DIR/priv-app
 fi
-mkdir $PREBUILT_DIR $PREBUILT_DIR/app $PREBUILT_DIR/priv-app
 
 F_GIT_COMMIT(){
     local git_path="$1"
