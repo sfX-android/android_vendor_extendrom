@@ -129,31 +129,41 @@ Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/do
 # - `java.lang.RuntimeException: Unable to find a default SSL provider.` (e.g. Google Maps)
 ##########################################################################################################
 
+###########################################################
 # microG GmsCore - LATEST
 # - FDroid repo
 # the "_PRIV" one is not required on newer Android versions while required e.g. on Android 9
 #   easiest as you get the latest always - but it is sometimes incredible slow
+# the "_presigned" one is required if:
+#   - users should be able to upgrade from the official microG repo
+#   - or/and you want to use the LineageOS spoofing implementation instead of extendrom's advanced one
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|app|MicrogGmsCore.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|app|MicrogGmsCore_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore_PRIV_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
 # microG GmsCore - STABLE
 # - Github release
 #   a "xxx_GH" fallback to github which is fast always
 # the "_PRIV" one is not required on newer Android versions while required e.g. on Android 9
+# the "_presigned" one is required if:
+#   - users should be able to upgrade from the official microG repo
+#   - or/and you want to use the LineageOS spoofing implementation instead of extendrom's advanced one
 
 # current stable:
-com.google.android.gms-250932018.apk|https://github.com/microg/GmsCore/releases/download/v0.3.9.250932|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-
-com.google.android.gms-250932018.apk|https://github.com/microg/GmsCore/releases/download/v0.3.9.250932|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-
-# LATEST PRE-RELEASE, EXPECT ISSUES!
-com.google.android.gms-250932020.apk|https://github.com/microg/GmsCore/releases/download/v0.3.10.250932/|app|MicrogGmsCore_GH_PRERELEASE.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-
-# 0.3.7 has issues!
-# see: https://github.com/microg/GmsCore/issues/2868
-com.google.android.gms-250932014.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932/|app|MicrogGmsCore_GH_v037.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932022.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932022.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|app|MicrogGmsCore_GH_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+# - priv:
+com.google.android.gms-250932022.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932022.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|priv-app|MicrogGmsCore_GH_PRIV_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
 # old stable:
+# note: see https://github.com/microg/GmsCore/issues/2868 for MicrogGmsCore_GH_v037
+com.google.android.gms-250932018.apk|https://github.com/microg/GmsCore/releases/download/v0.3.9.250932|app|MicrogGmsCore_GH_v039.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932018.apk|https://github.com/microg/GmsCore/releases/download/v0.3.9.250932|app|MicrogGmsCore_GH_v039_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932018.apk|https://github.com/microg/GmsCore/releases/download/v0.3.9.250932|priv-app|MicrogGmsCore_GH_PRIV_v039.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932018.apk|https://github.com/microg/GmsCore/releases/download/v0.3.9.250932|priv-app|MicrogGmsCore_GH_PRIV_v039_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932014.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932/|app|MicrogGmsCore_GH_v037.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|app|MicrogGmsCore_GH_v036.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-244735012.apk|https://github.com/microg/GmsCore/releases/download/v0.3.6.244735/|priv-app|MicrogGmsCore_GH_PRIV_v036.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-240913010.apk|https://github.com/microg/GmsCore/releases/download/v0.3.5.240913/|app|MicrogGmsCore_GH_v035.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
@@ -163,6 +173,18 @@ com.google.android.gms-240913004.apk|https://github.com/microg/GmsCore/releases/
 # latest version before the fully re-written GMScore (requires NominatimBackend/MozillaNlpBackend):
 com.google.android.gms-223616054.apk|https://github.com/microg/GmsCore/releases/download/v0.2.27.223616/|app|MicrogGmsCore_unified-latest.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
+###########################################################
+# microG companion (aka FakeStore) - STABLE
+com.android.vending-84022622.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+
+# microG companion (aka FakeStore) - LATEST PRE-RELEASE, EXPECT ISSUES!
+
+# microG companion (aka FakeStore) - OLD STABLE
+com.android.vending-84022620.apk|https://github.com/microg/GmsCore/releases/download/v0.3.10.250932|priv-app|FakeStore_GH_v0310.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+com.android.vending-84022614.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH_v037.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+com.android.vending-83700037.apk|https://github.com/microg/FakeStore/releases/download/v0.2.1|priv-app|FakeStore_GH_v021.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+
+###########################################################
 # microG GsfProxy
 # - FDroid repo
 #   easiest as you get the latest always - but it is sometimes incredible slow
@@ -172,16 +194,7 @@ com.google.android.gsf-LATEST.apk|https://microg.org/fdroid/repo/|app|GsfProxy.a
 GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/download/v0.1.0|app|GsfProxy_GH.apk;PRESIGNED|false
 GsfProxy.apk|https://github.com/microg/android_packages_apps_GsfProxy/releases/download/v0.1.0|priv-app|GsfProxy_GH_PRIV.apk;PRESIGNED|false
 
-# microG companion - STABLE (aka FakeStore)
-com.android.vending-84022614.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
-
-# microG companion - LATEST PRE-RELEASE, EXPECT ISSUES!
-com.android.vending-84022620.apk|https://github.com/microg/GmsCore/releases/download/v0.3.10.250932|priv-app|FakeStore_GH_v0310.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
-com.android.vending-84022614.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH_v037.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
-
-# microG companion - OLD STABLE (aka FakeStore)
-com.android.vending-83700037.apk|https://github.com/microg/FakeStore/releases/download/v0.2.1|priv-app|FakeStore_GH_v021.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
-
+###########################################################
 # DEPRECATED: NominatimBackend
 org.microg.nlp.backend.nominatim_LATEST.apk|FDROIDREPO|app|NominatimBackend.apk;PRESIGNED|false
 # DEPRECATED: MozillaNlpBackend
