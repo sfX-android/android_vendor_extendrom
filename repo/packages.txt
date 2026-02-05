@@ -16,7 +16,7 @@
 ##########################################################################################################
 
 # apk version can be revealed by e.g.: 
-# https://gitlab.com/fdroid/fdroidclient/-/commits/master/app/build.gradle?search=release
+# https://gitlab.com/fdroid/fdroidclient/-/blob/master/app/build.gradle.kts
 
 # LATEST
 # (BEWARE: This can also point to beta or even ALPHA releases!!)
