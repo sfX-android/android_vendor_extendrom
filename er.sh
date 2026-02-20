@@ -2,7 +2,7 @@
 ############################################################################
 #
 # Copyright (C) 2017-2018 Andreas Schneider <asn@crytpomilk.org>
-# Copyright (C) 2020-2025 steadfasterX <steadfasterX |AT| binbash #DOT# rocks>
+# Copyright (C) 2020-2026 steadfasterX <steadfasterX |AT| binbash #DOT# rocks>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -223,7 +223,7 @@ F_GIT_COMMIT(){
     fi
     cd $git_path
     git add -A
-    git commit -m "$git_msg"
+    git commit -m $(echo -e "$git_msg")
     cd $cur_path
 }
 export -f F_GIT_COMMIT
