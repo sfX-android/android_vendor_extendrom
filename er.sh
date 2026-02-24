@@ -223,7 +223,7 @@ F_GIT_COMMIT(){
     fi
     cd $git_path
     git add -A
-    git commit -m $(echo -e "$git_msg")
+    git commit -m "$(echo -e \"$git_msg\")"
     cd $cur_path
 }
 export -f F_GIT_COMMIT
