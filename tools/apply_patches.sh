@@ -84,7 +84,7 @@ for p in $(find -L $PDIR -type f -name '*.patch' -exec grep -H project {} \; | s
     if [ $ERR -eq 3 ]||[ $RES -ne 0 ];then
 	echo -e "$POUT" && F_LOG "FATAL ERROR occured while applying >${dp}<!!!" && exit 3
     fi
-    F_GIT_COMMIT "${p/*#}" "ER: applied patch file:\n${dp}"
+    F_GIT_COMMIT "${p/*#}" "ER: applied patch file:\n\n${dp}"
 done
 
 # create patch indicator
