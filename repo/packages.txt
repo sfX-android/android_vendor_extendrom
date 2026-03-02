@@ -22,8 +22,8 @@
 # (BEWARE: This can also point to beta or even ALPHA releases!!)
 org.fdroid.fdroid_LATEST.apk|FDROIDREPO|app|F-Droid_latest.apk;PRESIGNED|true
 
-# latest STABLE (1.23.1)
-org.fdroid.fdroid_1023051.apk|FDROIDREPO|app|F-Droid.apk;PRESIGNED|true
+# latest STABLE (1.23.2)
+org.fdroid.fdroid_1023052.apk|FDROIDREPO|app|F-Droid.apk;PRESIGNED|true
 
 # older releases
 org.fdroid.fdroid_1023050.apk|FDROIDREPO|app|F-Droid_v1.23.0.apk;PRESIGNED|true
@@ -131,7 +131,7 @@ Phonesky_AXP-OS.apk|https://github.com/AXP-OS/packages_apps_phonesky/releases/do
 
 ###########################################################
 # microG GmsCore - LATEST
-# - FDroid repo
+#   - FDroid repo
 # the "_PRIV" one is not required on newer Android versions while required e.g. on Android 9
 #   easiest as you get the latest always - but it is sometimes incredible slow
 # the "_presigned" one is required if:
@@ -143,7 +143,7 @@ com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|app|MicrogGmsC
 com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|MicrogGmsCore_PRIV_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
 # microG GmsCore - STABLE
-# - Github release
+#   - Github release (https://github.com/microg/GmsCore)
 #   a "xxx_GH" fallback to github which is fast always
 # the "_PRIV" one is not required on newer Android versions while required e.g. on Android 9
 # the "_presigned" one is required if:
@@ -151,17 +151,21 @@ com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|Micro
 #   - or/and you want to use the LineageOS spoofing implementation instead of extendrom's advanced one
 
 # current stable:
-com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|app|MicrogGmsCore_GH_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|app|MicrogGmsCore_GH_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 # - priv:
-com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|priv-app|MicrogGmsCore_GH_PRIV_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|priv-app|MicrogGmsCore_GH_PRIV_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
 # old stable:
+com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|app|MicrogGmsCore_GH_0312.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|app|MicrogGmsCore_GH_0312_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|priv-app|MicrogGmsCore_GH_0312_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|priv-app|MicrogGmsCore_GH_PRIV_0312_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-250932022.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|app|MicrogGmsCore_GH_0311.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-250932022.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|app|MicrogGmsCore_GH_0311_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-com.google.android.gms-250932022.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-com.google.android.gms-250932022.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|priv-app|MicrogGmsCore_GH_PRIV_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932022.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|priv-app|MicrogGmsCore_GH_PRIV_0311.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932022.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|priv-app|MicrogGmsCore_GH_PRIV_0311_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-250932018.apk|https://github.com/microg/GmsCore/releases/download/v0.3.9.250932|app|MicrogGmsCore_GH_v039.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-250932018.apk|https://github.com/microg/GmsCore/releases/download/v0.3.9.250932|app|MicrogGmsCore_GH_v039_presigned.apk;PRESIGNED|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-250932018.apk|https://github.com/microg/GmsCore/releases/download/v0.3.9.250932|priv-app|MicrogGmsCore_GH_PRIV_v039.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
@@ -178,11 +182,12 @@ com.google.android.gms-223616054.apk|https://github.com/microg/GmsCore/releases/
 
 ###########################################################
 # microG companion (aka FakeStore) - STABLE
-com.android.vending-84022622.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+com.android.vending-84022626.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 
 # microG companion (aka FakeStore) - LATEST PRE-RELEASE, EXPECT ISSUES!
 
 # microG companion (aka FakeStore) - OLD STABLE
+com.android.vending-84022622.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|priv-app|FakeStore_GH_v0311.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 com.android.vending-84022620.apk|https://github.com/microg/GmsCore/releases/download/v0.3.10.250932|priv-app|FakeStore_GH_v0310.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 com.android.vending-84022614.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH_v037.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 com.android.vending-83700037.apk|https://github.com/microg/FakeStore/releases/download/v0.2.1|priv-app|FakeStore_GH_v021.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
