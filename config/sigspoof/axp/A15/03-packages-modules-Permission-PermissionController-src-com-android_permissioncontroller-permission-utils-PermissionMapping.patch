@@ -8,7 +8,7 @@ index 840a033c3..df012305c 100644
  
          PLATFORM_PERMISSIONS[Manifest.permission.BODY_SENSORS] = Manifest.permission_group.SENSORS
  
-+       PLATFORM_PERMISSIONS["android.permission.FAKE_PACKAGE_SIGNATURE"] = "android.permission.FAKE_PACKAGE"
++        PLATFORM_PERMISSIONS["android.permission.FAKE_PACKAGE_SIGNATURE"] = "android.permission-group.FAKE_PACKAGE"
 +
          if (SdkLevel.isAtLeastT()) {
              PLATFORM_PERMISSIONS[Manifest.permission.POST_NOTIFICATIONS] =
