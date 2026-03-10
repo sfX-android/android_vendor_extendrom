@@ -503,8 +503,8 @@ F_SIGPATCH(){
     ERR=$?
     echo "[$FUNCNAME] Signature spoofing patching ended with $ERR"
     echo "[$FUNCNAME] adding signature spoof controller"
-    cp $PDIR/*-packages-apps-Settings-src-com-android-settings-development-SpoofSignaturePreferenceController.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignaturePreferenceController.java || exit 3
-    cp $PDIR/*-packages-apps-Settings-src-com-android-settings-development-SpoofSignatureInfo.java ${SRC_TOP}/packages/apps/Settings/src/com/android/settings/development/SpoofSignatureInfo.java || exit 3
+    cp $PDIR/*-packages-apps-Settings-src-com-android-settings-development-SpoofSignaturePreferenceController.java ${SRC_TOP_FULL}/packages/apps/Settings/src/com/android/settings/development/SpoofSignaturePreferenceController.java || exit 3
+    cp $PDIR/*-packages-apps-Settings-src-com-android-settings-development-SpoofSignatureInfo.java ${SRC_TOP_FULL}/packages/apps/Settings/src/com/android/settings/development/SpoofSignatureInfo.java || exit 3
     F_GIT_COMMIT "packages/apps/Settings" "ER: advanced signature spoofing\n\nF_SIGPATCH: adding controller files"
     
 
