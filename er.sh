@@ -95,8 +95,15 @@ echo -e "\n\n"
 echo "ENABLE_EXTENDROM: $ENABLE_EXTENDROM"
 echo "EXTENDROM_PREROOT_BOOT: $EXTENDROM_PREROOT_BOOT"
 echo "MAGISK_TARGET_ARCH: $MAGISK_TARGET_ARCH"
-export ER_TARGET_ARCH=$(build/soong/soong_ui.bash --dumpvar-mode TARGET_ARCH  2>/dev/null)
-echo "ER_TARGET_ARCH: $ER_TARGET_ARCH"
+
+_ER_TARGET_ARCH=$(build/soong/soong_ui.bash --dumpvar-mode TARGET_ARCH  2>/dev/null)
+if [ "$_ER_TARGET_ARCH" != "arm64" ];then
+    export ER_TARGET_ARCH="armeabi"
+else
+    export ER_TARGET_ARCH="arm64"
+fi
+echo "ER_TARGET_ARCH: $ER_TARGET_ARCH ($_ER_TARGET_ARCH)"
+
 echo "EXTENDROM_PACKAGES: $EXTENDROM_PACKAGES"
 echo "EOS_EDITION: $EOS_EDITION"
 echo "EXTENDROM_SIGNING_PATCHES: $EXTENDROM_SIGNING_PATCHES"
