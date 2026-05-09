@@ -65,7 +65,7 @@ AuroraServices_v1.1.1.apk|https://gitlab.com/AuroraOSS/AuroraServices/uploads/c2
 # Pre-releases
 
 # Magisk latest stable version
-Magisk-v30.6.apk|https://github.com/topjohnwu/Magisk/releases/download/v30.6|app|Magisk_v30.apk;PRESIGNED|false
+Magisk-v30.7.apk|https://github.com/topjohnwu/Magisk/releases/download/v30.7|app|Magisk_v30.apk;PRESIGNED|false
 
 # Magisk previous stable version
 Magisk-v29.0.apk|https://github.com/topjohnwu/Magisk/releases/download/v29.0|app|Magisk.apk;PRESIGNED|false
@@ -152,13 +152,17 @@ com.google.android.gms-LATEST.apk|https://microg.org/fdroid/repo/|priv-app|Micro
 #   - or/and you want to use the LineageOS spoofing implementation instead of extendrom's advanced one
 
 # current stable:
-com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|app|MicrogGmsCore_GH_presigned.apk;PRESIGNED-extractlibs|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932030.apk|https://github.com/microg/GmsCore/releases/download/v0.3.15.250932|app|MicrogGmsCore_GH.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932030.apk|https://github.com/microg/GmsCore/releases/download/v0.3.15.250932|app|MicrogGmsCore_GH_presigned.apk;PRESIGNED-extractlibs|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 # - priv:
-com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
-com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|priv-app|MicrogGmsCore_GH_PRIV_presigned.apk;PRESIGNED-extractlibs|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932030.apk|https://github.com/microg/GmsCore/releases/download/v0.3.15.250932|priv-app|MicrogGmsCore_GH_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932030.apk|https://github.com/microg/GmsCore/releases/download/v0.3.15.250932|priv-app|MicrogGmsCore_GH_PRIV_presigned.apk;PRESIGNED-extractlibs|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 
 # old stable:
+com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|app|MicrogGmsCore_GH_0313.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|app|MicrogGmsCore_GH_0313_presigned.apk;PRESIGNED-extractlibs|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|priv-app|MicrogGmsCore_GH_PRIV_0313.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
+com.google.android.gms-250932026.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|priv-app|MicrogGmsCore_GH_PRIV_0313_presigned.apk;PRESIGNED-extractlibs|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|app|MicrogGmsCore_GH_0312.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|app|MicrogGmsCore_GH_0312_presigned.apk;PRESIGNED-extractlibs|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
 com.google.android.gms-250932024.apk|https://github.com/microg/GmsCore/releases/download/v0.3.12.250932|priv-app|MicrogGmsCore_GH_0312_PRIV.apk;user-keys/shared|false|GmsCore|microg.xml;er_privapp-permissions-com.google.android.gms.xml;er_sysconfig-com.google.android.gms.xml;er_default-permissions-com.google.android.gms.xml
@@ -183,11 +187,12 @@ com.google.android.gms-223616054.apk|https://github.com/microg/GmsCore/releases/
 
 ###########################################################
 # microG companion (aka FakeStore) - STABLE
-com.android.vending-84022626.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
+com.android.vending-84022630.apk|https://github.com/microg/GmsCore/releases/download/v0.3.15.250932|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 
 # microG companion (aka FakeStore) - LATEST PRE-RELEASE, EXPECT ISSUES!
 
 # microG companion (aka FakeStore) - OLD STABLE
+com.android.vending-84022626.apk|https://github.com/microg/GmsCore/releases/download/v0.3.13.250932|priv-app|FakeStore_GH.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 com.android.vending-84022622.apk|https://github.com/microg/GmsCore/releases/download/v0.3.11.250932|priv-app|FakeStore_GH_v0311.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 com.android.vending-84022620.apk|https://github.com/microg/GmsCore/releases/download/v0.3.10.250932|priv-app|FakeStore_GH_v0310.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
 com.android.vending-84022614.apk|https://github.com/microg/GmsCore/releases/download/v0.3.7.250932|priv-app|FakeStore_GH_v037.apk;PRESIGNED|false||er_privapp-permissions-com.android.vending.xml;er_default-permissions-com.android.vending.xml
@@ -248,7 +253,8 @@ NeoLauncher-signed.apk|https://github.com/AXP-OS/packages_apps_neo-launcher/rele
 Lawnchair_202589.apk|https://www.dropbox.com/s/qi551e1y2ubd1zd|app|Lawnchair-stable.apk;PRESIGNED|false
 
 # Lawnchair - latest
-Lawnchair.14.0.0.Beta.3.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v14.0.0-beta3|app|Lawnchair-latest.apk;PRESIGNED|false
+Lawnchair.15.0.0.Beta.3.0.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v15.0.0-beta3.0|app|Lawnchair-latest.apk;PRESIGNED|false
+Lawnchair.14.0.0.Beta.3.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v14.0.0-beta3|app|Lawnchair-14.apk;PRESIGNED|false
 # Lawnchair - v12.1 alpha4
 Lawnchair.12.1.0.Alpha.4.apk|https://github.com/LawnchairLauncher/lawnchair/releases/download/v12.1.0-alpha.4|app|Lawnchair-12.apk;PRESIGNED|false
 
