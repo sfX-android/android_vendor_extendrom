@@ -958,7 +958,7 @@ if [ "$EXTENDROM_PREROOT_BOOT" == "true" ];then
     echo "[MAGISK] ... Magisk found!"
     unzip -q $MAGZIP -d $MAGISKOUT/src
 
-    cp $MAGISKOUT/src/lib/x86/libmagiskboot.so $MAGISKOUT/magiskboot
+    cp $MAGISKOUT/src/lib/x86_64/libmagiskboot.so $MAGISKOUT/magiskboot || cp $MAGISKOUT/src/lib/x86/libmagiskboot.so $MAGISKOUT/magiskboot
     chmod 755 $MAGISKOUT/magiskboot
     echo "[MAGISK] ... MAGISK_TARGET_ARCH specified as $MAGISK_TARGET_ARCH"
     echo "[MAGISK] ... Preparing work dir.."
